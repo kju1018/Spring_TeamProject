@@ -1,0 +1,8 @@
+/build/
+/.vscode/
+.settings/
+.classpath
+.project
+.springBeans
+/target/
+*.DS_Store
