@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 public class MyPageController {
 	
-	@GetMapping("/mypageupdate")
+	@GetMapping("/mypage_update")
 	public String myPageUpdate() {
 		return "mypage/mypage_update";
 	}

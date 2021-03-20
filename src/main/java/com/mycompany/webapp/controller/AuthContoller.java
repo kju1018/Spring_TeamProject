@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/auth")
 public class AuthContoller {
 
-	@RequestMapping("/findid")
+	@RequestMapping("/find_id")
 	public String findid() {
 		
 		return "auth/findid";
@@ -18,12 +18,15 @@ public class AuthContoller {
 		return "auth/login";
 	}
 	
-
-	
-	@GetMapping("/findpw")
+	@GetMapping("/find_pw")
 	public String findpw() {
 		
 		return "auth/findpw";
+	}
+	
+	@GetMapping("/signup")
+	public String signUp() {
+		return "auth/sign_up";
 	}
 	
 }
