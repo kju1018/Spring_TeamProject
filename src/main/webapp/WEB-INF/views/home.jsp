@@ -37,25 +37,25 @@
                   <div class="row  justify-content-center p-10 item_mt-10" s>
                       <div class="col text_center_sort">
                            <a href="<%=application.getContextPath()%>/list/product_list"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/lamp1.jpg" alt=""></a>
-                           <div style="position: absolute; top:45%; left: 35%; color: white;"><h3>인테리어 조명</h3></div>
+                           <div onclick="move_page('<%=application.getContextPath()%>/list/product_list')" class="pointer" style="position: absolute; top:45%; left: 35%; color: white;"><h3>인테리어 조명</h3></div>
                       </div>
                       <div class="col text_center_sort">
-                           <a href="<%=application.getContextPath()%>/list/product_list"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/lamp1.jpg" alt=""></a>
-                           <div style="position: absolute; top:45%; left: 35%; color: white;"><h3>디퓨저/캔들</h3></div>
+                           <a href="<%=application.getContextPath()%>/list/product_list"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/candle1.jpg" alt=""></a>
+                           <div onclick="move_page('<%=application.getContextPath()%>/list/product_list')" class="pointer" style="position: absolute; top:45%; left: 35%; color: white;"><h3>디퓨저/캔들</h3></div>
                       </div>
                       <div class="col text_center_sort">
                             <a href="<%=application.getContextPath()%>/list/product_list"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/photo1.jpg" alt=""></a>   
-                            <div style="position: absolute; top:45%; left: 45%; color: white;"><h3>액자</h3></div>
+                            <div onclick="move_page('<%=application.getContextPath()%>/list/product_list')" class="pointer" style="position: absolute; top:45%; left: 45%; color: white;"><h3>액자</h3></div>
                       </div>
                       <div class="col text_center_sort">
                             <a href="<%=application.getContextPath()%>/list/product_list"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/plant.jpg" alt=""></a>
-                            <div style="position: absolute; top:45%; left: 30%; color: white;"><h3>조화/화병</h3></div>
+                            <div onclick="move_page('<%=application.getContextPath()%>/list/product_list')" class="pointer" style="position: absolute; top:45%; left: 30%; color: white;"><h3>조화/화병</h3></div>
                       </div>
                   </div>
               </div>
               <!---- about us-->
                       <div class="col-lg item_mt-10 text_center_sort" >
-                           <a href="/WebContent/Page/Company/about_us.html"><img class="item_width_100 item_height_350r item_mt-1" src="<%=application.getContextPath()%>/resources/image/slide/aboutus.png"alt=""></a>
+                           <a href="<%=application.getContextPath()%>/company/about_us"><img class="item_width_100 item_height_350r item_mt-1" src="<%=application.getContextPath()%>/resources/image/slide/aboutus.png"alt=""></a>
                      </div>
               <!------best item-->
               <div class="col item_mt-10" >

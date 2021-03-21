@@ -31,9 +31,11 @@
             <div class="col-3" > 
                 <div class="row align-items-center" >
                     
-                        <div id="searching" class="col"style="text-align: end; margin: 0 auto; ">
+                        <div id="searching" class="col" style="text-align: end; margin: 0 auto; ">
+                        	
                             <input type="text" style=" text-align: center;">
-                            <i class="fa fa-search" aria-hidden="true" onclick="location.href='productList'"></i>
+                            <i class="fa fa-search pointer " aria-hidden="true" onclick="move_page('<%=application.getContextPath()%>/list/product_list')"></i>
+                        	
                         </div>
                       
                 </div>
@@ -70,7 +72,7 @@
         <!-----category text-->
         <div class="col" style=" text-align: center; border-bottom: 1px solid black; height: 3.5em;">
             <ul class="navul" style="display: inline-block;">
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/aboutus')"><a class=" header_a" style="text-decoration: none; color: black;">AboutUs</a></li>
+                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/company/about_us')"><a class=" header_a" style="text-decoration: none; color: black;">AboutUs</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/list/product_list')"><a class=" header_a" style="text-decoration: none; color: black;">인테리어조명</a></li>
  			    <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/list/product_list')"><a class=" header_a" style="text-decoration: none; color: black;">디퓨저/캔들</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/list/product_list')"><a class=" header_a" style="text-decoration: none; color: black;">액자</a></li>
