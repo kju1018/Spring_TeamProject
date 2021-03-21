@@ -41,8 +41,8 @@
 	</div>
 	<br>
     <div>
-        <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" href="product_view" role="button"> 취소 </a>
-        <a class="btn btn-light btn-outline-secondary" style="width:8%" href="product_view" role="button"> 완료 </a>
+        <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 취소 </a>
+        <a class="btn btn-light btn-outline-secondary" style="width:8%" href="<%=application.getContextPath()%>/product/product_view" role="button"> 완료 </a>
         
         </div>
 	<br><br>	

@@ -31,8 +31,8 @@
 	</table> 
     <!--구매 / 장바구니-->
 	<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b>50,000원</b><small>(1개)</small><br><br>
-	<a href="<%=application.getContextPath()%>/payment/payment" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</a><br><br>
-	<a href="<%=application.getContextPath()%>/payment/payment_c"  class="btn btn-white btn-outline-dark" style="width:100%" role="button">ADD TO CART</a><br><br>
+	<a href="<%=application.getContextPath()%>/payment" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</a><br><br>
+	<a href="<%=application.getContextPath()%>/mypage/cart"  class="btn btn-white btn-outline-dark" style="width:100%" role="button">ADD TO CART</a><br><br>
 		
 	</div>
 	<br><br>
@@ -126,7 +126,7 @@
                     <tbody>
                     <tr>
                         <th scope="row">3</th>
-                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:10%"> 조명1</td>
+                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:30%"> 조명1</td>
                         <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">실제가 더 좋아요~</a></td>
                         <td>ㅎㅎ</td>
                         <td>2021-03-10</td>
@@ -135,7 +135,7 @@
                     </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td><img src="<%=application.getContextPath()%>/resources/image/light3_sora.png" style="width:10%"> 조명3</td>
+                    <td><img src="<%=application.getContextPath()%>/resources/image/light3_sora.png" style="width:30%"> 조명3</td>
                     <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">너무 좋아요~</a></td>
                     <td>aa</td>
                     <td>2021-03-11</td>
@@ -143,7 +143,7 @@
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png" style="width:10%"> 조명2</td>
+                    <td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png" style="width:30%"> 조명2</td>
                     <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">상품후기 테스트</a></td>
                     <td>상품관리자</td>
                     <td>2021-03-10</td>
