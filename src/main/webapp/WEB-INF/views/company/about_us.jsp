@@ -16,10 +16,10 @@
         <hr style="color:lightgray"/>
       <div class="row" style="clear: both;">
         <div style="float:left">
-            <img src="<%=application.getContextPath()%>/resources/image/us_sora.jpg" style="margin-left:20%; width:80%">
+            <img src="<%=application.getContextPath()%>/resources/image/us_sora.jpg" style="margin-left:35%; width:75%">
         </div>
         <div style="float:right">
-            <img src="<%=application.getContextPath()%>/resources/image/us_detail.png" style="margin-top:50%; margin-left:20%; width:100%">
+            <img src="<%=application.getContextPath()%>/resources/image/us_detail.png" style="margin-top:35%; margin-left:20%; width:85%">
         </div>
     </div>
 <!-- style="border:1px solid red" -->
