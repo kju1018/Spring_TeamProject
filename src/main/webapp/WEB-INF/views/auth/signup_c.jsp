@@ -3,9 +3,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   
   
-   <div class="container-fluid item_mt-18" >
-        <div class="row justify-content-center" >
-            <div class="col-6 wrapper_content p-3">
+   <div class="container-fluid item_mt-18 " >
+        <div class="row justify-content-center " >
+            <div class="col-6 border p-3">
                 <h3 class="text_center_sort item_mb-1">회원가입이 완료 되었습니다</h3>
                     <div class="container wrapper_content item_pb-1" >
                         <div class="row ">
@@ -17,7 +17,7 @@
                                
                                 <div class="row justify-content-start">
                                     <div class="col-2 item_p mr-1 item_pt-017 item_mr-07">
-                                        <img src="common/image/user.png" alt="userprofile"width="85">
+                                        <img src="<%=application.getContextPath()%>/resources/image/user.png" alt="userprofile"width="85">
                                     </div>
                                     <div class="col">
                                         <div class="row item_pb-1">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 <div class="col text_center_sort item_mt-3"><p>박시현님은[일반회원]입니다.</p></div>
-                <div class="col text_center_sort"><button class="btn btn-outline-dark">메인으로 이동</button></div>
+                <div class="col text_center_sort"><a href="<%=application.getContextPath()%>" class="btn btn-outline-dark btn-lg btn-block">메인으로 이동</a></div>
             </div>
             
         </div>
