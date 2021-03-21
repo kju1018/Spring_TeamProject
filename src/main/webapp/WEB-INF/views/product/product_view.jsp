@@ -196,7 +196,7 @@
           </table>
         </div>
         <div style="margin-left: 80%;">
-        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/product_view" role="button">상품문의하기</a>
+        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/p_qna_write" role="button">상품문의하기</a>
         </div>
 
         <div class="row justify-content-md-center">
