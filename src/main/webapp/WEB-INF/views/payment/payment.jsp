@@ -29,7 +29,7 @@
             </div>
         </div><!--주문상품 div-->
         <!--form 전체 -->
-        <form id=" paymentForm" method="post" action="payment">
+        <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/payment">
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
                     <div class="border-bottom pl-2 pt-2">
@@ -175,7 +175,7 @@
                     </table>
                 </div>
                 <div class="pl-4 pr-4 mt-3">
-                    <button class="btn btn-dark item_width_100">50,000원 결제하기</button>
+                    <button type="submit" class="btn btn-dark item_width_100">50,000원 결제하기</button>
                 </div>
             </div><!-- form안에 div 전체 틀 content-->
         </form>

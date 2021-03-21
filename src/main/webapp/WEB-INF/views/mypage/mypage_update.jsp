@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="container-xl" style="margin-top: 18em;" >
-        <form action="">
+        <form action="<%=application.getContextPath()%>/mypage/mypage_update" method="post">
             <div class="col" style=" text-align: center;"><h3>회원정보수정</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             <div class="container-xl mb-5 border border-secondary"><!-- 전체 영역-->
@@ -177,8 +177,8 @@
             </div>
           
             <div class="col text-center mt-5">
-                <a href="mypage" class="btn btn-lg btn-dark">수정완료</a>
-                <a href="mypage" class="btn btn-lg btn-outline-dark">취소</a>
+                <button type="submit" class="btn btn-lg btn-dark">수정완료</button>
+                <a href="<%=application.getContextPath()%>/mypage/mypage" class="btn btn-lg btn-outline-dark">취소</a>
                 <a href="<%=application.getContextPath()%>" class="btn btn-sm btn-outline-dark" style="float:right">회원탈퇴</a>
             </div>
         </form>

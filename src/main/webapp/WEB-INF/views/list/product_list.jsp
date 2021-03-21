@@ -31,21 +31,23 @@
             정확한 검색어 인지 확인하시고 다시 검색해 주세요.
         </p>
         <ul class="list"><!-- 상품 리스트 영역 -->
-            <li class="product mt-4" onclick="location.href='product/product_view'">
-                <div>
-                    <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
-                </div>
-                <div class="productTitle">
-                    상품명
-                </div>
-                <div class="productContent">
-                    15000원
-                </div>
-
+        <%--  onclick="location.href='<%=application.getContextPath()%>/product/product_view'" --%>
+            <li class="product mt-4">
+	            <a href="<%=application.getContextPath()%>/product/product_view">
+	                <div>
+	                    <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
+	                </div>
+	                <div class="productTitle">
+	                    상품명
+	                </div>
+	                <div class="productContent">
+	                    15000원
+	                </div>
+	            </a>
             </li>
     <!--         onclick="location.href='product/product_view'" -->
              <li class="product mt-4" >
-                <a href="product/product_view">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_2.jpg">
                     </div>
@@ -58,8 +60,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_3.png">
                     </div>
@@ -72,8 +74,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_4.png">
                     </div>
@@ -86,8 +88,8 @@
                 </a>
             </li>
             
-            <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+            <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_5.png">
                     </div>
@@ -100,8 +102,8 @@
                 </a>
             </li>
             
-            <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+            <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_6.png">
                     </div>
@@ -114,8 +116,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_7.png">
                     </div>
@@ -128,8 +130,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_8.png">
                     </div>
@@ -142,8 +144,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_9.png">
                     </div>
@@ -156,8 +158,8 @@
                 </a>
             </li>
             
-             <li class="product mt-4" onclick="location.href='product/product_view'">
-                <a href="#none">
+             <li class="product mt-4">
+                <a href="<%=application.getContextPath()%>/product/product_view">
                     <div>
                         <img class="productImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_10.png">
                     </div>
@@ -176,7 +178,7 @@
         
     </div>
     
-    <ul class="pagenav">
+    <ul class="pagenav pt-4">
         <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
         <li class="page-item"><a href="#">PREV</a></li>
         <li class="page-item"><a href="#">1</a></li>

@@ -8,7 +8,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="container-xl" style="margin-top: 18em;" >
-        <form action="signuptest" method="post">
+        <form action="<%=application.getContextPath()%>/auth/signup" method="post">
             <div class="col" style=" text-align: center;"><h3>회원가입</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             

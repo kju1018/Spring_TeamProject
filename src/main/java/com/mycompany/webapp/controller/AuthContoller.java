@@ -2,6 +2,7 @@ package com.mycompany.webapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -29,4 +30,14 @@ public class AuthContoller {
 		return "auth/sign_up";
 	}
 	
+	@PostMapping("/signup")
+	public String signUpProcess() {
+		//회원가입 처리
+		return "redirect:/auth/signup_complete";
+	}
+	
+	@GetMapping("/signup_complete")
+	public String signUpComplete() {
+		return "auth/signup_c";
+	}
 }
