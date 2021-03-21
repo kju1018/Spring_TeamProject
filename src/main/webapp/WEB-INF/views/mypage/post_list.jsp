@@ -18,6 +18,13 @@
 	<div class="titleyj">
 		<p>게시물 관리</p>
 	</div>
+	<div class="my_button">
+		<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
+		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
+		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
+		<input type='button' value="게시물관리" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/post_list'">
+		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
+	</div>
 	
 	<!-- 게시물 종류 선택 -->
 	<div class="sel_nav">
@@ -62,10 +69,7 @@
 	</table>
 	<!--게시판-->
 
-    <!--하단 버튼-->
-    <div class="p_l_bottom">
-        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage'">
-    </div>
+    
     <br/>
 
 	<!-- 페이지 -->
@@ -77,7 +81,10 @@
 		<li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
 	</ul>
 	<!-- 페이지 -->
-
+	
+	<div class="c_bottom">
+		<input type="button" class="btn btn-dark" value="메인화면으로" onclick="location.href ='<%=application.getContextPath()%>'">
+	</div>
 </div>
 
 

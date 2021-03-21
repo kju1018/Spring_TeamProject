@@ -21,12 +21,12 @@
 	
 	<!-- 공지사항 QnA 선택 버튼 -->
 	<div class="select_nav">
-		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href='notice_list'">
-		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href='qna_list'">          
+		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
+		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
 	</div>            
 
     <div style="text-align: right; margin-bottom: 4px;">
-        <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href='qna_write'"> 
+        <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'"> 
     </div>
     <!--게시판-->
      <table class="table">
@@ -41,21 +41,21 @@
             </thead>
 
             <tbody>
-                <tr class="qna_list" onclick="location.href='qna_view'">
+                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
                     <th scope="row">1</th>
                     <td>배송 관련 문의</td>
                     <td>이연정</td>
                     <td>2021-03-12</td>
                     <td>4</td>
                 </tr>
-                <tr class="qna_list" onclick="location.href='qna_view'">
+                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
                     <th scope="row">2</th>
                     <td>환불했는데 돈 언제 들어오나요?</td>
                     <td>이연정</td>
                     <td>2021-01-18</td>
                     <td>20</td>
                 </tr>
-                <tr class="qna_list" onclick="location.href='qna_view'">
+                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
                     <th scope="row">3</th>
                     <td>상품 훼손되서 왔는데 교환 가능한가요?</td>
                     <td>이연정</td>

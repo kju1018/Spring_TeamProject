@@ -15,11 +15,11 @@
 }
 
 /* 오른쪽 상단 계단형 메뉴 */
-.sm_navi{
+.sm_navi{ /*ol*/
     margin-top: 10px;
     float: right;
 }
-.sm_nav {
+.sm_nav { /*li*/
     float: left;
 	text-align: right;
     list-style: none;
@@ -45,6 +45,10 @@
 	float: right;
 	margin-right: 20px;
 	margin-bottom: 15px;
+}
+.my_button {
+	text-align: center;
+	padding: 10px; 
 }
 
 /* answer_view -------------------------------------------------------------------------*/
@@ -90,19 +94,7 @@
 	font-size: 16px;
 }
 
-
-/* 오른쪽 상단 계단형 메뉴 */
-.sm_navi{
-	margin-top: 10px;
-    float: right;
-}
-.sm_nav {
-    float: left;
-    text-align: right;
-    list-style: none;
-}
-
-  /* 개별 목록 후버 */
+/* 개별 목록 후버 */
 .qna_list:hover {
 	background-color: rgb(237, 239, 241);
 }
@@ -115,22 +107,6 @@
 	margin-top: 15px;
 	margin-bottom :30px;
 }
-
-/* 페이지 이동 버튼 */
-.pagenav { /* 가운데 정렬 */
-    margin:0px;
-    padding:0px;
-	text-align: center;
-    margin-bottom: 80px;
-}
-.page-item {
-	display: inline-block;
-	margin: 4px;
-}
-.page-item > a {
-	color: grey;
-}
-
 /* qna_list -------------------------------------------------------------------------*/
 
 
@@ -153,21 +129,6 @@
 }
 /* qna_write -------------------------------------------------------------------------*/
 
-
-
-/* 페이지 이동 버튼 */
-.pagenav { /* 가운데 정렬 */
-	margin: 0px;
-	padding: 0px;
-	text-align: center;
-}
-.page-item {
-	display: inline-block;
-	margin: 4px;
-}
-.page-item > a {
-	color: grey;
-}
 
 /* cart -------------------------------------------------------------------------*/
 .btn-sel {
@@ -213,16 +174,11 @@
 	margin-bottom: 15px;
 }
 
-      /*하단 버튼*/
-.l_l_bottom {
-    text-align: right;
-}
-
 /* like_list -------------------------------------------------------------------------*/
 
 
 /* mypage -------------------------------------------------------------------------*/
-ul {
+.sq_button {
 	list-style-type: none;
 	margin: 0;
     padding: 0;
@@ -252,15 +208,7 @@ ul {
     background-color: #eff1f3;
 }
 /* 오른쪽 상단 계단형 메뉴 */
-.sm_navi{
-    margin-top: 10px;
-    float: right;
-}
-.sm_nav {
-    float: left;
-	text-align: right;
-    list-style: none;
-}
+
 /* mypage -------------------------------------------------------------------------*/
 
 
@@ -272,10 +220,6 @@ ul {
 	background-color: rgb(237, 239, 241);
 }
 
-/*하단 버튼*/
-.o_l_bottom {
-    float: right;
-}
 /* ordered_list -------------------------------------------------------------------------*/
 
 
@@ -295,11 +239,6 @@ ul {
 
 
 /* post_list -------------------------------------------------------------------------*/
-/*하단 버튼*/
-.p_l_bottom {
-    float: right;
-}
-
 /* 개별 목록 후버 */
 .post_list:hover {
 	background-color: rgb(237, 239, 241);

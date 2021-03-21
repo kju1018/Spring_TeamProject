@@ -47,8 +47,8 @@
 
             <div class="q_w_bottom">
                 <hr/>         
-                <input type="button" class="btn btn-dark btn-sm" value="등록" onclick="location.href='qna_list'">
-                <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href='qna_list'">
+                <input type="button" class="btn btn-dark btn-sm" value="등록" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
+                <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
             </div>
 
         

@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<body>
+
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
 	<!-- 오른쪽 상단 계단 메뉴-->
@@ -16,9 +16,17 @@
 	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
 	<p class='titleyj'>장바구니</p>
-
+	
+	<div class="my_button">
+		<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
+		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
+		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
+		<input type='button' value="게시물관리" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/post_list'">
+		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
+	</div>
+	
 	<!--게시판-->
-	<table class="table">
+	<table class="table" style="margin-top: 15px;">
 		<tr>
 			<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
 			<th width="30%">제품사진</th>
