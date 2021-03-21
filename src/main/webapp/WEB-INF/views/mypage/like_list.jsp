@@ -14,9 +14,9 @@
         <li class="sm_nav">좋아요</li>
     </ol>
     <br/>
-
+	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
-	<p class='title'>좋아요</p>
+	<p class='titleyj'>좋아요</p>
 
 	<!--검색창-->
 	<div class='find_zone'>
@@ -32,14 +32,14 @@
 			<th width="55%">상품명</th>
 			<th width="15%">삭제</th>
 		</tr>
-		<tr onclick="location.href='product_view'">
+		<tr onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
             <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
 			<th>북유럽풍 조명 장식</th>
 			<th><input type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
 		</tr>
 		
-		<tr onclick="location.href='product_view'">
+		<tr onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
             <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
 			<th>스칸디나비아 주방 식탁</th>
@@ -49,7 +49,7 @@
 	<!--게시판-->
 
     <div class="l_l_bottom">
-        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='mypage'">
+        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage'">
     </div>
     <br/>
 

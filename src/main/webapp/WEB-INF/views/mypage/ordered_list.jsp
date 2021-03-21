@@ -13,14 +13,14 @@
         <li class="sm_nav">주문내역</li>
     </ol>
     <br/>
-
+	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
-	<p class='title'>주문 내역</p>
+	<p class='titleyj'>주문 내역</p>
 	
 	<!-- 검색창 -->
 	<div class='find_zone'>
 	<input type='text' name='findStr' />
-	<input type='button' value='검색' id='btnFind' name='select' />
+	<input type='button' value='검색' id='btnFind' name='select' onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'"/>
 	</div>
 	
 	<!--게시판-->
@@ -35,7 +35,7 @@
 			<th width="10%">구매상태</th>
 		</tr>
 		
-		<tr class="ordered_list">
+		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
             <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th>A12341234/2021-03-08</th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
@@ -45,7 +45,7 @@
 			<th>취소</th>
 		</tr>
 		
-		<tr class="ordered_list">
+		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
             <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th>A56785678/2021-02-02</th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
@@ -59,7 +59,7 @@
 
     <!--하단 버튼-->
     <div class="o_l_bottom">
-        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='mypage'">
+        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage'">
     </div>
     <br/>
     <br/>

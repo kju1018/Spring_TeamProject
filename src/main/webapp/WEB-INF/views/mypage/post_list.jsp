@@ -13,9 +13,9 @@
         <li class="sm_nav">게시물관리</li>
     </ol>
     <br/>
-
+	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
-	<div class="title">
+	<div class="titleyj">
 		<p>게시물 관리</p>
 	</div>
 	
@@ -40,19 +40,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="post_list">
+			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
 				<th scope="row">1</th>
 				<td>배송 관련 문의</td>
 				<td>이연정</td>
 				<td>2021-03-12</td>
 			</tr>
-			<tr class="post_list">
+			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
 				<th scope="row">2</th>
 				<td>환불했는데 돈 언제 들어오나요?</td>
 				<td>이연정</td>
 				<td>2021-01-18</td>
 			</tr>
-			<tr class="post_list">
+			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
 				<th scope="row">3</th>
 				<td>상품 훼손되서 왔는데 교환 가능한가요?</td>
 				<td>이연정</td>
@@ -64,7 +64,7 @@
 
     <!--하단 버튼-->
     <div class="p_l_bottom">
-        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='mypage'">
+        <input type="button" class="btn btn-dark" value="마이페이지로" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage'">
     </div>
     <br/>
 

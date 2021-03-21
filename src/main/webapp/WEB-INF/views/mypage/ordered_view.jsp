@@ -15,9 +15,9 @@
     </ol>
     <br/>
 
-    
+	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">    
         <div class="deliver_info">
-            <p class="title">주문내역 상세</p>
+            <p class="titleyj">주문내역 상세</p>
 
             <div class="table table-responsive">
                 <p>주문 정보</p>
@@ -64,7 +64,7 @@
             </table>
 
             <div class="o_v_bottom">
-                <input type="button" class="btn btn-dark" value="주문 목록으로" onclick="location.href ='ordered_list'">
+                <input type="button" class="btn btn-dark" value="주문 목록으로" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
             </div>
 
 

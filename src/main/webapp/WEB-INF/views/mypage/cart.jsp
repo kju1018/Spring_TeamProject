@@ -13,9 +13,9 @@
         <li class="sm_nav">장바구니</li>
     </ol>
     <br/>
-
+	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
-	<p class='title'>장바구니</p>
+	<p class='titleyj'>장바구니</p>
 
 	<!--게시판-->
 	<table class="table">
@@ -28,7 +28,7 @@
 			<th width="10%">배송비</th>
 			<th width="10%"></th>
 		</tr>
-		<tr class="cart_list" onclick="location.href='product_view'">
+		<tr class="cart_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
 			<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
 			<th>북유럽풍 조명 장식</th>
@@ -40,7 +40,7 @@
 				<input type="button" class="btn-sel" value="삭제">
 			</th>
 		</tr>
-		<tr class="cart_list" onclick="location.href=''">
+		<tr class="cart_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
 			<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
 			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
 			<th>스칸디나비아 주방 식탁</th>
@@ -84,7 +84,7 @@
 	
 	<div class="c_bottom">
 		<input type="button" class="btn btn-dark" value="전체상품주문">
-		<input type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='home'">
+		<input type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='<%=application.getContextPath()%>/home'">
 	</div>
 								
 </div>

@@ -7,60 +7,63 @@
 
 <div class="container" style="margin-top: 12em;">
 
-    <!-- 오른쪽 상단 계단 메뉴-->
-    <ol class="sm_navi">
-        <li class="sm_nav">홈 > </li>
-        <li class="sm_nav">마이페이지</li>
-    </ol>
-    <br/>
+ <!-- 오른쪽 상단 계단 메뉴-->
+ <ol class="sm_navi">
+     <li class="sm_nav">홈 > </li>
+     <li class="sm_nav">마이페이지</li>
+ </ol>
+ <br/>
+    
+    
+<img src="<%=application.getContextPath()%>/resources/image/slide/slide11.PNG" class="container">
+<!--제목-->
+<div id="title">
+    <p class="titleyj">마이페이지</p>
+    
+</div>
 
-        <!--제목-->
-    <div id="title">
-        <p class="title">마이페이지</p>
-    </div>
-
-    <div class="my_wrap">
-        <div class="banner" onclick="location.href ='ordered_list'">
-            <div id="icon">
-                <img src = "<%=application.getContextPath()%>/resources/image/clipboard.png" width="60">
-            </div>
-            <ul>
-                <li>ORDER</li>
-                <li>주문내역</li>
-                <li>주문내역을 확인하실수 있습니다.</li>
-            </ul>
-        </div>
-        <div class="banner" onclick="location.href ='mypage_update'">
-            <div id="icon">
-            <img src = "<%=application.getContextPath()%>/resources/image/user.png" width="60">
-            </div>
-            <ul>
-                <li>PROFILE</li>
-                <li>회원정보</li>
-                <li>개인정보를 관리하는 공간입니다.</li>
-            </ul>
-        </div>
-        <div class="banner" onclick="location.href ='like_list'">
-            <div id="icon">
-            <img src = "<%=application.getContextPath()%>/resources/image/like.png" width="60">
-            </div>
-            <ul>
-                <li>LIKE</li>
-                <li>좋아요</li>
-                <li>'좋아요'를 선택한 상품 목록</li>
-            </ul>
-        </div>
-        <div class="banner" onclick="location.href ='post_list'">
-            <div id="icon">
-            <img src = "<%=application.getContextPath()%>/resources/image/post.png" width="60">
-            </div>
-            <ul>
-                <li>BOARD</li>
-                <li>게시물 관리</li>
-                <li>게시물을 관리하는 공간입니다.</li>
-            </ul>
-        </div>
-    </div>	
+<div class="my_wrap">
+   <div class="banner" onclick="location.href ='ordered_list'">
+      <div id="icon">
+         <img src = "<%=application.getContextPath()%>/resources/image/clipboard.png" width="60">
+      </div>
+      <ul>
+          <li>ORDER</li>
+          <li>주문내역</li>
+          <li>주문내역을 확인하실수 있습니다.</li>
+      </ul>
+   </div>
+   <div class="banner" onclick="location.href ='mypage_update'">
+       <div id="icon">
+       <img src = "<%=application.getContextPath()%>/resources/image/user.png" width="60">
+       </div>
+       <ul>
+           <li>PROFILE</li>
+           <li>회원정보</li>
+           <li>개인정보를 관리하는 공간입니다.</li>
+       </ul>
+   </div>
+   <div class="banner" onclick="location.href ='like_list'">
+       <div id="icon">
+       <img src = "<%=application.getContextPath()%>/resources/image/like.png" width="60">
+       </div>
+       <ul>
+           <li>LIKE</li>
+           <li>좋아요</li>
+           <li>'좋아요'를 선택한 상품 목록</li>
+       </ul>
+   </div>
+   <div class="banner" onclick="location.href ='post_list'">
+       <div id="icon">
+       <img src = "<%=application.getContextPath()%>/resources/image/post.png" width="60">
+       </div>
+       <ul>
+           <li>BOARD</li>
+           <li>게시물 관리</li>
+           <li>게시물을 관리하는 공간입니다.</li>
+       </ul>
+   </div>
+ </div>	
 </div>
 
 
