@@ -8,7 +8,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="container-xl" style="margin-top: 18em;" >
-        <form action="<%=application.getContextPath()%>/auth/signup" method="post">
+        <form action="signuptest" method="post">
             <div class="col" style=" text-align: center;"><h3>회원가입</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             
@@ -211,7 +211,7 @@
                 </table>
             </div>
             <div class="col text-center mt-5">
-            	<button type="submit" class="btn btn-lg btn-dark">회원가입</button>  
+            	<a href="<%=application.getContextPath()%>/auth/signup_complete" type="submit" class="btn btn-lg btn-dark">회원가입</a>  
             </div>
         </form>
     </div>

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-   <div class="container-lg wrapper_content item_mt-18">
-        <div class="row justify-content-center"  >
+   <div class="container-lg item_mt-18">
+        <div class="row justify-content-center border" >
             <div class="col-6">
                 <!--제목부분-->
                 <div class="text_center_sort item_mt-2"><h5>회원로그인</h3></div>
@@ -17,18 +17,19 @@
                 </div>
                 <!--로그인 버튼-->
                 <div class="item_mt-1">
-                    <button class="btn btn-dark btn-lg item_width_100 btn-block">로그인</button>
+                    <a href="#" class="btn btn-dark btn-lg item_width_100 btn-block">로그인</a>
                 </div>
                 <!-- span 태그-->
                 <div class="item_mt-05  item_pl-1">
-                    <span class="fontsize-sm">아이디 찾기 |</span>
-                    <span class="fontsize-sm">비밀번호 찾기</span>
+                	<a href="<%=application.getContextPath()%>/auth/find_id"><span class="fontsize-sm">아이디 찾기 |</span></a>
+                    <a href="<%=application.getContextPath()%>/auth/find_pw"><span class="fontsize-sm">비밀번호 찾기 </span></a>
                 </div>
                 <!--회원가입 버튼-->
                 <div class="item_mt-05 item_mb-3">
-                    <button class="btn btn-secondary btn-lg item_width_100 btn-block">회원가입</button>
+                    <a href="<%=application.getContextPath()%>/auth/signup" class="btn btn-secondary btn-lg item_width_100 btn-block">회원가입</a>
                 </div>
                 
             </div>
         </div>
     </div>
+ <%@ include file="/WEB-INF/views/common/footer.jsp" %>
