@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:15%">
     <div class="row justify-content-center" >
 	    <div class="col-12" style="width:100%;" id="photo1" >
 		    <div id="photo2" style="float:left; width:35%; margin-left:14%;">
@@ -195,9 +195,8 @@
             </tbody>
           </table>
         </div>
-        <div style="margin-left: 73%;">
-        <a class="btn btn-dark" href="<%=application.getContextPath()%>/product/p_qna_write" role="button">상품문의하기</a>
-        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/product_view" role="button">목록보기</a>
+        <div style="margin-left: 80%;">
+        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/product_view" role="button">상품문의하기</a>
         </div>
 
         <div class="row justify-content-md-center">
