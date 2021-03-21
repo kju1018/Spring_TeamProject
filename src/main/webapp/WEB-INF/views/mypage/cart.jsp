@@ -84,7 +84,7 @@
 	
 	<div class="c_bottom">
 		<input type="button" class="btn btn-dark" value="전체상품주문">
-		<input type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='<%=application.getContextPath()%>/home'">
+		<input type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='<%=application.getContextPath()%>'">
 	</div>
 								
 </div>
