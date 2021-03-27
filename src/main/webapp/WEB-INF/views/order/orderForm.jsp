@@ -29,7 +29,7 @@
             </div>
         </div><!--주문상품 div-->
         <!--form 전체 -->
-        <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/payment">
+        <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
                     <div class="border-bottom pl-2 pt-2">
@@ -48,43 +48,43 @@
                                 </colgroup>
                                 <tr>
                                     <th class="p-2">받는사람</th>
-                                    <td><input type="text" class="paymentinput"></td>
+                                    <td><input type="text" class="paymentinput" name="oReceiver"></td>
                                 </tr>
 
                                 <tr>
                                     <th class="p-2 align-text-top">주소</th>
                                     <td>
                                         <!-- readOnly -->
-                                        <input type="text" class="paymentinput2" placeholder="우편번호">
+                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="oZipcode">
                                         <a href="#none" class="btn btn-dark btn-sm ml-2 mb-1">주소검색</a><br>
-                                        <input type="text" class="paymentinput" placeholder="기본주소"> <br>
-                                        <input type="text" class="paymentinput" placeholder="나머지 주소(선택 입력 가능)">
+                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oAddress"> <br>
+                                        <input type="text" class="paymentinput" placeholder="나머지 주소(선택 입력 가능)" name="oAddress">
                                     </td>
                                 </tr>
                                 <tr>
                                         <th class="p-2">휴대전화</th>
                                         <td>
-                                            <select class="paymentSelect item_width_30">
+                                            <select class="paymentSelect item_width_30" name="oNumber">
                                                 <option value="010">010</option>
-                                                <option value="010">011</option>
-                                                <option value="010">016</option>
+                                                <option value="011">011</option>
+                                                <option value="016">016</option>
                                             </select>
                                             -
-                                            <input class="paymentinput2" type="text">
+                                            <input class="paymentinput2" type="text" name="oNumber">
                                             -
-                                            <input class="paymentinput2" type="text">
+                                            <input class="paymentinput2" type="text" name="oNumber">
                                         </td>
                                 </tr>
                             </table>
                         </div><!--입력하는곳-->
                         <div class="p-4"><!-- 메시지-->
-                            <select class="paymentSelect item_width_100">
-                                <option value="selectM">--메시지 선택(선택사항)--</option>
-                                <option >배송전에 미리 연락바랍니다.</option>
-                                <option >부재 시 경비실에 맡겨주세요.</option>
-                                <option >부재 시 문 앞에 놓아주세요.</option>
-                                <option >빠른 배송 부탁드립니다.</option>
-                            </select>
+                            <select class="paymentSelect item_width_100" name="oMessage">
+                                <option value="selectNo">--메시지 선택(선택사항)--</option>
+                                <option value="배송전에 미리 연락바랍니다.">배송전에 미리 연락바랍니다.</option>
+                                <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
+                                <option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>
+                                <option value="빠른 배송 부탁드립니다.">빠른 배송 부탁드립니다.</option>
+                            </select>                            
                         </div><!-- 메시지-->
                     </div><!-- 배송지 양식 내용-->
                 </div><!-- 주소정보-->
@@ -112,13 +112,15 @@
                             <h5 style="float: right;">50,000원</h5>
                         </div>
 
-                        <h5 class="mt-2">결제수단</h3>
+                        <h5 class="mt-2">결제수단</h5>
                         <div class="border border-dark">
                             <div class="p-3" style="background-color: #dee2e6;">
                                 <h6 class="font-weight-bold mb-0">결제수단 선택</h6>
                             </div>
                             <div class="p-3">
-                                <input type="radio"> 무통장 입금
+                            	<div class="form-group">
+                                	<input type="radio" name="oMethod" value="무통장 입금"> 무통장 입금
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -130,16 +132,16 @@
                                 <tr>
                                     <th class="p-2">입금은행</th>
                                     <td>
-                                        <select class="paymentSelect" style="width: 100%;">
-                                            <option value="selectM">::: 선택해 주세요. :::</option>
-                                            <option >국민은행: 607301-01-303584 김민석 </option>
+                                        <select class="paymentSelect" style="width: 100%;" name="oAccountInfo">
+                                            <option value="selectNo">::: 선택해 주세요. :::</option>
+                                            <option value="국민은행: 607301-01-303584 김민석">국민은행: 607301-01-303584 김민석 </option>
                                         </select>    
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th class="p-2">입금자명</th>
-                                    <td><input type="text" class="item_width_100"></td>
+                                    <td><input type="text" class="item_width_100" name="oDepositor"></td>
                                 </tr>
                             </table>
                         </div>

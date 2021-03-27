@@ -3,6 +3,31 @@
                         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		
+			
+			<typeAlias type="com.mycompany.webapp.dto.User" alias="user"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Cart" alias="cart"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.CommunityQna" alias="communityqna"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Like" alias="like"/>	
+			
+			<typeAlias type="com.mycompany.webapp.dto.Order" alias="order"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.OrderProduct" alias="orderproduct"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Pcategory" alias="pcategory"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Product" alias="product"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.ProductImg" alias="productimg"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.ProductQna" alias="productqna"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.ProductReview" alias="productreview"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
+				
+			
 	</typeAliases>
 </configuration>
