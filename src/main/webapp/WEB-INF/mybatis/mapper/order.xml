@@ -9,13 +9,13 @@
 	<select id="selectByOrderNo" parameterType="int" resultType="order">
 		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from orders
-		where orderno=#{orderNo}
+		where orderno=#{orderno}
 	</select>
 	
 	<select id="selectByUserId" parameterType="string" resultType="order">
 		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from orders
-		where userid=#{userId}
+		where userid=#{userid}
 	</select>
 	
 	
@@ -27,25 +27,25 @@
 		insert into orders
 		(orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber)	
 		values
-		(#{orderNo}, #{userId}, #{oAddress}, #{oReceiver}, #{oMessage}, #{oMethod}, sysdate, #{oStatus}, #{oZipcode}, #{oNumber})
+		(#{orderno}, #{userid}, #{oaddress}, #{oreceiver}, #{omessage}, #{omethod}, sysdate, #{ostatus}, #{ozipcode}, #{onumber})
 	</insert>
 	
 	<update id="updateOrderStatus" parameterType="int">
 		update orders set 
 		ostatus='Ãë¼Ò'
-		where orderno=#{orderNo}
+		where orderno=#{orderno}
 	</update>
 	
 	<update id="updateOrder" parameterType="order">
 		update orders set 
-		oaddress=#{oAddress},
-		ostatus=#{oStatus}
-		where orderno=#{orderNo}
+		oaddress=#{oaddress},
+		ostatus=#{ostatus}
+		where orderno=#{orderno}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-		delete from users
-		where orderno=#{orderNo}
+		delete from orders
+		where orderno=#{orderno}
 	</delete>
 </mapper>
 
