@@ -7,10 +7,10 @@
 
 	
 	
-	<select id="selectByUserId" parameterType="string" resultType="order">
-		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
-		from orders
-		where userid=#{userId}
+	<select id="selectByOrderNo" parameterType="string" resultType="orderproduct">
+		select productno, orderno, oquantity, pname, nprice, ioriginalname, isavename, imgtype, orderstatus, orderdate
+		from orderproducts op, product
+		where op.orderno=#{orderNo} and 
 	</select>
 	
 	

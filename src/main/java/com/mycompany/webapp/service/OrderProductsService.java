@@ -20,8 +20,8 @@ public class OrderProductsService {
 		orderProductsDao.insert(orderProduct);
 	}
 	
-	public List<OrderProduct> getOrderProducts(String userId){
-		List<OrderProduct> list = orderProductsDao.selectByUserId(userId);
+	public List<OrderProduct> getOrderProducts(String orderNo){
+		List<OrderProduct> list = orderProductsDao.selectByOrderNo(orderNo);
 		return list;
 	}
 	
