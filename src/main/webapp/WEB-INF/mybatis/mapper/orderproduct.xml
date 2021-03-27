@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--xml파일을 식별할 수 있는 이름 -->
+<mapper namespace="com.mycompany.webapp.dao.OrderProductsDao">
+	<!--select문을 식별할 수 있는 이름 -->
+
+	
+	
+	<select id="selectByUserId" parameterType="string" resultType="order">
+		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
+		from orders
+		where userid=#{userId}
+	</select>
+	
+	
+	<insert id="insert" parameterType="orderproduct">
+		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+			select seq_orderproductsno.nextval from dual
+		</selectKey>
+		
+		insert into orderproducts
+		(productno, orderno, oquantity)	
+		values
+		(#{productNo}, #{orderNo}, #{oQuantity})
+	</insert>
+
+	<update id="updateOrder" parameterType="order">
+		update orders set 
+		oaddress=#{oAddress},
+		ostatus=#{oStatus}
+		where orderno=#{orderNo}
+	</update>
+	
+</mapper>
+
+

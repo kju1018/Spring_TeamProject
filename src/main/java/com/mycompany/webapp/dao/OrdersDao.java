@@ -2,8 +2,11 @@ package com.mycompany.webapp.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.mycompany.webapp.dto.Order;
 
+@Mapper
 public interface OrdersDao {
 	public Order selectByOrderNo(int orderNo);
 	public List<Order> selectByUserId(String userId);
