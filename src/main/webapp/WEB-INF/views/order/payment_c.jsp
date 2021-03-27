@@ -12,6 +12,13 @@
             <h4 id="payment_c_box">
                 주문완료
             </h4>
+            <div>
+            
+            	
+            
+            
+            </div>
+            
             <div class="border-bottom p-5 text-center">
                 <img src="<%=application.getContextPath()%>/resources/image/shopping-bag_kms.png" style="width: 50px;">
                 <p class="font-weight-bold">고객님의 주문이<br>

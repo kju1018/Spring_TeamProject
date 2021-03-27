@@ -12,7 +12,7 @@ public class Order {
 	private String oMessage;
 	private String oMethod;
 	private Date oDate;
-	private String oState;
+	private String oStatus;
 	private int oZipcode;
 	private String oAccountInfo;
 	private String oDepositor;
@@ -64,11 +64,11 @@ public class Order {
 	public void setoDate(Date oDate) {
 		this.oDate = oDate;
 	}
-	public String getoState() {
-		return oState;
+	public String getoStatus() {
+		return oStatus;
 	}
-	public void setoState(String oState) {
-		this.oState = oState;
+	public void setoStatus(String oState) {
+		this.oStatus = oState;
 	}
 	public int getoZipcode() {
 		return oZipcode;
@@ -92,7 +92,7 @@ public class Order {
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", uid=" + uid + ", oAddress=" + oAddress + ", oReceiver=" + oReceiver
 				+ ", oNumber=" + oNumber + ", oMessage=" + oMessage + ", oMethod=" + oMethod + ", oDate=" + oDate
-				+ ", oState=" + oState + ", oZipcode=" + oZipcode + ", oAccountInfo=" + oAccountInfo + ", oDepositor="
+				+ ", oState=" + oStatus + ", oZipcode=" + oZipcode + ", oAccountInfo=" + oAccountInfo + ", oDepositor="
 				+ oDepositor + "]";
 	}
 	

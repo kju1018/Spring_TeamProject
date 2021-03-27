@@ -1,5 +1,7 @@
 package com.mycompany.webapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,24 @@ public class OrdersService {
 	
 	public void saveOrder(Order order) {
 		ordersDao.insert(order);
+	}
+
+	public Order getOrder(int orderNo) {
+		Order order = ordersDao.selectByOrderNo(orderNo);
+		return order;
+	}
+	
+	public List<Order> getOrderList(String uid){
+		List<Order> orderList = ordersDao.selectByUid(uid);
+		return orderList;
+	}
+	
+	//주문 완료상태에서(배송완료가 아님) 취소 버튼을 누를경우 취소상태로
+	public void cancelOrder(int orderNo) {
+		ordersDao.updateOrderStatus(orderNo);
+	}
+	
+	public void removeOrder(int orderNo) {
+		ordersDao.delete(orderNo);
 	}
 }
