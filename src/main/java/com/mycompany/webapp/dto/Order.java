@@ -1,11 +1,10 @@
 package com.mycompany.webapp.dto;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class Order {
 	private int orderNo;
-	private String uid;
+	private String userId;
 	private String oAddress;
 	private String oReceiver;
 	private String oNumber;
@@ -14,19 +13,18 @@ public class Order {
 	private Date oDate;
 	private String oStatus;
 	private int oZipcode;
-	private String oAccountInfo;
-	private String oDepositor;
+	
 	public int getOrderNo() {
 		return orderNo;
 	}
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
-	public String getUid() {
-		return uid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setUserId(String uid) {
+		this.userId = uid;
 	}
 	public String getoAddress() {
 		return oAddress;
@@ -67,8 +65,8 @@ public class Order {
 	public String getoStatus() {
 		return oStatus;
 	}
-	public void setoStatus(String oState) {
-		this.oStatus = oState;
+	public void setoStatus(String oStatus) {
+		this.oStatus = oStatus;
 	}
 	public int getoZipcode() {
 		return oZipcode;
@@ -76,27 +74,13 @@ public class Order {
 	public void setoZipcode(int oZipcode) {
 		this.oZipcode = oZipcode;
 	}
-	public String getoAccountInfo() {
-		return oAccountInfo;
-	}
-	public void setoAccountInfo(String oAccountInfo) {
-		this.oAccountInfo = oAccountInfo;
-	}
-	public String getoDepositor() {
-		return oDepositor;
-	}
-	public void setoDepositor(String oDepositor) {
-		this.oDepositor = oDepositor;
-	}
 	@Override
 	public String toString() {
-		return "Order [orderNo=" + orderNo + ", uid=" + uid + ", oAddress=" + oAddress + ", oReceiver=" + oReceiver
+		return "Order [orderNo=" + orderNo + ", uid=" + userId + ", oAddress=" + oAddress + ", oReceiver=" + oReceiver
 				+ ", oNumber=" + oNumber + ", oMessage=" + oMessage + ", oMethod=" + oMethod + ", oDate=" + oDate
-				+ ", oState=" + oStatus + ", oZipcode=" + oZipcode + ", oAccountInfo=" + oAccountInfo + ", oDepositor="
-				+ oDepositor + "]";
+				+ ", oStatus=" + oStatus + ", oZipcode=" + oZipcode + "]";
 	}
-	
-	
+
 	
 	
 	

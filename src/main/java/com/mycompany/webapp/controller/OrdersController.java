@@ -35,16 +35,16 @@ public class OrdersController {
 		//결재가 다 완료된다면(나중에 생각)
 		//아마 여기서 orderproducts도 만들어야할듯
 //		String uid = (String) session.getAttribute("loginUid");
-		String uid = "user1";
-		if (uid != null) {
+		String userId = "user1";
+		if (userId != null) {
 			order.setOrderNo(1);//일단 임의로 지정
-			order.setUid(uid);//일단 임의로 지정
+			order.setUserId(userId);//일단 임의로 지정
 			order.setoStatus("입금 대기중");
 			order.setoNumber(order.getoNumber().replace(",", "-"));
 		} else {
 			//주문 취소 등
 		}
-//		ordersService.saveOrder(order);
+		ordersService.saveOrder(order);
 		logger.info(order.toString());
 		
 		return "redirect:/order/order_complete";
