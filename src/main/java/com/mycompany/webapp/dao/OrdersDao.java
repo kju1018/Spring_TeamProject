@@ -8,10 +8,10 @@ import com.mycompany.webapp.dto.Order;
 
 @Mapper
 public interface OrdersDao {
-	public Order selectByOrderNo(int orderNo);
-	public List<Order> selectByUserId(String userId);
+	public Order selectByOrderNo(int orderno);
+	public List<Order> selectByUserId(String userid);
 	public int insert(Order order);
-	public int updateOrderStatus(int orderNo);
+	public int updateOrderStatus(int orderno);
 	public int updateOrder(Order order);
-	public int delete(int orderNo);
+	public int delete(int orderno);
 }

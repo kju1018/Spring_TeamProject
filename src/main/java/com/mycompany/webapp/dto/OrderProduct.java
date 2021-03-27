@@ -5,75 +5,78 @@ import java.util.Date;
 
 public class OrderProduct {
 	
-	private int productNo;
-	private int orderNo;
-	private int oQuantity;
-	private String pName;
-	private int pPrice;
-	private String iOriginalName;
-	private String iSaveName;
-	private String imgType;
-	private String orderStatus;
-	private Date orderDate;
-	public int getProductNo() {
-		return productNo;
+	private int productno;
+	private int orderno;
+	private int oquantity;
+	private String pname;
+	private int pprice;
+	private String ioriginalname;
+	private String isavename;
+	private String imgtype;
+	private String orderstatus;
+	private Date orderdate;
+	
+	public int getProductno() {
+		return productno;
 	}
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+	public void setProductno(int productno) {
+		this.productno = productno;
 	}
-	public int getOrderNo() {
-		return orderNo;
+	public int getOrderno() {
+		return orderno;
 	}
-	public void setOrderNo(int orderNo) {
-		this.orderNo = orderNo;
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
 	}
-	public int getoQuantity() {
-		return oQuantity;
+	public int getOquantity() {
+		return oquantity;
 	}
-	public void setoQuantity(int oQuantity) {
-		this.oQuantity = oQuantity;
+	public void setOquantity(int oquantity) {
+		this.oquantity = oquantity;
 	}
-	public String getpName() {
-		return pName;
+	public String getPname() {
+		return pname;
 	}
-	public void setpName(String pName) {
-		this.pName = pName;
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
-	public int getpPrice() {
-		return pPrice;
+	public int getPprice() {
+		return pprice;
 	}
-	public void setpPrice(int pPrice) {
-		this.pPrice = pPrice;
+	public void setPprice(int pprice) {
+		this.pprice = pprice;
 	}
-	public String getiOriginalName() {
-		return iOriginalName;
+	public String getIoriginalname() {
+		return ioriginalname;
 	}
-	public void setiOriginalName(String iOriginalName) {
-		this.iOriginalName = iOriginalName;
+	public void setIoriginalname(String ioriginalname) {
+		this.ioriginalname = ioriginalname;
 	}
-	public String getiSaveName() {
-		return iSaveName;
+	public String getIsavename() {
+		return isavename;
 	}
-	public void setiSaveName(String iSaveName) {
-		this.iSaveName = iSaveName;
+	public void setIsavename(String isavename) {
+		this.isavename = isavename;
 	}
-	public String getImgType() {
-		return imgType;
+	public String getImgtype() {
+		return imgtype;
 	}
-	public void setImgType(String imgType) {
-		this.imgType = imgType;
+	public void setImgtype(String imgtype) {
+		this.imgtype = imgtype;
 	}
-	public String getOrderStatus() {
-		return orderStatus;
+	public String getOrderstatus() {
+		return orderstatus;
 	}
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
+	public void setOrderstatus(String orderstatus) {
+		this.orderstatus = orderstatus;
 	}
-	public Date getOrderDate() {
-		return orderDate;
+	public Date getOrderdate() {
+		return orderdate;
 	}
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderdate(Date orderdate) {
+		this.orderdate = orderdate;
 	}
+	
+	
 }
 	

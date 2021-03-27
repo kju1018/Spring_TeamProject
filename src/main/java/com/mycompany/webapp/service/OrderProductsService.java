@@ -20,12 +20,16 @@ public class OrderProductsService {
 		orderProductsDao.insert(orderProduct);
 	}
 	
-	public List<OrderProduct> getOrderProducts(String orderNo){
-		List<OrderProduct> list = orderProductsDao.selectByOrderNo(orderNo);
+	public List<OrderProduct> getOrderProducts(String userid){
+		List<OrderProduct> list = orderProductsDao.selectByUserId(userid);
 		return list;
 	}
 	
 	public void updateOrderProduct(OrderProduct orderProduct) {
 		orderProductsDao.updateOrderProduct(orderProduct);
+	}
+	
+	public void delete(int orderno) {
+		orderProductsDao.delete(orderno);
 	}
 }

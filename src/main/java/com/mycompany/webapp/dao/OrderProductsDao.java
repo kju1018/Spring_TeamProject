@@ -8,9 +8,10 @@ import com.mycompany.webapp.dto.OrderProduct;
 
 @Mapper
 public interface OrderProductsDao {
-	public int insert(OrderProduct orderProduct);
-	public List<OrderProduct> selectByOrderNo(String orderNo);
-	public int updateOrderProduct(OrderProduct orderProduct);
+	public int insert(OrderProduct orderproduct);
+	public List<OrderProduct> selectByUserId(String userid);
+	public int updateOrderProduct(OrderProduct orderproduct);
+	public int delete(int orderno);
 //	public int delete() 
 	//OrderProduct를 삭제하려면 orderno, productno둘 다 필요 물어봐야함
 	//필요 없을수도있음
