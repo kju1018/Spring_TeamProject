@@ -1,5 +1,7 @@
 package com.mycompany.webapp.dao;
 
-public class OrdersDao {
+import com.mycompany.webapp.dto.Order;
 
+public interface OrdersDao {
+	public int insert(Order order);
 }
