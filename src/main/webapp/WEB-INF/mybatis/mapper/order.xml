@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--xml파일을 식별할 수 있는 이름 -->
+<mapper namespace="com.mycompany.webapp.dao.OrdersDao">
+	<!--select문을 식별할 수 있는 이름 -->
+
+	
+	<select id="selectByOrderNo" parameterType="int" resultType="order">
+		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
+		from orders
+		where orderno=#{orderNo}
+	</select>
+	
+	<select id="selectByUserId" parameterType="string" resultType="order">
+		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
+		from orders
+		where userid=#{userId}
+	</select>
+	
+	
+	<insert id="insert" parameterType="order">
+		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+			select seq_ordersno.nextval from dual
+		</selectKey>
+		
+		insert into orders
+		(orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber)	
+		values
+		(#{orderNo}, #{userId}, #{oAddress}, #{oReceiver}, #{oMessage}, #{oMethod}, sysdate, #{oStatus}, #{oZipcode}, #{oNumber})
+	</insert>
+	
+	<update id="updateOrderStatus" parameterType="int">
+		update orders set 
+		ostatus='취소'
+		where orderno=#{orderNo}
+	</update>
+	
+	<update id="updateOrder" parameterType="order">
+		update orders set 
+		oaddress=#{oAddress},
+		ostatus=#{oStatus}
+		where orderno=#{orderNo}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from users
+		where orderno=#{orderNo}
+	</delete>
+</mapper>
+
+

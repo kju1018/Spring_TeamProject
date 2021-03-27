@@ -2,6 +2,7 @@ package com.mycompany.webapp.dto;
 
 import java.util.Date;
 
+
 public class OrderProduct {
 	
 	private int productNo;
@@ -74,6 +75,5 @@ public class OrderProduct {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	
 }
+	
