@@ -27,6 +27,8 @@
 			<typeAlias type="com.mycompany.webapp.dto.ProductReview" alias="productreview"/>
 			
 			<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Notice" alias="notice"/>
 				
 			
 	</typeAliases>
