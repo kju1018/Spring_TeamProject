@@ -9,7 +9,7 @@ public class PaymentController {
 	
 	
 	
-	@PostMapping("/payment")
+	/*@PostMapping("/payment")
 	public String paymentProcess() {
 		//결재 완료 과정
 		//결재가 완료되면
@@ -20,5 +20,5 @@ public class PaymentController {
 	@GetMapping("/payment_complete")
 	public String paymentComplete() {
 		return "payment/payment_c";
-	}
+	}*/
 }
