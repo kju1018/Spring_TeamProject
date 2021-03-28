@@ -8,10 +8,25 @@ import com.mycompany.webapp.dto.OrderProduct;
 
 @Mapper
 public interface OrderProductsDao {
+	
+	//주문 물품 생성
 	public int insert(OrderProduct orderproduct);
+	
+	//특정 유저에 주문 물품 리스트
 	public List<OrderProduct> selectByUserId(String userid);
+	
+	public int delete(OrderProduct orderproduct);
+	
+	
+	
+	
+	
+	//주문 물품 업데이트(필요없을듯)
 	public int updateOrderProduct(OrderProduct orderproduct);
-	public int delete(int orderno);
+
+	//(묶음 배송일경우) 주문 번호로 다 삭제
+	//하지만 이건 안쓰일듯 (order삭제로 cascade설정)
+	public int deleteByOrderNo(int orderno);
 //	public int delete() 
 	//OrderProduct를 삭제하려면 orderno, productno둘 다 필요 물어봐야함
 	//필요 없을수도있음

@@ -24,7 +24,7 @@ public class OrdersService {
 		return orderList;
 	}
 	
-	public void saveOrder(Order order) {
+	public void createOrder(Order order) {
 		ordersDao.insert(order);
 	}
 	

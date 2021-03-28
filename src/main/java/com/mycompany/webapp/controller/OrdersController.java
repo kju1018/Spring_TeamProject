@@ -44,7 +44,7 @@ public class OrdersController {
 		} else {
 			//주문 취소 등
 		}
-		ordersService.saveOrder(order);
+		ordersService.createOrder(order);
 		logger.info(order.toString());
 		
 		return "redirect:/order/order_complete";
