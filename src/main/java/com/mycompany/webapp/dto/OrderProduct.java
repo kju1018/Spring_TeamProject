@@ -13,9 +13,8 @@ public class OrderProduct {
 	private String ioriginalname;
 	private String isavename;
 	private String imgtype;
-	private String orderstatus;
-	private Date orderdate;
-	
+	private String ostatus;
+	private Date odate;
 	public int getProductno() {
 		return productno;
 	}
@@ -64,18 +63,20 @@ public class OrderProduct {
 	public void setImgtype(String imgtype) {
 		this.imgtype = imgtype;
 	}
-	public String getOrderstatus() {
-		return orderstatus;
+	public String getOstatus() {
+		return ostatus;
 	}
-	public void setOrderstatus(String orderstatus) {
-		this.orderstatus = orderstatus;
+	public void setOstatus(String ostatus) {
+		this.ostatus = ostatus;
 	}
-	public Date getOrderdate() {
-		return orderdate;
+	public Date getOdate() {
+		return odate;
 	}
-	public void setOrderdate(Date orderdate) {
-		this.orderdate = orderdate;
+	public void setOdate(Date odate) {
+		this.odate = odate;
 	}
+	
+	
 	
 	
 }

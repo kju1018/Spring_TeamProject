@@ -7,11 +7,11 @@
 
 	
 	<select id="selectByUserId" parameterType="string" resultType="orderproduct">
-		select productno, orderno, oquantity, pname, pprice, ioriginalname, isavename, imgtype, orderstatus, orderdate
+		select op.productno, o.orderno, op.oquantity, p.pname, p.pprice, pi.ioriginalname, pi.isavename, pi.imgtype, o.ostatus, o.odate
 		from orders o, orderproducts op, products p, productimgs pi
 		where o.userid=#{userid} and o.orderno = op.orderno
 			and op.productno = p.productno and p.productno = pi.productno
-			and pi.priority = 1
+			and pi.ipriority = 1
 
 	</select>
 	
