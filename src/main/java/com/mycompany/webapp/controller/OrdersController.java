@@ -1,5 +1,7 @@
 package com.mycompany.webapp.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.OrderProduct;
+import com.mycompany.webapp.service.OrderProductsService;
 import com.mycompany.webapp.service.OrdersService;
 
 @Controller
@@ -20,6 +24,9 @@ public class OrdersController {
 	
 	@Autowired
 	private OrdersService ordersService;
+	
+	@Autowired
+	private OrderProductsService orderProductService;
 	
 	//주문서를 가져오는 부분
 	@GetMapping("/order_form")
@@ -61,4 +68,30 @@ public class OrdersController {
 		return "order/payment_c";
 	}
 	
+	
+	
+	
+	@GetMapping("/test")
+	public String testMethod() {
+		
+		/*OrderProduct orderProduct = new OrderProduct();
+			orderProduct.setOrderno(22);
+			orderProduct.setProductno(2);
+			orderProduct.setOquantity(5);
+			
+			orderProductService.createOrderProduct(orderProduct);*/
+		
+		List<OrderProduct> orderProduct = orderProductService.getOrderProducts("user1");
+		
+		logger.info(orderProduct.toString());
+		return "redirect:/order/order_form";
+	}
+	
 }
+
+
+
+
+
+
+
