@@ -20,9 +20,9 @@ public class ProductsService {
 	public void pUpdate(Products products) {
 		productsDao.pUpdate(products);
 	};
-	public Products pSelectByPno(int productno) {
-		Products products = productsDao.pSelectByPno(productno);
-		return products;
+	public List<Products> pSelectByPno(int productno) {
+		List<Products> list = productsDao.pSelectByPno(productno);
+		return list;
 	};
 	public void pDeleteByPno(int productno) {
 		productsDao.pDeleteByPno(productno);
