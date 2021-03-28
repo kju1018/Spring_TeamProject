@@ -7,7 +7,7 @@
 
 	
 	<select id="selectByUserId" parameterType="string" resultType="orderproduct">
-		select productno, orderno, oquantity, pname, nprice, ioriginalname, isavename, imgtype, orderstatus, orderdate
+		select productno, orderno, oquantity, pname, pprice, ioriginalname, isavename, imgtype, orderstatus, orderdate
 		from orders o, orderproducts op, products p, productimgs pi
 		where o.userid=#{userid} and o.orderno = op.orderno
 			and op.productno = p.productno and p.productno = pi.productno
@@ -29,7 +29,12 @@
 		where orderno=#{orderno} and productno=#{productno}
 	</update>
 	
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="orderproduct">
+		delete from orderproducts
+		where orderno=#{orderno} and productno=#{productno}
+	</delete>
+	
+	<delete id="deleteByOrderNo" parameterType="int">
 		delete from orderproducts
 		where orderno=#{orderno}
 	</delete>
