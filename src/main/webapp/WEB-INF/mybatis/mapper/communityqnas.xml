@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.webapp.dao.CommunityQnasDao">
+ <select id="selectAll" resultType="communityqna">
+      select boardno, btitle, bwriter, bcontent, bdate, bcount
+      from communityqnas
+      order by boardno desc
+   </select>  
+   
+ <select id="selectByPage" parameterType="pager" resultType="communityqna">
+      select rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+            from (
+               select boardno, btitle, bcontent, bwriter, bdate, bcount
+               from communityqnas
+               order by boardno desc
+            )
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+
+   </select>
+   
+   <insert id="insert" parameterType="communityqna">
+   	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
+         select seq_boards_bno.nextval from dual
+      </selectKey>
+      
+         insert into communityqnas
+         (boardno, btitle, bcontent, bwriter, bdate, bhitcount)
+         values
+         (#{boardno}, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)      
+   
+   </insert>
+   
+   <select id="selectByBoardno" parameterType="int" resultType="communityqna">
+      select boardno, btitle, bcontent, bwriter, bdate, bhitcount
+      from communityqnas
+      where boardno=#{boardno}
+   </select>
+   
+   <update id="update" parameterType="communityqna">
+      update communityqnas set
+         btitle=#{btitle},
+         bcontent=#{bcontent}
+         where boardno=#{boardno}
+   </update>
+   
+   <delete id="deleteByBoardno" parameterType="int">
+      delete from communityqnas where boardno=#{boardno}
+   </delete>
+   
+   <update id="updateBcount">
+      update communityqnas set bcount=bcount+1 where boardno=#{boardno}
+   </update>
+   
+   <select id="count" resultType="int">
+      select count(*) from communityqnas
+   </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

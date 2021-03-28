@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--xml파일을 식별할 수 있는 이름 -->
+<mapper namespace="com.mycompany.webapp.dao.OrderProductsDao">
+	<!--select문을 식별할 수 있는 이름 -->
+
+	
+	<select id="selectByUserId" parameterType="string" resultType="orderproduct">
+		select productno, orderno, oquantity, pname, nprice, ioriginalname, isavename, imgtype, orderstatus, orderdate
+		from orders o, orderproducts op, products p, productimgs pi
+		where o.userid=#{userid} and o.orderno = op.orderno
+			and op.productno = p.productno and p.productno = pi.productno
+			and pi.priority = 1
+
+	</select>
+	
+	<insert id="insert" parameterType="orderproduct">
+		
+		insert into orderproducts
+		(productno, orderno, oquantity)	
+		values
+		(#{productno}, #{orderno}, #{oquantity})
+	</insert>
+
+	<update id="updateOrderProduct" parameterType="orderproduct">
+		update orderproducts set 
+		oquantity=#{oquantity}
+		where orderno=#{orderno} and productno=#{productno}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from orderproducts
+		where orderno=#{orderno}
+	</delete>
+	
+</mapper>
+
+

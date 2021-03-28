@@ -1,100 +1,81 @@
 package com.mycompany.webapp.dto;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class Order {
-	private int orderNo;
-	private String uid;
-	private String oAddress;
-	private String oReceiver;
-	private String oNumber;
-	private String oMessage;
-	private String oMethod;
-	private Date oDate;
-	private String oState;
-	private int oZipcode;
-	private String oAccountInfo;
-	private String oDepositor;
-	public int getOrderNo() {
-		return orderNo;
+	private int orderno;
+	private String userid;
+	private String oaddress;
+	private String oreceiver;
+	private String onumber;
+	private String omessage;
+	private String omethod;
+	private Date odate;
+	private String ostatus;
+	private int ozipcode;
+	
+	public int getOrderno() {
+		return orderno;
 	}
-	public void setOrderNo(int orderNo) {
-		this.orderNo = orderNo;
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
 	}
-	public String getUid() {
-		return uid;
+	public String getUserid() {
+		return userid;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getoAddress() {
-		return oAddress;
+	public String getOaddress() {
+		return oaddress;
 	}
-	public void setoAddress(String oAddress) {
-		this.oAddress = oAddress;
+	public void setOaddress(String oaddress) {
+		this.oaddress = oaddress;
 	}
-	public String getoReceiver() {
-		return oReceiver;
+	public String getOreceiver() {
+		return oreceiver;
 	}
-	public void setoReceiver(String oReceiver) {
-		this.oReceiver = oReceiver;
+	public void setOreceiver(String oreceiver) {
+		this.oreceiver = oreceiver;
 	}
-	public String getoNumber() {
-		return oNumber;
+	public String getOnumber() {
+		return onumber;
 	}
-	public void setoNumber(String oNumber) {
-		this.oNumber = oNumber;
+	public void setOnumber(String onumber) {
+		this.onumber = onumber;
 	}
-	public String getoMessage() {
-		return oMessage;
+	public String getOmessage() {
+		return omessage;
 	}
-	public void setoMessage(String oMessage) {
-		this.oMessage = oMessage;
+	public void setOmessage(String omessage) {
+		this.omessage = omessage;
 	}
-	public String getoMethod() {
-		return oMethod;
+	public String getOmethod() {
+		return omethod;
 	}
-	public void setoMethod(String oMethod) {
-		this.oMethod = oMethod;
+	public void setOmethod(String omethod) {
+		this.omethod = omethod;
 	}
-	public Date getoDate() {
-		return oDate;
+	public Date getOdate() {
+		return odate;
 	}
-	public void setoDate(Date oDate) {
-		this.oDate = oDate;
+	public void setOdate(Date odate) {
+		this.odate = odate;
 	}
-	public String getoState() {
-		return oState;
+	public String getOstatus() {
+		return ostatus;
 	}
-	public void setoState(String oState) {
-		this.oState = oState;
+	public void setOstatus(String ostatus) {
+		this.ostatus = ostatus;
 	}
-	public int getoZipcode() {
-		return oZipcode;
+	public int getOzipcode() {
+		return ozipcode;
 	}
-	public void setoZipcode(int oZipcode) {
-		this.oZipcode = oZipcode;
+	public void setOzipcode(int ozipcode) {
+		this.ozipcode = ozipcode;
 	}
-	public String getoAccountInfo() {
-		return oAccountInfo;
-	}
-	public void setoAccountInfo(String oAccountInfo) {
-		this.oAccountInfo = oAccountInfo;
-	}
-	public String getoDepositor() {
-		return oDepositor;
-	}
-	public void setoDepositor(String oDepositor) {
-		this.oDepositor = oDepositor;
-	}
-	@Override
-	public String toString() {
-		return "Order [orderNo=" + orderNo + ", uid=" + uid + ", oAddress=" + oAddress + ", oReceiver=" + oReceiver
-				+ ", oNumber=" + oNumber + ", oMessage=" + oMessage + ", oMethod=" + oMethod + ", oDate=" + oDate
-				+ ", oState=" + oState + ", oZipcode=" + oZipcode + ", oAccountInfo=" + oAccountInfo + ", oDepositor="
-				+ oDepositor + "]";
-	}
+	
+	
 	
 	
 	

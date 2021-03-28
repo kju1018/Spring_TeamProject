@@ -132,10 +132,7 @@
                                 <tr>
                                     <th class="p-2">입금은행</th>
                                     <td>
-                                        <select class="paymentSelect" style="width: 100%;" name="oAccountInfo">
-                                            <option value="selectNo">::: 선택해 주세요. :::</option>
-                                            <option value="국민은행: 607301-01-303584 김민석">국민은행: 607301-01-303584 김민석 </option>
-                                        </select>    
+                                         국민은행: 607301-01-303584 김민석
                                     </td>
                                 </tr>
 

@@ -10,7 +10,7 @@
 			
 			<typeAlias type="com.mycompany.webapp.dto.CommunityQna" alias="communityqna"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.Like" alias="like"/>	
+			<typeAlias type="com.mycompany.webapp.dto.Likes" alias="likes"/>	
 			
 			<typeAlias type="com.mycompany.webapp.dto.Order" alias="order"/>
 			
@@ -18,15 +18,17 @@
 			
 			<typeAlias type="com.mycompany.webapp.dto.Pcategory" alias="pcategory"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.Product" alias="product"/>
+			<typeAlias type="com.mycompany.webapp.dto.Products" alias="products"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.ProductImg" alias="productimg"/>
+			<typeAlias type="com.mycompany.webapp.dto.ProductImgs" alias="productimgs"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.ProductQna" alias="productqna"/>
+			<typeAlias type="com.mycompany.webapp.dto.ProductQnas" alias="productqnas"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.ProductReview" alias="productreview"/>
+			<typeAlias type="com.mycompany.webapp.dto.ProductReviews" alias="productreview"/>
 			
 			<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
+			
+			<typeAlias type="com.mycompany.webapp.dto.Notice" alias="notice"/>
 				
 			
 	</typeAliases>
