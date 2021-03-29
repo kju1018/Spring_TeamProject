@@ -2,8 +2,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script>
+	const findId = () => {
+		const uname = $("#uname").val();
+		const uemail = $("#uemail").val();
+		var result 
+		
+		if(uname === "" || uemail === ""){
+			alert("양식을 채워주세요.")
+		}
+		
+		$.ajax({
+			url : "read",
+			data : {uname, uemail},
+			method: "post"
+		})
+		.then(data => {
+			$("#board").html(data);
+		})
+		
+	}
 
-
+</script>
     
   <div class="container-lg wrapper_content item_mt-18">
         <div class="row justify-content-center border"  >
@@ -28,12 +48,12 @@
                     </div>
                     <!--input : email-->
                     <div class="col-6">
-                        <input type="text" class="form-control" id="uemail"  name="uname">
+                        <input type="text" class="form-control" id="uemail"  name="uemail">
                     </div>
                 </div>
                 <!--버튼-->
                 <div class="row item_mt-4 justify-content-center item_mb-3">
-                    <button class="btn btn-dark btn-lg item_width_20 btn-block">확인</button>
+                    <button onclick="findId()" class="btn btn-dark btn-lg item_width_20 btn-block">확인</button>
                 </div>
                
                 

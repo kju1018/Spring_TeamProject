@@ -19,7 +19,7 @@ public class UsersService {
 	
 	@Autowired
 	private UsersDao usersDao;
-	
+	/// 회원가입 시 회원추가
 	public void join(User user) {
 	
 		user.setUjoindate(new Date());
@@ -28,13 +28,21 @@ public class UsersService {
 		
 		usersDao.userInsert(user);
 	}
-	
+	/// 아이디가 존재하는지 아닌지 여부를 확인하기 위한 절차
 	public String duplicateId(User user) {
 		User dbUser=usersDao.selectbyUserid(user.getUserid());
+		logger.info(user.getUserid());
 		 if(dbUser != null) {
-			 logger.info("존재하는 ");
 			 return "wrongUid";
-		 }
+		 }		 
+		 return "success";
+	}
+	
+	public String loginProcess(User user) {
+		User dbUser=usersDao.selectbyUserid(user.getUserid());
+		 if(!user.getUpassword().equals(dbUser.getUpassword()) || dbUser == null) {
+				 return "fail";
+		}
 		 
 		 return "success";
 	}
