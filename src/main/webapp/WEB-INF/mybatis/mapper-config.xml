@@ -24,7 +24,7 @@
 			
 			<typeAlias type="com.mycompany.webapp.dto.ProductQnas" alias="productqnas"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.ProductReviews" alias="productreview"/>
+			<typeAlias type="com.mycompany.webapp.dto.ProductReviews" alias="productreviews"/>
 			
 			<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
 			
