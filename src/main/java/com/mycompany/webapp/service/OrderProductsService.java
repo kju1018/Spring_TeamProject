@@ -29,7 +29,11 @@ public class OrderProductsService {
 		orderProductsDao.updateOrderProduct(orderProduct);
 	}
 	
-	public void delete(int orderno) {
-		orderProductsDao.delete(orderno);
+	public void delete(OrderProduct orderProduct) {
+		orderProductsDao.delete(orderProduct);
+	}
+	
+	public void deleteByOrderNo(int orderno) {
+		orderProductsDao.deleteByOrderNo(orderno);
 	}
 }
