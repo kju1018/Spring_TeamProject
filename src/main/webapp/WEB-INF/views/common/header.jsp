@@ -53,12 +53,19 @@
             <!-----auth info-->
             <div class="col-3"> 
                 <div class="row align-items-end" style="padding-top: 0.6em;" >
+                <c:if test="${loginUid==null}">
                     <div class="col" >
                         <a href="<%=application.getContextPath()%>/auth/login" style="font-size: xx-small;text-decoration: none; color: black;">SignIn</a>
                     </div>
                     <div class="col"  >
                         <a href="<%=application.getContextPath()%>/auth/signup" style="font-size: xx-small;text-decoration: none; color: black;">SignUp</a>
                     </div>
+                </c:if>
+                <c:if test="${loginUid!=null}">
+                	<div class="col" >
+                        <a href="<%=application.getContextPath()%>/auth/logout" style="font-size: xx-small;text-decoration: none; color: black;">logout</a>
+                    </div>
+                </c:if>
                     <div class="col"  >
                         <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black;">MyPage</a>
                     </div>
