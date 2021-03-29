@@ -30,6 +30,7 @@
         </div><!--주문상품 div-->
         <!--form 전체 -->
         <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
+           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
                     <div class="border-bottom pl-2 pt-2">
@@ -48,37 +49,37 @@
                                 </colgroup>
                                 <tr>
                                     <th class="p-2">받는사람</th>
-                                    <td><input type="text" class="paymentinput" name="oReceiver"></td>
+                                    <td><input type="text" class="paymentinput" name="oreceiver"></td>
                                 </tr>
 
                                 <tr>
                                     <th class="p-2 align-text-top">주소</th>
                                     <td>
                                         <!-- readOnly -->
-                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="oZipcode">
+                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="ozipcode">
                                         <a href="#none" class="btn btn-dark btn-sm ml-2 mb-1">주소검색</a><br>
-                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oAddress"> <br>
-                                        <input type="text" class="paymentinput" placeholder="나머지 주소(선택 입력 가능)" name="oAddress">
+                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oaddress"> <br>
+                                        <input type="text" class="paymentinput" placeholder="나머지 주소(선택 입력 가능)" name="oaddress">
                                     </td>
                                 </tr>
                                 <tr>
                                         <th class="p-2">휴대전화</th>
                                         <td>
-                                            <select class="paymentSelect item_width_30" name="oNumber">
+                                            <select class="paymentSelect item_width_30" name="onumber">
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="016">016</option>
                                             </select>
                                             -
-                                            <input class="paymentinput2" type="text" name="oNumber">
+                                            <input class="paymentinput2" type="text" name="onumber">
                                             -
-                                            <input class="paymentinput2" type="text" name="oNumber">
+                                            <input class="paymentinput2" type="text" name="onumber">
                                         </td>
                                 </tr>
                             </table>
                         </div><!--입력하는곳-->
                         <div class="p-4"><!-- 메시지-->
-                            <select class="paymentSelect item_width_100" name="oMessage">
+                            <select class="paymentSelect item_width_100" name="omessage">
                                 <option value="selectNo">--메시지 선택(선택사항)--</option>
                                 <option value="배송전에 미리 연락바랍니다.">배송전에 미리 연락바랍니다.</option>
                                 <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
@@ -119,7 +120,7 @@
                             </div>
                             <div class="p-3">
                             	<div class="form-group">
-                                	<input type="radio" name="oMethod" value="무통장 입금"> 무통장 입금
+                                	<input type="radio" name="omethod" value="무통장 입금"> 무통장 입금
                                 </div>
                             </div>
                         </div>
@@ -138,7 +139,7 @@
 
                                 <tr>
                                     <th class="p-2">입금자명</th>
-                                    <td><input type="text" class="item_width_100" name="oDepositor"></td>
+                                    <td><input type="text" class="item_width_100" name="odepositor"></td>
                                 </tr>
                             </table>
                         </div>

@@ -44,7 +44,6 @@ public class OrdersController {
 //		String uid = (String) session.getAttribute("loginUid");
 		String userId = "user1";
 		if (userId != null) {
-			order.setOrderno(1);//일단 임의로 지정
 			order.setUserid(userId);//일단 임의로 지정
 			order.setOstatus("입금 대기중");
 			order.setOnumber(order.getOnumber().replace(",", "-"));
