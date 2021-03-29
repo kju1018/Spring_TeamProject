@@ -4,7 +4,6 @@ import java.util.Date;
 
 
 public class OrderProduct {
-	
 	private int productno;
 	private int orderno;
 	private int oquantity;
@@ -15,6 +14,7 @@ public class OrderProduct {
 	private String imgtype;
 	private String ostatus;
 	private Date odate;
+	
 	public int getProductno() {
 		return productno;
 	}
