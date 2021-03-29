@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   
 
@@ -20,9 +20,16 @@
     <!--게시판-->
     <div class="table table-responsive">
         <table class="table">
-          <tr>
+            <tr>
+                <th width="25%">글번호</th>
+                <td><input type="text" class="form-control" id="btitle" name="boardno"></td>
+                <th width="25%">조회수</th>
+                <td><input type="text" class="form-control" id="bcount" name="bcount"></td>
+            </tr>
+            
+            <tr>
                 <th width="25%">작성자</th>
-                <td><input type="text" class="form-control" value="${communityqna.userid}" readonly></td>
+                <td><input type="text" class="form-control" id="userid" name="userid"></td>
                 <th width="25%">작성일</th>
                 <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
             </tr>

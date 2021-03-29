@@ -55,4 +55,9 @@ public class CommunityQnasService {
 		int rows = communityqnasDao.count();
 		return rows;
 	}
+	
+	public List<CommunityQna> getBoardListById(String userid){
+		List<CommunityQna> list = communityqnasDao.selectByUserid(userid);
+		return list;
+	}
 }
