@@ -31,14 +31,14 @@ public class OrdersController {
 	//주문서를 가져오는 부분
 	@GetMapping("/order_form")
 	public String createOrderForm() {
-		//pno 필요할듯
+		//cartlist 필요할듯
 		return "order/orderForm";
 	}
 	
 	//주문서에서 form을 다 작성하고 결제 완료버튼을 누르면 처리하는곳 (Order 생성)
 //	public String createForm(Order order, HttpSession session) {
 	@PostMapping("/create_order")
-	public String createOrder(Order order) {
+	public String createOrder(Order order) {//카트리스트
 		//결재가 다 완료된다면(나중에 생각)
 		//아마 여기서 orderproducts도 만들어야할듯
 //		String uid = (String) session.getAttribute("loginUid");

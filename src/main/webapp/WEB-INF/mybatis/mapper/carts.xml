@@ -28,7 +28,21 @@
 		where userid=#{userid} and productno=#{productno}
 	</update>
 	
-	<delete id="delete" parameterType="cart">
+	<delete id="delete" parameterType="list">
+		delete from carts
+		where
+		<foreach collection="list" item="cart" separator="OR">
+			(userid=#{cart.userid} and productno=#{cart.productno})
+		</foreach> 
+		
+	</delete>
+	
+	<delete id="deleteAllByUserId" parameterType="string">
+		delete from carts
+		where userid=#{userid}
+	</delete>
+		
+	<delete id="deleteByCart" parameterType="cart">
 		delete from carts
 		where userid=#{userid} and productno=#{productno}
 	</delete>

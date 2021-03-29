@@ -3,6 +3,23 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script type="text/javascript">
+	const cartdelete = (productno) => {
+		if(confirm("정말 삭제하시겠습니까 ?") == true){
+			location.href ="<%=application.getContextPath()%>/cart/delete?productno="+productno;
+	    }
+	    else{
+	        return ;
+	    }
+	};
+	
+	const updatecartquantity = (productno) => {
+		  const cartquantity = document.getElementById('cartquantity'+productno).value;
+		  location.href ="<%=application.getContextPath()%>/cart/update_quantity?cartquantity="+cartquantity+"&productno="+productno;
+		};
+	
+</script>
+
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -30,41 +47,52 @@
 		<tr>
 			<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
 			<th width="30%">제품사진</th>
-			<th width="30%">상품정보</th>
-			<th width="10%">수량</th>
+			<th width="25%">상품정보</th>
+			<th width="15%">수량</th>
 			<th width="10%">구매금액</th>
 			<th width="10%">배송비</th>
 			<th width="10%"></th>
 		</tr>
-		<tr class="cart_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-			<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
-			<th>북유럽풍 조명 장식</th>
-			<th>2</th>
-			<th>268000</th>
-			<th>무료</th>
-			<th>
-				<input type="button" class="btn-sel" value="주문하기">
-				<input type="button" class="btn-sel" value="삭제">
-			</th>
-		</tr>
-		<tr class="cart_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-			<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
-			<th>스칸디나비아 주방 식탁</th>
-			<th>1</th>
-			<th>10000000</th>
-			<th>무료</th>
-			<th>
-				<input type="button" class="btn-sel" value="주문하기">
-				<input type="button" class="btn-sel" value="삭제">
-			</th>
-		</tr>
+		
+		<c:forEach var="cart" items="${cartList}">
+			<tr class="cart_list" >
+				<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
+				<th>
+					<a href="<%=application.getContextPath()%>/product/product_view">
+						<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50">
+					</a>
+				</th>
+				<th><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
+				<th>
+					<div class="row">
+						<div class="col-6">
+							<input type="number" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
+						</div>
+						<div class="col-6">
+							<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
+						</div>
+						
+					</div>
+						
+						
+						
+				</th>
+				<th>${cart.cartquantity*cart.pprice}</th>
+				<th>무료</th>
+				<th>
+					<input type="button" class="btn-sel" value="주문하기" >
+					<button id="cartdelete" class="btn-sel" onclick="cartdelete(${cart.productno})">삭제</button>
+				</th>
+			</tr>
+			<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
+		</c:forEach>
+		
+
 	</table>
 	<hr/>
 
 	<div class="c-middle">
-		<input type="button" class="btn btn-dark btn-sm" value="장바구니비우기">
+		<a type="button" class="btn btn-dark btn-sm" href="<%=application.getContextPath()%>/cart/delete_allcart">상품전체 삭제</a>
 	</div>	
 
 	<!-- 페이지 -->
@@ -84,15 +112,15 @@
 		<th width="33%">결제예정금액</th>
 	</tr>
 	<tr>
-		<th>100,000</th>
+		<th><c:out value="${total}"/>원</th>
 		<th>+0 원</th>
-		<th>= 100,000 원</th>
+		<th>= <c:out value="${total}"/>원</th>
 	</tr>
 	</table>
 	
 	<div class="c_bottom">
-		<input type="button" class="btn btn-dark" value="전체상품주문">
-		<input type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='<%=application.getContextPath()%>'">
+		<a type="button" class="btn btn-dark" >상품전체주문</a>
+		<input  type="button" class="btn btn-dark" value="쇼핑계속하기" onclick="location.href ='<%=application.getContextPath()%>'">
 	</div>
 								
 </div>
