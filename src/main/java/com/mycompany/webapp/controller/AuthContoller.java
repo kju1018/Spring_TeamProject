@@ -38,6 +38,13 @@ public class AuthContoller {
 		return "auth/login";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		//session.invalidate();
+		session.removeAttribute("loginUid");
+		return "redirect:/";
+	}
+	
 	//로그인 과정 처리
 	@PostMapping("/loginprocess")
 	public String loginprocess(User user, HttpSession session) {
