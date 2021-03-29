@@ -15,6 +15,9 @@ public interface UsersDao {
 	//관리자가 특정 유저 검색
 	public User selectbyUserid(String Uid);
 	
+	//email을 통한 유저 검색
+	public User selectbyUemail(String uemail);
+	
 	//회원가입 (추가)
 	public int userInsert(User user);
 	

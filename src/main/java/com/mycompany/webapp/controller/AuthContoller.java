@@ -1,6 +1,10 @@
 package com.mycompany.webapp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,19 +20,39 @@ import com.mycompany.webapp.service.UsersService;
 @RequestMapping("/auth")
 public class AuthContoller {
 	
+	private static final Logger logger =
+			LoggerFactory.getLogger(AuthContoller.class);
+	
 	@Autowired
 	UsersService usersService;
-
-	@RequestMapping("/find_id")
+	// 아이디 찾기 폼으로 이동
+	@GetMapping("/find_id")
 	public String findid() {
 		
 		return "auth/findid";
 	}
-	@RequestMapping("/login")
+	
+	//로그인 폼으로 이동
+	@GetMapping("/login")
 	public String login() {	
 		return "auth/login";
 	}
 	
+	//로그인 과정 처리
+	@PostMapping("/loginprocess")
+	public String loginprocess(User user, HttpSession session) {
+		String result = usersService.loginProcess(user);
+		logger.info(result);
+		if(result.equals("success")) {
+			session.removeAttribute("loginerror");
+			session.setAttribute("loginUid", user.getUserid());
+			return "redirect:/";			
+		}else {
+			session.setAttribute("loginerror", result);
+			return "redirect:/auth/login";
+		}
+	}
+	// 비밀번호 찾기 폼으로 이동
 	@GetMapping("/find_pw")
 	public String findpw() {
 		
@@ -39,6 +63,8 @@ public class AuthContoller {
 	public String signUp() {
 		return "auth/sign_up";
 	}
+	
+	
 	// signup proccess 과정 (회원가입 양식에서 넘어온 데이터를 데이터베이스에 넣는 과정)
 	@PostMapping(value="/signupprocess", produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -50,13 +76,11 @@ public class AuthContoller {
 		JSONObject jsonObject = new JSONObject();
 		if(result.equals("success")) {
 			usersService.join(user);
+			
 			jsonObject.put("result", "success");
 		}else if(result.equals("wrongUid")) {
 			jsonObject.put("result", "wrongUid");
 		}
-		
-		
-		
 		return jsonObject.toString();
 	}
 	
