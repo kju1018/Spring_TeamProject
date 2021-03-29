@@ -11,5 +11,6 @@ public interface CartsDao {
 	public int insert(Cart cart);
 	public List<Cart> selectByUserId(String userid);
 	public int delete(Cart cart);
+	public int deleteAllByUserId(String userid);
 	public int updateCart(Cart cart);
 }

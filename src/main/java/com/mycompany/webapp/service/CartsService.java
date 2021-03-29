@@ -22,8 +22,14 @@ public class CartsService {
 		return list;
 	}
 	
+	//카트 개별 삭제
 	public void removeCart(Cart cart) {
 		cartsDao.delete(cart);
+	}
+	
+	//카트 전체 삭제
+	public void removeCartAll(String userid) {
+		cartsDao.deleteAllByUserId(userid);
 	}
 	
 	public void updateCart(Cart cart) {
