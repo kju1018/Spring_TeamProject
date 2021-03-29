@@ -25,7 +25,7 @@ public class LikesService {
 		likesDao.lUpdate(likes);
 	}
 	
-	public void LDeleteByProductNo(int productno) {
-		likesDao.LDeleteByProductNo(productno);
+	public void LDelete(int productno) {
+		likesDao.LDelete(productno);
 	}
 }
