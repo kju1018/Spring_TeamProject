@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -24,27 +24,27 @@
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
-            <td>1</td>
+            <td><input type="text" class="form-control" value="${communityqna.boardno}" readonly></td>
             <th style="width:15%">조회수</th>
-            <td>95</td>
+            <td><input type="text" class="form-control" value="${communityqna.bcount}" readonly></td>
         </tr>
         
         
         <tr>
             <th style="width:15%">작성자</th>
-            <td>이연정</td>
+            <td><input type="text" class="form-control" value="${communityqna.userid}" readonly></td>
             <th style="width:15%">작성일</th>
-            <td>2021-03-10</td>
+            <td><input type="text" class="form-control" value="${communityqna.bdate}" readonly></td>
         </tr>
         
         <tr>
             <th style="width:15%">제목</th>
-            <td colspan="3">사이즈 문의</td>
+            <td colspan="3"><input type="text" class="form-control" value="${communityqna.btitle}" readonly></td>
         </tr>
         
         <tr>
             <th style="width:15%">글내용</th>
-            <td colspan="3">전선의 길이는 어떤가여? 충분한지 궁금해여.... 방 구조상 좀더 길어야 할 것 같은데 좀 더 긴 사이즈는 없나여? 그리고 배송도 퀵으로 받을 수 있는 방법 없나요? 진짜 급한데 ㅠㅠ</td>
+            <td colspan="3"><input type="text" class="form-control" value="${communityqna.bcontent}" readonly></td>
         </tr>
     </table>
 

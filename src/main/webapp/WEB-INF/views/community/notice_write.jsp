@@ -19,30 +19,26 @@
     <p class="titleyj">공지사항 상세</p>
     
     <!--게시판-->
-
+	<form onsubmit="create()">
     <table class="table">
     <tr>
-        <th style="width:15%">글번호</th>
-        <td><input type="text" class="form-control" value="${notice.boardno}" readonly></td>
-        <th style="width:15%">조회수</th>
-        <td><input type="text" class="form-control" value="${notice.bcount}" readonly></td>
-    </tr> 
-    <tr>
         <th style="width:15%">작성자</th>
-        <td><input type="text" class="form-control" value="${notice.userid}" readonly></td>
+        <td><input type="text" class="form-control" id="userid" name="userid"></td>
         <th style="width:15%">작성일</th>
-        <td><input type="text" class="form-control" value="${notice.bdate}" readonly></td>
+        <td><input type="text" class="form-control" id="bdate" name="bdate"></td>
     </tr>
     <tr>
         <th style="width:15%">제목</th>
-        <td colspan="3"><input type="text" class="form-control" value="${notice.btitle}" readonly></td>
+        <td colspan="3"><input type="text" class="form-control" id="btitle" name="btitle"></td>
     </tr>
     <tr>
         <th style="width:15%">글 내용</th>
-        <td colspan="3"><input type="text" class="form-control" value="${notice.bcontent}" readonly></td>
+        <td colspan="3"><input type="text" class="form-control" id="bcontent" name="bcontent"></td>
     </tr>
     </table>
-  
+  	</form>
+  	
+  	
     <div class="n_v_bottom">
         <hr/>  
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
