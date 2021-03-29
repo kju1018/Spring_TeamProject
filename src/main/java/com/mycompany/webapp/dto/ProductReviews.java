@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ProductReviews {
 	private int boardno;
-	private String uid;
+	private String userid;
 	private int productno;
 	private String btitle;
 	private String bcontent;

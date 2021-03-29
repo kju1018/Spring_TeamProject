@@ -6,7 +6,23 @@
 		from productqnas
 		order by boardno desc
 	</select>
+	
 	<insert id="pQnaInsert" parameterType="productqnas">
-		
+		insert into boardno, userid, productno, btitle, uindex, bdate, bcontent, bcount, board_origin, board_re
+		values
+		(seq_boardno.nextval, #{userid}, #{productno}, #{btitle}, #{uindex}, sysdate, #{bcontent}, #{bcount}, #{board_origin}, #{board_re})
 	</insert>
+	
+	<update id="pQnaUpdate" parameterType="productqnas">
+		update productqnas set
+		btitle=#{btitle},
+		bcontent=#{bcontent},
+		board_origin=#{board_origin},
+		board_re=#{board_re}
+		where boardno=#{boardno}
+	</update>
+	
+	<delete id="pQnaDelete" parameterType="int">
+		delete from productqnas where boardno=#{boardno}
+	</delete>
 </mapper>
