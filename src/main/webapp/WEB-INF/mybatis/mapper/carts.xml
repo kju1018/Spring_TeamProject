@@ -7,7 +7,7 @@
 
 	
 	<select id="selectByUserId" parameterType="string" resultType="cart">
-		select userid, productno, pname, pprice, ioriginalname, isavename, imgtype, cartquantity
+		select c.userid, c.productno, pname, pprice, ioriginalname, isavename, imgtype, cartquantity
 		from carts c, products p, productimgs pi
 		where c.userid=#{userid} and c.productno = p.productno and 
 				p.productno = pi.productno
