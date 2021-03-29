@@ -23,8 +23,8 @@ public class CartsService {
 	}
 	
 	//카트 개별 삭제
-	public void removeCart(Cart cart) {
-		cartsDao.delete(cart);
+	public void removeCart(List<Cart> cartList) {
+		cartsDao.delete(cartList);
 	}
 	
 	//카트 전체 삭제
