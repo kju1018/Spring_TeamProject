@@ -20,7 +20,7 @@
 	
 	
 	<insert id="insert" parameterType="order">
-		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="orderno" resultType="int" order="BEFORE">
 			select seq_ordersno.nextval from dual
 		</selectKey>
 		

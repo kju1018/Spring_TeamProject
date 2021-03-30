@@ -10,6 +10,8 @@ import com.mycompany.webapp.dto.Cart;
 public interface CartsDao {
 	public int insert(Cart cart);
 	public List<Cart> selectByUserId(String userid);
-	public int delete(Cart cart);
+	public int delete(List<Cart> cartlist);//선택삭제
+	public int deleteAllByUserId(String userid);//전체 삭제
+	public int deleteByCart(Cart cart); //한개 삭제
 	public int updateCart(Cart cart);
 }
