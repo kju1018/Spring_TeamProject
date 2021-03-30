@@ -1,4 +1,4 @@
-package com.mycompany.webapp.dao;
+    package com.mycompany.webapp.dao;
 
 import java.util.List;
 
@@ -17,4 +17,5 @@ public interface CommunityQnasDao {
 	public int deleteByBoardno(int boardno);
 	public int updateBcount(int boardno);
 	public int count();
+	public List<CommunityQna> selectByUserid(String userid);
 }

@@ -10,7 +10,7 @@
  
 
     <div class="container-xl" style="margin-top: 16em;" >
-        <h4 class="font-weight-bold">상품 목록</h4>
+        <h4 class="font-weight-bold">인테리어 조명</h4>
         
     </div>
 
@@ -39,7 +39,7 @@
         <%--  onclick="location.href='<%=application.getContextPath()%>/product/product_view'" --%>
             <li class="product mt-4">
             
-	            <a href="<%=application.getContextPath()%>/product/product_view?productno=${p_list.productno}">
+	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}">
 	                <div>
 	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
 	                </div>

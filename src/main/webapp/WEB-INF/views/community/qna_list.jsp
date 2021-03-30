@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -41,27 +41,15 @@
             </thead>
 
             <tbody>
-                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-                    <th scope="row">1</th>
-                    <td>배송 관련 문의</td>
-                    <td>이연정</td>
-                    <td>2021-03-12</td>
-                    <td>4</td>
-                </tr>
-                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-                    <th scope="row">2</th>
-                    <td>환불했는데 돈 언제 들어오나요?</td>
-                    <td>이연정</td>
-                    <td>2021-01-18</td>
-                    <td>20</td>
-                </tr>
-                <tr class="qna_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-                    <th scope="row">3</th>
-                    <td>상품 훼손되서 왔는데 교환 가능한가요?</td>
-                    <td>이연정</td>
-                    <td>2020-12-02</td>
-                    <td>13</td>
-                </tr>
+               <c:forEach var="communityqna" items="${list}">
+		      <tr>
+		         <td>${communityqna.boardno}</td>
+		         <td><a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a></td>
+		         <td>${communityqna.userid}</td>
+		         <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
+		         <td>${communityqna.bcount}</td>
+		      </tr>
+		   </c:forEach>
             </tbody>
     </table>
 	<!--게시판-->

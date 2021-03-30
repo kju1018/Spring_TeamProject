@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+
 <div class="container-fluid" style="margin-top:15%;">
+
     <div class="row justify-content-center" >
 	    <div class="col-12" style="width:100%;" id="photo1" >
 		    <div id="photo2" style="float:left; width:35%; margin-left:14%;">
@@ -18,6 +20,7 @@
   read jsp의 ?뒤의 bno는 넘길 곳의 변수명 / 뒤에는 내쪽에서 넘기는 변수명-->
     <!--product -->
   
+
 				<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
 				<hr style="width:100%; color: black; border:1px solid black;"/>
 				<p style="font-size: large;">${productnum.pname}</p><br><br>
