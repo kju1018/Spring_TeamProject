@@ -24,7 +24,7 @@
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
-            <td><input type="text" class="form-control" value="${communityqna.boardno}" readonly></td>
+            <td><input type="text" class="form-control" name="boardno" value="${communityqna.boardno}" readonly></td>
             <th style="width:15%">조회수</th>
             <td><input type="text" class="form-control" value="${communityqna.bcount}" readonly></td>
         </tr>
@@ -47,15 +47,15 @@
             <td colspan="3"><input type="text" class="form-control" name="bcontent" id="bcontent" value="${communityqna.bcontent}"></td>
         </tr>
     </table>
-	</form>
+	
             
-    <div class="q_v_bottom">
-        <hr/>
-        <input type="button" class="btn btn-dark btn-sm" value="취소" onclick="location.href ='qna_view?boardno=${communityqna.boardno}'">
-        <button type="submit" class="btn btn-dark btn-sm">수정완료</button>         
-        <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
-    </div>
-
+	    <div class="q_v_bottom">
+	        <hr/>
+	        <input type="button" class="btn btn-dark btn-sm" value="취소" onclick="location.href ='qna_view?boardno=${communityqna.boardno}'">
+	        <button type="submit" class="btn btn-dark btn-sm">수정완료</button>         
+	        <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
+	    </div>
+	</form>
 <!--게시판-->
 
 

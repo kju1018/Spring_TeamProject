@@ -3,7 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   
+<%
+	int ref=1, re_step=0, re_lev=0;
+	try{
+		if(request.getParameter("num")!=null) {
+			ref = Integer.parserInt(resquest.getParamter("ref"));
+			re_step = Integer.parseInt(request.getParameter("re_step"));
+			re_lev = Integer.parseIn(request.getParamter("re_lev"));
+		}
+	}
 
+%>
 <!-- 전체 컨텐츠 영역 -->
 <div class="container" style="margin-top: 12em;">
     <!-- 오른쪽 상단 계단 메뉴-->
@@ -30,6 +40,7 @@
                 <th>글내용</th>
                 <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
             </tr>
+            
         </table>
 
             <div class="q_w_bottom">

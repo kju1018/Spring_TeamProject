@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,10 +79,9 @@ public class CommunityQnaController {
 	@PostMapping("/create")
 	public String communityQnaCreate(CommunityQna communityqna, HttpSession session) {
 		
-			communityqna.setBoardno(1);
+	
 			communityqna.setUserid("user1");
 			communityQnasService.saveBoard(communityqna);
-			logger.info(communityqna.getBtitle());
 			return "redirect:/community/qna_list";
 		 
 		
@@ -105,8 +105,9 @@ public class CommunityQnaController {
 	@PostMapping("/update")
 	public String communityQnaUpdate(CommunityQna communityqna) {
 		communityQnasService.updateBoard(communityqna);
-		return "redirect:/community/qna_view";
+		return "redirect:/community/qna_view?boardno="+communityqna.getBoardno();
 	}
+	
 	
 	@GetMapping("/delete")
 	public String communityQnaDelete(int boardno) {

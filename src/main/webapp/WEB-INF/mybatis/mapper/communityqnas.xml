@@ -25,9 +25,9 @@
    </select>
    
    <insert id="insert" parameterType="communityqna">
-   	 <!-- <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
+   	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
          select seq_communityqnas_boardno.nextval from dual
-      </selectKey>  -->
+      </selectKey>
       
          insert into communityqnas
          (boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re)

@@ -9,9 +9,28 @@ public class CommunityQna {
 	private Date bdate;
 	private String bcontent;
 	private int bcount;
-	private int board_origin;
-	private int board_re;
+	private int ref;
+	private int re_step;
+	private int re_lev;
 	
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getRe_step() {
+		return re_step;
+	}
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+	public int getRe_lev() {
+		return re_lev;
+	}
+	public void setRe_lev(int re_lev) {
+		this.re_lev = re_lev;
+	}
 	public int getBoardno() {
 		return boardno;
 	}
@@ -49,16 +68,5 @@ public class CommunityQna {
 	public void setBcount(int bcount) {
 		this.bcount = bcount;
 	}
-	public int getBoard_origin() {
-		return board_origin;
-	}
-	public void setBoard_origin(int board_origin) {
-		this.board_origin = board_origin;
-	}
-	public int getBoard_re() {
-		return board_re;
-	}
-	public void setBoard_re(int board_re) {
-		this.board_re = board_re;
-	}
+	
 }
