@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.ProductReviewsDao">
 	<select id="prSelectAll" resultType="productreviews">
-		select boardno, uid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimagtype
+		select boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype
 		from productreviews
 		order by boardno desc
 	</select>
 	
 	<insert id="prInsert" parameterType="productreviews">
 		insert into productreviews
-		(boardno, uid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimagtype)
+		(boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype)
 		values
-		(seq_boardno.nextval, #{uid}, #{productno}, #{btitle}, #{bcontent}, sysdate, #{borgimg}, #{bsaveimg}, #{bimagtype})
+		(seq_boardno.nextval, #{userid}, #{productno}, #{btitle}, #{bcontent}, sysdate, #{borgimg}, #{bsaveimg}, #{bimgtype})
 	</insert>
 	
 	<update id="prUpdate" parameterType="productreviews">
@@ -20,7 +20,7 @@
 		bcontent=#{bcontent}, 
 		borgimg=#{borgimg}, 
 		bsaveimg=#{bsaveimg}, 
-		bimagtype=#{bimagtype}
+		bimgtype=#{bimgtype}
 		where boardno=#{boardno}
 	</update>
 	
