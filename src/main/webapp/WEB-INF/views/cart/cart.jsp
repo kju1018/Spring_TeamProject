@@ -18,6 +18,18 @@
 		  location.href ="<%=application.getContextPath()%>/cart/update_quantity?cartquantity="+cartquantity+"&productno="+productno;
 		};
 	
+		
+	const deleteAll = () => {
+		const cartdelete = (productno) => {
+			if(confirm("장바구니를 비우시겠습니까?") == true){
+				 location.href ="<%=application.getContextPath()%>/cart/delete_allcart";
+		    }
+		    else{
+		        return ;
+		    }
+		
+	};
+	
 </script>
 
 
@@ -54,45 +66,54 @@
 			<th width="10%"></th>
 		</tr>
 		
-		<c:forEach var="cart" items="${cartList}">
+		<c:if test="${empty cartList}">
 			<tr class="cart_list" >
-				<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-				<th>
-					<a href="<%=application.getContextPath()%>/product/product_view">
-						<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50">
-					</a>
-				</th>
-				<th><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
-				<th>
-					<div class="row">
-						<div class="col-6">
-							<input type="number" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
-						</div>
-						<div class="col-6">
-							<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
-						</div>
-						
-					</div>
-						
-						
-						
-				</th>
-				<th>${cart.cartquantity*cart.pprice}</th>
-				<th>무료</th>
-				<th>
-					<input type="button" class="btn-sel" value="주문하기" >
-					<button id="cartdelete" class="btn-sel" onclick="cartdelete(${cart.productno})">삭제</button>
-				</th>
+				<td colspan="7" class="text-center">
+					장바구니가 비어있습니다.
+				</td>
 			</tr>
-			<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
-		</c:forEach>
 		
+		</c:if>
+		<c:if test="${not empty cartList}">
+			<c:forEach var="cart" items="${cartList}">
+				<tr class="cart_list" >
+					<th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
+					<th>
+						<a href="<%=application.getContextPath()%>/product/product_view">
+							<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50">
+						</a>
+					</th>
+					<th><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
+					<th>
+						<div class="row">
+							<div class="col-6">
+								<input type="number" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
+							</div>
+							<div class="col-6">
+								<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
+							</div>
+							
+						</div>
+							
+							
+							
+					</th>
+					<th>${cart.cartquantity*cart.pprice}</th>
+					<th>무료</th>
+					<th>
+						<input type="button" class="btn-sel" value="주문하기" >
+						<button id="cartdelete" class="btn-sel" onclick="cartdelete(${cart.productno})">삭제</button>
+					</th>
+				</tr>
+				<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
+			</c:forEach>
+		</c:if>
 
 	</table>
 	<hr/>
 
 	<div class="c-middle">
-		<a type="button" class="btn btn-dark btn-sm" href="<%=application.getContextPath()%>/cart/delete_allcart">상품전체 삭제</a>
+		<a type="button" class="btn btn-dark btn-sm" href="">상품전체 삭제</a>
 	</div>	
 
 	<!-- 페이지 -->
