@@ -15,7 +15,6 @@
     <br/>
 
     <!--제목-->
-    <img src="<%=application.getContextPath()%>/resources/image/slide8.png" class="container">
     <p class="titleyj">QnA 쓰기</p>
 
     <!--게시판-->

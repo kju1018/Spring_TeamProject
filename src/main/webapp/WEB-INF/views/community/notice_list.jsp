@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -24,6 +24,10 @@
 		<input type="button"  class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
 	</div>            
 
+	<div style="text-align: right; margin-bottom: 4px;">
+        <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_write'"> 
+    </div>
+    
  	<!--게시판-->
 	<table class="table">
 		<thead>
@@ -36,27 +40,16 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr class="notice_list" onclick="location.href ='<%=application.getContextPath()%>/community/notice_view'">
-	      <th scope="row">1</th>
-	      <td>언제나 노력하고 고민하는 더파이브 되겠습니다. 감사합니다.</td>
-	      <td>관리자</td>
-	      <td>2021-03-27</td>
-	      <td>43</td>
-	    </tr>
-	    <tr class="notice_list" onclick="location.href ='<%=application.getContextPath()%>/community/notice_view'">
-	      <th scope="row">2</th>
-	      <td>시스템 점검 관련 공지</td>
-	      <td>관리자</td>
-	      <td>2021-02-12</td>
-	      <td>63</td>
-	    </tr>
-	    <tr class="notice_list" onclick="location.href ='<%=application.getContextPath()%>/community/notice_view'">
-	      <th scope="row">3</th>
-	      <td>배송 지연에 관한 사과의 말씀 드립니다.</td>
-	      <td>관리자</td>
-	      <td>2021-01-02</td>
-	      <td>1203</td>
-	    </tr>
+	     <c:forEach var="notice" items="${list}">
+		      <tr>
+		         <td>${notice.boardno}</td>
+		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
+		         <td>${notice.bcontent}</td>
+		         <td>${notice.userid}</td>
+		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
+		         <td>${notice.bcount}</td>
+		      </tr>
+		   </c:forEach>
 	  </tbody>
 	</table>
 	<!--게시판-->

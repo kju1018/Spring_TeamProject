@@ -47,24 +47,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-				<th scope="row">1</th>
-				<td>배송 관련 문의</td>
-				<td>이연정</td>
-				<td>2021-03-12</td>
-			</tr>
-			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-				<th scope="row">2</th>
-				<td>환불했는데 돈 언제 들어오나요?</td>
-				<td>이연정</td>
-				<td>2021-01-18</td>
-			</tr>
-			<tr class="post_list" onclick="location.href ='<%=application.getContextPath()%>/community/qna_view'">
-				<th scope="row">3</th>
-				<td>상품 훼손되서 왔는데 교환 가능한가요?</td>
-				<td>이연정</td>
-				<td>2020-12-02</td>
-			</tr>
+			<c:forEach var="notice" items="${list}">
+		      <tr>
+		         <td>${notice.boardno}</td>
+		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
+		         <td>${notice.bcontent}</td>
+		         <td>${notice.userid}</td>
+		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
+		         <td>${notice.bcount}</td>
+		      </tr>
+		   </c:forEach>
 		</tbody>
 	</table>
 	<!--게시판-->

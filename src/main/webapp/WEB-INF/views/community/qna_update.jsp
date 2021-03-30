@@ -20,7 +20,7 @@
     <p class="titleyj">QnA 상세</p>
 
     <!--게시판-->
-
+	<form action="update" method="post">
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
@@ -39,20 +39,20 @@
         
         <tr>
             <th style="width:15%">제목</th>
-            <td colspan="3"><input type="text" class="form-control" value="${communityqna.btitle}" readonly></td>
+            <td colspan="3"><input type="text" class="form-control" name="btitle" id="btitle" value="${communityqna.btitle}"></td>
         </tr>
         
         <tr>
             <th style="width:15%">글내용</th>
-            <td colspan="3"><input type="text" class="form-control" value="${communityqna.bcontent}" readonly></td>
+            <td colspan="3"><input type="text" class="form-control" name="bcontent" id="bcontent" value="${communityqna.bcontent}"></td>
         </tr>
     </table>
-
+	</form>
             
     <div class="q_v_bottom">
         <hr/>
-        <input type="button" class="btn btn-dark btn-sm" value="답글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'">
-        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_update?boardno=${communityqna.boardno}'">          
+        <input type="button" class="btn btn-dark btn-sm" value="취소" onclick="location.href ='qna_view?boardno=${communityqna.boardno}'">
+        <button type="submit" class="btn btn-dark btn-sm">수정완료</button>         
         <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
     </div>
 
