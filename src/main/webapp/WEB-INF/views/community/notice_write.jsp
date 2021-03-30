@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -19,21 +19,21 @@
     <p class="titleyj">공지사항 상세</p>
     
     <!--게시판-->
-	<form onsubmit="create()">
+	<form action="create" method="post">
     <table class="table">
     <tr>
         <th style="width:15%">작성자</th>
-        <td><input type="text" class="form-control" id="userid" name="userid"></td>
+        <td><input type="text" id="userid" name="userid" value="${notice.userid}"></td>
         <th style="width:15%">작성일</th>
-        <td><input type="text" class="form-control" id="bdate" name="bdate"></td>
+        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
     </tr>
     <tr>
         <th style="width:15%">제목</th>
-        <td colspan="3"><input type="text" class="form-control" id="btitle" name="btitle"></td>
+        <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
     </tr>
     <tr>
         <th style="width:15%">글 내용</th>
-        <td colspan="3"><input type="text" class="form-control" id="bcontent" name="bcontent"></td>
+        <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
     </tr>
     </table>
   	</form>

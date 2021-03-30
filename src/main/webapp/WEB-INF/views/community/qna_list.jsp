@@ -41,11 +41,10 @@
             </thead>
 
             <tbody>
-               <c:forEach var="notice" items="${list}">
+               <c:forEach var="communityqna" items="${list}">
 		      <tr>
 		         <td>${communityqna.boardno}</td>
-		         <td><a href="communityqna?boardno=${communityqna.boardno}">${communityqna.btitle}</a></td>
-		         <td>${communityqna.bcontent}</td>
+		         <td><a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a></td>
 		         <td>${communityqna.userid}</td>
 		         <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${communityqna.bcount}</td>
