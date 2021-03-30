@@ -23,4 +23,6 @@
 <delete id="pImgDelete" parameterType="int">
 	delete from productimgs where imgno=#{imgno}
 </delete>
+
+<!-- pno / 리스트 -->
 </mapper>

@@ -13,4 +13,5 @@ public interface ProductsDao {
 	public int pUpdate(Products products); //상품 업데이트
 	public Products pSelectByPno(int productno); //상품인덱스번호 찾기
 	public int pDeleteByPno(int productno); //상품 삭제
+
 }

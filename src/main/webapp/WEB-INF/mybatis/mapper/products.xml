@@ -3,9 +3,9 @@
 
 <mapper namespace="com.mycompany.webapp.dao.ProductsDao">
 <select id="pSelectAll" resultType="products">
-	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, datailimgoname, detailimgsname, detailimgtype
+	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
 	from products
-	ordey by productno desc
+	order by productno desc
 </select>
 
 <insert id="pInsert" parameterType="products">
@@ -13,26 +13,35 @@
 		   		select seq_productno.nextval from dual
 	</selectKey>
 	insert into products
-	(productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, datailimgoname, detailimgsname, detailimgtype)
+	(productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype)
 	values
-	(seq_productno.nextval, #{pcategory}, #{pname}, #{pprice}, sysdate, #{psalescount}, #{pstock}, #{penable}, #{datailimgoname}, #{detailimgsname}, #{detailimgtype})
+	(seq_productno.nextval, #{pcategory}, #{pname}, #{pprice}, sysdate, #{psalescount}, #{pstock}, #{penable}, #{detailimgoname}, #{detailimgsname}, #{detailimgtype})
 </insert>
 
-<update id="pUpdate" parameterType="int">
+<update id="pUpdate" parameterType="products">
 	update products set
-	pcategory=#{pcategory}, 
-	pname=#{pname}, pprice=#{pprice}, psalescount=#{psalescount}, 
-	pstock=#{pstock}, penable=#{penable}, 
-	datailimgoname=#{datailimgoname}, detailimgsname=#{detailimgsname}, detailimgtype=#{detailimgtype}
+		pcategory=#{pcategory}, 
+		pname=#{pname},
+		pprice=#{pprice}, 
+		psalescount=#{psalescount}, 
+		pstock=#{pstock}, 
+		penable=#{penable}, 
+		detailimgoname=#{detailimgoname}, 
+		detailimgsname=#{detailimgsname}, 
+		detailimgtype=#{detailimgtype}
+	where productno=#{productno}
 </update>
 
 <select id="pSelectByPno" parameterType="int" resultType="products">
-	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, datailimgoname, detailimgsname, detailimgtype
+	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
 	from products
 	where productno=#{productno}
 </select>
 
+
 <delete id="pDeleteByPno" parameterType="int">
 	delete from products wehre productno=#{productno}
 </delete>
+
+
 </mapper>
