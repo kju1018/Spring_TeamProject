@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Notice;
 import com.mycompany.webapp.dto.Pager;
@@ -20,12 +19,17 @@ import com.mycompany.webapp.service.NoticesService;
 
 @Controller
 @RequestMapping("/community")
-public class NoticesController {
+public class NoticeController {
 	private static final Logger logger =
-			LoggerFactory.getLogger(NoticesController.class);
+			LoggerFactory.getLogger(NoticeController.class);
 	
 	@Autowired
 	private NoticesService noticesService;
+	
+	@RequestMapping("/notice_list")
+	public String noticeList1(Model model) {
+		return "community/notice_list";
+	}
 	
 	@GetMapping("/notice_list")
 	public String noticeList(String pageNo, Model model, HttpSession session) {
@@ -49,8 +53,26 @@ public class NoticesController {
 	      model.addAttribute("pager", pager);
 		return "community/notice_list";
 	}
+	
+	@GetMapping("/notice_write")
+	public String noticeWrite(HttpSession session) {
+		
+	    return "community/notice_write";
+	}
+	
+	@PostMapping("/create1")
+	public String noticeCreate(Notice notice, HttpSession session) {
+		
+			notice.setBoardno(1);
+			notice.setUserid("admin");
+			noticesService.saveBoard(notice);
+			logger.info(notice.getBtitle());
+			return "redirect:/community/notice_list";
+
+	}
+	
 	@GetMapping("/notice_view")
-	public String notice_view(int boardno, Model model) {
+	public String noticeView(int boardno, Model model) {
 		noticesService.addHitcount(boardno);
 		Notice notice = noticesService.getBoard(boardno);
 		model.addAttribute("notice", notice);
@@ -58,10 +80,22 @@ public class NoticesController {
 	}
 	
 	@GetMapping("/notice_update")
-	public String noticeupdate(int boardno, Model model) {
+	public String noticeUpdateForm(int boardno, Model model) {
 		Notice notice = noticesService.getBoard(boardno);
 		model.addAttribute("notice", notice);
 		return "community/notice_update";
+	}
+	
+	@PostMapping("/update1")
+	public String noticeUpdate(Notice notice) {
+		noticesService.updateBoard(notice);
+		return "redirect:/community/notice_view";
+	}
+	
+	@GetMapping("/delete1")
+	public String notieDelete(int boardno) {
+		noticesService.deleteBoard(boardno);
+		return "redirect:/community/notice_list";
 	}
 	
 }

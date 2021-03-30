@@ -34,7 +34,7 @@
             <th style="width:15%">작성자</th>
             <td><input type="text" class="form-control" value="${communityqna.userid}" readonly></td>
             <th style="width:15%">작성일</th>
-            <td><input type="text" class="form-control" value="${communityqna.bdate}" readonly></td>
+            <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
         </tr>
         
         <tr>
@@ -51,9 +51,8 @@
             
     <div class="q_v_bottom">
         <hr/>
-        <input type="button" class="btn btn-dark btn-sm" value="답글 쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'">
-        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'">          
-        <input type="button" class="btn btn-dark btn-sm" value="글작성" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
+        <input type="button" class="btn btn-dark btn-sm" value="답글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'">
+        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_update?boardno=${communityqna.boardno}'">          
         <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
     </div>
 
