@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container-fluid" style="margin-top:15%">
 		<div class="row" >
@@ -30,29 +32,30 @@
 						</div>
 					</th>
 					</tr>	
-								
+					<c:forEach var="rv_board" items="${list}">
 						<tr>
 								<td class="rv_table">SUBJECT</td>
-								<td class="rv_table" style="text-align: left">&nbsp;북유럽식 식탁조명 후기</td>
+								<td class="rv_table" style="text-align: left; width:70%;">&nbsp;${rv_board.btitle}</td>
 							</tr>
 							<tr>
 								<td class="rv_table">WRITER</td>
-								<td class="rv_table" style="text-align: left">&nbsp;ㅎㅎ</td>
+								<td class="rv_table" style="text-align: left">&nbsp;${rv_board.userid}</td>
 							</tr>
 							<tr>
 								<td class="rv_table">DATE</td>
-								<td class="rv_table" style="text-align: left">&nbsp;2021-03-10</td>
+								<td class="rv_table" style="text-align: left">&nbsp;<fmt:formatDate value="${rv_board.bdate}" pattern="yyyy-MM-dd"/></td>
 							</tr>
 							<tr>
-								<td class="rv_table" colspan="2" height="150">홈페이지 회원가입 후 등업신청 하시면 동영샹 메뉴얼을
-									보실 수 있습니다.</td>
-							</tr>						
+								<td class="rv_table" colspan="2" height="150">${rv_board.bcontent}</td>
+							</tr>		
+							
+							</c:forEach>				
 					</table>
 					</div>
 						<br>
-                        <div>
-                            <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:77.7%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 목록 </a>
-                       </div>
+               <div>
+                   <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:77.7%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 목록 </a>
+              </div>
 				<br><br>
 </div>
 </div>
