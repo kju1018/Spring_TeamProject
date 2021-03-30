@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<div class="container-fluid" style="margin-top:15%">
+<div class="container-fluid" style="margin-top:15%;">
     <div class="row justify-content-center" >
 	    <div class="col-12" style="width:100%;" id="photo1" >
 		    <div id="photo2" style="float:left; width:35%; margin-left:14%;">
@@ -18,31 +18,31 @@
   read jsp의 ?뒤의 bno는 넘길 곳의 변수명 / 뒤에는 내쪽에서 넘기는 변수명-->
     <!--product -->
   
-	<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
-	<hr style="width:100%; color: black; border:1px solid black;"/>
-	<p style="font-size: large;">${productnum.pname}</p><br><br>
-	<pre><small style="color: gray;">판매가		${productnum.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
-    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
-    
-    </small>
-	<!--수량 선택-->
-    <table style="width:100%; height:80px; border:1px solid lightgray;">
-		<tr>
-			<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
-                <br><br>마켓디자인</small><input type="number" value="1" style="width:8%; margin-left:40%;">
-                <small style="margin-left:27%;">${productnum.pprice}원</small></td>
-                
-		</tr>
-	</table> 
-    <!--구매 / 장바구니-->
-	<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b>${productnum.pprice}원</b><small>(1개)</small><br><br>
-	<a href="<%=application.getContextPath()%>/payment" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</a><br><br>
-	<a href="<%=application.getContextPath()%>/mypage/cart"  class="btn btn-white btn-outline-dark" style="width:100%" role="button">ADD TO CART</a><br><br>
-		
-	</div>
-	<br><br>
-		</div><!-- photo_subject -->	
-	</div><!-- photo1 --><br><br>
+				<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
+				<hr style="width:100%; color: black; border:1px solid black;"/>
+				<p style="font-size: large;">${productnum.pname}</p><br><br>
+				<pre><small style="color: gray;">판매가		${productnum.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
+			    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
+			    
+			    </small>
+				<!--수량 선택-->
+			    <table style="width:100%; height:80px; border:1px solid lightgray;">
+					<tr>
+						<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
+			                <br><br>마켓디자인</small><input type="number" value="1" style="width:8%; margin-left:40%;">
+			                <small style="margin-left:27%;">${productnum.pprice}원</small></td>
+			                
+					</tr>
+				</table> 
+			    <!--구매 / 장바구니-->
+				<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b>${productnum.pprice}원</b><small>(1개)</small><br><br>
+				<a href="<%=application.getContextPath()%>/payment" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</a><br><br>
+				<a href="<%=application.getContextPath()%>/mypage/cart"  class="btn btn-white btn-outline-dark" style="width:100%" role="button">ADD TO CART</a><br><br>
+					
+				</div>
+				<br><br>
+			</div><!-- photo_subject -->	
+</div><!-- photo1 --><br><br>
     <hr style="border:1px solid lightgray"/>
 	<div >
         <p style="margin-left:12%; font-size: large;">Product Detail</p>
