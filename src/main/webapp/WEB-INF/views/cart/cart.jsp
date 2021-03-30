@@ -41,10 +41,14 @@
 	
 	
 	const test = () => {
+		var cartArr = new Array();
 		$("input[name=chk_box]:checked").each(function() {
 			  var test = $(this).val(); 
-			  alert(test);
+			  alert();
+			  cartArr.push(test);
 		});
+		console.log(cartArr);
+		
 	}; 
 
 
@@ -97,17 +101,17 @@
 		<c:if test="${not empty cartList}">
 			<c:forEach var="cart" items="${cartList}">
 				<tr class="cart_list" >
-					<th class="align-middle"><input type="checkbox" name="chk_box" class="checkSelect" value="${cart}"/></th>
+					<th class="align-middle"><input type="checkbox" name="chk_box" class="checkSelect" value="${cart.productno}"/></th>
 					<th class="align-middle">
 						<a href="<%=application.getContextPath()%>/product/product_view">
-							<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50">
+							<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
 						</a>
 					</th>
 					<th class="align-middle"><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
 					<th class="align-middle">
 						<div class="row">
 							<div class="col-6">
-								<input type="number" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
+								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
 							</div>
 							<div class="col-6">
 								<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
@@ -118,7 +122,7 @@
 					</th>
 					<th class="align-middle">${cart.cartquantity*cart.pprice}</th>
 					<th class="align-middle">무료</th>
-					<th>
+					<th class="align-middle">
 						<input type="button" class="btn-sel" value="주문하기" >
 						<input type="button" id="cartdelete" class="btn-sel" onclick="cartdelete(${cart.productno})" value="삭제"/>
 					</th>

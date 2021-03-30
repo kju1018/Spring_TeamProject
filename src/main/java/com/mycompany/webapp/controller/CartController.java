@@ -77,4 +77,10 @@ public class CartController {
 		return "redirect:cartlist";
 	}
 	
+	@GetMapping("/test")
+	public String test(List<String> list) {
+		
+		logger.info(list.toString());
+		return "redirect:cartlist";
+	}
 }
