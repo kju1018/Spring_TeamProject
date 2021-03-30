@@ -28,24 +28,27 @@ public class CartController {
 	public String createCart(Cart cart) {
 		cart.setUserid("user1");
 		cartsService.createCart(cart);
-		
-		return "redirect:";//다시 프로덕트 상세
+		return "redirect:/product/product_view_user";//다시 프로덕트 상세
 	}
 	
 	@GetMapping("/cartlist")
 	public String getCartList(Model model) {
 		List<Cart> list = cartsService.getCartList("user1");
 		model.addAttribute("cartList", list);
+		
 		return "cart/cart";
 	}
 	
-	@GetMapping("/delete_cart")
+	//선택된 것 삭제(아직 미구현)
+	@GetMapping("/delete_cart_selected")
 	public String deleteCart(List<Cart> cartList) {
 		cartsService.removeCartSelect(cartList);
+		
 		return "redirect:cartlist";
 
 	}
 	
+	//전체 삭제
 	@GetMapping("/delete_allcart")
 	public String deleteCartAll() {
 		cartsService.removeCartAll("user1");
@@ -54,19 +57,20 @@ public class CartController {
 
 	}
 	
-	@GetMapping("/delete")
-	public String delete(int productno, Model model) {
+	//한개만 삭제
+	@GetMapping("/delete_cartone")
+	public String deleteCartOne(int productno) {
 		Cart cart = new Cart();
 		cart.setUserid("user1");
 		cart.setProductno(productno);
 		cartsService.removeCartOne(cart);
-		model.addAttribute("complete", "complete");
+		
 		return "redirect:cartlist";
 	}
 	
+	//개수 변경
 	@GetMapping("/update_quantity")
 	public String updateQuantity(Cart cart) {
-		
 		cart.setUserid("user1");
 		cartsService.updateCart(cart);
 		
