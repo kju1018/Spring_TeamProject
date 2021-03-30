@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Products;
 import com.mycompany.webapp.service.ProductsService;
 
@@ -22,6 +23,7 @@ public class ProductsController {
 	@Autowired
 	private ProductsService productsService;
 	
+	/*ADMIN*======================================================/
 	/*상품 상세 - admin*/
 	@GetMapping("/product_view")
 	public String product_view(Model model, int productno) {
@@ -94,6 +96,22 @@ public class ProductsController {
 		return "redirect:/list/product_list";
 	}
 	
-
+	/*USER*======================================================/
+	/*상품 상세*/
+	@GetMapping("/product_view_user")
+	public String product_view_user(Model model, int productno) {
+		Products productnum = productsService.pSelectByPno(productno);
+		model.addAttribute("productnum", productnum);	
+		return "product/product_view_user";
+	}
+	
+	/*상품 리스트*/
+	@GetMapping("/product_list_user")
+	public String product_list_user(Model model) {
+		List<Products> list = productsService.pSelectAll();
+		model.addAttribute("list", list);	
+		return "product/product_list_user";
+	}
+	
 
 }

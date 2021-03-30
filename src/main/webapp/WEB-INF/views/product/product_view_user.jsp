@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script type="text/javascript">
+const insertcartquantity = (productno) => {
+	  const pquant = document.getElementById('pquantity').value;
+	  alert(pquant);
+	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
+	};
+</script>
 
 <div class="container-fluid" style="margin-top:15%">
     <div class="row justify-content-center" >
@@ -29,7 +36,7 @@
     <table style="width:100%; height:80px; border:1px solid lightgray;">
 		<tr>
 			<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
-                <br><br>마켓디자인</small><input type="number" value="1" style="width:8%; margin-left:40%;">
+                <br><br>마켓디자인</small><input type="number" id="pquantity" name="pquantity" value="1" style="width:8%; margin-left:40%;">
                 <small style="margin-left:27%;">${productnum.pprice}원</small></td>
                 
 		</tr>
@@ -37,7 +44,7 @@
     <!--구매 / 장바구니-->
 	<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b>${productnum.pprice}원</b><small>(1개)</small><br><br>
 	<a href="<%=application.getContextPath()%>/payment" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</a><br><br>
-	<a href="<%=application.getContextPath()%>/mypage/cart"  class="btn btn-white btn-outline-dark" style="width:100%" role="button">ADD TO CART</a><br><br>
+	<button onclick="insertcartquantity(${productnum.productno})" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
 		
 	</div>
 	<br><br>
