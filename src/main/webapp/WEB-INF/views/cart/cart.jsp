@@ -10,9 +10,11 @@
 	 });
 	 
 	 const getList = () => {
-	 	const args = {url:"cartlist", method:"get"};
 	 	
-	 	$.ajax(args).then(data => {
+	 	$.ajax({
+	 		url:"cartlist",
+		    method: "get"
+	 }).then(data => {
 	 	  	$("#board").html(data);
 	 	 });
 	 };
@@ -33,8 +35,8 @@
 				    method: "get"
 			 }).then(data => {
 				  if(data.result=="success"){
+					  console.log("성공");
 					  getList();
-				  	  console.log("성공");
 				  }
 		     });   
 		   } else{

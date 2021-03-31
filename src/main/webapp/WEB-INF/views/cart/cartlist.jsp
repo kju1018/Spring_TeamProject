@@ -8,6 +8,7 @@
 			<th width="30%">제품사진</th>
 			<th width="25%">상품정보</th>
 			<th width="15%">수량</th>
+			<th width="10%"></th>
 			<th width="10%">구매금액</th>
 			<th width="10%">배송비</th>
 		</tr>
@@ -31,17 +32,10 @@
 					</th>
 					<th class="align-middle"><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
 					<th class="align-middle">
-						<div class="row">
-							<div class="col-6">
-								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
-							</div>
-							<div class="col-6">
-								<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
-							</div>
-							
-						</div>
-								
+						<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:50%">
+						
 					</th>
+					<th class="align-middle"><a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a></th>
 					<th class="align-middle">${cart.cartquantity*cart.pprice}</th>
 					<th class="align-middle">무료</th>
 				</tr>

@@ -43,7 +43,7 @@ public class CartController {
 	public String getCartList(Model model) {
 		List<Cart> list = cartsService.getCartList("user1");
 		model.addAttribute("cartList", list);
-		logger.info("아아");
+		logger.info(list.size()+"");
 		return "cart/cartlist";
 	}
 	
