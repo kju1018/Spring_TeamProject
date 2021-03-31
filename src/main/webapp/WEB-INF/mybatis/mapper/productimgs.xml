@@ -24,5 +24,10 @@
 	delete from productimgs where imgno=#{imgno}
 </delete>
 
+<select id="pImgSelectByIno" resultType="productimgs">
+	select imgno, productno, ioriginalname, isavename, imgtype
+	from productimgs
+	where productno=${productno}
+</select>
 <!-- pno / 리스트 -->
 </mapper>
