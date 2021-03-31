@@ -4,19 +4,19 @@
 
 <mapper namespace="com.mycompany.webapp.dao.CommunityQnasDao">
  <select id="selectAll" resultType="communityqna">
-      select boardno, btitle, bwriter, bcontent, bdate, bcount
+      select boardno, btitle, userid, bcontent, bdate, bcount, board_origin, board_re
       from communityqnas
-      order by boardno desc
+      order by board_origin desc, boardno asc
    </select>  
    
  <select id="selectByPage" parameterType="pager" resultType="communityqna">
-      select rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
       from(
-         select rownum as rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
             from (
-               select boardno, btitle, bcontent, bwriter, bdate, bcount
+               select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
                from communityqnas
-               order by boardno desc
+               order by board_origin desc, boardno asc
             )
          where rownum &lt;=#{endRowNo}
       )
@@ -25,21 +25,27 @@
    </select>
    
    <insert id="insert" parameterType="communityqna">
-   	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
-         select seq_boards_bno.nextval from dual
-      </selectKey>
+   	 <!-- <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
+         select seq_communityqnas_boardno.nextval from dual
+      </selectKey>  -->
       
          insert into communityqnas
-         (boardno, btitle, bcontent, bwriter, bdate, bhitcount)
+         (boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re)
          values
-         (#{boardno}, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)      
+         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0, #{board_origin}, #{board_re})      
    
    </insert>
    
    <select id="selectByBoardno" parameterType="int" resultType="communityqna">
-      select boardno, btitle, bcontent, bwriter, bdate, bhitcount
+      select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
       from communityqnas
       where boardno=#{boardno}
+   </select>
+   
+   <select id="selectByUserid" parameterType="string" resultType="communityqna">
+      select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+      from communityqnas
+      where userid=#{userid}
    </select>
    
    <update id="update" parameterType="communityqna">

@@ -4,17 +4,17 @@
 
 <mapper namespace="com.mycompany.webapp.dao.NoticesDao">
  <select id="selectAll" resultType="notice">
-      select boardno, btitle, bwriter, bcontent, bdate, bcount
+      select boardno, btitle, userid, bcontent, bdate, bcount
       from notices
       order by boardno desc
    </select>
      
  <select id="selectByPage" parameterType="pager" resultType="notice">
-      select rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount
       from(
-         select rownum as rnum, boardno, btitle, bcontent, bwriter, bdate, bcount
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
             from (
-               select boardno, btitle, bcontent, bwriter, bdate, bcount
+               select boardno, btitle, bcontent, userid, bdate, bcount
                from notices
                order by boardno desc
             )
@@ -26,18 +26,18 @@
    
    <insert id="insert" parameterType="notice">
    	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
-         select seq_boards_bno.nextval from dual
+         select seq_notices_boardno.nextval from dual
       </selectKey>
       
          insert into notices
-         (boardno, btitle, bcontent, bwriter, bdate, bhitcount)
+         (boardno, btitle, bcontent, userid, bdate, bhitcount)
          values
-         (#{boardno}, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)      
+         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
    
    </insert>
    
    <select id="selectByBoardno" parameterType="int" resultType="notice">
-      select boardno, btitle, bcontent, bwriter, bdate, bhitcount
+      select boardno, btitle, bcontent, userid, bdate, bhitcount
       from notices
       where boardno=#{boardno}
    </select>

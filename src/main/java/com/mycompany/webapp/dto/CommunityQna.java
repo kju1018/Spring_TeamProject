@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CommunityQna {
 	private int boardno;
-	private String uid;
+	private String userid;
 	private String btitle;
 	private Date bdate;
 	private String bcontent;
@@ -18,11 +18,12 @@ public class CommunityQna {
 	public void setBoardno(int boardno) {
 		this.boardno = boardno;
 	}
-	public String getUid() {
-		return uid;
+	
+	public String getUserid() {
+		return userid;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getBtitle() {
 		return btitle;
