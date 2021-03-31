@@ -11,6 +11,6 @@ public interface LikesDao {
 	public List<Likes> likeSelectAll(); //좋아요 전체선택
 	public int lInsert(Likes likes);
 	public int lUpdate(Likes likes);
-	public int LDeleteByProductNo(int productno);
+	public int LDelete(int productno);
 	
 }

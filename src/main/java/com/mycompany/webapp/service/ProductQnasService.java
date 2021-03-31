@@ -10,22 +10,22 @@ import com.mycompany.webapp.dto.ProductQnas;
 
 @Service
 public class ProductQnasService {
-	@Autowired ProductQnasDao productQnaDao;
+	@Autowired ProductQnasDao productQnasDao;
 	public List<ProductQnas> pQanSelectAll(){
-		List<ProductQnas> list = productQnaDao.pQanSelectAll();
+		List<ProductQnas> list = productQnasDao.pQanSelectAll();
 		return list;
 	}
 	
 	public void pQnaInsert(ProductQnas productqnas) {
-		productQnaDao.pQnaInsert(productqnas);
+		productQnasDao.pQnaInsert(productqnas);
 	}
 	
 	public void pQnaUpdate(ProductQnas productqnas) {
-		productQnaDao.pQnaUpdate(productqnas);
+		productQnasDao.pQnaUpdate(productqnas);
 	}
 	
 	public void pQnaDelete(int boardno) {
-		productQnaDao.pQnaDelete(boardno);
+		productQnasDao.pQnaDelete(boardno);
 	}
 	
 
