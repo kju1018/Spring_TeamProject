@@ -22,6 +22,26 @@
 		location.href = movelink;
 	}
 </script>
+
+<script>
+
+   // 생략	
+
+	$(document).on('click', '#productSearch', function(e){
+		alert("검색");
+		e.preventDefault();
+
+		var url = "${pageContext.request.contextPath}/product/product_list";
+
+		url = url + "?keyword=" + $('#keyword').val();
+
+		location.href = url;
+
+		console.log(url);
+
+	});	
+
+</script>
 <body>
 <header>
 	
@@ -34,8 +54,8 @@
                     
                         <div id="searching" class="col" style="text-align: end; margin: 0 auto; ">
                         	
-                            <input type="text" style=" text-align: center;">
-                            <i class="fa fa-search pointer " aria-hidden="true" onclick="move_page('<%=application.getContextPath()%>/list/product_list')"></i>
+                            <input type="text" name="keyword" id="keyword" style=" text-align: center;">
+                            <button class="btn btn-sm btn-dark" name="productSearch" id="productSearch">검색</button>
                         	
                         </div>
                       
@@ -46,7 +66,7 @@
             <div class="col-6"> 
                 <div class="row align-items-end text-center">
                     <div class="col align-self-center" >
-                        <a href="<%=application.getContextPath()%>"><img  src="${pageContext.request.contextPath}/resources/image/logo.png" alt="" height="130"></a>
+                        <a href="<%=application.getContextPath()%>"><img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="" height="130"></a>
                     </div>
                 </div>
             </div>
@@ -89,7 +109,7 @@
  			    <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">디퓨저/캔들</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">액자</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">조화/화병</a></li>
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">커뮤니티</a></li>
+                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/community/notice_list')"><a class=" header_a" style="text-decoration: none; color: black;">커뮤니티</a></li>
             </ul>
         </div>
         <!-----category text-->

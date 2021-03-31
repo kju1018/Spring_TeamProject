@@ -38,10 +38,20 @@
       where boardno=#{boardno}
    </select>
    
-   <select id="selectByUserid" parameterType="string" resultType="communityqna">
-      select boardno, btitle, bcontent, userid, bdate, bcount
-      from communityqnas
-      where userid=#{userid}
+   <select id="selectByUserid" parameterType="pager" resultType="communityqna">
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+               select boardno, btitle, bcontent, userid, bdate, bcount
+               from communityqnas
+                where userid=#{userid}
+               order by boardno desc
+            )
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
    </select>
    
    <update id="update" parameterType="communityqna">
@@ -62,6 +72,12 @@
    <select id="count" resultType="int">
       select count(*) from communityqnas
    </select>
+   
+   <select id="countuser" resultType="int">
+      select count(*) from communityqnas
+                where userid=#{userid}
+   </select>
+   
    
    
    
@@ -119,7 +135,7 @@
 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 
-<if test="keyword != null and keyword != '' ">
+			<if test="keyword != null and keyword != '' ">
 
 			<if test="searchType=='title'">
 

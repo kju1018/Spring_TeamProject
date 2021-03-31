@@ -45,7 +45,7 @@ public class NoticeController {
 	   
 
 	      int totalRows = noticesService.getTotalRows();
-	      Pager pager = new Pager(10,5,totalRows, intPageNo);
+	      Pager pager = new Pager(7, 5, totalRows, intPageNo);
 	      session.setAttribute("pager", pager);
 	      
 	      List<Notice> list = noticesService.getBoardList(pager);

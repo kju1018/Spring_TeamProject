@@ -69,7 +69,7 @@ public class CommunityQnaController {
 		return "community/qna_list";
 	}
 	
-
+	
 	@GetMapping("/answer_write")
 	public String AnswerqnaWrite(HttpSession session) {
 		
