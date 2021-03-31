@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -47,14 +47,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="notice" items="${list}">
+			<c:forEach var="post_list" items="${list}">
 		      <tr>
-		         <td>${notice.boardno}</td>
-		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
-		         <td>${notice.bcontent}</td>
-		         <td>${notice.userid}</td>
-		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
-		         <td>${notice.bcount}</td>
+		         <td>${communityqna.boardno}</td>
+		         <td><a href="communityqna?boardno=${communityqna.boardno}">${notice.btitle}</a></td>
+		         <td>${communityqna.bcontent}</td>
+		         <td>${communityqna.userid}</td>
+		         <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
+		         <td>${communityqna.bcount}</td>
 		      </tr>
 		   </c:forEach>
 		</tbody>

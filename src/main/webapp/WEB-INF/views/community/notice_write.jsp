@@ -22,12 +22,6 @@
 	<form action="create1" method="post">
     <table class="table">
     <tr>
-        <th style="width:15%">작성자</th>
-        <td><input type="text" id="userid" name="userid" value="${notice.userid}"></td>
-        <th style="width:15%">작성일</th>
-        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
-    </tr>
-    <tr>
         <th style="width:15%">제목</th>
         <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
     </tr>

@@ -20,6 +20,7 @@
 
     <!--게시판-->
     <form action="create" method="post">
+    <input type="text" name="boardno" value="${communityqna.boardno}">
     <div class="table table-responsive">
         <table class="table">
             <tr>

@@ -3,20 +3,15 @@
 				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mycompany.webapp.dao.CommunityQnasDao">
- <select id="selectAll" resultType="communityqna">
-      select boardno, btitle, userid, bcontent, bdate, bcount, board_origin, board_re
-      from communityqnas
-      order by board_origin desc, boardno asc
-   </select>  
-   
+
  <select id="selectByPage" parameterType="pager" resultType="communityqna">
-      select rnum, boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount
       from(
-         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
             from (
-               select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+               select boardno, btitle, bcontent, userid, bdate, bcount
                from communityqnas
-               order by board_origin desc, boardno asc
+               order by boardno desc
             )
          where rownum &lt;=#{endRowNo}
       )
@@ -24,26 +19,27 @@
 
    </select>
    
+  
    <insert id="insert" parameterType="communityqna">
    	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
          select seq_communityqnas_boardno.nextval from dual
       </selectKey>
       
          insert into communityqnas
-         (boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re)
+         (boardno, btitle, bcontent, userid, bdate, bcount)
          values
-         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0, #{board_origin}, #{board_re})      
+         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
    
    </insert>
    
    <select id="selectByBoardno" parameterType="int" resultType="communityqna">
-      select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+      select boardno, btitle, bcontent, userid, bdate, bcount
       from communityqnas
       where boardno=#{boardno}
    </select>
    
    <select id="selectByUserid" parameterType="string" resultType="communityqna">
-      select boardno, btitle, bcontent, userid, bdate, bcount, board_origin, board_re
+      select boardno, btitle, bcontent, userid, bdate, bcount
       from communityqnas
       where userid=#{userid}
    </select>
@@ -66,6 +62,90 @@
    <select id="count" resultType="int">
       select count(*) from communityqnas
    </select>
+   
+   
+   
+   
+   
+   
+ <insert id="insertRepl" parameterType="communityqna">
+   	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
+         select seq_communityqnas_boardno.nextval from dual
+      </selectKey>
+      
+         insert into communityqnas
+         (boardno, btitle, bcontent, userid, bdate, bcount)
+         values
+         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
+   
+   </insert>  
+	<select id="getSearchList" resultType="communityqna">
+		select boardno, btitle, bcontent, userid, bdate, bcount
+		from communityqnas
+
+		   <trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if test="searchType=='btitle' and keyword != null and keyword != '' ">
+
+				and btitle like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='bcontent' and keyword != null and keyword != '' ">
+
+				and bcontent like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='userid' and keyword != null and keyword != '' ">
+
+				and userid like CONCAT('%', #{keyword}, '%')
+
+			</if>	
+
+		</trim>
+
+		LIMIT #{startList}, #{listSize}
+
+	</select>
+
+
+
+	<select id="getBoardListCnt" resultType="int">
+
+		select count(*) as listCnt
+
+		from communityqnas
+
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+<if test="keyword != null and keyword != '' ">
+
+			<if test="searchType=='title'">
+
+				and btitle like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='content'">
+
+				and bcontent like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test="searchType=='reg_id'">
+
+				and userid like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+      </if>
+
+	</trim>
+
+	</select>
+
+   
 </mapper>
 
 

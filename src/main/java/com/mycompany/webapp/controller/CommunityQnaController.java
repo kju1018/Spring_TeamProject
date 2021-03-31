@@ -43,9 +43,8 @@ public class CommunityQnaController {
 	}
 	
 	@GetMapping("/qna_list")
-	public String communityQnaList1(
-		String pageNo, Model model, HttpSession session) {
-			
+	public String communityBoardList(
+		String pageNo, Model model, HttpSession session, String searchType, String keyword) {
 			int intPageNo = 1;
 			if(pageNo == null) {
 			//세션에서 Pager를 찾고, 있으면 pageNo를 설정
@@ -61,19 +60,36 @@ public class CommunityQnaController {
 			int totalRows = communityQnasService.getTotalRows();
 			Pager pager = new Pager(6, 5, totalRows, intPageNo);
 			session.setAttribute("pager", pager);
-			
+			logger.info(keyword);
+			logger.info(searchType);
 			List<CommunityQna> list = communityQnasService.getBoardList(pager);
-			model.addAttribute("list", list);
+//			else {List<CommunityQna> list = communityQnasService.getSearchList(keyword);}
+			model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
 			model.addAttribute("pager", pager);
 		return "community/qna_list";
 	}
+	
 
+	@GetMapping("/answer_write")
+	public String AnswerqnaWrite(HttpSession session) {
+		
+	    	  return "community/answer_write";
+	}
+	
+	@PostMapping("/replcreate")
+	public String AnswercreateCreate(CommunityQna communityqna, HttpSession session) throws Exception {
+			
+			communityqna.setUserid("user1");
+			communityQnasService.saveRepl(communityqna);
+			return "redirect:/community/qna_list";
+
+	}
+	
+	
 	@GetMapping("/qna_write")
 	public String communityQnaWrite(HttpSession session) {
 		
 	    	  return "community/qna_write";
-	      
-		
 	}
 	
 	@PostMapping("/create")
@@ -83,8 +99,7 @@ public class CommunityQnaController {
 			communityqna.setUserid("user1");
 			communityQnasService.saveBoard(communityqna);
 			return "redirect:/community/qna_list";
-		 
-		
+
 	}
 	
 	@GetMapping("/qna_view")

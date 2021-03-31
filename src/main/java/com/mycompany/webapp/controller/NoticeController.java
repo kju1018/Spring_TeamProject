@@ -62,9 +62,8 @@ public class NoticeController {
 	
 	@PostMapping("/create1")
 	public String noticeCreate(Notice notice, HttpSession session) {
-		
-			notice.setBoardno(1);
-			notice.setUserid("admin");
+
+			notice.setUserid("user1");
 			noticesService.saveBoard(notice);
 			logger.info(notice.getBtitle());
 			return "redirect:/community/notice_list";

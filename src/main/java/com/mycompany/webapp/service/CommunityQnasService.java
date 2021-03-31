@@ -18,10 +18,10 @@ public class CommunityQnasService {
 	@Autowired
 	private CommunityQnasDao communityqnasDao;
 	
-	public List<CommunityQna> getBoardList() {
-		List<CommunityQna> list = communityqnasDao.selectAll();
-		return list;
-	}
+//	public List<CommunityQna> getBoardList() {
+//		List<CommunityQna> list = communityqnasDao.selectAll();
+//		return list;
+//	}
 	
 	public List<CommunityQna> getBoardList(Pager pager) {
 		List<CommunityQna> list = communityqnasDao.selectByPage(pager);
@@ -33,7 +33,13 @@ public class CommunityQnasService {
 		communityqnasDao.insert(communityqna);
 		logger.info("저장 후 bno:" + communityqna.getBoardno());
 	}
-
+	
+	public void saveRepl(CommunityQna communityqna) {
+		logger.info("저장전 bno:"+ communityqna.getBoardno());
+		communityqnasDao.insertRepl(communityqna);
+		logger.info("저장 후 bno:" + communityqna.getBoardno());
+	}
+	
 	public CommunityQna getBoard(int boardno) {
 		CommunityQna communityqna = communityqnasDao.selectByBoardno(boardno);
 		return communityqna;
@@ -58,6 +64,11 @@ public class CommunityQnasService {
 	
 	public List<CommunityQna> getBoardListById(String userid){
 		List<CommunityQna> list = communityqnasDao.selectByUserid(userid);
+		return list;
+	}
+	
+	public List<CommunityQna> getSearchList(String keyword) {
+		List<CommunityQna> list = communityqnasDao.getSearchList(keyword);
 		return list;
 	}
 }

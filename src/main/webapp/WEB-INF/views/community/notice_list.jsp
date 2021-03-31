@@ -34,7 +34,7 @@
 	    <tr>
             <th style="width:10%">NO</th>
             <th style="width:50%">SUBJECT</th>
-            <th style="width:15%"></th>
+            <th style="width:15%">WRITER</th>
             <th style="width:15%">DATE</th>
             <th style="width:10%">READ</th>
 	    </tr>
@@ -44,7 +44,6 @@
 		      <tr>
 		         <td>${notice.boardno}</td>
 		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
-		         <td>${notice.bcontent}</td>
 		         <td>${notice.userid}</td>
 		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${notice.bcount}</td>

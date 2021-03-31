@@ -3,17 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   
-<%
-	int ref=1, re_step=0, re_lev=0;
-	try{
-		if(request.getParameter("num")!=null) {
-			ref = Integer.parserInt(resquest.getParamter("ref"));
-			re_step = Integer.parseInt(request.getParameter("re_step"));
-			re_lev = Integer.parseIn(request.getParamter("re_lev"));
-		}
-	}
-
-%>
 <!-- 전체 컨텐츠 영역 -->
 <div class="container" style="margin-top: 12em;">
     <!-- 오른쪽 상단 계단 메뉴-->
@@ -28,7 +17,7 @@
     <p class="titleyj">QnA 쓰기</p>
 
     <!--게시판-->
-    <form action="create" method="post">
+    <form action="replcreate" method="post">
     <div class="table table-responsive">
         <table class="table">
             <tr>
@@ -48,6 +37,8 @@
                 <button type="submit" class="btn btn-dark btn-sm">등록</button>
                 <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
             </div>
+            
+        
     </div>
     </form>
     <!--게시판-->

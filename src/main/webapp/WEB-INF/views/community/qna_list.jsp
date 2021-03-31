@@ -3,6 +3,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+
+   // 생략	
+
+	$(document).on('click', '#btnSearch', function(e){
+		alert("검색");
+		e.preventDefault();
+
+		var url = "${pageContext.request.contextPath}/community/qna_list";
+
+		url = url + "?searchType=" + $('#searchType').val();
+
+		url = url + "&keyword=" + $('#keyword').val();
+
+		location.href = url;
+
+		console.log(url);
+
+	});	
+
+</script>
+
 
 <!-- 전체 컨텐츠 영역 -->
 <div class="container" style="margin-top: 12em;">
@@ -23,8 +45,8 @@
 	<div class="select_nav">
 		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
 		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
-	</div>            
-
+	</div>   
+	       
     <div style="text-align: right; margin-bottom: 4px;">
         <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'"> 
     </div>
@@ -50,6 +72,7 @@
 		         <td>${communityqna.bcount}</td>
 		      </tr>
 		   </c:forEach>
+		   
 		   
 		   <tr>
 		   	<td colspan="5" class="text-center">
@@ -82,7 +105,40 @@
 		   </tr>
             </tbody>
     </table>
-	<!--게시판-->
+	
+	<!-- search{s} -->
+
+		<div class="form-group row justify-content-center">
+
+			<div class="w100" style="padding-right:10px">
+
+				<select class="form-control form-control-sm" name="searchType" id="searchType">
+
+					<option value="btitle">제목</option>
+
+					<option value="bcontent">본문</option>  
+
+					<option value="userid">작성자</option>
+
+				</select>
+
+			</div>
+
+			<div class="w300" style="padding-right:10px">
+
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+
+			</div>
+
+			<div>
+
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+
+			</div>
+
+		</div>
+
+		<!-- search{e} -->
 
 </div>
 <!--전체 컨텐츠 영역--> 

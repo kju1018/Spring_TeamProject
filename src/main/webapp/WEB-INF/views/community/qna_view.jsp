@@ -20,7 +20,7 @@
     <p class="titleyj">QnA 상세</p>
 
     <!--게시판-->
-
+	<form action="" method="post">
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
@@ -51,15 +51,16 @@
             
     <div class="q_v_bottom">
         <hr/>
-        <input type="button" class="btn btn-dark btn-sm" value="답글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/answer_write'">
+        <input type="button" class="btn btn-dark btn-sm" value="답글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/answer_write?boardno=${communityqna.boardno}'">
         <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_update?boardno=${communityqna.boardno}'">          
         <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
     </div>
-
+	
 <!--게시판-->
 
-
+	</form>
 </div>
+
 <!--전체 컨텐츠 영역--> 
 
 
