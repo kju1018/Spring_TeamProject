@@ -3,6 +3,43 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+	const findpw = () => {
+		
+		const userid = $("#userid").val();
+		const uname = $("#uname").val();
+		const uemail = $("#uemail").val();
+		var result = true;
+		console.log(userid);
+		console.log(uname);
+		console.log(uemail);
+		if(userid === "" || uname === "" || uemail === "" ){
+			result = false;
+			alert("양식을 채워주세요.");
+		}
+		
+	
+		if(result){
+		
+			$.ajax({
+				url : "findpwProcess",
+				data : {userid,uname,uemail},
+				method: "post"
+			})
+			.then(data => {
+				if(data.result == "notnull"){
+					window.location.href = "pwupdate";
+				}else{
+					alert("존재하지 않는 정보 입니다.");
+					window.location.href = "find_pw";
+				}
+			})
+		}
+		
+	}
+
+</script>
+
 <div class="container-lg wrapper_content item_mt-18">
         <div class="row justify-content-center border">
             <div class="col-8">
@@ -12,11 +49,11 @@
                 <div class="row item_mt-2 justify-content-center">
                     <!--라벨 : 아이디-->
                     <div class="col-3 align-self-end ">
-                        <label for="uid">아이디</label> 
+                        <label for="userid">아이디</label> 
                     </div>
                     <!--input : 아이디-->
                     <div class="col-6">
-                        <input type="text" class="form-control" id="uid" name="uid">
+                        <input type="text" class="form-control" id="userid" name="userid">
                     </div>
                 </div>
                 <!--이름 라벨과 input 영역-->
@@ -37,12 +74,12 @@
                     </div>
                     <!--input :이메일-->
                     <div class="col-6">
-                        <input type="text" class="form-control" id="uemail"  name="uname">
+                        <input type="text" class="form-control" id="uemail"  name="uemail">
                     </div>
                 </div>
                 <!--확인 버튼 영역-->
                 <div class="row item_mt-4 justify-content-center item_mb-3">
-                    <button class="btn btn-dark btn-lg item_width_20 btn-block">확인</button>
+                    <button onclick="findpw()" class="btn btn-dark btn-lg item_width_20 btn-block">확인</button>
                 </div>
                
                 

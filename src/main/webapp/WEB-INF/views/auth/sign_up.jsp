@@ -127,9 +127,9 @@
 		const unumber1 = $("#unumber1").val();
 		const unumber2 = $("#unumber2").val();
 		const unumber3 = $("#unumber3").val();
-		const utel = unumber1+unumber2+unumber3;
+		const utel = unumber1+"-"+unumber2+"-"+unumber3;
 		
-		
+		console.log(utel);
 		if(unumber2 === "" || unumber3 === "" ){
 			result = false;
 			$("#errorUnumber").html("필수사항 입니다.");
@@ -190,6 +190,11 @@
 						window.location.href = "login";
 					}else if(data.result == "wrongUid"){
 						$("#errorUid").html("존재하는 아이디 입니다.");
+					}else if(data.result == "existemail"){
+						$("#errorUemail").html("존재하는 이메일 입니다.");
+					}else {
+						$("#errorUid").html("존재하는 아이디 입니다.");
+						$("#errorUemail").html("존재하는 이메일 입니다.");
 					}
 				});
 		}
@@ -421,7 +426,7 @@
                 </table>
             </div>
             <div class="col text-center mt-5">
-            <!-- <%=application.getContextPath()%>/auth/signup_complete -->
+           
             	<button type="submit" class="btn btn-lg btn-dark">회원가입</button>  
             </div>
         </form>

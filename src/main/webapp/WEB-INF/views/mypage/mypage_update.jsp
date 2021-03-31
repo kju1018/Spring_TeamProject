@@ -6,8 +6,40 @@
 <%-- taglib 지시자 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+	<script>
+		const updatepage = () => {
+			event.preventDefault();
+			const uzipcode = $("#uzipcode").val();
+			const uaddress = $("#uaddress").val();
+			const utel = $("#utel").val();
+			var result = true;
+			
+			if(uzipcode == "" || uaddress == "" || utel == ""){
+				result = false;
+				alert("수정할 정보가 없습니다.");
+			}
+			
+			if(result){
+				$.ajax({
+					  url: "updateprocess",
+					  data: {uzipcode, uaddress, utel},
+					  method: "post"
+					}).then(data => {
+						if(data.result == "success"){
+							alert("수정이 완료되었습니다.");
+							window.location.href = "<%=application.getContextPath()%>/mypage/mypageupdate";
+						}else{
+							alert("수정에 실패하였습니다.");
+						}
+					});
+			}
+		}
+
+	
+	</script>
     <div class="container-xl" style="margin-top: 18em;" >
-        <form action="<%=application.getContextPath()%>/mypage/mypage_update" method="post">
+         <form onsubmit="updatepage()" method="post"> 
             <div class="col" style=" text-align: center;"><h3>회원정보수정</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             <div class="container-xl mb-5 border border-secondary"><!-- 전체 영역-->
@@ -18,7 +50,7 @@
                    <div class="col-10 border-left border-secondary">
                         <div class="row">
                             <div class="col-4">
-                                 <input type="text" class="signup-input" id="uid" name="uid" value="5조" readonly>
+                                 <input type="text" class="signup-input" id="uid" name="uid" value="${user.userid}" readonly>
                             </div>
                             <div class="col-8 align-self-center">
                                 <span class="signup-span">(영문소문자/숫자, 4 ~ 16자)</span>
@@ -30,30 +62,16 @@
             
                 <div class="row align-items-center border-bottom border-secondary">
                     <div class="col-2" >
-                        <label class="signup-label" for="upassword">비밀번호</label>
+                        <label class="signup-label" for="upassword">비밀번호 변경</label>
                     </div>
                     <div class="col-10 border-left border-secondary">
                         <div class="row">
                             <div class="col-4">
-                                <input type="password" class="signup-input" id="upassword" name="upassword">
-                            </div>
-                            <div class="col-8 align-self-center">
-                                <span class="signup-span">(영문대소문자/특수문자 중 2가지 이상 조합, 10 ~ 16자)</span>
+                              	  <a href="<%=application.getContextPath()%>/auth/pwupdate" class="btn btn-primary btn-md  ">비밀번호 변경</a>
+                           		
                             </div>
                         </div>
                     </div>    
-                </div>
-                <div class="row align-items-center border-bottom border-secondary">
-                    <div class="col-2">
-                        <label class="signup-label" for="urepassword">비밀번호 확인</label>
-                    </div>
-                    <div class="col-10 border-left border-secondary">
-                        <div class="row">
-                            <div class="col-4">
-                                <input type="password" class="signup-input" id="urepassword" name="urepassword">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="row align-items-center border-bottom border-secondary" >
@@ -63,7 +81,7 @@
                     <div class="col-10 border-left border-secondary">
                         <div class="row">
                             <div class="col-4">
-                                <input type="text" class="signup-input" id="uname" name="uname" value="5조" readonly>
+                                <input type="text" class="signup-input" id="uname" name="uname" value="${user.uname}" readonly>
                             </div>
                         </div>
                     </div>
@@ -74,7 +92,10 @@
                     <div class="col-10 border-left border-secondary">
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <input type="text" style="width: 100%;" name="uaddress1">
+                            <c:if test="${user.uzipcode != null}">
+	  							<input type="text" style="width: 100%;" id="uzipcode" name="uzipcode" value="${user.uzipcode}">
+	  						</c:if>
+                                
                             </div>
                             <div class="col-2 pl-0">
                                 <a href="#" class="btn btn-outline-dark btn-sm">우편번호</a>
@@ -82,7 +103,9 @@
                         </div>
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <input type="text" style="width: 100%;">
+                                <c:if test="${user.uaddress != null}">
+	  							<input type="text" style="width: 100%;" id="uaddress" name="uaddress" value="${user.uaddress}">
+	  						</c:if>
                             </div>
                             <div class="col-8">
                                <span class="signup-span">기본주소</span>
@@ -105,20 +128,9 @@
                     </div>
                     <div class="col-10 border-left border-secondary">
                         <div class="row align-items-center">
-                            <div class="col-2">
-                                <select class="signup-input" name="unumber1">
-                                    <option selected value="010">010</option>
-                                    <option value="011">011</option>
-                                    <option value="02">02</option>
-                                </select>
-                            </div>
-                            <span class="ml-1">-</span>
-                            <div class="col-2">
-                                <input type="text" class="signup-input" name="unumber2">
-                            </div>
-                            <span class="ml-1">-</span>
-                            <div class="col-2" >
-                                <input type="text" class="signup-input" name="unumber3">
+                            
+                            <div class="col-4" >
+                                <input type="text" class="signup-input" id="utel" name="utel" value="${user.utel}">
                             </div>
                         </div>
                     </div>
@@ -131,56 +143,20 @@
                     <div class="col-10 border-left border-secondary">
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <input type="email" class="signup-input" name="uemail">
+                                <input type="email" class="signup-input" name="uemail" value="${user.uemail}" readonly>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row align-items-center">
-                    <div class="col-2" >
-                    	<label class="signup-label" for="id">생년월일</label>
-                    </div>
-                    <div class="col-10 border-left border-secondary">
-                        <div class="row align-items-center" style="margin-top: 0.2em;">
-                            <div class="col-2">
-                                <input type="text" class="signup-input" name="uyear">
-                            </div>
-                            <span>년</span>
-                            <div class="col-2">
-                                <input type="text" class="signup-input" name="umonth">
-                            </div>
-                            <span>월</span>
-                            <div class="col-2">
-                                <input type="text" class="signup-input" name="uday">
-                            </div>
-                            <span class="mr-4">일</span>
-                            <div class="col" >
-                                <div class="row ">
-                                    <div class="col-5" >
-                                        <div class="row align-items-center">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">양력</label>
-                                              </div>
-                                              <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2">
-                                                <label class="form-check-label" for="inlineCheckbox2">음력</label>
-                                              </div>
-                                        </div>    
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          
             </div>
           
             <div class="col text-center mt-5">
                 <button type="submit" class="btn btn-lg btn-dark">수정완료</button>
                 <a href="<%=application.getContextPath()%>/mypage/mypage" class="btn btn-lg btn-outline-dark">취소</a>
-                <a href="<%=application.getContextPath()%>" class="btn btn-sm btn-outline-dark" style="float:right">회원탈퇴</a>
+                <a href="<%=application.getContextPath()%>/auth/deleteuser" class="btn btn-sm btn-outline-dark" style="float:right">회원탈퇴</a>
             </div>
-        </form>
+       	  </form> 
     </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
