@@ -4,22 +4,28 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
 	const findId = () => {
+		
 		const uname = $("#uname").val();
 		const uemail = $("#uemail").val();
-		var result 
-		
+		var result = true;
+		console.log(uname);
+		console.log(uemail);
 		if(uname === "" || uemail === ""){
-			alert("양식을 채워주세요.")
+			result = false;
+			alert("양식을 채워주세요.");
 		}
 		
-		$.ajax({
-			url : "read",
-			data : {uname, uemail},
-			method: "post"
-		})
-		.then(data => {
-			$("#board").html(data);
-		})
+		if(result){
+		
+			$.ajax({
+				url : "findIdProcess",
+				data : {uemail,uname},
+				method: "post"
+			})
+			.then(data => {
+				console.log(data.result);
+			})
+		}
 		
 	}
 
@@ -28,6 +34,7 @@
   <div class="container-lg wrapper_content item_mt-18">
         <div class="row justify-content-center border"  >
             <div class="col-8">
+            
                 <!--제목 부분-->
                 <div class="text_center_sort item_mt-2"><h5>아이디 찾기</h3></div>
                     
