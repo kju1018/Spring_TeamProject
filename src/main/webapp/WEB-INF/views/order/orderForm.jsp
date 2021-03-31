@@ -22,9 +22,9 @@
                     </div>
                 </a>
                 <a href="#none" class="ml-3">
-                    <h6>식탁 조명</h6>
-                    <p>수량: 1개</p>
-                    <p>상품구매금액: 50000원</p>
+                    ${cart.pname}
+                    <p>수량: ${cart.cartquantity}</p>
+                    <p>상품구매금액: ${cart.pprice}</p>
                 </a>
             </div>
         </div><!--주문상품 div-->

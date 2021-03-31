@@ -3,14 +3,16 @@ package com.mycompany.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.service.CartsService;
@@ -31,20 +33,39 @@ public class CartController {
 		return "redirect:/product/product_view_user";//다시 프로덕트 상세
 	}
 	
-	@GetMapping("/cartlist")
-	public String getCartList(Model model) {
-		List<Cart> list = cartsService.getCartList("user1");
-		model.addAttribute("cartList", list);
+	@GetMapping("/cart")
+	public String getCart(Model model) {
 		
 		return "cart/cart";
 	}
 	
+	@GetMapping("/cartlist")
+	public String getCartList(Model model) {
+		List<Cart> list = cartsService.getCartList("user1");
+		model.addAttribute("cartList", list);
+		logger.info("아아");
+		return "cart/cartlist";
+	}
+	
 	//선택된 것 삭제(아직 미구현)
 	@GetMapping("/delete_cart_selected")
-	public String deleteCart(List<Cart> cartList) {
-		cartsService.removeCartSelect(cartList);
-		
-		return "redirect:cartlist";
+	@ResponseBody
+	public String deleteCart(@RequestParam(value="cartArr[]") List<String> cartArr) {
+		JSONObject jsonObject = new JSONObject();
+		List<Cart> cartlist = new ArrayList<Cart>();
+		for(String productno : cartArr) {
+			Cart cart = new Cart();
+			cart.setUserid("user1");
+			cart.setProductno(Integer.parseInt(productno));
+			cartlist.add(cart);
+		}
+		if(cartlist.size() > 0) {
+			logger.info(cartlist.toString());
+			cartsService.removeCartSelect(cartlist);
+			jsonObject.put("result", "success");
+			logger.info(jsonObject.toString());
+		}
+		return jsonObject.toString();
 
 	}
 	
@@ -52,7 +73,7 @@ public class CartController {
 	@GetMapping("/delete_allcart")
 	public String deleteCartAll() {
 		cartsService.removeCartAll("user1");
-		
+
 		return "redirect:cartlist";
 
 	}

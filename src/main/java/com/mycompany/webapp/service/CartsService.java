@@ -17,6 +17,11 @@ public class CartsService {
 		cartsDao.insert(cart);
 	}
 	
+	public Cart getCartByProductno(int productno) {
+		Cart cart = cartsDao.selectByProductno(productno);
+		return cart;
+	}
+	
 	public List<Cart> getCartList(String userid) {
 		List<Cart> list = cartsDao.selectByUserId(userid);
 		return list;

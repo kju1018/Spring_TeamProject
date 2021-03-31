@@ -4,20 +4,56 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <script type="text/javascript">
-	const cartdelete = (productno) => {
-		if(confirm("정말 삭제하시겠습니까 ?") == true){
-			location.href ="<%=application.getContextPath()%>/cart/delete_cartone?productno="+productno;
-	    }
-	    else{
-	        return ;
-	    }
-	};
-	
+
+	$(function(){
+	    getList();
+	 });
+	 
+	 const getList = () => {
+	 	const args = {url:"cartlist", method:"get"};
+	 	
+	 	$.ajax(args).then(data => {
+	 	  	$("#board").html(data);
+	 	 });
+	 };
+	 
+	 
+	 const cartdelete = () => {
+		 
+		 if(confirm("장바구니를 비우시겠습니까?") == true){
+			var cartArr = new Array();
+			$("input[name=chk_box]:checked").each(function() {
+					var test = $(this).val(); 
+					cartArr.push(test);
+			});
+					
+			$.ajax({
+				    url: "delete_cart_selected",
+				    data: {cartArr},
+				    method: "get"
+			 }).then(data => {
+				  if(data.result=="success"){
+					  getList();
+				  	  console.log("성공");
+				  }
+		     });   
+		   } else{
+		        return ;
+		    }
+			   
+	    };
+		 
+		
+	 
 	const updatecartquantity = (productno) => {
 		  const cartquantity = document.getElementById('cartquantity'+productno).value;
 		  location.href ="<%=application.getContextPath()%>/cart/update_quantity?cartquantity="+cartquantity+"&productno="+productno;
 		};
-	
+		
+	const cartorder = (productno) => {
+		location.href ="<%=application.getContextPath()%>/order/order_form?productno="+productno;
+	}
+
 		
 	const deleteAll = (cartlistlength) => {
 			if(cartlistlength===0){
@@ -40,7 +76,7 @@
 	} */
 	
 	
-	const test = () => {
+	/* const test = () => {
 		var cartArr = new Array();
 		$("input[name=chk_box]:checked").each(function() {
 			  var test = $(this).val(); 
@@ -51,7 +87,7 @@
 		
 	}; 
 
-
+ */
 	
 	
 </script>
@@ -78,89 +114,29 @@
 		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
 	</div>
 	
-	<!--게시판-->
-	<table class="table" style="margin-top: 15px;">
-		<tr>
-			<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
-			<th width="30%">제품사진</th>
-			<th width="25%">상품정보</th>
-			<th width="15%">수량</th>
-			<th width="10%">구매금액</th>
-			<th width="10%">배송비</th>
-			<th width="10%"></th>
-		</tr>
+	<div id="board">
 		
-		<c:if test="${empty cartList}">
-			<tr class="cart_list" >
-				<td colspan="7" class="text-center">
-					장바구니가 비어있습니다.
-				</td>
-			</tr>
-			<c:set var="total" value="${0}"/>
-		</c:if>
-		<c:if test="${not empty cartList}">
-			<c:forEach var="cart" items="${cartList}">
-				<tr class="cart_list" >
-					<th class="align-middle"><input type="checkbox" name="chk_box" class="checkSelect" value="${cart.productno}"/></th>
-					<th class="align-middle">
-						<a href="<%=application.getContextPath()%>/product/product_view">
-							<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
-						</a>
-					</th>
-					<th class="align-middle"><a href="<%=application.getContextPath()%>/product/product_view">${cart.pname}</a></th>
-					<th class="align-middle">
-						<div class="row">
-							<div class="col-6">
-								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
-							</div>
-							<div class="col-6">
-								<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">확인</a>
-							</div>
-							
-						</div>
-								
-					</th>
-					<th class="align-middle">${cart.cartquantity*cart.pprice}</th>
-					<th class="align-middle">무료</th>
-					<th class="align-middle">
-						<input type="button" class="btn-sel" value="주문하기" >
-						<input type="button" id="cartdelete" class="btn-sel" onclick="cartdelete(${cart.productno})" value="삭제"/>
-					</th>
-				</tr>
-				<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
-			</c:forEach>
-		</c:if>
-
-	</table>
+	
+	
+   </div>
+   
+	<!--게시판-->
 	<hr/>
 
 	<div class="c-middle">
-		<input type="button" class="btn btn-dark btn-sm" onclick="test()" value="테스트"/>
+		<input type="button" class="btn btn-dark btn-sm" onclick="cartdelete()" value="선택상품삭제"/>
 		<input type="button" class="btn btn-dark btn-sm" onclick="deleteAll(${cartList.size()})" value="상품전체 삭제"/>
 	</div>	
 
 	<!-- 페이지 -->
-	<ul class="pagenav" style="margin-top: 40px;">
+<%-- 	<ul class="pagenav" style="margin-top: 40px;">
 		<li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
 		<li class="page-item"><a href="#">PREV</a></li>
 		<li class="page-item"><a href="#">1</a></li>
 		<li class="page-item"><a href="#">NEXT</a></li>
 		<li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
 	</ul>
-	<br/>
-
-	<table class="table" style="margin-top: 50px;">
-	<tr>
-		<th width="33%">총 상품금액</th>
-		<th width="33%">총 배송비</th>
-		<th width="33%">결제예정금액</th>
-	</tr>
-	<tr>
-		<th><c:out value="${total}"/>원</th>
-		<th>+0 원</th>
-		<th>= <c:out value="${total}"/>원</th>
-	</tr>
-	</table>
+	<br/> --%>
 	
 	<div class="c_bottom">
 		<a type="button" class="btn btn-dark" >상품전체주문</a>
