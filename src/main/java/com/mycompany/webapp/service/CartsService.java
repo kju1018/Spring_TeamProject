@@ -17,14 +17,14 @@ public class CartsService {
 		cartsDao.insert(cart);
 	}
 	
-	public Cart getCartByProductno(int productno) {
-		Cart cart = cartsDao.selectByProductno(productno);
-		return cart;
-	}
-	
 	public List<Cart> getCartList(String userid) {
 		List<Cart> list = cartsDao.selectByUserId(userid);
 		return list;
+	}
+	
+	public Cart getCart(Cart cart) {
+		Cart tempCart = cartsDao.select(cart);
+		return tempCart;
 	}
 	
 	//체크 표시된 카트 삭제

@@ -9,7 +9,7 @@ import com.mycompany.webapp.dto.Cart;
 @Mapper
 public interface CartsDao {
 	public int insert(Cart cart);
-	public Cart selectByProductno(int productno);
+	public Cart select(Cart cart);
 	public List<Cart> selectByUserId(String userid);
 	public int delete(List<Cart> cartlist);//선택삭제
 	public int deleteAllByUserId(String userid);//전체 삭제

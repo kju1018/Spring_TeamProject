@@ -1,5 +1,6 @@
 package com.mycompany.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,12 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Order;
-import com.mycompany.webapp.dto.OrderProduct;
 import com.mycompany.webapp.service.CartsService;
 import com.mycompany.webapp.service.OrderProductsService;
 import com.mycompany.webapp.service.OrdersService;
@@ -36,13 +34,11 @@ public class OrdersController {
 	private OrderProductsService orderProductService;
 
 	// 주문서를 가져오는 부분
-	@GetMapping("/order_form")
-	public String createOrderForm(int productno, Model model) {
-		
-		Cart cart = cartsService.getCartByProductno(productno);
-		model.addAttribute("cart", cart);
-		
-		// cartlist 필요할듯
+	@PostMapping("/order_form")
+	public String createOrderForm(String[] cart_box, Model model) {
+		List<Cart> cartList = new ArrayList<Cart>();
+		for(String productno : cart_box)
+			logger.info(productno);
 		return "order/orderForm";
 	}
 

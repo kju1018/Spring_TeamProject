@@ -14,10 +14,10 @@
 
 	</select>
 	
-	<select id="selectByProductno" parameterType="int" resultType="cart">
+	<select id="select" parameterType="cart" resultType="cart">
 		select c.userid, c.productno, pname, pprice, ioriginalname, isavename, imgtype, cartquantity
 		from carts c, products p, productimgs pi
-		where c.productno=#{productno} and c.productno = p.productno and 
+		where c.userid = #{userid} and c.productno=#{productno} and c.productno = p.productno and 
 				p.productno = pi.productno and pi.ipriority = 1
 	</select>
 	
