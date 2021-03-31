@@ -33,7 +33,7 @@
           <li>주문내역을 확인하실수 있습니다.</li>
       </ul>
    </div>
-   <div class="banner" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
+   <div class="banner" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypageupdate'">
        <div id="icon">
        <img src = "<%=application.getContextPath()%>/resources/image/user.png" width="60">
        </div>
