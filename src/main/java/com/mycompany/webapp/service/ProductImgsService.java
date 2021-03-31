@@ -27,4 +27,8 @@ public class ProductImgsService {
 	public void pImgDelete(int imgno) {
 		productImgsDao.pImgDelete(imgno);
 	}
+	public List<ProductImgs> pImgSelectByIno(int productno) {
+		List<ProductImgs> productImgs = productImgsDao.pImgSelectByIno(productno);
+		return productImgs;
+	}
 }

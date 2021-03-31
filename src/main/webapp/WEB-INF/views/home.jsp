@@ -63,7 +63,7 @@
                        <h3 class="aft col-2 text_end_sort">Best</h3>    
                    </div>
                    <div class="row justify-content-center" >
-                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view')">
+                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=1')">
                              <div class="card item_width_13r" >
                                <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
                                <div class="row align-self-center item_width_100 item_pb-1">
@@ -77,7 +77,7 @@
                                </div>
                              </div>
                          </div>
-                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view')">
+                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=1')">
                             <div class="card item_width_13r" >
                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
                               <div class="row align-self-center item_width_100 item_pb-1">
@@ -91,7 +91,7 @@
                               </div>
                             </div>
                          </div>
-                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view')">
+                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=1')">
                             <div class="card item_width_13r" >
                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
                               <div class="row align-self-center item_width_100 item_pb-1">
@@ -105,7 +105,7 @@
                               </div>
                             </div>
                         </div>
-                        <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view')">
+                        <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=1')">
                             <div class="card item_width_13r" >
                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
                               <div class="row align-self-center item_width_100 item_pb-1">
@@ -119,7 +119,7 @@
                               </div>
                             </div>
                         </div>
-                        <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view')">
+                        <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=1')">
                             <div class="card item_width_13r" >
                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
                               <div class="row align-self-center item_width_100 item_pb-1">

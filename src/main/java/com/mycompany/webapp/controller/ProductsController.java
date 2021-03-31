@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mycompany.webapp.dto.Cart;
+import com.mycompany.webapp.dto.ProductImgs;
 import com.mycompany.webapp.dto.Products;
+import com.mycompany.webapp.service.ProductImgsService;
 import com.mycompany.webapp.service.ProductsService;
 
 @Controller
@@ -22,6 +23,9 @@ public class ProductsController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductsController.class);
 	@Autowired
 	private ProductsService productsService;
+	@Autowired
+	private ProductImgsService productImgsService;
+	
 	
 	/*ADMIN*======================================================/
 	/*상품 상세 - admin*/
@@ -98,20 +102,38 @@ public class ProductsController {
 	
 	/*USER*======================================================/
 	/*상품 상세*/
+	@SuppressWarnings("null")
 	@GetMapping("/product_view_user")
 	public String product_view_user(Model model, int productno) {
 		Products productnum = productsService.pSelectByPno(productno);
-		model.addAttribute("productnum", productnum);	
+		List<ProductImgs> productimg = productImgsService.pImgSelectByIno(productno);
+		for(int i=0; i<productimg.size(); i++) {
+			logger.info(productimg.get(i).getIoriginalname());
+		}
+		
+//		List<ProductImgs> iprioritys = null;
+//		ProductImgs ipriority = null;
+//		for(int i=0; i<productimg.size(); i++) {
+//			if(productimg.get(i).getIpriority()==1) {
+//				logger.info("");
+//				ipriority = productimg.get(i);
+//			}else {
+//				iprioritys.add(productimg.get(i));
+//			}
+//		}
+		model.addAttribute("productnum", productnum);
+//		model.addAttribute("ipriority", ipriority);	
+//		model.addAttribute("iprioritys", iprioritys);			
 		return "product/product_view_user";
 	}
 	
 	/*상품 리스트*/
 	@GetMapping("/product_list_user")
 	public String product_list_user(Model model) {
+		//model옆에 int categoryno / if categoryno = 1이면 인테리어조명 ... //
 		List<Products> list = productsService.pSelectAll();
 		model.addAttribute("list", list);	
 		return "product/product_list_user";
 	}
-	
 
 }
