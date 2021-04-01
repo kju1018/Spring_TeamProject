@@ -3,22 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript">
-const insertcartquantity = (productno) => { //add to cart에 productno + productquantity//넘기기 ajax로
+const insertcartquantity = (productno) => { //add to cart에 productno + productquantity 넘기기
 	  const pquant = document.getElementById('quantity').value;
 	  alert(pquant);
 	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
 	};
 	
-const cartComfirm = () => {
-	$.ajax({
-		url:""
-		data:{}
-	}).then(data => {
-		alert("이미 장바구니에 있습니다.");
-	})
-	
-}
 
+	
 const sumtotal = (pprice) => { //총합 계산
 	const num = document.getElementById('pquantity').value;
 	if(num > 0){
@@ -71,27 +63,27 @@ const changeimg4 = (product_img) => {
 					<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
 					<hr style="width:100%; color: black; border:1px solid black;"/>
 					<p style="font-size: large;">${products.pname}</p><br><br>
-					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		무료<br><br></pre>
+					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
 				    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
 				    
 				    </small>
 					<!--수량 선택-->
 					<form action="<%=application.getContextPath()%>/order/order_form" method="post">
 					
-								<input type="hidden" name="chk_productno" value="${products.productno}"/>
-								    <table style="width:100%; height:80px; border:1px solid lightgray;">
-												<tr>
-													<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
-					                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
-					                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
-					                
-												</tr>
-										</table> 
-							    <!--구매 / 장바구니-->
-								<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
-								<!-- form으로 -->
-								
-								<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
+						<input type="hidden" name="chk_productno" value="${products.productno}"/>
+						    <table style="width:100%; height:80px; border:1px solid lightgray;">
+										<tr>
+											<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
+			                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
+			                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
+			                
+										</tr>
+								</table> 
+					    <!--구매 / 장바구니-->
+						<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
+						<!-- form으로 -->
+						
+						<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
 						</form>
 						<button onclick="insertcartquantity(${products.productno})" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
 							

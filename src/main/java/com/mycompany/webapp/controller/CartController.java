@@ -29,10 +29,11 @@ public class CartController {
 	@Autowired
 	private CartsService cartsService;
 	
+	//카트 생성
 	@GetMapping(value="/create_cart", produces="application/json;charset=UTF-8" )
 	public String createCart(Cart cart) {
-		cart.setUserid("user1");
-		Cart tempCart = cartsService.getCart(cart);
+		cart.setUserid("user1");//제품상세에서 받은 productno, quantity를 이용해서 Cart객체 생성
+		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 있으면 null
 		
 		JSONObject jsonObject = new JSONObject();
 		if(tempCart == null) {
@@ -45,12 +46,14 @@ public class CartController {
 		return jsonObject.toString();
 	}
 	
+	//카트 페이지
 	@GetMapping("/cart")
 	public String getCart() {
 		
 		return "cart/cart";
 	}
 	
+	//카트 목록 출력
 	@GetMapping("/cartlist")
 	public String getCartList(Model model) {
 		List<Cart> list = cartsService.getCartList("user1");
@@ -58,6 +61,7 @@ public class CartController {
 		return "cart/cartlist";
 	}
 	
+	//선택된 카트 삭제
 	@GetMapping(value="/delete_cart_selected", produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public String deleteCart(@RequestParam(value="cartArr[]") List<String> cartArr) {
@@ -70,14 +74,13 @@ public class CartController {
 			cartlist.add(cart);
 		}
 		if(cartlist.size() > 0) {
-			cartsService.removeCartSelect(cartlist);
+			cartsService.removeSelectCart(cartlist);
 			jsonObject.put("result", "success");
 		}
 		return jsonObject.toString();
 	}
 	
 	//전체 삭제
-	
 	@GetMapping(value="/delete_allcart", produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public String deleteCartAll() {
@@ -88,21 +91,14 @@ public class CartController {
 	}
 
 	//개수 변경
-	
 	@GetMapping(value="/update_quantity", produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public String updateQuantity(Cart cart) {
 		cart.setUserid("user1");
-		cartsService.updateCart(cart);
+		cartsService.updateCartQuantity(cart);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
 		return jsonObject.toString();
 	}
 	
-	/*@PostMapping("/test")
-		public String test() {
-			logger.info("dsaff");
-			logger.info(""+chk_box.length);
-			return "redirect:cartlist";
-	}*/
 }

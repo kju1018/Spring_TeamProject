@@ -129,81 +129,35 @@ public class ProductsController {
 			  intPageNo = Integer.parseInt(pageNo);
 		  }	  
 		  
+		  
 	      int totalRows = productsService.getTotalRows(pcategory);
+	      
 	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
+	      //logger.info(Integer.toString(pager.getTotalRows()));
+
+	  
 	      session.setAttribute("pager", pager);
 	      
 	      List<Products> list = productsService.pSelectAll(pager);
 	      
 	      Pager pager_list = new Pager(10,5, totalRows, intPageNo, list);
-//	      List<Products> list_date = productsService.getTotalDate(pager_list);
-//	      List<Products> list_name = productsService.getTotalName(pager_list);
-//	      List<Products> list_low = productsService.getTotalLow(pager_list);
-//	      List<Products> list_high = productsService.getTotalHigh(pager_list);
+	      List<Products> list_date = productsService.getTotalDate(pager_list);
+	      List<Products> list_name = productsService.getTotalName(pager_list);
+	      List<Products> list_low = productsService.getTotalLow(pager_list);
+	      List<Products> list_high = productsService.getTotalHigh(pager_list);
 	      
 	      //====================
 	      //컨트롤러 쪼개서 버튼
 		model.addAttribute("list", list);
-		model.addAttribute("pager_list", pager_list);
-		
-		
-//		model.addAttribute("list_date", list_date);
-//		model.addAttribute("list_name", list_name);
-//		model.addAttribute("list_low", list_low);
-//		model.addAttribute("list_high", list_high);
+		model.addAttribute("list_date", list_date);
+		model.addAttribute("list_name", list_name);
+		model.addAttribute("list_low", list_low);
+		model.addAttribute("list_high", list_high);
 		model.addAttribute("pcategory", pcategory);
 		model.addAttribute("pcategoryname", pcategoryname);
 		return "product/product_list_user";
 	}
 	
 	/* 정렬 */
-	@GetMapping("/product_list_user_new")
-	public String product_list_user_new(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname) {
-		int intPageNo = 1;
-		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
-			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			  Pager pager = (Pager) session.getAttribute("pager");
-			  if(pager != null) {
-				  intPageNo = pager.getPageNo();
-			  } 
-		  }else { //클라이언트에서 pageNo가 넘어왔을 경우
-			  intPageNo = Integer.parseInt(pageNo);
-		  }	  
-	      int totalRows = productsService.getTotalRows(pcategory);
-	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
-	      session.setAttribute("pager", pager);
-	      List<Products> list = productsService.getTotalDate(pager);
-	      Pager pager_list = new Pager(10,5, totalRows, intPageNo, list);
-	      model.addAttribute("list", list);
-	      model.addAttribute("pager_list", pager_list);
-	      model.addAttribute("pcategory", pcategory);
-		  model.addAttribute("pcategoryname", pcategoryname);
-		  
-		return "redirect:/product/product_list_user";
-	}
-	
-	@GetMapping("/product_list_user_high")
-	public String product_list_user_high(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname) {
-		int intPageNo = 1;
-		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
-			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			  Pager pager = (Pager) session.getAttribute("pager");
-			  if(pager != null) {
-				  intPageNo = pager.getPageNo();
-			  } 
-		  }else { //클라이언트에서 pageNo가 넘어왔을 경우
-			  intPageNo = Integer.parseInt(pageNo);
-		  }	  
-	      int totalRows = productsService.getTotalRows(pcategory);
-	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
-	      session.setAttribute("pager", pager);
-	      List<Products> list = productsService.getTotalHigh(pager);
-	      Pager pager_list = new Pager(10,5, totalRows, intPageNo, list);
-	      model.addAttribute("list", list);
-	      model.addAttribute("pager_list", pager_list);
-	      model.addAttribute("pcategory", pcategory);
-		  model.addAttribute("pcategoryname", pcategoryname);
-		  
-		return "redirect:/product/product_list_user";
-	}
+
 }

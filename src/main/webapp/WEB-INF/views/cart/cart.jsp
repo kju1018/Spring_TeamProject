@@ -21,15 +21,15 @@
 	 
 	 const cartdelete = () => {
 		var cartArr = new Array();
-		$("input[name=cart_box]:checked").each(function() {
+		$("input[name=chk_productno]:checked").each(function() {
 				var test = $(this).val(); 
 				cartArr.push(test);
 		});
 		
 		if(cartArr.length == 0){
-			alert("선택값이 없습니다.")
+			alert("선택된 상품이 없습니다.")
 		} else {
-			if(confirm("장바구니를 비우시겠습니까?") == true){
+			if(confirm("선택된 상품들을 삭제하시겠습니다?") == true){
 				$.ajax({
 						url: "delete_cart_selected",
 						data: {cartArr},
@@ -84,16 +84,21 @@
 	function checkCart() {
 		event.preventDefault();
 		var cartArr = new Array();
-		$("input[name=cart_box]:checked").each(function() {
-				var test = $(this).val(); 
-				cartArr.push(test);
+		var quantity="";
+		$("input[name=chk_productno]:checked").each(function() {
+				var box_productno = $(this).val(); 
+				cartArr.push(box_productno);
+				var temp = $("#cartquantity"+box_productno).val();
+				/* 선택한 productno를 이용하여 cartquantity id를 찾음  */
+				quantity += temp+" ";
 		});
 		
 		if(cartArr.length == 0){
-			alert("선택값이 없습니다.")
+			alert("선택된 상품이 없습니다.")
 		} else {
 			var cart_form = document.querySelector("#cart_form");
-			cart_form.submit();
+		    $('#quantity').val(quantity);
+		    cart_form.submit();
 		} 
 		
 	}

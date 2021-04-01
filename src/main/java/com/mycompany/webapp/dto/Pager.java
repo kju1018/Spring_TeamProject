@@ -18,7 +18,6 @@ public class Pager {
 	private int endRowIndex;	//페이지의 마지막 행 인덱스
 	private int pcategory;
 	private String userid;
-	private List<Products> products;
 	private String keyword;
 	
 	public String getKeyword() {
@@ -28,7 +27,7 @@ public class Pager {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	private List<Products> products;
 
 	public int getPcategory() {
 		return pcategory;

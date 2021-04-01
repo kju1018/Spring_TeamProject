@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <form id="cart_form" onsubmit="checkCart()" action="<%=application.getContextPath()%>/order/order_form" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<table class="table" style="margin-top: 30px;">
 			<tr>
 				<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
@@ -24,9 +25,10 @@
 			</c:if>
 	
 			<c:if test="${not empty cartList}">
+					<input type="hidden" id="quantity" name="quantity" value=""/>
 					<c:forEach var="cart" items="${cartList}">
 						<tr class="cart_list" >
-							<th class="align-middle"><input type="checkbox" name="cart_box" class="checkSelect" value="${cart.productno}"/></th>
+							<th class="align-middle"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}"/></th>
 							<th class="align-middle">
 								<a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">
 									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
