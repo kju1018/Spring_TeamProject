@@ -19,14 +19,8 @@
     <p class="titleyj">공지사항 상세</p>
     
     <!--게시판-->
-	<form action="create" method="post">
+	<form action="create1" method="post">
     <table class="table">
-    <tr>
-        <th style="width:15%">작성자</th>
-        <td><input type="text" id="userid" name="userid" value="${notice.userid}"></td>
-        <th style="width:15%">작성일</th>
-        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
-    </tr>
     <tr>
         <th style="width:15%">제목</th>
         <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
@@ -36,14 +30,15 @@
         <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
     </tr>
     </table>
-  	</form>
+  	
   	
   	
     <div class="n_v_bottom">
-        <hr/>  
+        <hr/>
+        <button type="submit" class="btn btn-dark btn-sm">등록</button>  
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
     </div>
-
+	</form>
        
      
    

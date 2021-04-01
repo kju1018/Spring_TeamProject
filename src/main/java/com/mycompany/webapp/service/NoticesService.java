@@ -38,7 +38,7 @@ public class NoticesService {
 		Notice notice = noticesDao.selectByBoardno(boardno);
 		return notice;
 	}
-
+	
 	public void updateBoard(Notice notice) {
 		noticesDao.update(notice);
 	}
