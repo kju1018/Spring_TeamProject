@@ -4,7 +4,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <script>
+
+
 	const findpw = () => {
+		
 		
 		const userid = $("#userid").val();
 		const uname = $("#uname").val();
@@ -44,6 +47,7 @@
         <div class="row justify-content-center border">
             <div class="col-8">
                 <!--제목 부분-->
+                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="text_center_sort item_mt-2"><h5>비밀번호 찾기</h3></div>
                 <!--아이디 라벨과 input 영역-->
                 <div class="row item_mt-2 justify-content-center">

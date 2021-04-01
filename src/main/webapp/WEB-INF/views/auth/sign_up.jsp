@@ -41,6 +41,13 @@
 		}
 	}
 	
+	$(function () {
+	    var token = $("input[name='_csrf']").val();
+	    var header = "X-CSRF-TOKEN";
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
 	
 
 
@@ -204,7 +211,8 @@
 
 
     <div class="container-xl" style="margin-top: 18em;" >
-        <form id="signupForm" name="signupForm" method="post" onsubmit="userSignup()" novalidate>
+        <form  onsubmit="userSignup()" novalidate>
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="col" style=" text-align: center;"><h3>회원가입</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             
@@ -212,8 +220,8 @@
             
                 <div class="row align-items-center border-bottom border-secondary">
                     <div class="col-2">
-                        <label class="signup-label" for="uid">아이디</label>
-                       
+
+                        <label class="signup-label" for="userid">아이디</label>
                     </div>
                     <div class="col-10 border-left border-secondary">
                         <div class="row">

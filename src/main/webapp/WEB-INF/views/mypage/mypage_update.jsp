@@ -8,6 +8,13 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<script>
+	$(function () {
+	    var token = $("input[name='_csrf']").val();
+	    var header = "X-CSRF-TOKEN";
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
 		const updatepage = () => {
 			event.preventDefault();
 			const uzipcode = $("#uzipcode").val();
@@ -35,11 +42,24 @@
 					});
 			}
 		}
+		
+		const logout = () => {
+			$.ajax({
+				url : "<%=application.getContextPath()%>/auth/deleteuser",
+				method : "post"
+			}).then( data => {
+				if(data.result == "success"){
+					window.location.href = "<%=application.getContextPath()%>/";
+				}
+			});
+		}
 
 	
 	</script>
     <div class="container-xl" style="margin-top: 18em;" >
+    	<div>
          <form onsubmit="updatepage()" method="post"> 
+         	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="col" style=" text-align: center;"><h3>회원정보수정</h3></div>
             <div class="col mb-3" style=" text-align: start;"><h3>기본정보</h3></div>
             <div class="container-xl mb-5 border border-secondary"><!-- 전체 영역-->
@@ -67,7 +87,7 @@
                     <div class="col-10 border-left border-secondary">
                         <div class="row">
                             <div class="col-4">
-                              	  <a href="<%=application.getContextPath()%>/auth/pwupdate" class="btn btn-primary btn-md  ">비밀번호 변경</a>
+                              	  <a href="<%=application.getContextPath()%>/auth/upwupdate" class="btn btn-primary btn-md  ">비밀번호 변경</a>
                            		
                             </div>
                         </div>
@@ -148,15 +168,15 @@
                         </div>
                     </div>
                 </div>
-
-          
             </div>
-          
-            <div class="col text-center mt-5">
-                <button type="submit" class="btn btn-lg btn-dark">수정완료</button>
-                <a href="<%=application.getContextPath()%>/mypage/mypage" class="btn btn-lg btn-outline-dark">취소</a>
-                <a href="<%=application.getContextPath()%>/auth/deleteuser" class="btn btn-sm btn-outline-dark" style="float:right">회원탈퇴</a>
-            </div>
+	          	<div class="col text-center mt-5">
+	               		 <button type="submit" class="btn btn-lg btn-dark">수정완료</button>
+	               		 <a href="<%=application.getContextPath()%>/mypage/mypage" class="btn btn-lg btn-outline-dark">취소</a>   
+	               		 <a  onclick ="logout()"class="btn btn-lg btn-outline-danger" style="float:right">회원탈퇴</a>         		
+	           	</div>
+           		
        	  </form> 
+       	  	 
+       	 </div>
     </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

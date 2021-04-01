@@ -3,6 +3,14 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
+
+		$(function () {
+		    var token = $("input[name='_csrf']").val();
+		    var header = "X-CSRF-TOKEN";
+		    $(document).ajaxSend(function(e, xhr, options) {
+		        xhr.setRequestHeader(header, token);
+		    });
+		});
 	const findId = () => {
 		
 		const uname = $("#uname").val();
@@ -23,7 +31,8 @@
 				method: "post"
 			})
 			.then(data => {
-				console.log(data.result);
+				alert("당신의 아이디는 "+data.result+" 입니다.");
+				window.location.href = "login";
 			})
 		}
 		
@@ -34,7 +43,7 @@
   <div class="container-lg wrapper_content item_mt-18">
         <div class="row justify-content-center border"  >
             <div class="col-8">
-            
+            	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <!--제목 부분-->
                 <div class="text_center_sort item_mt-2"><h5>아이디 찾기</h3></div>
                     

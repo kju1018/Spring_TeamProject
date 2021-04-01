@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 
 <!DOCTYPE html>
@@ -21,6 +22,14 @@
 	function move_page(movelink) {
 		location.href = movelink;
 	}
+	
+	$(function () {
+	    var token = $("input[name='_csrf']").val();
+	    var header = "X-CSRF-TOKEN";
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
 </script>
 
 <script>
@@ -75,28 +84,38 @@
             <div class="col-3"> 
                 <div class="row align-items-end" style="padding-top: 0.6em;" >
                    
-	    			
-                <c:if test="${loginUid==null}">
-                    <div class="col" >
-                        <a href="<%=application.getContextPath()%>/auth/login" style="font-size: xx-small;text-decoration: none; color: black;">SignIn</a>
-                    </div>
-                    <div class="col"  >
-                        <a href="<%=application.getContextPath()%>/auth/signup" style="font-size: xx-small;text-decoration: none; color: black;">SignUp</a>
-                    </div>
-                </c:if>
-                <c:if test="${loginUid!=null}">
-               	   <div class="col" >
-                	 <a href="<%=application.getContextPath()%>/auth/logout" style="font-size: xx-small;text-decoration: none; color: black;">logout</a>               		
-                   </div>
-                </c:if>  
-            
-	    	
-                    <div class="col"  >
-                        <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black;">MyPage</a>
-                    </div>
-                    <div class="col" >
-                        <a href="<%=application.getContextPath()%>/mypage/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
-                    </div>
+					<sec:authorize access="isAnonymous()">
+				    		 <div class="col" >
+	                        	<a href="<%=application.getContextPath()%>/auth/login" style="font-size: xx-small;text-decoration: none; color: black;">SignIn</a>
+	                   		 </div>
+	                   		 <div class="col"  >
+	                   		     <a href="<%=application.getContextPath()%>/auth/signup" style="font-size: xx-small;text-decoration: none; color: black;">SignUp</a>
+	                   		 </div>
+	                   		 <div class="col">
+                       			 <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black; ">MyPage</a>
+                  		    </div>
+                   		    <div class="col" >
+                    		     <a href="<%=application.getContextPath()%>/mypage/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
+                   		    </div>
+				    	</sec:authorize>
+				    	<sec:authorize access="isAuthenticated()">
+				    		
+				    		<form method="post" class="d-inline-block"
+				    			  action="<%=application.getContextPath()%>/logout">
+				    			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				    			  
+				    			 <div class="col">
+				    				 <span class="text-secondary mr-4">User: <sec:authentication property="name"/></span>
+                					 <button class="btn btn-outline-secondary btn-sm" type="submit" style="font-size: xx-small;text-decoration: none; color: black;">logout</button>               		
+                 			     </div>
+				    		</form>
+				    		<div class="col-2 pb-1">
+                       			 <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black; ">MyPage</a>
+                  		    </div>
+                   		    <div class="col-2 pb-1" >
+                    		     <a href="<%=application.getContextPath()%>/mypage/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
+                   		    </div>
+				    	</sec:authorize>
                 </div>
             </div>
         </div>
