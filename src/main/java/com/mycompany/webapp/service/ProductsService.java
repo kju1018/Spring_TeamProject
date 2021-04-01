@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.webapp.controller.ProductsController;
 import com.mycompany.webapp.dao.ProductsDao;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
 
 @Service
@@ -21,6 +21,16 @@ public class ProductsService {
 		return list;
 	}	
 	
+	public List<Products> pSelectAll(Pager pager){
+		List<Products> list = productsDao.pSelectByPage(pager);
+		return list;
+	}	
+	
+	public int getTotalRows(int pcategory) {
+		int rows = productsDao.count(pcategory);
+		return rows;
+	}
+	
 	public void pInsert(Products products) {
 		productsDao.pInsert(products);
 	};
@@ -29,7 +39,6 @@ public class ProductsService {
 		productsDao.pUpdate(products);
 	};
 
-	
 	public Products pSelectByPno(int productno){ 
 		Products products = productsDao.pSelectByPno(productno); 
 		return products; 
