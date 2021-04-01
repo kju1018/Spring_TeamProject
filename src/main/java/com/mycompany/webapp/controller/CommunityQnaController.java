@@ -82,7 +82,7 @@ public class CommunityQnaController {
 	}
 	
 	@GetMapping("/search")
-	public String Search(String pageNo, Model model, HttpSession session, String keyword) {
+	public String Search(Model model, String keyword) {
 		
 		List<CommunityQna> list = communityQnasService.getSearchList(keyword);
 		model.addAttribute("list", list);

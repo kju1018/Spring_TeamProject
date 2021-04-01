@@ -8,7 +8,6 @@
    // 생략	
 
 	$(document).on('click', '#btnSearch', function(e){
-		alert("검색");
 		e.preventDefault();
 
 		var url = "${pageContext.request.contextPath}/community/search";

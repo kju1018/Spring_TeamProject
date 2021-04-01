@@ -23,7 +23,7 @@
 		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
 		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
 		<input type='button' value="게시물관리" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/post_list'">
-		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
+		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/cart/cartlist'">
 	</div>
 	
 	<!-- 게시물 종류 선택 -->
@@ -156,22 +156,23 @@
 		<thead>
 			<tr>
 				<th width="10%">번호</th>
-				<th  width="50%">제목</th>
+				<th width="25%">상품사진</th>
+				<th width="25%">제목</th>
 				<th width="15%">작성자</th>
 				<th width="15%">작성일</th>
 				<th width="10%">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="post_list" items="${list}">
-		      <tr>
-		         <td>${post_list.boardno}</td>
-		         <td><a href="<%=application.getContextPath()%>/community/qna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
-		         <td>${post_list.userid}</td>
-		         <td><fmt:formatDate value="${post_list.bdate}" pattern="yyyy-MM-dd"/></td>
-		         <td>${post_list.bcount}</td>
-		      </tr>
-		   </c:forEach>
+	      <tr>
+	        	<td>3</td>
+                   <td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png" style="width:30%"> 조명2</td>
+                   <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">상품후기 테스트</a></td>
+                   <td>user1</td>
+                   <td>2021-03-10</td>
+                   <td>3</td>
+	      </tr>
+
 		   
 		   <tr>
 		   	<td colspan="5" class="text-center">
