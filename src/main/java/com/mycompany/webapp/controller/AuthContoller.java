@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,39 +33,7 @@ public class AuthContoller {
 		return "auth/findid";
 	}
 	
-	@PostMapping(value="/updatepw",produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public String updatepw(HttpSession session, String upassword) {
-		
-		String userid = "";
-		String status = "";
-		if(session.getAttribute("findUserid") != null) {
-			logger.info(session.getAttribute("findUserid").toString());
-			 userid = session.getAttribute("findUserid").toString();
-			 status = "findUserid";
-		}
-		
-		if(session.getAttribute("loginUid") != null) {
-			logger.info(session.getAttribute("loginUid").toString());
-			 userid = session.getAttribute("loginUid").toString();
-			 status = "loginUid";
-		}
-		
-		
-		int result = usersService.updateuser(userid, upassword);
-		JSONObject jsonObject = new JSONObject();
-		
-		logger.info(status);
-		if(result == 1) {
-			logger.info("success" + userid);
-			jsonObject.put("updateresult", status.toString());
-			return jsonObject.toString();
-		}else {
-			jsonObject.put("updateresult", "updatefail");
-			session.removeAttribute("findUserid");
-			return jsonObject.toString();
-		}
-	}
+	
 	
 	@PostMapping(value="/findIdProcess", produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -82,31 +50,13 @@ public class AuthContoller {
 	
 	//로그인 폼으로 이동
 	@GetMapping("/login")
-	public String login() {	
-		return "auth/login";
+	public String login(Authentication auth) {
+	
+			return "auth/login";
+	
 	}
 	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		//session.invalidate();
-		session.removeAttribute("loginUid");
-		return "redirect:/";
-	}
-	
-	//로그인 과정 처리
-	@PostMapping("/loginprocess")
-	public String loginprocess(User user, HttpSession session) {
-		String result = usersService.duplicateId(user);
-		if(result.equals("success")) {
-			session.removeAttribute("loginerror");
-			session.setAttribute("loginUid", user.getUserid());
-			
-			return "redirect:/";			
-		}else {
-			session.setAttribute("loginerror", result);
-			return "redirect:/auth/login";
-		}
-	}
+
 	// 비밀번호 찾기 폼으로 이동
 	@GetMapping("/find_pw")
 	public String findpw(HttpSession session) {
@@ -117,18 +67,61 @@ public class AuthContoller {
 		return "auth/findpw";
 	}
 	
+	//findpw -> pwudpate 넘어갈떄
 	@GetMapping("/pwupdate")
-	public String pwupdate(HttpSession session) {
-		if(session.getAttribute("findUserid") != null || session.getAttribute("loginUid")!=null) {
+	public String pwupdate(HttpSession session ) {
+		if(session.getAttribute("findUserid")!=null) {
 			return "auth/pwupdate";
-		}else if(session.getAttribute("findUserid") == null) {
+		}{
 			return "redirect:/auth/find_pw";
-		}else {
-			return "redirect:/mypage/mypage";
 		}
-		
+	}
+	// 로그인 유저가 들어가는 updatepw form 이동
+	@GetMapping("/upwupdate")
+	public String upwupdate() {
+
+			return "auth/pwupdate";
 	}
 	
+
+	/// 비밀번호 업데이트 (로그인 유저 or 비밀번호 찾기를 통해 들어온 회원)
+	@PostMapping(value="/updatepw",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String updatepw(HttpSession session, String upassword, Authentication auth) {
+		
+		String userid = "";
+		String status = "";
+		
+		
+		try {
+			 userid = auth.getName();
+			 status = "loginUid";
+			
+		}catch (Exception e) {
+			if(session.getAttribute("findUserid") != null) {
+				
+				 userid = session.getAttribute("findUserid").toString();
+				 status = "findUserid";
+			}
+		}
+		
+		
+		
+		
+		int result = usersService.updateuser(userid, upassword);
+		JSONObject jsonObject = new JSONObject();
+		logger.info(userid);
+		logger.info(status);
+		if(result == 1) {
+			logger.info("success" + userid);
+			jsonObject.put("updateresult", status.toString());
+			return jsonObject.toString();
+		}else {
+			jsonObject.put("updateresult", "updatefail");
+			session.removeAttribute("findUserid");
+			return jsonObject.toString();
+		}
+	}
 	
 	@PostMapping(value="/findpwProcess", produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -177,15 +170,19 @@ public class AuthContoller {
 		return jsonObject.toString();
 	}
 	
-	@GetMapping(value="/deleteuser", produces="application/json;charset=UTF-8")
-	public String deleteuser(HttpSession session) {
-		String userid = session.getAttribute("loginUid").toString();
+	@PostMapping(value="/deleteuser", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteuser(Authentication auth) {
+		String userid = auth.getName();
+		logger.info(userid);
 		String result = usersService.deleteuser(userid);
+		JSONObject jsonObject = new JSONObject();
 		if(result.equals("success")) {
-			session.removeAttribute("loginUid");
-			return "redirect:/";
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
 		}else {
-			return  "redirect:/mypage/mypage";
+			jsonObject.put("result", "fail");
+			return jsonObject.toString();
 		}
 	}
 	
