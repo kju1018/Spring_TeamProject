@@ -1,5 +1,6 @@
 package com.mycompany.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,86 +12,92 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Order;
-import com.mycompany.webapp.dto.OrderProduct;
+import com.mycompany.webapp.service.CartsService;
 import com.mycompany.webapp.service.OrderProductsService;
 import com.mycompany.webapp.service.OrdersService;
 
 @Controller
 @RequestMapping("/order")
 public class OrdersController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(OrdersController.class);
-	
+
 	@Autowired
 	private OrdersService ordersService;
-	
+
+	@Autowired
+	private CartsService cartsService;
+
 	@Autowired
 	private OrderProductsService orderProductService;
-	
-	//주문서를 가져오는 부분
-	@GetMapping("/order_form")
-	public String createOrderForm() {
-		//cartlist 필요할듯
+
+	// 주문서를 가져오는 부분
+	@PostMapping("/order_form")
+	public String createOrderForm(String[] cart_box, Model model) {
+		List<Cart> cartList = new ArrayList<Cart>();
+		for(String productno : cart_box)
+			logger.info(productno);
 		return "order/orderForm";
 	}
-	
-	//주문서에서 form을 다 작성하고 결제 완료버튼을 누르면 처리하는곳 (Order 생성)
+
+	/*	@GetMapping("/test")
+		public String test(int productno, RedirectAttributes redirect) {
+			
+			Cart cart = cartsService.getCartByProductno(productno);
+			
+			redirect.addFlashAttribute("cart", cart);
+			return "redirect:order_form";
+		}*/
+
+	// 주문서에서 form을 다 작성하고 결제 완료버튼을 누르면 처리하는곳 (Order 생성)
 //	public String createForm(Order order, HttpSession session) {
 	@PostMapping("/create_order")
-	public String createOrder(Order order) {//카트리스트
-		//결재가 다 완료된다면(나중에 생각)
-		//아마 여기서 orderproducts도 만들어야할듯
+	public String createOrder(Order order) {// 카트리스트
+		// 결재가 다 완료된다면(나중에 생각)
+		// 아마 여기서 orderproducts도 만들어야할듯
 //		String uid = (String) session.getAttribute("loginUid");
 		String userId = "user1";
 		if (userId != null) {
-			order.setUserid(userId);//일단 임의로 지정
+			order.setUserid(userId);// 일단 임의로 지정
 			order.setOstatus("입금 대기중");
 			order.setOnumber(order.getOnumber().replace(",", "-"));
 		} else {
-			//주문 취소 등
+			// 주문 취소 등
 		}
 		ordersService.createOrder(order);
 		logger.info(order.toString());
-		
+
 		return "redirect:/order/order_complete";
 	}
-	
+
 	@GetMapping("/order_complete")
 	public String orderComplete(Model model) {
-		//1. orderNo을 통해 select로 방금 주문한 Order를 완료창에서 보여줌(session이용?)
-		int orderNo = 1;//가져오는방법 생각해보기
-		Order order = ordersService.getOrder(orderNo);//방금 주문한(생성한) Order
+		// 1. orderNo을 통해 select로 방금 주문한 Order를 완료창에서 보여줌(session이용?)
+		int orderNo = 1;// 가져오는방법 생각해보기
+		Order order = ordersService.getOrder(orderNo);// 방금 주문한(생성한) Order
 		model.addAttribute("order", order);
-		//2. createOrder에서 만든 Order를 여기로 보내줌 (물어보기)
-		
+		// 2. createOrder에서 만든 Order를 여기로 보내줌 (물어보기)
+
 		return "order/payment_c";
 	}
-	
-	
-	
-	
-	@GetMapping("/test")
-	public String testMethod() {
-		
-		/*OrderProduct orderProduct = new OrderProduct();
-			orderProduct.setOrderno(22);
-			orderProduct.setProductno(2);
-			orderProduct.setOquantity(5);
+
+	/*	
+		@GetMapping("/test")
+		public String testMethod() {
 			
-			orderProductService.createOrderProduct(orderProduct);*/
-		
-		List<OrderProduct> orderProduct = orderProductService.getOrderProducts("user1");
-		
-		logger.info(orderProduct.toString());
-		return "redirect:/order/order_form";
-	}
-	
+			OrderProduct orderProduct = new OrderProduct();
+				orderProduct.setOrderno(22);
+				orderProduct.setProductno(2);
+				orderProduct.setOquantity(5);
+				
+				orderProductService.createOrderProduct(orderProduct);
+			
+			List<OrderProduct> orderProduct = orderProductService.getOrderProducts("user1");
+			
+			logger.info(orderProduct.toString());
+			return "redirect:/order/order_form";
+		}*/
+
 }
-
-
-
-
-
-
-

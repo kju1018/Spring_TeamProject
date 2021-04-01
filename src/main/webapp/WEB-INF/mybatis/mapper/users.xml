@@ -8,88 +8,62 @@
   	
 	<!-- 愿�由ъ�� ���μ���� ������ 議고������ -->
 	<select id="selectAll" resultType="user">
-		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UEXIT, UJOINDATE, UAUTHORITY
+		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UENABLED, UJOINDATE, UAUTHORITY
 		from users
 		order by USERID desc
 	</select>
 	<!-- 愿�由ъ��媛� ������ 寃����� �� -->
 	<select id="selectbyUserid" parameterType="string" resultType="user">
-  		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UEXIT, UJOINDATE, UAUTHORITY
+  		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UENABLED, UJOINDATE, UAUTHORITY
   	    from users
   	    where USERID = #{userid} 
   	</select>
 	
 	<select id="selectbyUemail" parameterType="string" resultType="user">
-  		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UEXIT, UJOINDATE, UAUTHORITY
+  		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UENABLED, UJOINDATE, UAUTHORITY
   	    from users
   	    where UEMAIL = #{uemail} 
   	</select>
   	
+  	<select id="selectbyemailandname" parameterType="string" resultType="user"> 
+  		select USERID
+  	    from users
+  	    where UEMAIL = #{uemail} and UNAME = #{uname}
+  	</select>
+
+	<select id="duplicateMaNald" parameterType="string" resultType="user"> 
+  		select USERID
+  	    from users
+  	    where UEMAIL = #{uemail} and UNAME = #{uname} and USERID=#{userid}
+  	</select>
 	<!-- ����媛��� (���� 異�媛�) -->
 	<insert id="userInsert" parameterType="user">
 		insert into users 
-		(userid, upassword, uname, uzipcode, uaddress, uemail, utel, ubirth, uexit, ujoindate, uauthority)
+		(userid, upassword, uname, uzipcode, uaddress, uemail, utel, ubirth, uenabled, ujoindate, uauthority)
 		values
-		(#{userid},#{upassword},#{uname},#{uzipcode},#{uaddress},#{uemail},#{utel},#{ubirth},#{uexit},#{ujoindate},#{uauthority})
+		(#{userid},#{upassword},#{uname},#{uzipcode},#{uaddress},#{uemail},#{utel},#{ubirth},#{uenabled},#{ujoindate},#{uauthority})
 	</insert>
 	<!-- �������댄������ uexit ���곗�댄�� -->
 	<update id="userStatusUpdate" parameterType="string">
 		update users set
-		UEXIT=#{uexit}
+		UENABLED=0
+		where USERID=#{userid}
+	</update>
+	
+	<update id="userpwUpdate" parameterType="string">
+		update users set
+		UPASSWORD=#{upassword}
 		where USERID=#{userid}
 	</update>
 	
 	<!-- ������蹂� ���� ���� �� -->
 	<update id="userUpdate" parameterType="user" >
-		<!-- 鍮�諛�踰��몃� �������� �� -->
-		<if test="uaddress == null and utel == null">
 			update users set
-			UPASSWORD=#{upassword}
-			where USERID=#{userid}
-		</if>
-		
-		<!-- 二쇱��留� �������� �� -->
-		<if test="upassword == null and utel == null">
-			update users set
-			UADDRESS=#{uaddress}
-			where USERID=#{userid}
-		</if>
-		<!-- ����踰��몃� �������� �� -->
-		<if test="uaddress == null and upassword == null">
-			update users set
+			UZIPCODE=${uzipcode},
+			UADDRESS=#{uaddress},
 			UTEL=#{utel}
 			where USERID=#{userid}
-		</if>
-		<!-- 鍮�諛�踰���, 二쇱�� �������� �� -->
-		<if test="utel == null">
-			update users set
-			UPASSWORD=#{upassword}
-			UADDRESS=#{uaddress}
-			where USERID=#{userid}
-		</if>
-		<!-- 鍮�諛�踰���, ���� �������� �� -->
-		<if test="uaddress == null">
-			update users set
-			UPASSWORD=#{upassword}
-			UTEL=#{utel}
-			where USERID=#{userid}
-		</if>
-		<!-- 二쇱��, ���� �������� �� -->
-		<if test="upassword == null">
-			update users set
-			UADDRESS=#{uaddress}
-			UTEL=#{utel}
-			where USERID=#{userid}
-		</if>
-		<!-- 紐⑤�� �������� �� -->
-		<if test="uaddress != null and utel != null and upassword != null">
-			update users set
-			UPASSWORD=#{upassword}
-			UADDRESS=#{uaddress}
-			UTEL=#{utel}
-			where USERID=#{userid}
-		</if>
-		
+
 	</update>
 
 </mapper>

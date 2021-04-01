@@ -5,7 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.UsersDao;
@@ -22,30 +22,109 @@ public class UsersService {
 	/// 회원가입 시 회원추가
 	public void join(User user) {
 	
+
 		user.setUjoindate(new Date());
-		user.setUexit(0);
-		user.setUauthority(0);
+		user.setUenabled(0);
+		user.setUauthority("ROLE_USER");
 		
 		usersDao.userInsert(user);
 	}
 	/// 아이디가 존재하는지 아닌지 여부를 확인하기 위한 절차
-	public String duplicateId(User user) {
-		User dbUser=usersDao.selectbyUserid(user.getUserid());
-		logger.info(user.getUserid());
+	public String duplicateId(String userid) {
+		User dbUser=usersDao.selectbyUserid(userid);
+		
 		 if(dbUser != null) {
 			 return "wrongUid";
 		 }		 
 		 return "success";
 	}
 	
-	public String loginProcess(User user) {
-		User dbUser=usersDao.selectbyUserid(user.getUserid());
-		 if(!user.getUpassword().equals(dbUser.getUpassword()) || dbUser == null) {
-				 return "fail";
-		}
-		 
+	public String duplicateId(User user) {
+		User dbUser=usersDao.selectbyUserid(user);
+		logger.info(dbUser.getUserid());
+		int uenabled = dbUser.getUenabled(); 
+		 if(dbUser == null || uenabled == 0 ) {
+			 return "wrongUid";
+		 }else {
+//			 BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+//			 boolean result = bpe.matches(user.getUpassword(),dbUser.getUpassword());
+			 
+			 if(user.equals(dbUser.getUpassword())) {
+				 return "wrongUpassword";
+			 }
+		 }
 		 return "success";
 	}
+	
+	public String duplicateEmail(String useremail) {
+		User dbUser = usersDao.selectbyUemail(useremail);
+		logger.info(useremail);
+		if(dbUser != null) {
+			return "existemail";
+		}
+		
+		return "success";
+	}
+	
+	public String finduser(String uemail, String uname) {
+		
+		User dbUser = usersDao.selectbyemailandname(uemail,uname);
+		if(dbUser != null) {
+			logger.info(dbUser.getUserid());
+			return dbUser.getUserid();
+		}else {
+			logger.info("fail");
+			return "fail";
+		}
+	}
+	
+	public String finduser(String uemail, String uname, String userid ) {
+		User dbUser = usersDao.duplicateMaNald(uemail, uname, userid);
+		if(dbUser == null) {
+			return "fail";
+		}else {
+			return "success";
+		}
+	}
+	
+	public User finduser(String userid) {
+		User dbUser = usersDao.selectbyUserid(userid);
+		if(dbUser == null) {
+			logger.info("null");
+			return null;
+		}else {
+			logger.info("dbuser");
+			return dbUser;
+		}
+	}
+	
+	public int updateuser(String userid, String userpassword) {
+		int result = usersDao.userpwUpdate(userid, userpassword);
+		
+		return result;
+	}
+	
+	public String updateInfo(User user) {
+		int result = usersDao.userUpdate(user);
+		logger.info(String.valueOf(result));
+		if(result == 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	public String deleteuser(String userid) {
+		int result = usersDao.userStatusUpdate(userid);
+		if(result == 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
 
 
 }

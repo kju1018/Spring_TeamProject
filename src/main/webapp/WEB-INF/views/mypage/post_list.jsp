@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -41,22 +41,52 @@
 		<thead>
 			<tr>
 				<th width="10%">번호</th>
-				<th  width="60%">제목</th>
+				<th  width="50%">제목</th>
 				<th width="15%">작성자</th>
 				<th width="15%">작성일</th>
+				<th width="10%">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="notice" items="${list}">
+			<c:forEach var="post_list" items="${list}">
 		      <tr>
-		         <td>${notice.boardno}</td>
-		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
-		         <td>${notice.bcontent}</td>
-		         <td>${notice.userid}</td>
-		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
-		         <td>${notice.bcount}</td>
+		         <td>${post_list.boardno}</td>
+		         <td><a href="<%=application.getContextPath()%>/community/qna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
+		         <td>${post_list.userid}</td>
+		         <td><fmt:formatDate value="${post_list.bdate}" pattern="yyyy-MM-dd"/></td>
+		         <td>${post_list.bcount}</td>
 		      </tr>
 		   </c:forEach>
+		   
+		   <tr>
+		   	<td colspan="5" class="text-center">
+		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="post_list?pageNo=1">처음</a>
+		   		
+		   		<c:if test="${pageruser.groupNo>1}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="post_list?pageNo=${pageruser.startPageNo-1}">이전</a>
+			   	</c:if>
+		   		
+		   		<c:forEach var="i" begin="${pageruser.startPageNo}" end="${pageruser.endPageNo}">
+		   			<c:if test="${pageruser.pageNo!=i}">
+		   				<a class="btn btn-outline-success btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   			<c:if test="${pageruser.pageNo==i}">
+		   				<a class="btn btn-danger btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   		</c:forEach>
+		   		
+		   		<c:if test="${pageruser.groupNo<pager.totalGroupNo}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="post_list?pageNo=${pageruser.endPageNo+1}">다음</a>
+			   	</c:if>
+			   	
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="post_list?pageNo=${pageruser.totalPageNo}">맨끝</a>
+		   	</td>
+		   </tr>
 		</tbody>
 	</table>
 	<!--게시판-->
@@ -64,15 +94,6 @@
     
     <br/>
 
-	<!-- 페이지 -->
-	<ul class="pagenav">
-		<li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
-		<li class="page-item"><a href="#">PREV</a></li>
-		<li class="page-item"><a href="#">1</a></li>
-		<li class="page-item"><a href="#">NEXT</a></li>
-		<li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
-	</ul>
-	<!-- 페이지 -->
 	
 	<div class="c_bottom">
 		<input type="button" class="btn btn-dark" value="메인화면으로" onclick="location.href ='<%=application.getContextPath()%>'">

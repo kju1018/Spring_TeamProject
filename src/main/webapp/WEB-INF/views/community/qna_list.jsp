@@ -3,6 +3,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+
+   // 생략	
+
+	$(document).on('click', '#btnSearch', function(e){
+		alert("검색");
+		e.preventDefault();
+
+		var url = "${pageContext.request.contextPath}/community/qna_list";
+
+		url = url + "?searchType=" + $('#searchType').val();
+
+		url = url + "&keyword=" + $('#keyword').val();
+
+		location.href = url;
+
+		console.log(url);
+
+	});	
+
+</script>
+
 
 <!-- 전체 컨텐츠 영역 -->
 <div class="container" style="margin-top: 12em;">
@@ -23,8 +45,8 @@
 	<div class="select_nav">
 		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
 		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
-	</div>            
-
+	</div>   
+	       
     <div style="text-align: right; margin-bottom: 4px;">
         <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_write'"> 
     </div>
@@ -50,19 +72,73 @@
 		         <td>${communityqna.bcount}</td>
 		      </tr>
 		   </c:forEach>
+		   
+		   
+		   <tr>
+		   	<td colspan="5" class="text-center">
+		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="qna_list?pageNo=1">처음</a>
+		   		
+		   		<c:if test="${pager.groupNo>1}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="qna_list?pageNo=${pager.startPageNo-1}">이전</a>
+			   	</c:if>
+		   		
+		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+		   			<c:if test="${pager.pageNo!=i}">
+		   				<a class="btn btn-outline-success btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   			<c:if test="${pager.pageNo==i}">
+		   				<a class="btn btn-danger btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   		</c:forEach>
+		   		
+		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="qna_list?pageNo=${pager.endPageNo+1}">다음</a>
+			   	</c:if>
+			   	
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
+		   	</td>
+		   </tr>
             </tbody>
     </table>
-	<!--게시판-->
+	
+	<!-- search{s} -->
 
-    <!-- 페이지 -->
-    <ul class="pagenav">
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
-        <li class="page-item"><a href="#">PREV</a></li>
-        <li class="page-item"><a href="#">1</a></li>
-        <li class="page-item"><a href="#">NEXT</a></li>
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
-    </ul>
-    
+		<div class="form-group row justify-content-center">
+
+			<div class="w100" style="padding-right:10px">
+
+				<select class="form-control form-control-sm" name="searchType" id="searchType">
+
+					<option value="btitle">제목</option>
+
+					<option value="bcontent">본문</option>  
+
+					<option value="userid">작성자</option>
+
+				</select>
+
+			</div>
+
+			<div class="w300" style="padding-right:10px">
+
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+
+			</div>
+
+			<div>
+
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+
+			</div>
+
+		</div>
+
+		<!-- search{e} -->
 
 </div>
 <!--전체 컨텐츠 영역--> 
