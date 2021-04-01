@@ -1,5 +1,7 @@
 package com.mycompany.webapp.dto;
 
+import java.util.List;
+
 public class Pager {
 	private int totalRows;		//전체 행수
 	private int totalPageNo;	//전체 페이지 수
@@ -25,6 +27,7 @@ public class Pager {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	private List<Products> products;
 
 	public int getPcategory() {
 		return pcategory;
@@ -93,6 +96,32 @@ public class Pager {
 		this.totalRows = totalRows;
 		this.pageNo = pageNo;
 		this.pcategory = pcategory;
+		
+		totalPageNo = totalRows / rowsPerPage;
+		if(totalRows % rowsPerPage != 0) totalPageNo++;
+		
+		totalGroupNo = totalPageNo / pagesPerGroup;
+		if(totalPageNo % pagesPerGroup != 0) totalGroupNo++;
+		
+		groupNo = (pageNo - 1) / pagesPerGroup + 1;
+		
+		startPageNo = (groupNo-1) * pagesPerGroup + 1;
+		
+		endPageNo = startPageNo + pagesPerGroup - 1;
+		if(groupNo == totalGroupNo) endPageNo = totalPageNo;
+		
+		startRowNo = (pageNo - 1) * rowsPerPage + 1;
+		startRowIndex = startRowNo - 1;
+		endRowNo = pageNo * rowsPerPage;
+		endRowIndex = endRowNo - 1; 
+	}
+	
+	public Pager(int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo, List<Products> products) {
+		this.rowsPerPage = rowsPerPage;
+		this.pagesPerGroup = pagesPerGroup;
+		this.totalRows = totalRows;
+		this.pageNo = pageNo;
+		this.products = products;
 		
 		totalPageNo = totalRows / rowsPerPage;
 		if(totalRows % rowsPerPage != 0) totalPageNo++;
@@ -224,6 +253,15 @@ public class Pager {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	
+	public List<Products> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Products> products) {
+		this.products = products;
+	}
+
 }
 
 
