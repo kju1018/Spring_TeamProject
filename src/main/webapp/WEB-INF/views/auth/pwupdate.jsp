@@ -3,6 +3,14 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
+
+	$(function () {
+	    var token = $("input[name='_csrf']").val();
+	    var header = "X-CSRF-TOKEN";
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	});
 	const updatepw = () => {
 		
 		const upassword = $("#upassword").val();
@@ -38,7 +46,8 @@
 				
 				if(data.updateresult == "update"){
 					window.location.href = "login";
-				}else if(data.updateresult == "loginUid"){
+				}else if(data.updateresult == "findUserid" || data.updateresult == "loginUid"){
+					alert("변경에 성공했습니다.");
 					window.location.href="<%=application.getContextPath()%>/mypage/mypage";
 				} 
 				else{
@@ -58,7 +67,7 @@
             
                 <!--제목 부분-->
                 <div class="text_center_sort item_mt-2"><h5>비밀번호 변경</h3></div>
-                    
+                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="row item_mt-2 justify-content-center">
                     <!--label : 이름-->
                     <div class="col-3 align-self-end ">

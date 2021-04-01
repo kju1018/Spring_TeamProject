@@ -85,13 +85,13 @@ public class NoticeController {
 		return "community/notice_update";
 	}
 	
-	@PostMapping("/update1")
+	@PostMapping("/updatenoti")
 	public String noticeUpdate(Notice notice) {
 		noticesService.updateBoard(notice);
-		return "redirect:/community/notice_view";
+		return "redirect:/community/notice_view?boardno="+notice.getBoardno();
 	}
 	
-	@GetMapping("/delete1")
+	@GetMapping("/deletenoti")
 	public String notieDelete(int boardno) {
 		noticesService.deleteBoard(boardno);
 		return "redirect:/community/notice_list";

@@ -19,7 +19,15 @@ public class Pager {
 	private int pcategory;
 	private String userid;
 	private List<Products> products;
+	private String keyword;
+	
+	public String getKeyword() {
+		return keyword;
+	}
 
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 
 	public int getPcategory() {

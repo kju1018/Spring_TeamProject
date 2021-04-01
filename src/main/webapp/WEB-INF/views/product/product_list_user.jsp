@@ -40,10 +40,10 @@
 		<%-- <c:forEach var="" items="">
 		</c:forEach>
      --%>    <ul class="filterDiv">
-            <li class="filterItem" id="newitem" onclick="newitem()">신상품</li>
+            <a class="filterItem" id="newitem" href="<%=application.getContextPath()%>/product/product_list_user_new?pcategory=${pcategory}&pcategoryname=${pcategoryname}">신상품</a>
             <li class="filterItem" id="productname" onclick="productname()">상품명</li>
             <li class="filterItem" id="lowprice" onclick="lowprice()">낮은가격</li>
-            <li class="filterItem" id="highprice" onclick="highprice()">높은가격</li>
+            <a class="filterItem" id="newitem" href="<%=application.getContextPath()%>/product/product_list_user_high?pcategory=${pcategory}&pcategoryname=${pcategoryname}">높은가격</a>
             <li class="filterItem" id="like" onclick="like()">좋아요</li>
             
         </ul>
