@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +36,9 @@ public class MyPageController {
 	
 	// 마이페이지 수정 폼 이동
 	@GetMapping("/mypageupdate")
-	public String myPageUpdate(HttpSession session, Model model) {
-		if(session.getAttribute("loginUid") != null) {
-			User dbuser = usersService.finduser(session.getAttribute("loginUid").toString());
+	public String myPageUpdate(Authentication auth, Model model) {
+		if(auth.getName() != null) {
+			User dbuser = usersService.finduser(auth.getName());
 			if(dbuser != null) {
 				model.addAttribute("user",dbuser);
 				return "mypage/mypage_update";
@@ -53,14 +54,12 @@ public class MyPageController {
 	
 	@PostMapping(value="/updateprocess" ,produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String updateprocess(HttpSession session, User user) {
+	public String updateprocess(Authentication auth, User user) {
 		//회원정보 수정 처리
 		
-		String userid = session.getAttribute("loginUid").toString();
+		String userid = auth.getName();
 		user.setUserid(userid);
-		logger.info(user.getUzipcode());
-		logger.info(user.getUaddress());
-		logger.info(user.getUserid());
+		
 		String result = usersService.updateInfo(user);
 		
 		

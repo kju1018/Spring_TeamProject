@@ -5,7 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.UsersDao;
@@ -21,10 +21,14 @@ public class UsersService {
 	private UsersDao usersDao;
 	/// 회원가입 시 회원추가
 	public void join(User user) {
-	
+
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		user.setUpassword(bpe.encode(user.getUpassword()));
 
 		user.setUjoindate(new Date());
-		user.setUenabled(0);
+
+		user.setUenabled(1);
+
 		user.setUauthority("ROLE_USER");
 		
 		usersDao.userInsert(user);
@@ -46,10 +50,10 @@ public class UsersService {
 		 if(dbUser == null || uenabled == 0 ) {
 			 return "wrongUid";
 		 }else {
-//			 BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-//			 boolean result = bpe.matches(user.getUpassword(),dbUser.getUpassword());
+			 BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			 boolean result = bpe.matches(user.getUpassword(),dbUser.getUpassword());
 			 
-			 if(user.equals(dbUser.getUpassword())) {
+			 if(!result) {
 				 return "wrongUpassword";
 			 }
 		 }
@@ -99,7 +103,9 @@ public class UsersService {
 	}
 	
 	public int updateuser(String userid, String userpassword) {
-		int result = usersDao.userpwUpdate(userid, userpassword);
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		
+		int result = usersDao.userpwUpdate(userid, bpe.encode(userpassword));
 		
 		return result;
 	}
