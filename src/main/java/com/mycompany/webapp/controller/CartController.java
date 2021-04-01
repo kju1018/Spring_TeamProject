@@ -39,7 +39,7 @@ public class CartController {
 			cartsService.createCart(cart);
 			jsonObject.put("result", "success");
 		} else {
-			jsonObject.put("result", "fail");
+			jsonObject.put("result", "failure");
 		}
 		
 		return jsonObject.toString();
