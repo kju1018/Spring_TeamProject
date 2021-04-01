@@ -22,6 +22,11 @@ public class CartsService {
 		return list;
 	}
 	
+	public Cart getCart(Cart cart) {
+		Cart tempCart = cartsDao.select(cart);
+		return tempCart;
+	}
+	
 	//체크 표시된 카트 삭제
 	public void removeCartSelect(List<Cart> cartList) {
 		cartsDao.delete(cartList);
