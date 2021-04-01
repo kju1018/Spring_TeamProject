@@ -45,6 +45,7 @@
   
     <div class="n_v_bottom">
         <hr/>  
+         <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_update?boardno=${notice.boardno}'">          
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
     </div>
 
