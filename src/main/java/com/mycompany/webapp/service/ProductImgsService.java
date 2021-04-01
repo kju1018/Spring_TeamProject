@@ -31,4 +31,9 @@ public class ProductImgsService {
 		List<ProductImgs> productImgs = productImgsDao.pImgSelectByIno(productno);
 		return productImgs;
 	}
+	
+	public ProductImgs pImgSelectByIno_pri(int productno) {
+		ProductImgs productImgs = productImgsDao.pImgSelectByIno_pri(productno);
+		return productImgs;
+	}
 }

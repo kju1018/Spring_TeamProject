@@ -14,13 +14,23 @@ public class Pager {
 	private int startRowIndex;	//페이지의 시작 행 인덱스(0, ..., n-1) for mysql
 	private int endRowNo;		//페이지의 마지막 행 번호
 	private int endRowIndex;	//페이지의 마지막 행 인덱스
+	private int pcategory;
 
-	public Pager(int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo) {
+	public int getPcategory() {
+		return pcategory;
+	}
+
+	public void setPcategory(int pcategory) {
+		this.pcategory = pcategory;
+	}
+
+	public Pager(int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo, int pcategory) {
 		this.rowsPerPage = rowsPerPage;
 		this.pagesPerGroup = pagesPerGroup;
 		this.totalRows = totalRows;
 		this.pageNo = pageNo;
-
+		this.pcategory = pcategory;
+		
 		totalPageNo = totalRows / rowsPerPage;
 		if(totalRows % rowsPerPage != 0) totalPageNo++;
 		

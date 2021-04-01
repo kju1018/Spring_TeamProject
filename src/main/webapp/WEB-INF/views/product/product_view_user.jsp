@@ -52,11 +52,11 @@ const changeimg4 = (product_img) => {
 	    <div class="col-12" style="width:100%;" id="photo1" >
 		    
 		    <div id="photo2" style="float:left; width:35%; margin-left:14%;">	
-            <img src="<%=application.getContextPath()%>/resources/image/${ipriority.ioriginalname}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br> 							
-            <img onclick="changeimg1('${iprioritys[0].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${iprioritys[0].ioriginalname}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
-            <img onclick="changeimg2('${iprioritys[1].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${iprioritys[1].ioriginalname}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
-            <img onclick="changeimg3('${iprioritys[2].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${iprioritys[2].ioriginalname}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
-            <img onclick="changeimg4('${iprioritys[3].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${iprioritys[3].ioriginalname}" style="width:23.3%; height:100px;" name="detail_img5" id="detail_img5">
+            <img src="<%=application.getContextPath()%>/resources/image/${productimg_pri.ioriginalname}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br> 							
+            <img onclick="changeimg1('${productimg[0].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[0].ioriginalname}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
+            <img onclick="changeimg2('${productimg[1].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[1].ioriginalname}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
+            <img onclick="changeimg3('${productimg[2].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[2].ioriginalname}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
+            <img onclick="changeimg4('${productimg[3].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[3].ioriginalname}" style="width:23.3%; height:100px;" name="detail_img5" id="detail_img5">
 
         </div><!-- photo2 -->
             
