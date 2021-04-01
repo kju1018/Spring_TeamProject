@@ -95,26 +95,26 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/post_list")
-	public String postList(
-		String pageNo, Model model, HttpSession session, String userid) {
-			int intPageNo = 1;
-			if(pageNo == null) {
-			//세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager) session.getAttribute("pager");
-				if(pager != null) {
-					intPageNo = pager.getPageNo();
-				}
-			} else {
-				intPageNo = Integer.parseInt(pageNo);
-			}
-			
-			
-			int totalRows = communityqnasService.getTotalRow("user1");
-			Pager pager = new Pager(6, 5, totalRows, intPageNo, "user1");
-			session.setAttribute("pager", pager);
-			List<CommunityQna> list = communityqnasService.getBoardListById(pager);
-			model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
-			model.addAttribute("pager", pager);
-		return "mypage/post_list";
-	}
+	   public String postList(
+	      String pageNo, Model model, HttpSession session, String userid) {
+	         int intPageNo = 1;
+	         if(pageNo == null) {
+	         //세션에서 Pager를 찾고, 있으면 pageNo를 설정
+	         Pager pager = (Pager) session.getAttribute("pager");
+	            if(pager != null) {
+	               intPageNo = pager.getPageNo();
+	            }
+	         } else {
+	            intPageNo = Integer.parseInt(pageNo);
+	         }
+	         
+	         
+	         int totalRows = communityqnasService.getTotalRow("user2");
+	         Pager pager = new Pager(6, 5, totalRows, intPageNo, "user2");
+	         session.setAttribute("pager", pager);
+	         List<CommunityQna> list = communityqnasService.getBoardListById(pager);
+	         model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+	         model.addAttribute("pager", pager);
+	      return "mypage/post_list";
+	   }
 }
