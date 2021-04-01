@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.CommunityQnasDao;
 import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
+import com.mycompany.webapp.dto.PagerUser;
 
 @Service
 public class CommunityQnasService {
@@ -18,10 +19,10 @@ public class CommunityQnasService {
 	@Autowired
 	private CommunityQnasDao communityqnasDao;
 	
-	public List<CommunityQna> getBoardList() {
-		List<CommunityQna> list = communityqnasDao.selectAll();
-		return list;
-	}
+//	public List<CommunityQna> getBoardList() {
+//		List<CommunityQna> list = communityqnasDao.selectAll();
+//		return list;
+//	}
 	
 	public List<CommunityQna> getBoardList(Pager pager) {
 		List<CommunityQna> list = communityqnasDao.selectByPage(pager);
@@ -33,7 +34,13 @@ public class CommunityQnasService {
 		communityqnasDao.insert(communityqna);
 		logger.info("저장 후 bno:" + communityqna.getBoardno());
 	}
-
+	
+	public void saveRepl(CommunityQna communityqna) {
+		logger.info("저장전 bno:"+ communityqna.getBoardno());
+		communityqnasDao.insertRepl(communityqna);
+		logger.info("저장 후 bno:" + communityqna.getBoardno());
+	}
+	
 	public CommunityQna getBoard(int boardno) {
 		CommunityQna communityqna = communityqnasDao.selectByBoardno(boardno);
 		return communityqna;
@@ -56,8 +63,18 @@ public class CommunityQnasService {
 		return rows;
 	}
 	
-	public List<CommunityQna> getBoardListById(String userid){
-		List<CommunityQna> list = communityqnasDao.selectByUserid(userid);
+	public int getTotalRows(String userid) {
+		int rows = communityqnasDao.countuser(userid);
+		return rows;
+	}
+	
+	public List<CommunityQna> getBoardListById(PagerUser pageruser){
+		List<CommunityQna> list = communityqnasDao.selectByUserid(pageruser);
+		return list;
+	}
+	
+	public List<CommunityQna> getSearchList(String keyword) {
+		List<CommunityQna> list = communityqnasDao.getSearchList(keyword);
 		return list;
 	}
 }

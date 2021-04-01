@@ -30,14 +30,14 @@
       </selectKey>
       
          insert into notices
-         (boardno, btitle, bcontent, userid, bdate, bhitcount)
+         (boardno, btitle, bcontent, userid, bdate, bcount)
          values
          (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
    
    </insert>
    
    <select id="selectByBoardno" parameterType="int" resultType="notice">
-      select boardno, btitle, bcontent, userid, bdate, bhitcount
+      select boardno, btitle, bcontent, userid, bdate, bcount
       from notices
       where boardno=#{boardno}
    </select>

@@ -12,9 +12,9 @@ public class User {
 	String uemail;
 	String utel;
 	Date ubirth;
-	int uexit;
+	int uenabled;
 	Date ujoindate;
-	int uauthority;
+	String uauthority;
 	public String getUserid() {
 		return userid;
 	}
@@ -63,25 +63,26 @@ public class User {
 	public void setUbirth(Date ubirth) {
 		this.ubirth = ubirth;
 	}
-	public int getUexit() {
-		return uexit;
-	}
-	public void setUexit(int uexit) {
-		this.uexit = uexit;
-	}
+
 	public Date getUjoindate() {
 		return ujoindate;
 	}
 	public void setUjoindate(Date ujoindate) {
 		this.ujoindate = ujoindate;
 	}
-	public int getUauthority() {
+	public int getUenabled() {
+		return uenabled;
+	}
+	public void setUenabled(int uenabled) {
+		this.uenabled = uenabled;
+	}
+	public String getUauthority() {
 		return uauthority;
 	}
-	public void setUauthority(int uauthority) {
+	public void setUauthority(String uauthority) {
 		this.uauthority = uauthority;
 	}
-	
+
 
 	
 	

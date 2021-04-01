@@ -34,7 +34,7 @@
 	    <tr>
             <th style="width:10%">NO</th>
             <th style="width:50%">SUBJECT</th>
-            <th style="width:15%"></th>
+            <th style="width:15%">WRITER</th>
             <th style="width:15%">DATE</th>
             <th style="width:10%">READ</th>
 	    </tr>
@@ -43,25 +43,46 @@
 	     <c:forEach var="notice" items="${list}">
 		      <tr>
 		         <td>${notice.boardno}</td>
-		         <td><a href="notice?boardno=${notice.boardno}">${notice.btitle}</a></td>
-		         <td>${notice.bcontent}</td>
+		         <td><a href="notice_view?boardno=${notice.boardno}">${notice.btitle}</a></td>
 		         <td>${notice.userid}</td>
 		         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${notice.bcount}</td>
 		      </tr>
 		   </c:forEach>
+		   
+		   <tr>
+		   	<td colspan="5" class="text-center">
+		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="qna_list?pageNo=1">처음</a>
+		   		
+		   		<c:if test="${pager.groupNo>1}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="qna_list?pageNo=${pager.startPageNo-1}">이전</a>
+			   	</c:if>
+		   		
+		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+		   			<c:if test="${pager.pageNo!=i}">
+		   				<a class="btn btn-outline-success btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   			<c:if test="${pager.pageNo==i}">
+		   				<a class="btn btn-danger btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   			</c:if>
+		   		</c:forEach>
+		   		
+		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
+			   		<a class="btn btn-outline-primary btn-sm"
+			   		   href="qna_list?pageNo=${pager.endPageNo+1}">다음</a>
+			   	</c:if>
+			   	
+		   		<a class="btn btn-outline-primary btn-sm"
+		   		   href="qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
+		   	</td>
+		   </tr>
 	  </tbody>
 	</table>
 	<!--게시판-->
 	
-	<!-- 페이지 -->
-    <ul class="pagenav">
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
-        <li class="page-item">PREV</li>
-        <li class="page-item">1</li>
-        <li class="page-item">NEXT</li>
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
-    </ul>
 
 </div>
 <!--전체 컨텐츠 영역--> 

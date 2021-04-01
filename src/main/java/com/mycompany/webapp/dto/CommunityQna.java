@@ -9,8 +9,8 @@ public class CommunityQna {
 	private Date bdate;
 	private String bcontent;
 	private int bcount;
-	private int board_origin;
-	private int board_re;
+
+	
 	
 	public int getBoardno() {
 		return boardno;
@@ -49,16 +49,5 @@ public class CommunityQna {
 	public void setBcount(int bcount) {
 		this.bcount = bcount;
 	}
-	public int getBoard_origin() {
-		return board_origin;
-	}
-	public void setBoard_origin(int board_origin) {
-		this.board_origin = board_origin;
-	}
-	public int getBoard_re() {
-		return board_re;
-	}
-	public void setBoard_re(int board_re) {
-		this.board_re = board_re;
-	}
+	
 }
