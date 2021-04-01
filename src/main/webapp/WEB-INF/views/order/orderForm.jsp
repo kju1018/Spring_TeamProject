@@ -15,7 +15,7 @@
             <div>
                 <h5 class="border-bottom pb-2">주문상품</h5>
             </div>
-            <c:forEach var="productno" items="${list}" varStatus="status">
+            <c:forEach var="product" items="${list}" varStatus="status">
 	            <div class="row ml-0 mr-0 mt-3">
 	                <a href="#none">
 	                    <div>
@@ -23,9 +23,9 @@
 	                    </div>
 	                </a>
 	                <a href="#none" class="ml-3">
-	                    ${productno}
+	                    ${product.pname}
 	                    <p>수량: ${quantityArr[status.index]}</p>
-	                    <p>상품구매금액: ${cart.pprice}</p>
+	                    <p>상품구매금액: ${product.pprice*quantityArr[status.index]}</p>
 	                </a>
 	            </div>
 	        </c:forEach>
