@@ -13,4 +13,5 @@ public interface ProductImgsDao {
 	public int pImgUpdate(ProductImgs productimgs);
 	public int pImgDelete(int imgno);
 	public List<ProductImgs> pImgSelectByIno(int productno);
+	public ProductImgs pImgSelectByIno_pri(int productno);
 }

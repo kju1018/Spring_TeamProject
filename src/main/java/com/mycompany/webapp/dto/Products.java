@@ -18,6 +18,7 @@ public class Products {
 	private List<ProductImgs> imglist;
 	//이미지를 담을 리스트 
 	//컨트롤러에서 
+	
 	public int getProductno() {
 		return productno;
 	}

@@ -2,6 +2,8 @@ package com.mycompany.webapp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductImgs;
 import com.mycompany.webapp.dto.Products;
 import com.mycompany.webapp.service.ProductImgsService;
@@ -102,37 +105,44 @@ public class ProductsController {
 	
 	/*USER*======================================================/
 	/*상품 상세*/
-	@SuppressWarnings("null")
 	@GetMapping("/product_view_user")
 	public String product_view_user(Model model, int productno) {
 		Products productnum = productsService.pSelectByPno(productno);
 		List<ProductImgs> productimg = productImgsService.pImgSelectByIno(productno);
-		for(int i=0; i<productimg.size(); i++) {
-			logger.info(productimg.get(i).getIoriginalname());
-		}
-		
-//		List<ProductImgs> iprioritys = null;
-//		ProductImgs ipriority = null;
-//		for(int i=0; i<productimg.size(); i++) {
-//			if(productimg.get(i).getIpriority()==1) {
-//				logger.info("");
-//				ipriority = productimg.get(i);
-//			}else {
-//				iprioritys.add(productimg.get(i));
-//			}
-//		}
+		ProductImgs productimg_pri = productImgsService.pImgSelectByIno_pri(productno);	
 		model.addAttribute("productnum", productnum);
-//		model.addAttribute("ipriority", ipriority);	
-//		model.addAttribute("iprioritys", iprioritys);			
+		model.addAttribute("productimg", productimg);	
+		model.addAttribute("productimg_pri", productimg_pri);			
 		return "product/product_view_user";
 	}
 	
 	/*상품 리스트*/
 	@GetMapping("/product_list_user")
-	public String product_list_user(Model model) {
-		//model옆에 int categoryno / if categoryno = 1이면 인테리어조명 ... //
-		List<Products> list = productsService.pSelectAll();
-		model.addAttribute("list", list);	
+	public String product_list_user(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname) {
+		  int intPageNo = 1;
+		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
+			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
+			  Pager pager = (Pager) session.getAttribute("pager");
+			  if(pager != null) {
+				  intPageNo = pager.getPageNo();
+			  } 
+		  }else { //클라이언트에서 pageNo가 넘어왔을 경우
+			  intPageNo = Integer.parseInt(pageNo);
+		  }	  
+		  
+		  
+	      int totalRows = productsService.getTotalRows(pcategory);
+	      
+	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
+	      //logger.info(Integer.toString(pager.getTotalRows()));
+	      session.setAttribute("pager", pager);
+	      
+	      List<Products> list = productsService.pSelectAll(pager);
+	      logger.info(Integer.toString(list.size()));
+
+		model.addAttribute("list", list);
+		model.addAttribute("pcategory", pcategory);
+		model.addAttribute("pcategoryname", pcategoryname);
 		return "product/product_list_user";
 	}
 

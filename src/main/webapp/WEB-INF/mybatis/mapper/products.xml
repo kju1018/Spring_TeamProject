@@ -8,6 +8,21 @@
 	order by productno desc
 </select>
 
+<select id="pSelectByPage" parameterType="pager" resultType="products">
+	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	from(
+		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+			from (
+				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+				from products
+				where pcategory=#{pcategory}
+				order by productno desc
+			)
+		where rownum &lt;=#{endRowNo}
+	)
+	where rnum &gt;= #{startRowNo}
+</select>
+
 <insert id="pInsert" parameterType="products">
 	<selectKey keyProperty="productno" resultType="int" order="BEFORE"> 
 		   		select seq_productno.nextval from dual
@@ -43,5 +58,7 @@
 	delete from products wehre productno=#{productno}
 </delete>
 
-
+<select id="count" parameterType="int" resultType="int">
+	select count(*) from products where pcategory=#{pcategory}
+</select>
 </mapper>
