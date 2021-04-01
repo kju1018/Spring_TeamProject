@@ -105,17 +105,10 @@
         <div class="col" style=" text-align: center; border-bottom: 1px solid black; height: 3.5em;">
             <ul class="navul" style="display: inline-block;">
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/company/about_us')"><a class=" header_a" style="text-decoration: none; color: black;">AboutUs</a></li>
-<<<<<<< HEAD
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pcategory=1&pcategoryname=인테리어조명')"><a class=" header_a" style="text-decoration: none; color: black;">인테리어조명</a></li>
+ 				<li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pcategory=1&pcategoryname=인테리어조명')"><a class=" header_a" style="text-decoration: none; color: black;">인테리어조명</a></li>
  			    <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pcategory=2&pcategoryname=디퓨저/캔들')"><a class=" header_a" style="text-decoration: none; color: black;">디퓨저/캔들</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pcategory=3&pcategoryname=액자')"><a class=" header_a" style="text-decoration: none; color: black;">액자</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pcategory=4&pcategoryname=조화/화병')"><a class=" header_a" style="text-decoration: none; color: black;">조화/화병</a></li>
-=======
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">인테리어조명</a></li>
- 			    <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">디퓨저/캔들</a></li>
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">액자</a></li>
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user')"><a class=" header_a" style="text-decoration: none; color: black;">조화/화병</a></li>
->>>>>>> refs/heads/master
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/community/notice_list')"><a class=" header_a" style="text-decoration: none; color: black;">커뮤니티</a></li>
             </ul>
         </div>
