@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -31,7 +31,7 @@
         <th style="width:15%">작성자</th>
         <td><input type="text" class="form-control" value="${notice.userid}" readonly></td>
         <th style="width:15%">작성일</th>
-        <td><input type="text" class="form-control" value="${notice.bdate}" readonly></td>
+        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd" /></td>
     </tr>
     <tr>
         <th style="width:15%">제목</th>
@@ -47,6 +47,7 @@
         <hr/>  
          <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_update?boardno=${notice.boardno}'">          
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
+        <input type="button" class="btn btn-dark btn-sm" value="삭제하기" onclick="location.href ='<%=application.getContextPath()%>/community/deletenoti?boardno=${notice.boardno}'">
     </div>
 
        
