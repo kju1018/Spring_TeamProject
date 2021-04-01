@@ -16,20 +16,20 @@
 
     <!--제목-->
     <img src="<%=application.getContextPath()%>/resources/image/slide8.png" class="container">
-    <p class="titleyj">공지사항 상세</p>
+    <p class="titleyj">공지사항 수정</p>
     
     <!--게시판-->
-	<form action="update" method="post">
+	<form action="updatenoti" method="post">
     <table class="table">
     <tr>
         <th style="width:15%">글번호</th>
-        <td><input type="text" class="form-control" id="btitle" name="boardno" value="${notice.boardno}" readonly></td>
+        <td><input type="text" class="form-control" name="boardno" value="${notice.boardno}" readonly></td>
         <th style="width:15%">조회수</th>
-        <td><input type="text" class="form-control" id="bcount" name="bcount" value="${notice.bcount}" readonly></td>
+        <td><input type="text" class="form-control" name="bcount" value="${notice.bcount}" readonly></td>
     </tr> 
     <tr>
         <th style="width:15%">작성자</th>
-        <td><input type="text" class="form-control" id="userid" name="userid" value="${notice.userid}" readonly></td>
+        <td><input type="text" class="form-control" name="userid" value="${notice.userid}" readonly></td>
         <th style="width:15%">작성일</th>
         <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd"/></td>
     </tr>
@@ -42,7 +42,7 @@
         <td colspan="3"><input type="text" class="form-control" id="bcontent" name="bcontent" value="${notice.bcontent}"></td>
     </tr>
     </table>
-  	</form>
+  
   	
   	
     <div class="n_v_bottom">
@@ -51,7 +51,7 @@
 	    <button type="submit" class="btn btn-dark btn-sm">수정완료</button>     
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
     </div>
-
+	</form>
        
      
    

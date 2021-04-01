@@ -17,10 +17,10 @@
 
     <!--제목-->
     <img src="<%=application.getContextPath()%>/resources/image/slide8.png" class="container">
-    <p class="titleyj">QnA 상세</p>
+    <p class="titleyj">QnA 수정</p>
 
     <!--게시판-->
-	<form action="update" method="post">
+	<form action="updateqna" method="post">
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
