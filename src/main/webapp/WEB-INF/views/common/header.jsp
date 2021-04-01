@@ -23,25 +23,7 @@
 	}
 </script>
 
-<script>
 
-   // 생략	
-
-	$(document).on('click', '#productSearch', function(e){
-		alert("검색");
-		e.preventDefault();
-
-		var url = "${pageContext.request.contextPath}/product/product_list";
-
-		url = url + "?keyword=" + $('#keyword').val();
-
-		location.href = url;
-
-		console.log(url);
-
-	});	
-
-</script>
 <body>
 <header>
 	
@@ -54,7 +36,7 @@
                     
                         <div id="searching" class="col" style="text-align: end; margin: 0 auto; ">
                         	
-                            <input type="text" name="keyword" id="keyword" style=" text-align: center;">
+                            <input type="text" name="searchword" id="searchword" style=" text-align: center;">
                             <button class="btn btn-sm btn-dark" name="productSearch" id="productSearch">검색</button>
                         	
                         </div>

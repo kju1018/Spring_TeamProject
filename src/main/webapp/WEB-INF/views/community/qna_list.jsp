@@ -11,12 +11,10 @@
 		alert("검색");
 		e.preventDefault();
 
-		var url = "${pageContext.request.contextPath}/community/qna_list";
+		var url = "${pageContext.request.contextPath}/community/search";
 
-		url = url + "?searchType=" + $('#searchType').val();
-
-		url = url + "&keyword=" + $('#keyword').val();
-
+		url = url + "?keyword=" + $("#keyword").val();
+		
 		location.href = url;
 
 		console.log(url);
@@ -114,9 +112,7 @@
 
 				<select class="form-control form-control-sm" name="searchType" id="searchType">
 
-					<option value="btitle">제목</option>
-
-					<option value="bcontent">본문</option>  
+					<option value="btitle+bcontent">제목 + 본문</option>
 
 					<option value="userid">작성자</option>
 
@@ -126,7 +122,7 @@
 
 			<div class="w300" style="padding-right:10px">
 
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" />
 
 			</div>
 

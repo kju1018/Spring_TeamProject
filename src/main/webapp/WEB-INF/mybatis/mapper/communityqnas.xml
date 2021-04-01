@@ -73,18 +73,34 @@
       select count(*) from communityqnas
    </select>
    
-   <select id="countuser" resultType="int">
-      select count(*) from communityqnas
-                where userid=#{userid}
+    <select id="countuser" resultType="int">
+      select count(userid) from communityqnas
    </select>
    
+   <select id="getSearchList" parameterType="pager"  resultType="communityqna">
+		select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      	from(
+        	select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+					select boardno, btitle, bcontent, userid, bdate, bcount
+					from communityqnas
+					where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
+					order by boardno desc
+            )
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+
+
+	</select>
    
    
    
    
    
    
- <insert id="insertRepl" parameterType="communityqna">
+ 	<insert id="insertRepl" parameterType="communityqna">
    	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
          select seq_communityqnas_boardno.nextval from dual
       </selectKey>
@@ -95,73 +111,7 @@
          (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
    
    </insert>  
-	<select id="getSearchList" resultType="communityqna">
-		select boardno, btitle, bcontent, userid, bdate, bcount
-		from communityqnas
-
-		   <trim prefix="WHERE" prefixOverrides="AND|OR">
-
-			<if test="searchType=='btitle' and keyword != null and keyword != '' ">
-
-				and btitle like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test="searchType=='bcontent' and keyword != null and keyword != '' ">
-
-				and bcontent like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test="searchType=='userid' and keyword != null and keyword != '' ">
-
-				and userid like CONCAT('%', #{keyword}, '%')
-
-			</if>	
-
-		</trim>
-
-		LIMIT #{startList}, #{listSize}
-
-	</select>
-
-
-
-	<select id="getBoardListCnt" resultType="int">
-
-		select count(*) as listCnt
-
-		from communityqnas
-
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-
-			<if test="keyword != null and keyword != '' ">
-
-			<if test="searchType=='title'">
-
-				and btitle like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test="searchType=='content'">
-
-				and bcontent like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test="searchType=='reg_id'">
-
-				and userid like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-      </if>
-
-	</trim>
-
-	</select>
-
-   
+	
 </mapper>
 
 
