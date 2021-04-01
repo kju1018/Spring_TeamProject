@@ -35,12 +35,13 @@ public class OrdersController {
 	// 주문서를 가져오는 부분
 	@PostMapping("/order_form")
 	public String createOrderForm(int[] chk_productno, String quantity, Model model) {
-		List<Integer> list = new ArrayList<Integer>();
+		List<Products> productList = new ArrayList<Products>();
 		String[] quantityArr = quantity.split(" ");
 		for(int i = 0; i < chk_productno.length; i++) {
-			list.add(chk_productno[i]);
+			Products product = productsService.pSelectByPno(chk_productno[i]);
+			productList.add(product);
 		}
-		model.addAttribute("list", list);
+		model.addAttribute("list", productList);
 		model.addAttribute("quantityArr",quantityArr);
 		
 		return "order/orderForm";
