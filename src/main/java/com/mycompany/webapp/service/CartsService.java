@@ -28,8 +28,8 @@ public class CartsService {
 	}
 	
 	//체크 표시된 카트 삭제
-	public void removeCartSelect(List<Cart> cartList) {
-		cartsDao.delete(cartList);
+	public void removeSelectCart(List<Cart> cartList) {
+		cartsDao.deleteSelectCart(cartList);
 	}
 	
 	//카트 전체 삭제
@@ -37,12 +37,15 @@ public class CartsService {
 		cartsDao.deleteAllByUserId(userid);
 	}
 	
+	//카트 개수 업데이트
+	public void updateCartQuantity(Cart cart) {
+		cartsDao.updateCartQuantity(cart);
+	}
+	
 	//카트 하나 삭제
 	public void removeCartOne(Cart cart) {
 		cartsDao.deleteByCart(cart);
 	}
 	
-	public void updateCart(Cart cart) {
-		cartsDao.updateCart(cart);
-	}
+	
 }

@@ -25,9 +25,10 @@
 			</c:if>
 	
 			<c:if test="${not empty cartList}">
+					<input type="hidden" id="quantity" name="quantity" value=""/>
 					<c:forEach var="cart" items="${cartList}">
 						<tr class="cart_list" >
-							<th class="align-middle"><input type="checkbox" name="cart_box" class="checkSelect" value="${cart.productno}"/></th>
+							<th class="align-middle"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}"/></th>
 							<th class="align-middle">
 								<a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">
 									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">

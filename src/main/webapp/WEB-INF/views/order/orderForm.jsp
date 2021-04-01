@@ -15,22 +15,28 @@
             <div>
                 <h5 class="border-bottom pb-2">주문상품</h5>
             </div>
-            <div class="row ml-0 mr-0">
-                <a href="#none">
-                    <div>
-                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
-                    </div>
-                </a>
-                <a href="#none" class="ml-3">
-                    ${cart.pname}
-                    <p>수량: ${cart.cartquantity}</p>
-                    <p>상품구매금액: ${cart.pprice}</p>
-                </a>
-            </div>
+            <c:forEach var="productno" items="${list}" varStatus="status">
+	            <div class="row ml-0 mr-0 mt-3">
+	                <a href="#none">
+	                    <div>
+	                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
+	                    </div>
+	                </a>
+	                <a href="#none" class="ml-3">
+	                    ${productno}
+	                    <p>수량: ${quantityArr[status.index]}</p>
+	                    <p>상품구매금액: ${cart.pprice}</p>
+	                </a>
+	            </div>
+	        </c:forEach>
         </div><!--주문상품 div-->
         <!--form 전체 -->
         <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+           <c:forEach var="productno" items="${list}" varStatus="status">
+	           <input type="hidden" name="order_productno" value="${productno}"/>
+	           <input type="hidden" name="order_quantity" value="${quantityArr[status.index]}"/>
+	        </c:forEach>
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
                     <div class="border-bottom pl-2 pt-2">
