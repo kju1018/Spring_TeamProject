@@ -17,9 +17,6 @@ public class Pager {
 	private int pcategory;
 	private String userid;
 	
-
-
-
 	public int getPcategory() {
 		return pcategory;
 	}
