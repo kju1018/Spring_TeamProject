@@ -15,10 +15,43 @@ public class Products {
 	private String detailimgoname;
 	private String detailimgsname;
 	private String detailimgtype;
-	private List<ProductImgs> imglist;
-	//이미지를 담을 리스트 
-	//컨트롤러에서 
+	private int imgno;
+	private String ioriginalname;
+	private String isavename;
+	private String imgtype;
+	private String ipriority;
 	
+
+	public int getImgno() {
+		return imgno;
+	}
+	public void setImgno(int imgno) {
+		this.imgno = imgno;
+	}
+	public String getIoriginalname() {
+		return ioriginalname;
+	}
+	public void setIoriginalname(String ioriginalname) {
+		this.ioriginalname = ioriginalname;
+	}
+	public String getIsavename() {
+		return isavename;
+	}
+	public void setIsavename(String isavename) {
+		this.isavename = isavename;
+	}
+	public String getImgtype() {
+		return imgtype;
+	}
+	public void setImgtype(String imgtype) {
+		this.imgtype = imgtype;
+	}
+	public String getIpriority() {
+		return ipriority;
+	}
+	public void setIpriority(String ipriority) {
+		this.ipriority = ipriority;
+	}
 	public int getProductno() {
 		return productno;
 	}
@@ -85,20 +118,6 @@ public class Products {
 	public void setDetailimgtype(String detailimgtype) {
 		this.detailimgtype = detailimgtype;
 	}
-	public List<ProductImgs> getImglist() {
-		return imglist;
-	}
-	public void setImglist(List<ProductImgs> imglist) {
-		this.imglist = imglist;
-	}
-	@Override
-	public String toString() {
-		return "Products [productno=" + productno + ", pcategory=" + pcategory + ", pname=" + pname + ", pprice="
-				+ pprice + ", pregisterdate=" + pregisterdate + ", psalescount=" + psalescount + ", pstock=" + pstock
-				+ ", penable=" + penable + ", detailimgoname=" + detailimgoname + ", detailimgsname=" + detailimgsname
-				+ ", detailimgtype=" + detailimgtype + ", imglist=" + imglist + "]";
-	}
-	
 	
 	
 }

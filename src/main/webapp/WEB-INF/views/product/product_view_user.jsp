@@ -4,16 +4,12 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript">
 const insertcartquantity = (productno) => { //add to cart에 productno + productquantity 넘기기
-	  const pquant = document.getElementById('pquantity').value;
+	  const pquant = document.getElementById('quantity').value;
 	  alert(pquant);
 	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
 	};
 	
-const insertorderquantity = (productno) => { //buy now에 productno + productquantity 넘기기
-	  const pquant = document.getElementById('pquantity').value;
-	  alert(pquant);
-	  location.href ="<%=application.getContextPath()%>/order/order_form?productno="+productno+"&cartquantity="+pquant;
-	};
+
 	
 const sumtotal = (pprice) => { //총합 계산
 	const num = document.getElementById('pquantity').value;
@@ -52,7 +48,7 @@ const changeimg4 = (product_img) => {
 	    <div class="col-12" style="width:100%;" id="photo1" >
 		    
 		    <div id="photo2" style="float:left; width:35%; margin-left:14%;">	
-            <img src="<%=application.getContextPath()%>/resources/image/${productimg_pri.ioriginalname}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br> 							
+            <img src="<%=application.getContextPath()%>/resources/image/${products.ioriginalname}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br> 							
             <img onclick="changeimg1('${productimg[0].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[0].ioriginalname}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
             <img onclick="changeimg2('${productimg[1].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[1].ioriginalname}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
             <img onclick="changeimg3('${productimg[2].ioriginalname}')" src="<%=application.getContextPath()%>/resources/image/${productimg[2].ioriginalname}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
@@ -66,25 +62,30 @@ const changeimg4 = (product_img) => {
 				    <!--product -->				  
 					<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
 					<hr style="width:100%; color: black; border:1px solid black;"/>
-					<p style="font-size: large;">${productnum.pname}</p><br><br>
-					<pre><small style="color: gray;">판매가		${productnum.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
+					<p style="font-size: large;">${products.pname}</p><br><br>
+					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
 				    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
 				    
 				    </small>
 					<!--수량 선택-->
+					<form action="<%=application.getContextPath()%>/order/order_form" method="post">
+					
+						<input type="hidden" name="chk_productno" value="${products.productno}"/>
 						    <table style="width:100%; height:80px; border:1px solid lightgray;">
 										<tr>
 											<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
-			                <br><br>${productnum.pname}</small><input onclick="sumtotal(${productnum.pprice})" type="number" id="pquantity" name="pquantity" value="1" style="width:8%; margin-left:40%;">
-			                <small style="margin-left:27%;"><span id="price">${productnum.pprice}원</span></small></td>
+			                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
+			                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
 			                
 										</tr>
 								</table> 
 					    <!--구매 / 장바구니-->
-						<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${productnum.pprice} 원</span></b><small>(1개)</small><br><br>
+						<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
 						<!-- form으로 -->
-						<button onclick="insertorderquantity(${productnum.productno})" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
-						<button onclick="insertcartquantity(${productnum.productno})" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
+						
+						<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
+						</form>
+						<button onclick="insertcartquantity(${products.productno})" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
 							
 					</div>
 					<br><br>
@@ -97,7 +98,7 @@ const changeimg4 = (product_img) => {
   </div><br>
     <!--상품 상세 이미지-->
     <div style="height:auto; margin-left: 5%">
-				<img src="<%=application.getContextPath()%>/resources/image/${productnum.detailimgoname}" style="width:100%">
+				<img src="<%=application.getContextPath()%>/resources/image/${products.detailimgoname}" style="width:100%">
     </div>
    
     <!--제품 리뷰-->

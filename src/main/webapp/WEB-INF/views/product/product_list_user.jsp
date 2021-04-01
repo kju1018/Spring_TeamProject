@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <script>
  const newitem = () => {
-	 alert("test");
+
  };
  
  const productname = () => {
@@ -36,8 +36,10 @@
 
     <div class="container-xl mt-4 border-bottom"><!-- 상품 개수, 필터 영역 -->
         <p id="itemNumber">${pager.totalRows} PRODUCT ITEM</p>
-
-        <ul class="filterDiv">
+		
+		<%-- <c:forEach var="" items="">
+		</c:forEach>
+     --%>    <ul class="filterDiv">
             <li class="filterItem" id="newitem" onclick="newitem()">신상품</li>
             <li class="filterItem" id="productname" onclick="productname()">상품명</li>
             <li class="filterItem" id="lowprice" onclick="lowprice()">낮은가격</li>
@@ -46,7 +48,7 @@
             
         </ul>
     </div>
- 
+ 		
  	
     <div class="container-xl p-0 productBox" ><!-- 검색 안내문구 영역 -->
         <p class="findResult text-center">
@@ -59,14 +61,14 @@
         <%--  onclick="location.href='<%=application.getContextPath()%>/product/product_view'" --%>
             <li class="product mt-4">
             
-	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}">
+	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}" id="product_no">
 	                <div>
-	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
+	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" id="product_img">
 	                </div>
-	                <div class="productTitle">
+	                <div class="productTitle" id="product_name">
 	                    ${p_list.pname}
 	                </div>
-	                <div class="productContent">
+	                <div class="productContent" id="product_price">
 	                    ${p_list.pprice} 원
 	                </div>
 	            </a>
