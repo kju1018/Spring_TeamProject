@@ -107,12 +107,11 @@ public class ProductsController {
 	/*상품 상세*/
 	@GetMapping("/product_view_user")
 	public String product_view_user(Model model, int productno) {
-		Products productnum = productsService.pSelectByPno(productno);
+		Products products = productsService.pSelectByPno(productno);
 		List<ProductImgs> productimg = productImgsService.pImgSelectByIno(productno);
-		ProductImgs productimg_pri = productImgsService.pImgSelectByIno_pri(productno);	
-		model.addAttribute("productnum", productnum);
-		model.addAttribute("productimg", productimg);	
-		model.addAttribute("productimg_pri", productimg_pri);			
+		logger.info(products.getIoriginalname());
+		model.addAttribute("products", products);
+		model.addAttribute("productimg", productimg);				
 		return "product/product_view_user";
 	}
 	
@@ -135,15 +134,30 @@ public class ProductsController {
 	      
 	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
 	      //logger.info(Integer.toString(pager.getTotalRows()));
+
+	  
 	      session.setAttribute("pager", pager);
 	      
 	      List<Products> list = productsService.pSelectAll(pager);
-	      logger.info(Integer.toString(list.size()));
-
+	      
+	      Pager pager_list = new Pager(10,5, totalRows, intPageNo, list);
+	      List<Products> list_date = productsService.getTotalDate(pager_list);
+	      List<Products> list_name = productsService.getTotalName(pager_list);
+	      List<Products> list_low = productsService.getTotalLow(pager_list);
+	      List<Products> list_high = productsService.getTotalHigh(pager_list);
+	      
+	      //====================
+	      //컨트롤러 쪼개서 버튼
 		model.addAttribute("list", list);
+		model.addAttribute("list_date", list_date);
+		model.addAttribute("list_name", list_name);
+		model.addAttribute("list_low", list_low);
+		model.addAttribute("list_high", list_high);
 		model.addAttribute("pcategory", pcategory);
 		model.addAttribute("pcategoryname", pcategoryname);
 		return "product/product_list_user";
 	}
+	
+	/* 정렬 */
 
 }

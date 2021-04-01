@@ -3,11 +3,13 @@
 
 <mapper namespace="com.mycompany.webapp.dao.ProductsDao">
 <select id="pSelectAll" resultType="products">
-	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from products
-	order by productno desc
+	select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+	from products p, productimgs i
+  where p.productno=i.productno and i.ipriority=1
+	order by p.productno desc
 </select>
 
+<!--  -->
 <select id="pSelectByPage" parameterType="pager" resultType="products">
 	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
 	from(
@@ -22,6 +24,63 @@
 	)
 	where rnum &gt;= #{startRowNo}
 </select>
+
+<select id="count_date" parameterType="pager" resultType="products">
+		select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	from(
+		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+			from (
+				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+				from products
+				order by pregisterdate desc
+			)
+		where rownum &lt;=#{endRowNo}
+	)
+	where rnum &gt;= #{startRowNo}
+</select>
+
+<select id="count_name" parameterType="pager" resultType="products">
+	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	from(
+		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+			from (
+				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+				from products
+				order by pname
+			)
+		where rownum &lt;=#{endRowNo}
+	)
+	where rnum &gt;= #{startRowNo}
+</select>
+
+<select id="count_low" parameterType="pager" resultType="products">
+	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	from(
+		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+			from (
+				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+				from products
+				order by pprice
+			)
+		where rownum &lt;=#{endRowNo}
+	)
+	where rnum &gt;= #{startRowNo}
+</select>
+
+<select id="count_high" parameterType="pager" resultType="products">
+	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	from(
+		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+			from (
+				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+				from products
+				order by pprice desc
+			)
+		where rownum &lt;=#{endRowNo}
+	)
+	where rnum &gt;= #{startRowNo}
+</select>
+
 
 <insert id="pInsert" parameterType="products">
 	<selectKey keyProperty="productno" resultType="int" order="BEFORE"> 
@@ -48,15 +107,25 @@
 </update>
 
 <select id="pSelectByPno" parameterType="int" resultType="products">
-	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
+	select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+	from products p, productimgs i
+  where p.productno=#{productno} and i.productno=#{productno} and i.ipriority=1
+	order by p.productno desc
+</select>
+<!--	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
 	from products
 	where productno=#{productno}
-</select>
-
+ -->
 
 <delete id="pDeleteByPno" parameterType="int">
 	delete from products wehre productno=#{productno}
 </delete>
+
+
+<!-- <select id="count_like" parameterType="products" resultType="products">
+	select count(*) from products where pcategory=#{pcategory}
+	order by pprice=#{} desc
+</select> -->
 
 <select id="count" parameterType="int" resultType="int">
 	select count(*) from products where pcategory=#{pcategory}

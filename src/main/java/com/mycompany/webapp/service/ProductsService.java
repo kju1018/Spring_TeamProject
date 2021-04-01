@@ -31,6 +31,25 @@ public class ProductsService {
 		return rows;
 	}
 	
+	public List<Products> getTotalDate(Pager pager) {
+		List<Products> rows = productsDao.count_date(pager);
+		return rows; 
+	}
+	public List<Products> getTotalName(Pager pager) {
+		List<Products> rows = productsDao.count_name(pager);
+		return rows; 
+	}
+
+	public List<Products> getTotalLow(Pager pager) {
+		List<Products> rows = productsDao.count_low(pager);
+		return rows; 
+	}
+
+	public List<Products> getTotalHigh(Pager pager) {
+		List<Products> rows = productsDao.count_high(pager);
+		return rows; 
+	}
+
 	public void pInsert(Products products) {
 		productsDao.pInsert(products);
 	};
