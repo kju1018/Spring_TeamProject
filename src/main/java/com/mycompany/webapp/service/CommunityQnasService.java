@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.CommunityQnasDao;
 import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
-import com.mycompany.webapp.dto.PagerUser;
 
 @Service
 public class CommunityQnasService {
@@ -63,13 +62,13 @@ public class CommunityQnasService {
 		return rows;
 	}
 	
-	public int getTotalRows(String userid) {
+	public int getTotalRow(String userid) {
 		int rows = communityqnasDao.countuser(userid);
 		return rows;
 	}
 	
-	public List<CommunityQna> getBoardListById(PagerUser pageruser){
-		List<CommunityQna> list = communityqnasDao.selectByUserid(pageruser);
+	public List<CommunityQna> getBoardListById(Pager pager){
+		List<CommunityQna> list = communityqnasDao.selectByUserid(pager);
 		return list;
 	}
 	

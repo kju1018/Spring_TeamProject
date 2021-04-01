@@ -1,4 +1,4 @@
-    package com.mycompany.webapp.dao;
+package com.mycompany.webapp.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
-import com.mycompany.webapp.dto.PagerUser;
+
 
 
 @Mapper
@@ -18,15 +18,13 @@ public interface CommunityQnasDao {
 	public int update(CommunityQna communityqna);
 	public int deleteByBoardno(int boardno);
 	public int updateBcount(int boardno);
-	public int countuser(String userid);
 	public int count();
-	public List<CommunityQna> selectByUserid(PagerUser pageruser);
+	public int countuser(String userid);
+	public List<CommunityQna> selectByUserid(Pager pager);
 	
 	
 	 //리플저장
 	public int insertRepl(CommunityQna communityqna); 
 	public List<CommunityQna> getSearchList(String keyword);
-
-
 
 }
