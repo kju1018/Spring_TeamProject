@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <form id="cart_form" onsubmit="checkCart()" action="<%=application.getContextPath()%>/order/order_form" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<table class="table" style="margin-top: 30px;">
 			<tr>
 				<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
