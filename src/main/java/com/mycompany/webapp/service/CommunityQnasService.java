@@ -1,6 +1,8 @@
 package com.mycompany.webapp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,20 +69,33 @@ public class CommunityQnasService {
 		return rows;
 	}
 	
+	public int getTotalRows(String searchType, String keyword) {
+		Map<String, String> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		
+		int rows = communityqnasDao.countkeyword(map);
+		return rows;
+	}
+	
 	public List<CommunityQna> getBoardListById(Pager pager){
 		List<CommunityQna> list = communityqnasDao.selectByUserid(pager);
 		return list;
 	}
 	
-	public List<CommunityQna> getSearchList(String keyword) {
-		List<CommunityQna> list = communityqnasDao.getSearchList(keyword);
+	public List<CommunityQna> getBoardListByKeyword(Pager pager, String searchType, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		List<CommunityQna> list = communityqnasDao.selectByKeyword(map);
 		return list;
 	}
 	
-	public List<CommunityQna> getSearchuserList(String keyword) {
-		List<CommunityQna> list = communityqnasDao.getSearchListuser(keyword);
-		return list;
-	}
+	
+
+
 	
 //	public List<CommunityQna> getSearchList(Pager pager, String keyword) {
 //		List<CommunityQna> list = communityqnasDao.getSearchList(pager, keyword);

@@ -54,6 +54,27 @@
       where rnum &gt;= #{startRowNo}
    </select>
    
+   <select id="selectByKeyword" parameterType="map" resultType="communityqna">
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+               select boardno, btitle, bcontent, userid, bdate, bcount
+               from communityqnas
+				<if test="searchType == 'btitlebcontent'">
+					where btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%'
+				</if>
+				<if test="searchType == 'userid'">
+					where userid like '%' || #{keyword} || '%'
+				</if>
+               order by boardno desc
+            )
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+   </select>
+   
    <update id="update" parameterType="communityqna">
       update communityqnas set
          btitle=#{btitle},
@@ -77,59 +98,18 @@
       select count(userid) from communityqnas
    </select>
    
-   <select id="getSearchList" parameterType="pager"  resultType="communityqna">
-  
-		select boardno, btitle, bcontent, userid, bdate, bcount
-		from communityqnas
-		where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
-		order by boardno desc
-	
-	</select>
-	
-	<select id="getSearchListuser" parameterType="pager"  resultType="communityqna">
-	
-		select boardno, btitle, bcontent, userid, bdate, bcount
-		from communityqnas
-		where userid like '%'||#{keyword}||'%'
-		order by boardno desc
-		
-           
-      
-	</select>
-   
-   <!-- 
-   <select id="getSearchList" parameterType="pager"  resultType="communityqna">
-   select rnum, boardno, btitle, bcontent, userid, bdate, bcount
-      from(
-         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
-            from (
-					select boardno, btitle, bcontent, userid, bdate, bcount
-					from communityqnas
-					where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
-					order by boardno desc
-					)
-           
-         where rownum &lt;=#{endRowNo}
-      )
-      where rnum &gt;= #{startRowNo}
-	</select>
-	
-	<select id="getSearchListuser" parameterType="pager"  resultType="communityqna">
-	select rnum, boardno, btitle, bcontent, userid, bdate, bcount
-      from(
-         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
-            from (
-					select boardno, btitle, bcontent, userid, bdate, bcount
-					from communityqnas
-					where userid like '%'||#{keyword}||'%'
-					order by boardno desc
-					)
-           
-         where rownum &lt;=#{endRowNo}
-      )
-      where rnum &gt;= #{startRowNo}
-	</select>  -->
-   
+    <select id="countkeyword" parameterType="map" resultType="int">
+    	<if test="searchType == 'btitlebcontent'">
+    		select count(*) 
+    		from communityqnas
+    		where btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%'
+    	</if>
+    	<if test="searchType == 'userid'">
+    		select count(*)
+			from communityqnas
+			where userid like '%' || #{keyword} || '%'
+    	</if>
+   </select>
    
    
    
@@ -146,14 +126,3 @@
    </insert>  
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-

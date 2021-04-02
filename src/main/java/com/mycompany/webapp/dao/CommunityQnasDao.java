@@ -1,6 +1,7 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,13 +21,14 @@ public interface CommunityQnasDao {
 	public int updateBcount(int boardno);
 	public int count();
 	public int countuser(String userid);
+	public int countkeyword(Map<String, String> map);
 	public List<CommunityQna> selectByUserid(Pager pager);
 	
 	
 	 //리플저장
 	public int insertRepl(CommunityQna communityqna); 
-	public List<CommunityQna> getSearchList(String keyword);
-	public List<CommunityQna> getSearchListuser(String keyword);
+	public List<CommunityQna> selectByKeyword(Map<String, Object> map);
+
 
 //	public List<CommunityQna> getSearchList(Pager pager, String keyword);
 //	public List<CommunityQna> getSearchListuser(Pager pager, String keyword);

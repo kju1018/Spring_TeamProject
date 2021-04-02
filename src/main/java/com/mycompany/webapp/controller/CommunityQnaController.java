@@ -18,122 +18,103 @@ import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.service.CommunityQnasService;
 
-
 @Controller
 @RequestMapping("/community")
 public class CommunityQnaController {
-	private static final Logger logger =
-			LoggerFactory.getLogger(CommunityQnaController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(CommunityQnaController.class);
+
 	@Autowired
-	private CommunityQnasService communityQnasService; 
-	
+	private CommunityQnasService communityQnasService;
+
 	@RequestMapping("/qna_list")
 	public String communityQnaList(Model model) {
 		return "community/qna_list";
 	}
-	
+
 	@GetMapping("/answer_view")
 	public String answerView(int boardno, Model model) {
 		communityQnasService.addBcount(boardno);
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna);
 		return "community/answer_view";
-		
+
 	}
 
 	@GetMapping("/answer_write")
 	public String AnswerqnaWrite(HttpSession session) {
-		
-	    return "community/answer_write";
+
+		return "community/answer_write";
 	}
-	
+
 	@PostMapping("/replcreate")
 	public String AnswercreateCreate(CommunityQna communityqna, HttpSession session) throws Exception {
-			
-			communityqna.setUserid("user1");
-			communityQnasService.saveRepl(communityqna);
-			return "redirect:/community/qna_list";
+
+		communityqna.setUserid("user1");
+		communityQnasService.saveRepl(communityqna);
+		return "redirect:/community/qna_list";
 
 	}
-	
+
 	@GetMapping("/qna_list")
-	public String communityBoardList(
-		String pageNo, Model model, HttpSession session) {
+	public String communityBoardList(String pageNo, Model model, HttpSession session, String searchType, String keyword) {
+		
+		if (keyword == null || keyword.equals("")) {
+			session.removeAttribute("keyword");
+			
 			int intPageNo = 1;
-			if(pageNo == null) {
-			//세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager) session.getAttribute("pager");
+			if (pageNo == null) {
+				Pager pager = (Pager) session.getAttribute("allPager");
 				if(pager != null) {
 					intPageNo = pager.getPageNo();
 				}
 			} else {
 				intPageNo = Integer.parseInt(pageNo);
 			}
-			
-			
+
 			int totalRows = communityQnasService.getTotalRows();
 			Pager pager = new Pager(6, 5, totalRows, intPageNo);
 			session.setAttribute("pager", pager);
-		
+
 			List<CommunityQna> list = communityQnasService.getBoardList(pager);
-			model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
-			model.addAttribute("pager", pager);
-		return "community/qna_list";
-	}
-	
-	@GetMapping("/search")
-	public String Search(String pageNo, Model model, HttpSession session, String searchType, String keyword) {
-		
-		if(searchType.equals("userid")) {
-			List<CommunityQna> list = communityQnasService.getSearchuserList(keyword);
-			model.addAttribute("list", list);
-			
+			model.addAttribute("list", list); // 오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+			model.addAttribute("allPager", pager);
 		} else {
-			List<CommunityQna> list = communityQnasService.getSearchList(keyword);
-			model.addAttribute("list", list);
+			int intPageNo = 1;
 			
+			String sessionKeyword = (String) session.getAttribute("keyword");
+			if(sessionKeyword != null && sessionKeyword.equals(keyword)) {
+				if (pageNo == null) {
+					Pager pager = (Pager) session.getAttribute("keywordPager");
+					if(pager != null) {
+						intPageNo = pager.getPageNo();
+					}
+				} else {
+					intPageNo = Integer.parseInt(pageNo);
+				}
+			} else {
+				session.setAttribute("keyword", keyword);
+			}
+
+			int totalRows = communityQnasService.getTotalRows(searchType, keyword);
+			Pager pager = new Pager(6, 5, totalRows, intPageNo);
+			session.setAttribute("keywordPager", pager);
+
+			List<CommunityQna> list = communityQnasService.getBoardListByKeyword(pager, searchType, keyword);
+			model.addAttribute("list", list); // 오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+			model.addAttribute("pager", pager);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 		}
+
 		return "community/qna_list";
 	}
-	
-//	@GetMapping("/search")
-//	public String Search(String pageNo, Model model, HttpSession session, String searchType, String keyword) {
-//		int intPageNo = 1;
-//		if(pageNo == null) {
-//		//세션에서 Pager를 찾고, 있으면 pageNo를 설정
-//		Pager pager = (Pager) session.getAttribute("pager");
-//			if(pager != null) {
-//				intPageNo = pager.getPageNo();
-//			}
-//		} else {
-//			intPageNo = Integer.parseInt(pageNo);
-//		}
-//		
-//		
-//		int totalRows = communityQnasService.getTotalRows();
-//		Pager pager = new Pager(6, 5, totalRows, intPageNo);
-//		session.setAttribute("pager", pager);
-//		
-//		if(searchType.equals("userid")) {
-//			List<CommunityQna> list = communityQnasService.getSearchuserList(pager, keyword);
-//			model.addAttribute("list", list);
-//			model.addAttribute("pager", pager);
-//		} else {
-//			List<CommunityQna> list = communityQnasService.getSearchList(pager, keyword);
-//			model.addAttribute("list", list);
-//			model.addAttribute("pager", pager);
-//		}
-//		return "community/qna_list";
-//	}
-	
-	
+
 	@GetMapping("/qna_write")
 	public String communityQnaWrite(HttpSession session) {
-		
+
 		return "community/qna_write";
 	}
-	
+
 	@PostMapping("/create")
 	public String communityQnaCreate(CommunityQna communityqna, HttpSession session) {
 
@@ -142,7 +123,7 @@ public class CommunityQnaController {
 		return "redirect:/community/qna_list";
 
 	}
-	
+
 	@GetMapping("/qna_view")
 	public String communityQnaView(int boardno, Model model) {
 		communityQnasService.addBcount(boardno);
@@ -150,21 +131,20 @@ public class CommunityQnaController {
 		model.addAttribute("communityqna", communityqna);
 		return "community/qna_view";
 	}
-	
+
 	@GetMapping("/qna_update")
 	public String communityQnaUpdateForm(int boardno, Model model) {
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna);
 		return "community/qna_update";
 	}
-	
+
 	@PostMapping("/updateqna")
 	public String communityQnaUpdate(CommunityQna communityqna) {
 		communityQnasService.updateBoard(communityqna);
-		return "redirect:/community/qna_view?boardno="+communityqna.getBoardno();
+		return "redirect:/community/qna_view?boardno=" + communityqna.getBoardno();
 	}
-	
-	
+
 	@GetMapping("/deleteqna")
 	public String communityQnaDelete(int boardno) {
 		logger.info(String.valueOf(boardno));
