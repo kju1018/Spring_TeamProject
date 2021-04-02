@@ -7,35 +7,49 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+<script>
+	const newAddress = () => {
+		
+	}
+	
+	const userAddress = () => {
+		
+	}
+
+
+</script>
+
     <div class="container-xl" style="margin-top: 16em;">
         <h4 class="font-weight-bold border-bottom pb-2">결제하기</h4>
     </div>
     <div class="container-xl mt-3"><!--결재하기 전체 div-->
-        <div><!--주문상품 div-->
-            <div>
-                <h5 class="border-bottom pb-2">주문상품</h5>
-            </div>
-            <c:forEach var="product" items="${list}" varStatus="status">
-	            <div class="row ml-0 mr-0 mt-3">
-	                <a href="#none">
-	                    <div>
-	                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
-	                    </div>
-	                </a>
-	                <a href="#none" class="ml-3">
-	                    ${product.pname}
-	                    <p>수량: ${quantityArr[status.index]}</p>
-	                    <p>상품구매금액: ${product.pprice*quantityArr[status.index]}</p>
-	                </a>
+    	        <!--form 전체 -->
+    	<form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
+    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	        <div><!--주문상품 div-->
+	            <div>
+	                <h5 class="border-bottom pb-2">주문상품</h5>
 	            </div>
-	        </c:forEach>
-        </div><!--주문상품 div-->
-        <!--form 전체 -->
-        <form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
-           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-           <c:forEach var="productno" items="${list}" varStatus="status">
-	           <input type="hidden" name="order_productno" value="${productno}"/>
-	           <input type="hidden" name="order_quantity" value="${quantityArr[status.index]}"/>
+	            <c:forEach var="product" items="${list}" varStatus="status">
+		            <div class="row ml-0 mr-0 mt-3">
+		                <a href="#none">
+		                    <div>
+		                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
+		                    </div>
+		                </a>
+		                <a href="#none" class="ml-3">
+		                    <h5>상품명: ${product.pname}</h5>
+		                    <p>수량: ${quantityArr[status.index]}</p>
+		                    <p>상품구매금액: ${product.pprice*quantityArr[status.index]}</p>
+		                </a>
+		            </div>
+		            <input type="hidden" name="order_productno" value="${product.productno}"/>
+	           		<input type="hidden" name="order_quantity" value="${quantityArr[status.index]}"/>
+		        </c:forEach>
+	        </div><!--주문상품 div-->
+           	<c:forEach var="product" items="${list}" varStatus="status">
+	          
 	        </c:forEach>
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
@@ -44,8 +58,8 @@
                     </div>
                     <div><!-- 배송지 양식 내용-->
                         <div class="p-2">
-                            <input type="radio">주문자 정보와 동일
-                            <input type="radio" class="ml-2">새로운 배송지
+                            <input type="radio" name="select_address" checked>주문자 정보와 동일
+                            <input type="radio" name="select_address" class="ml-2">새로운 배송지
                         </div>
                         <div class="border-bottom pb-3"><!--입력하는곳-->
                             <table class="paymenttable">
@@ -55,31 +69,23 @@
                                 </colgroup>
                                 <tr>
                                     <th class="p-2">받는사람</th>
-                                    <td><input type="text" class="paymentinput" name="oreceiver"></td>
+                                    <td><input type="text" class="paymentinput" name="oreceiver" value="${user.uname}"></td>
                                 </tr>
 
                                 <tr>
                                     <th class="p-2 align-text-top">주소</th>
                                     <td>
                                         <!-- readOnly -->
-                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="ozipcode">
+                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="ozipcode" value="${user.uzipcode}" readonly>
                                         <a href="#none" class="btn btn-dark btn-sm ml-2 mb-1">주소검색</a><br>
-                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oaddress"> <br>
-                                        <input type="text" class="paymentinput" placeholder="나머지 주소(선택 입력 가능)" name="oaddress">
+                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oaddress" value="${user.uaddress}" readonly> <br>
+                                        <input type="text" class="paymentinput" name="oaddress" readonly>
                                     </td>
                                 </tr>
                                 <tr>
                                         <th class="p-2">휴대전화</th>
-                                        <td>
-                                            <select class="paymentSelect item_width_30" name="onumber">
-                                                <option value="010">010</option>
-                                                <option value="011">011</option>
-                                                <option value="016">016</option>
-                                            </select>
-                                            -
-                                            <input class="paymentinput2" type="text" name="onumber">
-                                            -
-                                            <input class="paymentinput2" type="text" name="onumber">
+                                        <td> 
+                                            <input class="paymentinput2" type="text" name="onumber" value="${user.utel}">
                                         </td>
                                 </tr>
                             </table>
@@ -126,7 +132,7 @@
                             </div>
                             <div class="p-3">
                             	<div class="form-group">
-                                	<input type="radio" name="omethod" value="무통장 입금"> 무통장 입금
+                                	<input type="radio" name="omethod" value="무통장 입금" checked> 무통장 입금
                                 </div>
                             </div>
                         </div>
