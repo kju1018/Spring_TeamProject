@@ -72,11 +72,9 @@
 		            <input type="hidden" name="order_productno" value="${product.productno}"/>
 	           		<input type="hidden" name="order_quantity" value="${quantityArr[status.index]}"/>
 	           		<c:set var="total" value="${total+quantityArr[status.index]*product.pprice}"/>
+		        	<hr/>
 		        </c:forEach>
 	        </div><!--주문상품 div-->
-           	<c:forEach var="product" items="${list}" varStatus="status">
-	          
-	        </c:forEach>
             <div><!-- form안에 div 전체 틀 content-->
                 <div class="border mt-3"><!-- 주소정보-->
                     <div class="border-bottom pl-2 pt-2">
@@ -175,10 +173,7 @@
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <th class="p-2">입금자명</th>
-                                    <td><input type="text" class="item_width_100" name="odepositor"></td>
-                                </tr>
+                   
                             </table>
                         </div>
                     </div>
