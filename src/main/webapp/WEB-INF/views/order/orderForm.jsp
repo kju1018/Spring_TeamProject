@@ -10,13 +10,37 @@
 
 <script>
 	const newAddress = () => {
+		$("#oreceiver").val("");
+		$("#oreceiver").removeAttr("readonly");
 		
+		$("#ozipcode").val("");
+		
+		$("#oaddress").val("");
+		$("#oaddress").removeAttr("readonly");
+		
+		$("#subaddress").attr("placeholder", "나머지 주소")
+		$("#subaddress").removeAttr("readonly");
+
+		$("#onumber").val("");
+		$("#onumber").removeAttr("readonly");
 	}
 	
 	const userAddress = () => {
+		var receiver = "<c:out value='${user.uname}'/>";
+		$("#oreceiver").val(receiver);
+		$("#oreceiver").attr("readonly",true);
 		
-	}
+		$("#ozipcode").val("");
+		
+		$("#oaddress").val("");
+		$("#oaddress").attr("readonly",true);
+		
+		$("#subaddress").attr("placeholder", "나머지 주소")
+		$("#subaddress").attr("readonly",true);
 
+		$("#onumber").val("");
+		$("#onumber").attr("readonly",true);
+	}
 
 </script>
 
@@ -59,7 +83,7 @@
                     <div><!-- 배송지 양식 내용-->
                         <div class="p-2">
                             <input type="radio" name="select_address" checked>주문자 정보와 동일
-                            <input type="radio" name="select_address" class="ml-2">새로운 배송지
+                            <input type="radio" name="select_address" onclick="newAddress()" class="ml-2">새로운 배송지
                         </div>
                         <div class="border-bottom pb-3"><!--입력하는곳-->
                             <table class="paymenttable">
@@ -69,23 +93,23 @@
                                 </colgroup>
                                 <tr>
                                     <th class="p-2">받는사람</th>
-                                    <td><input type="text" class="paymentinput" name="oreceiver" value="${user.uname}"></td>
+                                    <td><input type="text" class="paymentinput" id="oreceiver" name="oreceiver" value="${user.uname}"></td>
                                 </tr>
 
                                 <tr>
                                     <th class="p-2 align-text-top">주소</th>
                                     <td>
                                         <!-- readOnly -->
-                                        <input type="text" class="paymentinput2" placeholder="우편번호" name="ozipcode" value="${user.uzipcode}" readonly>
+                                        <input type="text" class="paymentinput2" placeholder="우편번호" id="ozipcode" name="ozipcode" value="${user.uzipcode}" readonly>
                                         <a href="#none" class="btn btn-dark btn-sm ml-2 mb-1">주소검색</a><br>
-                                        <input type="text" class="paymentinput" placeholder="기본주소" name="oaddress" value="${user.uaddress}" readonly> <br>
-                                        <input type="text" class="paymentinput" name="oaddress" readonly>
+                                        <input type="text" class="paymentinput" placeholder="기본주소" id="oaddress" name="oaddress" value="${user.uaddress}" readonly> <br>
+                                        <input type="text" class="paymentinput" id="subaddress" name="oaddress" readonly>
                                     </td>
                                 </tr>
                                 <tr>
                                         <th class="p-2">휴대전화</th>
                                         <td> 
-                                            <input class="paymentinput2" type="text" name="onumber" value="${user.utel}">
+                                            <input class="paymentinput2" type="text" id="onumber" name="onumber" value="${user.utel}" readonly>
                                         </td>
                                 </tr>
                             </table>
