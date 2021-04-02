@@ -5,6 +5,7 @@
 
 <%-- taglib 지시자 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -65,11 +66,12 @@
 		                <a href="#none" class="ml-3">
 		                    <h5>상품명: ${product.pname}</h5>
 		                    <p>수량: ${quantityArr[status.index]}</p>
-		                    <p>상품구매금액: ${product.pprice*quantityArr[status.index]}</p>
+		                    <p>상품구매금액: ${product.pprice}원 X ${quantityArr[status.index]}개 = ${product.pprice*quantityArr[status.index]}원</p>
 		                </a>
 		            </div>
 		            <input type="hidden" name="order_productno" value="${product.productno}"/>
 	           		<input type="hidden" name="order_quantity" value="${quantityArr[status.index]}"/>
+	           		<c:set var="total" value="${total+quantityArr[status.index]*product.pprice}"/>
 		        </c:forEach>
 	        </div><!--주문상품 div-->
            	<c:forEach var="product" items="${list}" varStatus="status">
@@ -137,7 +139,7 @@
                             </colgroup>
                             <tr>
                                 <th class="p-1">주문상품</th>
-                                <td class="text-right">50000원</td>
+                                <td class="text-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</td>
                             </tr>
                             <tr>
                                 <th class="p-1">배송비</th>
@@ -146,7 +148,7 @@
                         </table>
                         <div class="mt-2 p-2" style="background-color: #dee2e6;">
                             <h5 style="display: inline-block;">결제 금액</h5>
-                            <h5 style="float: right;">50,000원</h5>
+                            <h5 style="float: right;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</h5>
                         </div>
 
                         <h5 class="mt-2">결제수단</h5>
@@ -211,7 +213,7 @@
                     </table>
                 </div>
                 <div class="pl-4 pr-4 mt-3">
-                    <button type="submit" class="btn btn-dark item_width_100">50,000원 결제하기</button>
+                    <button type="submit" class="btn btn-dark item_width_100"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원 결제하기</button>
                 </div>
             </div><!-- form안에 div 전체 틀 content-->
         </form>

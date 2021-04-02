@@ -84,11 +84,6 @@ public class OrdersController {
 
 	@GetMapping("/order_complete")
 	public String orderComplete(Model model) {
-		// 1. orderNo을 통해 select로 방금 주문한 Order를 완료창에서 보여줌(session이용?)
-		int orderNo = 1;// 가져오는방법 생각해보기
-		Order order = ordersService.getOrder(orderNo);// 방금 주문한(생성한) Order
-		model.addAttribute("order", order);
-		// 2. createOrder에서 만든 Order를 여기로 보내줌 (물어보기)
 
 		return "order/payment_c";
 	}
