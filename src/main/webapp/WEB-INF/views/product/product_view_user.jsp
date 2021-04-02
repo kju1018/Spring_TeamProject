@@ -3,20 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript">
+<%-- 
 const insertcartquantity = (productno) => { //add to cart에 productno + productquantity 넘기기
 	  const pquant = document.getElementById('quantity').value;
 	  alert(pquant);
 	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
 	};
-	
-/* 	const cartComfirm = () => {
-		$.ajax({
-			url:""
-			data:{}
-		}).then(data => {
-			alert("이미 장바구니에 있습니다.");
-		})
- */
+ --%>
+
+const cartComfirm = () => {
+			const productno = ${products.productno};			
+			const pquantity = document.getElementById('pquantity').value;
+			
+			$.ajax({
+				url:"<%=application.getContextPath()%>/cart/create_cart",
+				data: {productno, pquantity},
+				method: "get"
+			}).then(data => {
+				console.log(data);
+				if(data.result=="failure"){
+				alert("이미 장바구니에 있습니다.");
+			}else{
+				alert("장바구니에 추가했습니다.");
+			}
+	});	
+}
+
 	
 const sumtotal = (pprice) => { //총합 계산 & 재고 계산
 	const num = document.getElementById('pquantity').value;
@@ -99,8 +111,8 @@ const changeimg4 = (product_img) => {
 						
 						<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
 						</form>
-						<button onclick="insertcartquantity(${products.productno})" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
-							
+						<button onclick="cartComfirm()" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
+							<!-- insertcartquantity(${products.productno}) -->
 					</div>
 					<br><br>
 				</div><!-- photo_subject -->	
