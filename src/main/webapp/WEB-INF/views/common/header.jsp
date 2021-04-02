@@ -77,7 +77,7 @@
                        			 <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black; ">MyPage</a>
                   		    </div>
                    		    <div class="col" >
-                    		     <a href="<%=application.getContextPath()%>/mypage/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
+                    		     <a href="<%=application.getContextPath()%>/cart/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
                    		    </div>
 				    	</sec:authorize>
 				    	<sec:authorize access="isAuthenticated()">
@@ -95,7 +95,7 @@
                        			 <a href="<%=application.getContextPath()%>/mypage/mypage" style="font-size:xx-small;text-decoration: none; color: black; ">MyPage</a>
                   		    </div>
                    		    <div class="col-2 pb-1" >
-                    		     <a href="<%=application.getContextPath()%>/mypage/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
+                    		     <a href="<%=application.getContextPath()%>/cart/cart"style="font-size:xx-small; text-decoration: none; color: black;">Cart</a>
                    		    </div>
 				    	</sec:authorize>
                 </div>
