@@ -14,7 +14,7 @@
 	</select>
 	<!-- 愿�由ъ��媛� ������ 寃����� �� -->
 	<select id="selectbyUserid" parameterType="string" resultType="user">
-  		select USERID, UPASSWORD, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UENABLED, UJOINDATE, UAUTHORITY
+  		select USERID, UNAME, UZIPCODE, UADDRESS, UEMAIL, UTEL, UBIRTH, UENABLED, UJOINDATE, UAUTHORITY
   	    from users
   	    where USERID = #{userid} 
   	</select>

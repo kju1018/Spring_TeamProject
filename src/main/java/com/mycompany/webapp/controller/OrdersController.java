@@ -6,19 +6,21 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.OrderProduct;
 import com.mycompany.webapp.dto.Products;
-import com.mycompany.webapp.service.CartsService;
+import com.mycompany.webapp.dto.User;
 import com.mycompany.webapp.service.OrderProductsService;
 import com.mycompany.webapp.service.OrdersService;
 import com.mycompany.webapp.service.ProductsService;
+import com.mycompany.webapp.service.UsersService;
 
 @Controller
 @RequestMapping("/order")
@@ -31,16 +33,24 @@ public class OrdersController {
 
 	@Autowired
 	private ProductsService productsService;
+	
+	@Autowired
+	private OrderProductsService orderProductsService;
+	
+	@Autowired
+	private UsersService usersService;
 
 	// 주문서를 가져오는 부분
 	@PostMapping("/order_form")
-	public String createOrderForm(int[] chk_productno, String quantity, Model model) {
+	public String createOrderForm(int[] chk_productno, String quantity, Model model, Authentication auth) {
 		List<Products> productList = new ArrayList<Products>();
 		String[] quantityArr = quantity.split(" ");
 		for(int i = 0; i < chk_productno.length; i++) {
 			Products product = productsService.pSelectByPno(chk_productno[i]);
 			productList.add(product);
 		}
+		User user = usersService.finduser(auth.getName());
+		model.addAttribute("user", user);
 		model.addAttribute("list", productList);
 		model.addAttribute("quantityArr",quantityArr);
 		
@@ -48,30 +58,26 @@ public class OrdersController {
 	}
 	
 	@PostMapping("/create_order")
-	public String createOrder(int[] order_productno, int[] order_quantity, Order order) {
+	public String createOrder(int[] order_productno, int[] order_quantity, Order order, Authentication auth) {
 		
-		order.setUserid("user1");
+		order.setUserid(auth.getName());
+		order.setOstatus("입금 대기중");
 		ordersService.createOrder(order);
 		
-		for(int a: order_productno) {
-			logger.info(" "+a);
+		List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
+		for(int i = 0; i < order_productno.length; i++) {
+			OrderProduct orderProduct = new OrderProduct();
+			
+			orderProduct.setProductno(order_productno[i]);
+			orderProduct.setOquantity(order_quantity[i]);
+			orderProduct.setOrderno(order.getOrderno());
+			
+			orderProductList.add(orderProduct);
 		}
+		//만약 카트 목록에서 주문한것이면 카트리스트도 삭제해주는거 구현
+	
+		orderProductsService.createOrderProductByList(orderProductList);
 		
-		for(int a: order_quantity) {
-			logger.info(" "+a);
-		}
-		logger.info(order.toString());
-		
-		/*String userId = "user1";
-		if (userId != null) {
-			order.setUserid(userId);// 일단 임의로 지정
-			order.setOstatus("입금 대기중");
-			order.setOnumber(order.getOnumber().replace(",", "-"));
-		} else {
-			// 주문 취소 등
-		}
-		ordersService.createOrder(order);
-		logger.info(order.toString());*/
 
 		return "redirect:/order/order_complete";
 	}

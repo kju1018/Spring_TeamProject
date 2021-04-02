@@ -47,7 +47,7 @@
 	};
 	
 	const updatecartquantity = (productno) => {
-		const cartquantity = document.getElementById('cartquantity'+productno).value;
+		const cartquantity = $("#cartquantity"+productno).val();
 		$.ajax({
 				url: "update_quantity",
 				data: {productno, cartquantity},
@@ -101,8 +101,40 @@
 		    cart_form.submit();
 		} 
 		
-	}
+	};
+
+	//모든 물품들의 체크박스가 체크 되어있으면 전체체크박스 체크
+	//하나라도 체크가 안되어있으면 전체체크박스 체크 해제
+	//체크되어있는 물품들의 가격 계산
+	const check = (cartlistlength) => {
+		const query = $("input[name=chk_productno]:checked");
+		if(query.length==cartlistlength){
+			$("input:checkbox[id='checkbox_All']").prop("checked", true);
+		} else{
+			$("input:checkbox[id='checkbox_All']").prop("checked", false);
+		}
+		var totalprice = 0;
+		query.each(function() {
+			var box_productno = $(this).val(); 
+			var price = $("#productprice"+box_productno).text();
+
+			totalprice += parseInt(price);
+		});
+		 $("#totalprice").text(totalprice);
+		 
+		 var fee = $("#fee").text()
+		 totalprice += parseInt(fee);
+		 $("#totalprice2").text(totalprice);
+	};
 	
+	//전체 체크박스 
+	const checkAll = () => {
+		 if ($("#checkbox_All").is(':checked')) {
+             $("input[type=checkbox]").prop("checked", true);
+         } else {
+             $("input[type=checkbox]").prop("checked", false);
+         }
+	};
 </script>
 
 
