@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   
 
@@ -20,6 +22,8 @@
 
     <!--게시판-->
     <form action="create" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
     <div class="table table-responsive">
         <table class="table">
             <tr>

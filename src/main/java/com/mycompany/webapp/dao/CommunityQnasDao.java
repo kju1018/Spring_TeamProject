@@ -26,5 +26,8 @@ public interface CommunityQnasDao {
 	 //리플저장
 	public int insertRepl(CommunityQna communityqna); 
 	public List<CommunityQna> getSearchList(String keyword);
+	public List<CommunityQna> getSearchListuser(String keyword);
 
+//	public List<CommunityQna> getSearchList(Pager pager, String keyword);
+//	public List<CommunityQna> getSearchListuser(Pager pager, String keyword);
 }

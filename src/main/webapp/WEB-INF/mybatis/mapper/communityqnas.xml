@@ -78,13 +78,57 @@
    </select>
    
    <select id="getSearchList" parameterType="pager"  resultType="communityqna">
+  
 		select boardno, btitle, bcontent, userid, bdate, bcount
 		from communityqnas
 		where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
 		order by boardno desc
+	
+	</select>
+	
+	<select id="getSearchListuser" parameterType="pager"  resultType="communityqna">
+	
+		select boardno, btitle, bcontent, userid, bdate, bcount
+		from communityqnas
+		where userid like '%'||#{keyword}||'%'
+		order by boardno desc
+		
+           
+      
 	</select>
    
-   
+   <!-- 
+   <select id="getSearchList" parameterType="pager"  resultType="communityqna">
+   select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+					select boardno, btitle, bcontent, userid, bdate, bcount
+					from communityqnas
+					where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
+					order by boardno desc
+					)
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+	</select>
+	
+	<select id="getSearchListuser" parameterType="pager"  resultType="communityqna">
+	select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+					select boardno, btitle, bcontent, userid, bdate, bcount
+					from communityqnas
+					where userid like '%'||#{keyword}||'%'
+					order by boardno desc
+					)
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+	</select>  -->
    
    
    

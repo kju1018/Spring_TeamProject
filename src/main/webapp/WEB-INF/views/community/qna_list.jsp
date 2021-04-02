@@ -11,8 +11,9 @@
 		e.preventDefault();
 
 		var url = "${pageContext.request.contextPath}/community/search";
-
-		url = url + "?keyword=" + $("#keyword").val();
+		
+		url = url + "?searchType=" + $("#searchType").val();
+		url = url + "&keyword=" + $("#keyword").val();
 		
 		location.href = url;
 
@@ -74,29 +75,29 @@
 		   <tr>
 		   	<td colspan="5" class="text-center">
 		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="qna_list?pageNo=1">처음</a>
 		   		
 		   		<c:if test="${pager.groupNo>1}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="qna_list?pageNo=${pager.startPageNo-1}">이전</a>
 			   	</c:if>
 		   		
 		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 		   			<c:if test="${pager.pageNo!=i}">
-		   				<a class="btn btn-outline-success btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="qna_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-danger btn-sm" href="qna_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="qna_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
 		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="qna_list?pageNo=${pager.endPageNo+1}">다음</a>
 			   	</c:if>
 			   	
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
 		   	</td>
 		   </tr>
@@ -121,7 +122,7 @@
 
 			<div class="w300" style="padding-right:10px">
 
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" />
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="${param.keyword}" />
 
 			</div>
 

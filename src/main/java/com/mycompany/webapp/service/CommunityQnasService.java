@@ -76,4 +76,19 @@ public class CommunityQnasService {
 		List<CommunityQna> list = communityqnasDao.getSearchList(keyword);
 		return list;
 	}
+	
+	public List<CommunityQna> getSearchuserList(String keyword) {
+		List<CommunityQna> list = communityqnasDao.getSearchListuser(keyword);
+		return list;
+	}
+	
+//	public List<CommunityQna> getSearchList(Pager pager, String keyword) {
+//		List<CommunityQna> list = communityqnasDao.getSearchList(pager, keyword);
+//		return list;
+//	}
+//	
+//	public List<CommunityQna> getSearchuserList(Pager pager, String keyword) {
+//		List<CommunityQna> list = communityqnasDao.getSearchListuser(pager, keyword);
+//		return list;
+//	}
 }
