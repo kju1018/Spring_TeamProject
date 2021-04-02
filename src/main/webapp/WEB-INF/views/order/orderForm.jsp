@@ -26,19 +26,19 @@
 	}
 	
 	const userAddress = () => {
-		var receiver = "<c:out value='${user.uname}'/>";
-		$("#oreceiver").val(receiver);
+
+		$("#oreceiver").val("<c:out value='${user.uname}'/>");
 		$("#oreceiver").attr("readonly",true);
 		
-		$("#ozipcode").val("");
+		$("#ozipcode").val("<c:out value='${user.uzipcode}'/>");
 		
-		$("#oaddress").val("");
+		$("#oaddress").val("<c:out value='${user.uaddress}'/>");
 		$("#oaddress").attr("readonly",true);
 		
-		$("#subaddress").attr("placeholder", "나머지 주소")
+		$("#subaddress").attr("placeholder", "")
 		$("#subaddress").attr("readonly",true);
 
-		$("#onumber").val("");
+		$("#onumber").val("<c:out value='${user.utel}'/>");
 		$("#onumber").attr("readonly",true);
 	}
 
@@ -82,7 +82,7 @@
                     </div>
                     <div><!-- 배송지 양식 내용-->
                         <div class="p-2">
-                            <input type="radio" name="select_address" checked>주문자 정보와 동일
+                            <input type="radio" name="select_address" onclick="userAddress()" checked>주문자 정보와 동일
                             <input type="radio" name="select_address" onclick="newAddress()" class="ml-2">새로운 배송지
                         </div>
                         <div class="border-bottom pb-3"><!--입력하는곳-->
