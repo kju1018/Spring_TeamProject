@@ -9,17 +9,31 @@ const insertcartquantity = (productno) => { //add to cart에 productno + product
 	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
 	};
 	
-
+/* 	const cartComfirm = () => {
+		$.ajax({
+			url:""
+			data:{}
+		}).then(data => {
+			alert("이미 장바구니에 있습니다.");
+		})
+ */
 	
-const sumtotal = (pprice) => { //총합 계산
+const sumtotal = (pprice) => { //총합 계산 & 재고 계산
 	const num = document.getElementById('pquantity').value;
+	if(num > ${products.pstock}){
+		alert("재고가 없습니다.");
+		document.getElementById('pquantity').value = ${products.pstock};
+		num = document.getElementById('pquantity').value;
+		document.getElementById('totalprice').innerHTML = (num*pprice)+" 원";
+		document.getElementById('price').innerHTML = (num*pprice)+" 원";
+  }
 	if(num > 0){
 		document.getElementById('totalprice').innerHTML = (num*pprice)+" 원";
 		document.getElementById('price').innerHTML = (num*pprice)+" 원";
 		}else{
 			alert("최소 수량은 1개 이상입니다.");
 			document.getElementById('pquantity').value = 1;
-		}
+		}	
 }	
 
 const changeimg1 = (product_img) => { //이미지 클릭시 변경
@@ -29,17 +43,17 @@ const changeimg1 = (product_img) => { //이미지 클릭시 변경
 
 const changeimg2 = (product_img) => {
 	var imgs = document.getElementById("detail_img1");
-	imgs.src="<%=application.getContextPath()%>/resources/image/light4_sora.png";
+	imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
 }	
 
 const changeimg3 = (product_img) => {
 	var imgs = document.getElementById("detail_img1");
-	imgs.src="<%=application.getContextPath()%>/resources/image/light5_sora.png";
+	imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
 }		
 
 const changeimg4 = (product_img) => {
 	var imgs = document.getElementById("detail_img1");
-	imgs.src="<%=application.getContextPath()%>/resources/image/light6_sora.png";
+	imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
 }	
 </script>
 
@@ -63,7 +77,7 @@ const changeimg4 = (product_img) => {
 					<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
 					<hr style="width:100%; color: black; border:1px solid black;"/>
 					<p style="font-size: large;">${products.pname}</p><br><br>
-					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		2,500원(30,000원 이상 구매 시 무료)<br><br></pre>
+					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		무료<br><br></pre>
 				    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
 				    
 				    </small>
@@ -73,14 +87,14 @@ const changeimg4 = (product_img) => {
 						<input type="hidden" name="chk_productno" value="${products.productno}"/>
 						    <table style="width:100%; height:80px; border:1px solid lightgray;">
 										<tr>
-											<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요.</b>
+											<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요. ${procuts.pstock}</b>
 			                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
 			                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
 			                
 										</tr>
 								</table> 
 					    <!--구매 / 장바구니-->
-						<br><small style="margin-left:73%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
+						<br><small style="margin-left:70%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
 						<!-- form으로 -->
 						
 						<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
