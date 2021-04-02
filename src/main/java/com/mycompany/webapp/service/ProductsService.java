@@ -21,6 +21,26 @@ public class ProductsService {
 		return list;
 	}	
 	
+	public List<Products> pSelectBest() {
+		List<Products> list = productsDao.pSelectBest();
+		return list;
+	}
+	
+	public List<Products> pSelectDate() {
+		List<Products> list = productsDao.pSelectDate();
+		return list;
+	}
+	
+	public List<Products> pSelectBestPager(Pager pager){
+		List<Products> list = productsDao.pSelectBestPager(pager);
+		return list;
+	}
+	
+	public List<Products> pSelectDatePager(Pager pager){
+		List<Products> list = productsDao.pSelectDatePager(pager);
+		return list;
+	}
+	
 	public List<Products> pSelectAll(Pager pager){
 		List<Products> list = productsDao.pSelectByPage(pager);
 		return list;
@@ -30,23 +50,28 @@ public class ProductsService {
 		int rows = productsDao.count(pcategory);
 		return rows;
 	}
+	public int getTotalRowsAll() {
+		int rows = productsDao.countAll();
+		return rows;
+	}
+
 	
 	public List<Products> getTotalDate(Pager pager) {
-		List<Products> rows = productsDao.count_date(pager);
+		List<Products> rows = productsDao.countDate(pager);
 		return rows; 
 	}
 	public List<Products> getTotalName(Pager pager) {
-		List<Products> rows = productsDao.count_name(pager);
+		List<Products> rows = productsDao.countName(pager);
 		return rows; 
 	}
 
 	public List<Products> getTotalLow(Pager pager) {
-		List<Products> rows = productsDao.count_low(pager);
+		List<Products> rows = productsDao.countLow(pager);
 		return rows; 
 	}
 
 	public List<Products> getTotalHigh(Pager pager) {
-		List<Products> rows = productsDao.count_high(pager);
+		List<Products> rows = productsDao.countHigh(pager);
 		return rows; 
 	}
 
@@ -67,4 +92,5 @@ public class ProductsService {
 		productsDao.pDeleteByPno(productno);
 	}
 	
+
 }
