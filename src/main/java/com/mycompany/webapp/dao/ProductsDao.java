@@ -10,12 +10,19 @@ import com.mycompany.webapp.dto.Products;
 @Mapper
 public interface ProductsDao {
 	public List<Products> pSelectAll(); //상품 전체 조회
+	public List<Products> pSelectBest(); //베스트5 조회
+	public List<Products> pSelectDate(); //신상품5 조회
+	
 	public List<Products> pSelectByPage(Pager pager);//페이징 처리	
 	public int count(int pcategory); //상품 전체 행수
-	public List<Products> count_date(Pager pager); //날짜순 정렬
-	public List<Products> count_name(Pager pager); //이름순 정렬
-	public List<Products> count_low(Pager pager); //가격순 정렬
-	public List<Products> count_high(Pager pager); //가격순 정렬
+	public int countAll();
+	
+	public List<Products> pSelectBestPager(Pager pager);
+	public List<Products> pSelectDatePager(Pager pager);	
+	public List<Products> countDate(Pager pager); //날짜순 정렬
+	public List<Products> countName(Pager pager); //이름순 정렬
+	public List<Products> countLow(Pager pager); //가격순 정렬
+	public List<Products> countHigh(Pager pager); //가격순 정렬
 	
 	public int pInsert(Products products); //상품 입력
 	public int pUpdate(Products products); //상품 업데이트
