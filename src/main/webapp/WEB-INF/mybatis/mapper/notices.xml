@@ -28,12 +28,12 @@
    	 <selectKey keyProperty="boardno" resultType="int" order="BEFORE">
          select seq_notices_boardno.nextval from dual
       </selectKey>
-      
+
          insert into notices
          (boardno, btitle, bcontent, userid, bdate, bcount)
          values
          (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0)      
-   
+
    </insert>
    
    <select id="selectByBoardno" parameterType="int" resultType="notice">

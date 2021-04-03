@@ -26,6 +26,11 @@
 
     <div class="table table-responsive">
         <table class="table">
+        	<tr>
+                <th>작성자</th>
+                <td colspan="3"><input type="text" id="userid" name="userid" value="${userid}" style="width: 100%;" readonly></td>
+            </tr>
+            
             <tr>
                 <th>제목</th>
                 <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
