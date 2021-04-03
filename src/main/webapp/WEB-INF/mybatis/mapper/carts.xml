@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="euc-kr" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--xmlÆÄÀÏÀ» ½Äº°ÇÒ ¼ö ÀÖ´Â ÀÌ¸§ -->
+<!--xmlíŒŒì¼ì„ ì‹ë³„í•  ìˆ˜ ìžˆëŠ” ì´ë¦„ -->
 <mapper namespace="com.mycompany.webapp.dao.CartsDao">
-	<!--select¹®À» ½Äº°ÇÒ ¼ö ÀÖ´Â ÀÌ¸§ -->
+	<!--selectë¬¸ì„ ì‹ë³„í•  ìˆ˜ ìžˆëŠ” ì´ë¦„ -->
 
 	
 	<select id="selectByUserId" parameterType="string" resultType="cart">

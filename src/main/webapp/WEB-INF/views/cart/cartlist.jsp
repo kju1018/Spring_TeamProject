@@ -7,12 +7,13 @@
 	<table class="table" style="margin-top: 30px;">
 			<tr>
 				<th><input type="checkbox" name="checkbox_All" id="checkbox_All" onclick="checkAll()" checked/></th>
-				<th width="25%">제품사진</th>
-				<th width="20%">상품정보</th>
-				<th width="10%">수량</th>
-				<th width="10%"></th>
-				<th width="25%">구매금액</th>
-				<th width="10%">배송비</th>
+				<th width="20%" class="text-center">제품사진</th>
+				<th width="20%" class="text-center">상품정보</th>
+				<th width="13%" class="text-center">가격</th>
+				<th width="10%" class="text-center">수량</th>
+				<th width="7%"></th>
+				<th width="20%" class="text-center">구매금액</th>
+				<th width="10%" class="text-center">배송비</th>
 			</tr>
 			
 			<c:if test="${empty cartList}">
@@ -26,22 +27,23 @@
 	
 			<c:if test="${not empty cartList}">
 					<input type="hidden" id="quantity" name="quantity" value=""/>
+					<input type="hidden" name="isCart" value="1"/>
 					<c:forEach var="cart" items="${cartList}">
 						<tr class="cart_list" >
-							<th class="align-middle"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
-							<th class="align-middle">
+							<th class="align-middle text-center"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
+							<th class="align-middle text-center">
 								<a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">
 									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
 								</a>
 							</th>
-							<th class="align-middle"><a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">${cart.pname}</a></th>
-							<th class="align-middle">
-								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
-								
+							<th class="align-middle text-center"><a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">${cart.pname}</a></th>
+							<th class="align-middle text-center">${cart.pprice}원</th>
+							<th class="align-middle text-center">
+								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:50%"> 개
 							</th>
-							<th class="align-middle"><a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a></th>
-							<th class="align-middle">${cart.pprice}원 X ${cart.cartquantity} = <span id="productprice${cart.productno}">${cart.cartquantity*cart.pprice}</span>원</th>
-							<th class="align-middle">무료</th>
+							<th class="align-middle text-center"><a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a></th>
+							<th class="align-middle text-center"><span id="productprice${cart.productno}">${cart.cartquantity*cart.pprice}</span>원</th>
+							<th class="align-middle text-center">무료</th>
 						</tr>
 						<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
 					</c:forEach>
@@ -59,9 +61,9 @@
 		</tr>
 
 		<tr>	
-			<th><span id="totalprice"><c:out value="${total}"/></span>원</th>
+			<th><span id="totalprice"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/></span>원</th>
 			<th>+<span id="fee">0</span> 원</th>
-			<th>= <span id="totalprice2"><c:out value="${total}"/></span>원</th>
+			<th>= <span id="totalprice2"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/></span>원</th>
 		</tr>
 	</table>
 	
