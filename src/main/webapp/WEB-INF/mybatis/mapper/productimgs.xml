@@ -24,16 +24,18 @@
 	delete from productimgs where imgno=#{imgno}
 </delete>
 
-<select id="pImgSelectByIno" resultType="productimgs">
+<select id="pImgSelectByPno" resultType="productimgs">
 	select imgno, productno, ioriginalname, isavename, imgtype, ipriority
 	from productimgs
 	where productno=${productno} and ipriority=0
 </select>
 
-<select id="pImgSelectByIno_pri" resultType="productimgs">
+<select id="pImgSelectByIno" parameterType="int" resultType="productimgs">
 	select imgno, productno, ioriginalname, isavename, imgtype, ipriority
 	from productimgs
-	where productno=${productno} and ipriority=1
+	where imgno=${imgno} and ipriority=0
 </select>
+
+
 <!-- pno / 리스트 -->
 </mapper>
