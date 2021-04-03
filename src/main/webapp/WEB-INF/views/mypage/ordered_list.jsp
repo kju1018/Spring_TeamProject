@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <!-- <style>
@@ -33,36 +33,31 @@
 	</div>
 	
 	<!--게시판-->
-	<table class="orderedtable table mt-5">
-		<tr>
-			<th width="20%">주문번호: A12341234</th>
-			<th width="20%"></th>
-			<th width="10%"></th>
-			<th width="10%"></th>
-			<th width="15%"></th>
-			<th width="25%">주문 일자: 2021-03-08</th>
-		</tr>
-		
-		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
-			<th>북유럽풍 조명 장식</th>
-			<th></th>
-			<th>2개</th>
-			<th>268000원</th>
-			<th>취소</th>
-		</tr>
-		
-		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="80px"></th>
-			<th>스칸디나비아 주방 식탁</th>
-			<th></th>
-			<th>1개</th>
-			<th>10000000원</th>
-			<th>-</th>
-		</tr>
-	</table>
+	<c:forEach items="${orderList}" var="order">
+		<table class="orderedtable table mt-5">
+			<tr>
+				<th width="20%">${order.orderno}</th>
+				<th width="20%"></th>
+				<th width="10%"></th>
+				<th width="10%"></th>
+				<th width="15%"></th>
+				<th width="25%">주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></th>
+			</tr>
+			
+			<c:forEach items="${order.orderproductlist}" var="orderproduct">
+				<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
+					<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
+					<th>${orderproduct.pname}</th>
+					<th></th>
+					<th>${orderproduct.oquantity}개</th>
+					<th>${orderproduct.oquantity*orderproduct.pprice} 원</th>
+					<th>${order.ostatus}</th>
+				</tr>
+			<br>
+			</c:forEach>
+		</table>
 	<!--게시판-->
-
+	</c:forEach>
     
     <br/>
     <br/>

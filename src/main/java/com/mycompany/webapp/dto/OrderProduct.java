@@ -60,7 +60,15 @@ public class OrderProduct {
 	}
 	public void setImgtype(String imgtype) {
 		this.imgtype = imgtype;
+	}
+	@Override
+	public String toString() {
+		return "OrderProduct [productno=" + productno + ", orderno=" + orderno + ", oquantity=" + oquantity + ", pname="
+				+ pname + ", pprice=" + pprice + ", ioriginalname=" + ioriginalname + ", isavename=" + isavename
+				+ ", imgtype=" + imgtype + "]";
 	}	
+	
+	
 	
 }
 	
