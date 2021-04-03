@@ -140,9 +140,11 @@
      			totalprice += parseInt(price);
      		});
              $("#totalprice").text(totalprice);
+             $("#totalprice2").text(totalprice);
          } else {
              $("input[type=checkbox]").prop("checked", false);
              $("#totalprice").text(0);
+             $("#totalprice2").text(0);
          }
 	};
 </script>

@@ -52,6 +52,7 @@
     	        <!--form 전체 -->
     	<form id=" paymentForm" method="post" action="<%=application.getContextPath()%>/order/create_order">
     		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+    		<input type="hidden" name="isCart" value="${isCart}">
 	        <div><!--주문상품 div-->
 	            <div>
 	                <h5 class="border-bottom pb-2">주문상품</h5>

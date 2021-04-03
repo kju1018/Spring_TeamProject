@@ -27,6 +27,7 @@
 	
 			<c:if test="${not empty cartList}">
 					<input type="hidden" id="quantity" name="quantity" value=""/>
+					<input type="hidden" name="isCart" value="1"/>
 					<c:forEach var="cart" items="${cartList}">
 						<tr class="cart_list" >
 							<th class="align-middle text-center"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
