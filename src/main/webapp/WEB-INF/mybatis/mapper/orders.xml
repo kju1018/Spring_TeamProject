@@ -5,23 +5,14 @@
 <mapper namespace="com.mycompany.webapp.dao.OrdersDao">
 	<!--select문을 식별할 수 있는 이름 -->
 	
-	<resultMap type="order" id="selectByUserId">
-		<id property="orderno" column="ordernl"/>
-		<result property="userid" column="userid"/>
-		<result property="oaddress" column="oaddress"/>
-		<result property="oreceiver" column="oreceiver"/>
-		<result property="omessage" column="omessage"/>
-		<result property="omethod" column="omethod"/>
-		<result property="odate" column="odate"/>
-		<result property="ostatus" column="ostatus"/>
-		<result property="ozipcode" column="userid"/>
-		<result property="onumber" column="onumber"/>
+	<resultMap type="order" id="orderResult">
+		<id property="orderno" column="orderno"/>
 		<collection property="orderproductlist" column="orderno" javaType="list" ofType="orderproduct"
 				select="getOrderProduct"/>
 	</resultMap>
 	
 	
-	<select id="selectByUserId" parameterType="string" resultType="order">
+	<select id="selectByUserId" parameterType="string" resultMap="orderResult">
 		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from orders
 		where userid=#{userid}
@@ -31,8 +22,7 @@
 		select op.productno, op.orderno, op.oquantity, p.pname, p.pprice, pi.ioriginalname, pi.isavename, pi.imgtype
 		from orderproducts op, products p, productimgs pi
 		where op.orderno=#{orderno} and op.productno=p.productno 
-		and 
-		
+		and p.productno = pi.productno and pi.ipriority = 1
 	</select>
 
 	
