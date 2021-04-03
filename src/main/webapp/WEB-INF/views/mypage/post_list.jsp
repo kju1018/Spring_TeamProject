@@ -47,7 +47,7 @@
 		      <tr>
 		         <td>${post_list.boardno}</td>
 		         <td><a href="<%=application.getContextPath()%>/community/qna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
-		         <td>${post_list.userid}</td>
+		         <td>${userid}</td>
 		         <td><fmt:formatDate value="${post_list.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${post_list.bcount}</td>
 		      </tr>
@@ -69,7 +69,7 @@
 		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
