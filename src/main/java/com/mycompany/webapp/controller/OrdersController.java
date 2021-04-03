@@ -115,9 +115,12 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/mypage/ordered_list")
-	public String getOrderedList(Model model) {
+	public String getOrderedList(Model model, Authentication auth) {
 		
-		
+		List<Order> orderList = ordersService.getOrderList(auth.getName());
+		for(Order order : orderList) {
+			logger.info(order.toString());
+		}
 		
 		return "mypage/ordered_list";
 	}
