@@ -1,6 +1,7 @@
 package com.mycompany.webapp.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	private int orderno;
@@ -13,6 +14,7 @@ public class Order {
 	private Date odate;
 	private String ostatus;
 	private int ozipcode;
+	private List<OrderProduct> orderproductlist;
 	
 	public int getOrderno() {
 		return orderno;
@@ -74,12 +76,21 @@ public class Order {
 	public void setOzipcode(int ozipcode) {
 		this.ozipcode = ozipcode;
 	}
+	public List<OrderProduct> getOrderproductlist() {
+		return orderproductlist;
+	}
+	public void setOrderproductlist(List<OrderProduct> orderproductlist) {
+		this.orderproductlist = orderproductlist;
+	}
 	@Override
 	public String toString() {
 		return "Order [orderno=" + orderno + ", userid=" + userid + ", oaddress=" + oaddress + ", oreceiver="
 				+ oreceiver + ", onumber=" + onumber + ", omessage=" + omessage + ", omethod=" + omethod + ", odate="
-				+ odate + ", ostatus=" + ostatus + ", ozipcode=" + ozipcode + "]";
+				+ odate + ", ostatus=" + ostatus + ", ozipcode=" + ozipcode + ", orderproductlist=" + orderproductlist
+				+ "]";
 	}
+	
+	
 	
 	
 	

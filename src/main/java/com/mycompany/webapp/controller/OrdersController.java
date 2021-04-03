@@ -101,13 +101,8 @@ public class OrdersController {
 			orderProduct.setProductno(order_productno[0]);
 			orderProduct.setOquantity(order_quantity[0]);
 			orderProduct.setOrderno(order.getOrderno());
-			
-			Cart cart = new Cart();
-			cart.setUserid(auth.getName());
-			cart.setProductno(order_productno[0]);
-			
+		
 			orderProductsService.createOrderProduct(orderProduct);
-			cartsService.createCart(cart);
 		}
 		
 		return "redirect:/order/order_complete";
@@ -120,7 +115,9 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/mypage/ordered_list")
-	public String getOrderedList() {
+	public String getOrderedList(Model model) {
+		
+		
 		
 		return "mypage/ordered_list";
 	}

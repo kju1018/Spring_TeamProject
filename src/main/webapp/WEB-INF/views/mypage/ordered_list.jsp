@@ -3,6 +3,12 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<!-- <style>
+.orderedtable tr th {
+	background: aqua;
+	text-align: center;
+}
+</style> -->
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -26,41 +32,32 @@
 		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
 	</div>
 	
-	<!-- 검색창 -->
-	<div class='find_zone'>
-	<input type='text' name='findStr' />
-	<input type='button' value='검색' id='btnFind' name='select' onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'"/>
-	</div>
-	
 	<!--게시판-->
-	<table class="table">
+	<table class="orderedtable table mt-5">
 		<tr>
-            <th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
-			<th width="20%">주문번호/주문일자</th>
-			<th width="30%">제품사진</th>
-			<th width="20%">상품정보</th>
-			<th width="10%">수량</th>
-			<th width="10%">구매금액</th>
-			<th width="10%">구매상태</th>
+			<th width="20%">주문번호: A12341234</th>
+			<th width="20%"></th>
+			<th width="10%"></th>
+			<th width="10%"></th>
+			<th width="15%"></th>
+			<th width="25%">주문 일자: 2021-03-08</th>
 		</tr>
 		
 		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th>A12341234/2021-03-08</th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
+			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
 			<th>북유럽풍 조명 장식</th>
-			<th>2</th>
-			<th>268000</th>
+			<th></th>
+			<th>2개</th>
+			<th>268000원</th>
 			<th>취소</th>
 		</tr>
 		
 		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th>A56785678/2021-02-02</th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
+			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="80px"></th>
 			<th>스칸디나비아 주방 식탁</th>
-			<th>1</th>
-			<th>10000000</th>
+			<th></th>
+			<th>1개</th>
+			<th>10000000원</th>
 			<th>-</th>
 		</tr>
 	</table>
