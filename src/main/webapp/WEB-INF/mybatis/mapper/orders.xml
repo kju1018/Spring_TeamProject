@@ -1,9 +1,29 @@
-<?xml version="1.0" encoding="euc-kr" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--xmlÆÄÀÏÀ» ½Äº°ÇÒ ¼ö ÀÖ´Â ÀÌ¸§ -->
+<!--xmlíŒŒì¼ì„ ì‹ë³„í•  ìˆ˜ ìžˆëŠ” ì´ë¦„ -->
 <mapper namespace="com.mycompany.webapp.dao.OrdersDao">
-	<!--select¹®À» ½Äº°ÇÒ ¼ö ÀÖ´Â ÀÌ¸§ -->
+	<!--selectë¬¸ì„ ì‹ë³„í•  ìˆ˜ ìžˆëŠ” ì´ë¦„ -->
+	
+	<resultMap type="order" id="orderResult">
+		<id property="orderno" column="orderno"/>
+		<collection property="orderproductlist" column="orderno" javaType="list" ofType="orderproduct"
+				select="getOrderProduct"/>
+	</resultMap>
+	
+	
+	<select id="selectByUserId" parameterType="string" resultMap="orderResult">
+		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
+		from orders
+		where userid=#{userid}
+	</select>	
+	
+	<select id="getOrderProduct" resultType="orderproduct">
+		select op.productno, op.orderno, op.oquantity, p.pname, p.pprice, pi.ioriginalname, pi.isavename, pi.imgtype
+		from orderproducts op, products p, productimgs pi
+		where op.orderno=#{orderno} and op.productno=p.productno 
+		and p.productno = pi.productno and pi.ipriority = 1
+	</select>
 
 	
 	<select id="selectByOrderNo" parameterType="int" resultType="order">
@@ -12,11 +32,7 @@
 		where orderno=#{orderno}
 	</select>
 	
-	<select id="selectByUserId" parameterType="string" resultType="order">
-		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
-		from orders
-		where userid=#{userid}
-	</select>
+
 	
 	
 	<insert id="insert" parameterType="order">
@@ -32,7 +48,7 @@
 	
 	<update id="updateOrderStatus" parameterType="int">
 		update orders set 
-		ostatus='Ãë¼Ò'
+		ostatus='ì·¨ì†Œ'
 		where orderno=#{orderno}
 	</update>
 	

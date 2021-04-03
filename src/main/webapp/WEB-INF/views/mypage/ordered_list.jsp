@@ -1,8 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<!-- <style>
+.orderedtable tr th {
+	background: aqua;
+	text-align: center;
+}
+</style> -->
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -26,46 +32,32 @@
 		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
 	</div>
 	
-	<!-- 검색창 -->
-	<div class='find_zone'>
-	<input type='text' name='findStr' />
-	<input type='button' value='검색' id='btnFind' name='select' onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'"/>
-	</div>
-	
 	<!--게시판-->
-	<table class="table">
-		<tr>
-            <th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
-			<th width="20%">주문번호/주문일자</th>
-			<th width="30%">제품사진</th>
-			<th width="20%">상품정보</th>
-			<th width="10%">수량</th>
-			<th width="10%">구매금액</th>
-			<th width="10%">구매상태</th>
-		</tr>
-		
-		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th>A12341234/2021-03-08</th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
-			<th>북유럽풍 조명 장식</th>
-			<th>2</th>
-			<th>268000</th>
-			<th>취소</th>
-		</tr>
-		
-		<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th>A56785678/2021-02-02</th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
-			<th>스칸디나비아 주방 식탁</th>
-			<th>1</th>
-			<th>10000000</th>
-			<th>-</th>
-		</tr>
-	</table>
+	<c:forEach items="${orderList}" var="order">
+		<table class="orderedtable table mt-5">
+			<tr>
+				<th width="20%">${order.orderno}</th>
+				<th width="20%"></th>
+				<th width="10%"></th>
+				<th width="10%"></th>
+				<th width="15%"></th>
+				<th width="25%">주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></th>
+			</tr>
+			
+			<c:forEach items="${order.orderproductlist}" var="orderproduct">
+				<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
+					<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
+					<th>${orderproduct.pname}</th>
+					<th></th>
+					<th>${orderproduct.oquantity}개</th>
+					<th>${orderproduct.oquantity*orderproduct.pprice} 원</th>
+					<th>${order.ostatus}</th>
+				</tr>
+			<br>
+			</c:forEach>
+		</table>
 	<!--게시판-->
-
+	</c:forEach>
     
     <br/>
     <br/>

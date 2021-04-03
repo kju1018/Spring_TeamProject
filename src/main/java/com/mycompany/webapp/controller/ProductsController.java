@@ -1,7 +1,12 @@
 package com.mycompany.webapp.controller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,16 +114,38 @@ public class ProductsController {
 	@GetMapping("/product_view_user")
 	public String product_view_user(Model model, int productno) {
 		Products products = productsService.pSelectByPno(productno);
-		List<ProductImgs> productimg = productImgsService.pImgSelectByIno(productno);
-		logger.info(products.getIoriginalname());
+		List<ProductImgs> productimg = productImgsService.pImgSelectByPno(productno);
 		model.addAttribute("products", products);
-		model.addAttribute("productimg", productimg);				
+		logger.info("imgno : "+Integer.toString(productimg.get(0).getImgno()));
+		model.addAttribute("productimg", productimg);
+		
 		return "product/product_view_user";
 	}
 	
+	/*상품 사진*/
+	@GetMapping("/downloadImags_detail")
+	public void downloadImags_detail(String savename, String type, HttpServletResponse response) {
+		try {
+			response.setContentType(type);
+			//String originalName = products.getDetailimgoname(); 
+			//originalName = new String(originalName.getBytes("UTF-8"),"ISO-8859-1");
+			//response.setHeader("Content-Disposition", "attachment; filename=\""+originalName+"\";");			
+			InputStream is = new FileInputStream("C:/team5_spring_img/image/"+savename);
+		    OutputStream os = response.getOutputStream();
+		    FileCopyUtils.copy(is, os);
+		    os.flush();
+		    is.close();
+		    os.close();			   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	
 	/*상품 리스트*/
 	@GetMapping("/product_list_user")
-	public String product_list_user(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname) {
+	public String product_list_user(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname, int sort) {
 		  int intPageNo = 1;
 		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
 			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
@@ -129,35 +157,42 @@ public class ProductsController {
 			  intPageNo = Integer.parseInt(pageNo);
 		  }	  
 		  
-		  
-	      int totalRows = productsService.getTotalRows(pcategory);
-	      
-	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory);
-	      //logger.info(Integer.toString(pager.getTotalRows()));
-
-	  
-	      session.setAttribute("pager", pager);
-	      
-	      List<Products> list = productsService.pSelectAll(pager);
-	      
-	      Pager pager_list = new Pager(10,5, totalRows, intPageNo, list);
-	      List<Products> list_date = productsService.getTotalDate(pager_list);
-	      List<Products> list_name = productsService.getTotalName(pager_list);
-	      List<Products> list_low = productsService.getTotalLow(pager_list);
-	      List<Products> list_high = productsService.getTotalHigh(pager_list);
-	      
-	      //====================
-	      //컨트롤러 쪼개서 버튼
+	      int totalRows = productsService.getTotalRows(pcategory); //카테고리의 전체 행수
+	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+	      //원래 세션자리	      
+	      List<Products> list = productsService.pSelectAll(pager); //행수 페이징 처리
+	      switch(sort) {
+	      case 1:
+	    	  list = productsService.getTotalDate(pager);
+	    	  break;
+	      case 2:
+	    	  list = productsService.getTotalName(pager);
+	    	  break;	      
+	      case 3:
+	    	  list = productsService.getTotalLow(pager);
+	    	  break;	    	  
+	      case 4:
+	    	  list = productsService.getTotalHigh(pager);
+	    	  break;
+	      case 5:
+	    	  totalRows = productsService.getTotalRowsAll();
+	    	  pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+	    	  list = productsService.pSelectBestPager(pager);
+	    	  break;
+	      case 6:
+	    	  totalRows = productsService.getTotalRowsAll();
+	    	  pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+	    	  list = productsService.pSelectDatePager(pager);
+	    	  break;
+	      default:
+	    	  break;
+      }
+	    session.setAttribute("pager", pager);  	    
 		model.addAttribute("list", list);
-		model.addAttribute("list_date", list_date);
-		model.addAttribute("list_name", list_name);
-		model.addAttribute("list_low", list_low);
-		model.addAttribute("list_high", list_high);
+		model.addAttribute("sort", sort);
 		model.addAttribute("pcategory", pcategory);
 		model.addAttribute("pcategoryname", pcategoryname);
 		return "product/product_list_user";
 	}
 	
-	/* 정렬 */
-
 }

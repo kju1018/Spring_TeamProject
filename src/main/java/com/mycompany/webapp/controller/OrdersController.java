@@ -6,22 +6,24 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.OrderProduct;
 import com.mycompany.webapp.dto.Products;
+import com.mycompany.webapp.dto.User;
 import com.mycompany.webapp.service.CartsService;
 import com.mycompany.webapp.service.OrderProductsService;
 import com.mycompany.webapp.service.OrdersService;
 import com.mycompany.webapp.service.ProductsService;
+import com.mycompany.webapp.service.UsersService;
 
 @Controller
-@RequestMapping("/order")
 public class OrdersController {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrdersController.class);
@@ -31,60 +33,94 @@ public class OrdersController {
 
 	@Autowired
 	private ProductsService productsService;
+	
+	@Autowired
+	private OrderProductsService orderProductsService;
+	
+	@Autowired
+	private UsersService usersService;
+	
+	@Autowired
+	private CartsService cartsService;
 
 	// 주문서를 가져오는 부분
-	@PostMapping("/order_form")
-	public String createOrderForm(int[] chk_productno, String quantity, Model model) {
+	@PostMapping("/order/order_form")
+	public String createOrderForm(
+			int[] chk_productno, 
+			String quantity,
+			int isCart,
+			Model model, 
+			Authentication auth) {
+		
 		List<Products> productList = new ArrayList<Products>();
 		String[] quantityArr = quantity.split(" ");
 		for(int i = 0; i < chk_productno.length; i++) {
 			Products product = productsService.pSelectByPno(chk_productno[i]);
 			productList.add(product);
 		}
+		User user = usersService.finduser(auth.getName());
+		model.addAttribute("user", user);
 		model.addAttribute("list", productList);
 		model.addAttribute("quantityArr",quantityArr);
-		
+		model.addAttribute("isCart", isCart);
 		return "order/orderForm";
 	}
 	
-	@PostMapping("/create_order")
-	public String createOrder(int[] order_productno, int[] order_quantity, Order order) {
-		
-		order.setUserid("user1");
+	@PostMapping("/order/create_order")
+	public String createOrder(
+			int[] order_productno, 
+			int[] order_quantity,
+			int isCart,
+			Order order, 
+			Authentication auth
+			) {
+		// 오더 생성
+		order.setUserid(auth.getName());
+		order.setOstatus("입금 대기중");
 		ordersService.createOrder(order);
 		
-		for(int a: order_productno) {
-			logger.info(" "+a);
+		if(isCart == 1) {//카트에서 구매 할 때
+			List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
+			List<Cart> cartList = new ArrayList<Cart>();
+			for(int i = 0; i < order_productno.length; i++) {
+				OrderProduct orderProduct = new OrderProduct();
+				orderProduct.setProductno(order_productno[i]);
+				orderProduct.setOquantity(order_quantity[i]);
+				orderProduct.setOrderno(order.getOrderno());
+				orderProductList.add(orderProduct);
+				
+				Cart cart = new Cart();
+				cart.setUserid(auth.getName());
+				cart.setProductno(order_productno[i]);
+				cartList.add(cart);
+			}
+			orderProductsService.createOrderProductByList(orderProductList);
+			cartsService.removeSelectCart(cartList);
+		} else { // 상품 상세 페이지에서 직접 구매할 때
+			OrderProduct orderProduct = new OrderProduct();
+			orderProduct.setProductno(order_productno[0]);
+			orderProduct.setOquantity(order_quantity[0]);
+			orderProduct.setOrderno(order.getOrderno());
+		
+			orderProductsService.createOrderProduct(orderProduct);
 		}
 		
-		for(int a: order_quantity) {
-			logger.info(" "+a);
-		}
-		logger.info(order.toString());
-		
-		/*String userId = "user1";
-		if (userId != null) {
-			order.setUserid(userId);// 일단 임의로 지정
-			order.setOstatus("입금 대기중");
-			order.setOnumber(order.getOnumber().replace(",", "-"));
-		} else {
-			// 주문 취소 등
-		}
-		ordersService.createOrder(order);
-		logger.info(order.toString());*/
-
 		return "redirect:/order/order_complete";
 	}
 
-	@GetMapping("/order_complete")
+	@GetMapping("/order/order_complete")
 	public String orderComplete(Model model) {
-		// 1. orderNo을 통해 select로 방금 주문한 Order를 완료창에서 보여줌(session이용?)
-		int orderNo = 1;// 가져오는방법 생각해보기
-		Order order = ordersService.getOrder(orderNo);// 방금 주문한(생성한) Order
-		model.addAttribute("order", order);
-		// 2. createOrder에서 만든 Order를 여기로 보내줌 (물어보기)
 
 		return "order/payment_c";
+	}
+	
+	@GetMapping("/mypage/ordered_list")
+	public String getOrderedList(Model model, Authentication auth) {
+		
+		List<Order> orderList = ordersService.getOrderList(auth.getName());
+		model.addAttribute("orderList", orderList);
+		
+		return "mypage/ordered_list";
 	}
 	
 

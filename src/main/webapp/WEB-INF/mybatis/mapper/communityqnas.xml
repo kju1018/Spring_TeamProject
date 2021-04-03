@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- namespace는 이 xml 파일이 어떤 것이 몸체인지, 몸체의 경로를 작성해주기 위한 용도이다. 즉, 인터페이스 바인딩을 위한 것 -->
+<!-- namespace는 mapper 인터페이스가 있는 경로를 작성 -->
 <mapper namespace="com.mycompany.webapp.dao.CommunityQnasDao">
 
+<!-- sql문의 태그 id속성은 구문을 찾기 위해 사용될 수 있는 네임 스페이스 내 유일한 구분자, 인터페이스의 메서드 이름작성 -->
+<!-- resultType: 결과 반환 object, parameterType: 조회결과 object/인터페이스 메소드가 받은 타입 -->
  <select id="selectByPage" parameterType="pager" resultType="communityqna">
       select rnum, boardno, btitle, bcontent, userid, bdate, bcount
       from(
@@ -54,6 +58,27 @@
       where rnum &gt;= #{startRowNo}
    </select>
    
+   <select id="selectByKeyword" parameterType="map" resultType="communityqna">
+      select rnum, boardno, btitle, bcontent, userid, bdate, bcount
+      from(
+         select rownum as rnum, boardno, btitle, bcontent, userid, bdate, bcount
+            from (
+               select boardno, btitle, bcontent, userid, bdate, bcount
+               from communityqnas
+				<if test="searchType == 'btitlebcontent'">
+					where btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%'
+				</if>
+				<if test="searchType == 'userid'">
+					where userid like '%' || #{keyword} || '%'
+				</if>
+               order by boardno desc
+            )
+           
+         where rownum &lt;=#{endRowNo}
+      )
+      where rnum &gt;= #{startRowNo}
+   </select>
+   
    <update id="update" parameterType="communityqna">
       update communityqnas set
          btitle=#{btitle},
@@ -77,15 +102,18 @@
       select count(userid) from communityqnas
    </select>
    
-   <select id="getSearchList" parameterType="pager"  resultType="communityqna">
-		select boardno, btitle, bcontent, userid, bdate, bcount
-		from communityqnas
-		where btitle like '%'||#{keyword}||'%' or bcontent like '%'||#{keyword}||'%'
-		order by boardno desc
-	</select>
-   
-   
-   
+    <select id="countkeyword" parameterType="map" resultType="int">
+    	<if test="searchType == 'btitlebcontent'">
+    		select count(*) 
+    		from communityqnas
+    		where btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%'
+    	</if>
+    	<if test="searchType == 'userid'">
+    		select count(*)
+			from communityqnas
+			where userid like '%' || #{keyword} || '%'
+    	</if>
+   </select>
    
    
    
@@ -102,14 +130,3 @@
    </insert>  
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-

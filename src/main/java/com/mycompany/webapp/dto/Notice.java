@@ -2,6 +2,8 @@ package com.mycompany.webapp.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Notice {
 	private int boardno;
 	private String userid;
@@ -9,8 +11,7 @@ public class Notice {
 	private Date bdate;
 	private String bcontent;
 	private int bcount;
-	
-	
+
 	public int getBoardno() {
 		return boardno;
 	}

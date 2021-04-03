@@ -20,6 +20,10 @@ public class OrderProductsService {
 		orderProductsDao.insert(orderProduct);
 	}
 	
+	public void createOrderProductByList(List<OrderProduct> orderProductList) {
+		orderProductsDao.insertByList(orderProductList);
+	}
+	
 	public void updateOrderProduct(OrderProduct orderProduct) {
 		orderProductsDao.updateOrderProduct(orderProduct);
 	}
