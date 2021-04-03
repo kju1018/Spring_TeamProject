@@ -118,9 +118,7 @@ public class OrdersController {
 	public String getOrderedList(Model model, Authentication auth) {
 		
 		List<Order> orderList = ordersService.getOrderList(auth.getName());
-		for(Order order : orderList) {
-			logger.info(order.toString());
-		}
+		model.addAttribute("orderList", orderList);
 		
 		return "mypage/ordered_list";
 	}
