@@ -11,13 +11,14 @@
 
 <!--  -->
 <select id="pSelectByPage" parameterType="pager" resultType="products">
-	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				where pcategory=#{pcategory}
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+          select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+          from products p, productimgs i
+          where p.productno=i.productno and i.ipriority=1 and pcategory=#{pcategory}
+
 				order by productno desc
 			)
 		where rownum &lt;=#{endRowNo}
@@ -26,13 +27,14 @@
 </select>
 
 <select id="countDate" parameterType="pager" resultType="products">
-		select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				where pcategory=#{pcategory}
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+          select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+          from products p, productimgs i
+          where p.productno=i.productno and i.ipriority=1 and pcategory=#{pcategory}
+
 				order by pregisterdate desc
 			)
 		where rownum &lt;=#{endRowNo}
@@ -41,13 +43,14 @@
 </select>
 
 <select id="countName" parameterType="pager" resultType="products">
-	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				where pcategory=#{pcategory}
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+          select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+          from products p, productimgs i
+          where p.productno=i.productno and i.ipriority=1 and pcategory=#{pcategory}
+
 				order by pname
 			)
 		where rownum &lt;=#{endRowNo}
@@ -56,13 +59,14 @@
 </select>
 
 <select id="countLow" parameterType="pager" resultType="products">
-	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				where pcategory=#{pcategory}
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+          select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+          from products p, productimgs i
+          where p.productno=i.productno and i.ipriority=1 and pcategory=#{pcategory}
+
 				order by pprice
 			)
 		where rownum &lt;=#{endRowNo}
@@ -71,14 +75,14 @@
 </select>
 
 <select id="countHigh" parameterType="pager" resultType="products">
-	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				where pcategory=#{pcategory}
-				order by pprice desc
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+          select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+          from products p, productimgs i
+          where p.productno=i.productno and i.ipriority=1 and pcategory=#{pcategory}
+				  order by pprice desc
 			)
 		where rownum &lt;=#{endRowNo}
 	)
@@ -120,18 +124,21 @@
   where p.productno=#{productno} and i.productno=#{productno} and i.ipriority=1
 	order by p.productno desc
 </select>
+
+
 <!--	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
 	from products
 	where productno=#{productno}
  -->
 <select id="pSelectBestPager" parameterType="pager" resultType="products">
- 	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				order by psalescount desc
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+            select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+            from products p, productimgs i
+            where p.productno=i.productno and i.ipriority=1
+				order by p.psalescount desc
 			)
 		where rownum &lt;=#{endRowNo}
 	)
@@ -139,13 +146,14 @@
 </select>
 
 <select id="pSelectDatePager" parameterType="pager" resultType="products">
- 	select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-	from(
-		select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-			from (
-				select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype
-				from products
-				order by pregisterdate desc
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+            select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+            from products p, productimgs i
+            where p.productno=i.productno and i.ipriority=1
+				order by p.pregisterdate desc
 			)
 		where rownum &lt;=#{endRowNo}
 	)
