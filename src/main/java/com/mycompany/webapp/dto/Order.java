@@ -74,6 +74,12 @@ public class Order {
 	public void setOzipcode(int ozipcode) {
 		this.ozipcode = ozipcode;
 	}
+	@Override
+	public String toString() {
+		return "Order [orderno=" + orderno + ", userid=" + userid + ", oaddress=" + oaddress + ", oreceiver="
+				+ oreceiver + ", onumber=" + onumber + ", omessage=" + omessage + ", omethod=" + omethod + ", odate="
+				+ odate + ", ostatus=" + ostatus + ", ozipcode=" + ozipcode + "]";
+	}
 	
 	
 	

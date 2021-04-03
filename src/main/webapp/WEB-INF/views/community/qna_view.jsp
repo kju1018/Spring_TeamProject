@@ -53,9 +53,11 @@
     <div class="q_v_bottom">
         <hr/>
         <input type="button" class="btn btn-dark btn-sm" value="답글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/answer_write?boardno=${communityqna.boardno}'">
-        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_update?boardno=${communityqna.boardno}'">          
-        <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
-        <input type="button" class="btn btn-dark btn-sm" value="삭제하기" onclick="location.href ='<%=application.getContextPath()%>/community/deleteqna?boardno=${communityqna.boardno}'">
+        <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">        
+        <c:if test="${loginUid == notice.userid}">
+	        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_update?boardno=${communityqna.boardno}'">          
+	        <input type="button" class="btn btn-dark btn-sm" value="삭제하기" onclick="location.href ='<%=application.getContextPath()%>/community/deleteqna?boardno=${communityqna.boardno}'">
+		</c:if>
     </div>
 	
 <!--게시판-->

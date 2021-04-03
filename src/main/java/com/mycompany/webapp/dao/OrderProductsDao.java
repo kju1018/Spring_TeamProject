@@ -18,7 +18,7 @@ public interface OrderProductsDao {
 	public int delete(OrderProduct orderproduct);
 	
 	
-	
+	public int insertByList(List<OrderProduct> orderProductList);
 	
 	
 	//주문 물품 업데이트(필요없을듯)

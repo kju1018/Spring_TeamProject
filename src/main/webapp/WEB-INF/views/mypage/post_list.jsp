@@ -56,29 +56,29 @@
 		   <tr>
 		   	<td colspan="5" class="text-center">
 		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=1">처음</a>
 		   		
 		   		<c:if test="${pager.groupNo>1}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.startPageNo-1}">이전</a>
 			   	</c:if>
 		   		
 		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 		   			<c:if test="${pager.pageNo!=i}">
-		   				<a class="btn btn-outline-success btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-danger btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
 		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.endPageNo+1}">다음</a>
 			   	</c:if>
 			   	
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=${pager.totalPageNo}">맨끝</a>
 		   	</td>
 		   </tr>
@@ -103,42 +103,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="post_list" items="${list}">
-		      <tr>
-		         <td>${post_list.boardno}</td>
-		         <td><a href="<%=application.getContextPath()%>/community/qna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
-		         <td>${post_list.userid}</td>
+		<tr>
+			 	<td>1</td>
+		         <td>배송관련 문의</td>
+		         <td>user2</td>
 		         <td><fmt:formatDate value="${post_list.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${post_list.bcount}</td>
-		      </tr>
-		   </c:forEach>
-		   
+		</tr>
 		   <tr>
 		   	<td colspan="5" class="text-center">
 		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=1">처음</a>
 		   		
 		   		<c:if test="${pager.groupNo>1}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.startPageNo-1}">이전</a>
 			   	</c:if>
 		   		
 		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 		   			<c:if test="${pager.pageNo!=i}">
-		   				<a class="btn btn-outline-success btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-danger btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
 		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.endPageNo+1}">다음</a>
 			   	</c:if>
 			   	
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=${pager.totalPageNo}">맨끝</a>
 		   	</td>
 		   </tr>
@@ -150,72 +147,69 @@
 	
 	<!--게시판-->
 	<div class="sel_nav">
-		<label>[내가 쓴 제품리뷰]</label>
+		<label>[내가 쓴 제품 QnA]</label>
 	</div>
-	<table class="table">
+	
+	<table class="table mb-7">
 		<thead>
 			<tr>
 				<th width="10%">번호</th>
-				<th width="25%">상품사진</th>
-				<th width="25%">제목</th>
+				<th width="25%">사진</th>
+				<th  width="25%">제목</th>
 				<th width="15%">작성자</th>
 				<th width="15%">작성일</th>
 				<th width="10%">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
-	      <tr>
-	        	<td>3</td>
-                   <td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png" style="width:30%"> 조명2</td>
-                   <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">상품후기 테스트</a></td>
-                   <td>user1</td>
-                   <td>2021-03-10</td>
-                   <td>3</td>
-	      </tr>
-
-		   
+		<tr>
+			 	<td>1</td>
+			 	<td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png"></td>
+		         <td>배송관련 문의</td>
+		         <td>user2</td>
+		         <td>2021-03-31</td>
+		         <td>5</td>
+		</tr>   
 		   <tr>
-		   	<td colspan="5" class="text-center">
+		   	<td colspan="6" class="text-center">
 		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=1">처음</a>
 		   		
 		   		<c:if test="${pager.groupNo>1}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.startPageNo-1}">이전</a>
 			   	</c:if>
 		   		
 		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 		   			<c:if test="${pager.pageNo!=i}">
-		   				<a class="btn btn-outline-success btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-danger btn-sm" href="post_list?pageNo=${i}">${i}</a>
+		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
 		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			   		<a class="btn btn-outline-primary btn-sm"
+			   		<a class="btn btn-light btn-sm"
 			   		   href="post_list?pageNo=${pager.endPageNo+1}">다음</a>
 			   	</c:if>
 			   	
-		   		<a class="btn btn-outline-primary btn-sm"
+		   		<a class="btn btn-dark btn-sm"
 		   		   href="post_list?pageNo=${pager.totalPageNo}">맨끝</a>
 		   	</td>
 		   </tr>
 		</tbody>
+	
 	</table>
 	<hr/>
 	<!--게시판-->
 
-    
-    <br/>
-
-	
+</div>
 	<div class="c_bottom">
 		<input type="button" class="btn btn-dark" value="메인화면으로" onclick="location.href ='<%=application.getContextPath()%>'">
 	</div>
-</div>
+
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

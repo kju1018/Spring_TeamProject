@@ -21,15 +21,15 @@
 	 
 	 const cartdelete = () => {
 		var cartArr = new Array();
-		$("input[name=cart_box]:checked").each(function() {
+		$("input[name=chk_productno]:checked").each(function() {
 				var test = $(this).val(); 
 				cartArr.push(test);
 		});
 		
 		if(cartArr.length == 0){
-			alert("선택값이 없습니다.")
+			alert("선택된 상품이 없습니다.")
 		} else {
-			if(confirm("장바구니를 비우시겠습니까?") == true){
+			if(confirm("선택된 상품들을 삭제하시겠습니다?") == true){
 				$.ajax({
 						url: "delete_cart_selected",
 						data: {cartArr},
@@ -47,7 +47,7 @@
 	};
 	
 	const updatecartquantity = (productno) => {
-		const cartquantity = document.getElementById('cartquantity'+productno).value;
+		const cartquantity = $("#cartquantity"+productno).val();
 		$.ajax({
 				url: "update_quantity",
 				data: {productno, cartquantity},
@@ -84,20 +84,57 @@
 	function checkCart() {
 		event.preventDefault();
 		var cartArr = new Array();
-		$("input[name=cart_box]:checked").each(function() {
-				var test = $(this).val(); 
-				cartArr.push(test);
+		var quantity="";
+		$("input[name=chk_productno]:checked").each(function() {
+				var box_productno = $(this).val(); 
+				cartArr.push(box_productno);
+				var temp = $("#cartquantity"+box_productno).val();
+				/* 선택한 productno를 이용하여 cartquantity id를 찾음  */
+				quantity += temp+" ";
 		});
 		
 		if(cartArr.length == 0){
-			alert("선택값이 없습니다.")
+			alert("선택된 상품이 없습니다.")
 		} else {
 			var cart_form = document.querySelector("#cart_form");
-			cart_form.submit();
+		    $('#quantity').val(quantity);
+		    cart_form.submit();
 		} 
 		
-	}
+	};
+
+	//모든 물품들의 체크박스가 체크 되어있으면 전체체크박스 체크
+	//하나라도 체크가 안되어있으면 전체체크박스 체크 해제
+	//체크되어있는 물품들의 가격 계산
+	const check = (cartlistlength) => {
+		const query = $("input[name=chk_productno]:checked");
+		if(query.length==cartlistlength){
+			$("input:checkbox[id='checkbox_All']").prop("checked", true);
+		} else{
+			$("input:checkbox[id='checkbox_All']").prop("checked", false);
+		}
+		var totalprice = 0;
+		query.each(function() {
+			var box_productno = $(this).val(); 
+			var price = $("#productprice"+box_productno).text();
+
+			totalprice += parseInt(price);
+		});
+		 $("#totalprice").text(totalprice);
+		 
+		 var fee = $("#fee").text()
+		 totalprice += parseInt(fee);
+		 $("#totalprice2").text(totalprice);
+	};
 	
+	//전체 체크박스 
+	const checkAll = () => {
+		 if ($("#checkbox_All").is(':checked')) {
+             $("input[type=checkbox]").prop("checked", true);
+         } else {
+             $("input[type=checkbox]").prop("checked", false);
+         }
+	};
 </script>
 
 

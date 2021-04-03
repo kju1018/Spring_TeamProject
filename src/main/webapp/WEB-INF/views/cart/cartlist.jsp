@@ -3,14 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <form id="cart_form" onsubmit="checkCart()" action="<%=application.getContextPath()%>/order/order_form" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<table class="table" style="margin-top: 30px;">
 			<tr>
-				<th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
+				<th><input type="checkbox" name="checkbox_All" id="checkbox_All" onclick="checkAll()" checked/></th>
 				<th width="25%">제품사진</th>
-				<th width="25%">상품정보</th>
-				<th width="15%">수량</th>
+				<th width="20%">상품정보</th>
+				<th width="10%">수량</th>
 				<th width="10%"></th>
-				<th width="15%">구매금액</th>
+				<th width="25%">구매금액</th>
 				<th width="10%">배송비</th>
 			</tr>
 			
@@ -24,9 +25,10 @@
 			</c:if>
 	
 			<c:if test="${not empty cartList}">
+					<input type="hidden" id="quantity" name="quantity" value=""/>
 					<c:forEach var="cart" items="${cartList}">
 						<tr class="cart_list" >
-							<th class="align-middle"><input type="checkbox" name="cart_box" class="checkSelect" value="${cart.productno}"/></th>
+							<th class="align-middle"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
 							<th class="align-middle">
 								<a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">
 									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
@@ -34,11 +36,11 @@
 							</th>
 							<th class="align-middle"><a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">${cart.pname}</a></th>
 							<th class="align-middle">
-								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:50%">
+								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:100%">
 								
 							</th>
 							<th class="align-middle"><a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a></th>
-							<th class="align-middle">${cart.cartquantity*cart.pprice}</th>
+							<th class="align-middle">${cart.pprice}원 X ${cart.cartquantity} = <span id="productprice${cart.productno}">${cart.cartquantity*cart.pprice}</span>원</th>
 							<th class="align-middle">무료</th>
 						</tr>
 						<c:set var="total" value="${total+cart.cartquantity*cart.pprice}"/>
@@ -57,9 +59,9 @@
 		</tr>
 
 		<tr>	
-			<th><c:out value="${total}"/>원</th>
-			<th>+0 원</th>
-			<th>= <c:out value="${total}"/>원</th>
+			<th><span id="totalprice"><c:out value="${total}"/></span>원</th>
+			<th>+<span id="fee">0</span> 원</th>
+			<th>= <span id="totalprice2"><c:out value="${total}"/></span>원</th>
 		</tr>
 	</table>
 	

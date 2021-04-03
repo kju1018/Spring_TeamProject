@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +30,12 @@ public class CartController {
 	@Autowired
 	private CartsService cartsService;
 	
+	//카트 생성
 	@GetMapping(value="/create_cart", produces="application/json;charset=UTF-8" )
-	public String createCart(Cart cart) {
-		cart.setUserid("user1");
-		Cart tempCart = cartsService.getCart(cart);
+	@ResponseBody
+	public String createCart(Cart cart, Authentication auth) {
+		cart.setUserid(auth.getName());//제품상세에서 받은 productno, quantity를 이용해서 Cart객체 생성
+		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 있으면 null
 		
 		JSONObject jsonObject = new JSONObject();
 		if(tempCart == null) {
@@ -45,64 +48,59 @@ public class CartController {
 		return jsonObject.toString();
 	}
 	
+	//카트 페이지
 	@GetMapping("/cart")
 	public String getCart() {
 		
 		return "cart/cart";
 	}
 	
+	//카트 목록 출력
 	@GetMapping("/cartlist")
-	public String getCartList(Model model) {
-		List<Cart> list = cartsService.getCartList("user1");
+	public String getCartList(Model model, Authentication auth) {
+		List<Cart> list = cartsService.getCartList(auth.getName());
 		model.addAttribute("cartList", list);
 		return "cart/cartlist";
 	}
 	
+	//선택된 카트 삭제
 	@GetMapping(value="/delete_cart_selected", produces="application/json;charset=UTF-8" )
 	@ResponseBody
-	public String deleteCart(@RequestParam(value="cartArr[]") List<String> cartArr) {
+	public String deleteCart(@RequestParam(value="cartArr[]") List<String> cartArr, Authentication auth) {
 		JSONObject jsonObject = new JSONObject();
 		List<Cart> cartlist = new ArrayList<Cart>();
 		for(String productno : cartArr) {
 			Cart cart = new Cart();
-			cart.setUserid("user1");
+			cart.setUserid(auth.getName());
 			cart.setProductno(Integer.parseInt(productno));
 			cartlist.add(cart);
 		}
 		if(cartlist.size() > 0) {
-			cartsService.removeCartSelect(cartlist);
+			cartsService.removeSelectCart(cartlist);
 			jsonObject.put("result", "success");
 		}
 		return jsonObject.toString();
 	}
 	
 	//전체 삭제
-	
 	@GetMapping(value="/delete_allcart", produces="application/json;charset=UTF-8" )
 	@ResponseBody
-	public String deleteCartAll() {
-		cartsService.removeCartAll("user1");
+	public String deleteCartAll(Authentication auth) {
+		cartsService.removeCartAll(auth.getName());
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
 		return jsonObject.toString();
 	}
 
 	//개수 변경
-	
 	@GetMapping(value="/update_quantity", produces="application/json;charset=UTF-8" )
 	@ResponseBody
-	public String updateQuantity(Cart cart) {
-		cart.setUserid("user1");
-		cartsService.updateCart(cart);
+	public String updateQuantity(Cart cart, Authentication auth) {
+		cart.setUserid(auth.getName());
+		cartsService.updateCartQuantity(cart);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
 		return jsonObject.toString();
 	}
 	
-	/*@PostMapping("/test")
-		public String test() {
-			logger.info("dsaff");
-			logger.info(""+chk_box.length);
-			return "redirect:cartlist";
-	}*/
 }

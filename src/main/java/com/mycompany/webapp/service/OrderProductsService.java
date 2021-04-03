@@ -20,9 +20,8 @@ public class OrderProductsService {
 		orderProductsDao.insert(orderProduct);
 	}
 	
-	public List<OrderProduct> getOrderProducts(String userid){
-		List<OrderProduct> list = orderProductsDao.selectByUserId(userid);
-		return list;
+	public void createOrderProductByList(List<OrderProduct> orderProductList) {
+		orderProductsDao.insertByList(orderProductList);
 	}
 	
 	public void updateOrderProduct(OrderProduct orderProduct) {
