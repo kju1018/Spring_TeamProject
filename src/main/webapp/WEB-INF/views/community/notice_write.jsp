@@ -31,6 +31,7 @@
         <th style="width:15%">글 내용</th>
         <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
     </tr>
+
     </table>
   	
   	
