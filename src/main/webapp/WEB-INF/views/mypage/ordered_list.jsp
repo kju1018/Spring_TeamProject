@@ -3,12 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<!-- <style>
-.orderedtable tr th {
-	background: aqua;
-	text-align: center;
-}
-</style> -->
+<style>
+.tempdd{
+	    border-radius: 12px;
+	    box-shadow: 0px 1px 5px 0px gray;
+	    background-color: rgb(255, 255, 255);
+	    margin-bottom: 20px;
+	    padding: 24px 24px;
+    }
+</style>
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -24,7 +27,7 @@
     <!--제목-->
 	<p class='titleyj'>주문 내역</p>
 	
-	<div class="my_button">
+	<div class="my_button mb-4">
 		<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
 		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
 		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
@@ -34,28 +37,35 @@
 	
 	<!--게시판-->
 	<c:forEach items="${orderList}" var="order">
-		<table class="orderedtable table mt-5">
-			<tr>
-				<th width="20%">${order.orderno}</th>
-				<th width="20%"></th>
-				<th width="10%"></th>
-				<th width="10%"></th>
-				<th width="15%"></th>
-				<th width="25%">주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></th>
-			</tr>
+		<div class="tempdd">
+			<table class="orderedtable table">
+				 <thead>
+					<tr>
+						<th width="20%"><span >주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></span></th>
+						<th width="20%"></th>
+						<th width="10%"></th>
+						<th width="10%"></th>
+						<th width="15%"></th>
+						<th width="25%">주문번호: ${order.orderno}</th>
+					</tr>
+				</thead>
+				
+				<c:forEach items="${order.orderproductlist}" var="orderproduct">
+					<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
+						<th><img class="rounded" src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
+						<th>${orderproduct.pname}</th>
+						<th></th>
+						<th>${orderproduct.pprice} 원</th>
+						<th>수량: ${orderproduct.oquantity}개</th>
+						<th>${order.ostatus}</th>
+					</tr>
+				</c:forEach>
+			</table>
+			<div>
+				
 			
-			<c:forEach items="${order.orderproductlist}" var="orderproduct">
-				<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-					<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
-					<th>${orderproduct.pname}</th>
-					<th></th>
-					<th>${orderproduct.oquantity}개</th>
-					<th>${orderproduct.oquantity*orderproduct.pprice} 원</th>
-					<th>${order.ostatus}</th>
-				</tr>
-			<br>
-			</c:forEach>
-		</table>
+			</div>
+		</div>
 	<!--게시판-->
 	</c:forEach>
     

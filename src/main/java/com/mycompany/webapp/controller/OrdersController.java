@@ -54,6 +54,7 @@ public class OrdersController {
 		
 		List<Products> productList = new ArrayList<Products>();
 		String[] quantityArr = quantity.split(" ");
+		
 		for(int i = 0; i < chk_productno.length; i++) {
 			Products product = productsService.pSelectByPno(chk_productno[i]);
 			productList.add(product);
@@ -66,6 +67,7 @@ public class OrdersController {
 		return "order/orderForm";
 	}
 	
+	//주문 처리
 	@PostMapping("/order/create_order")
 	public String createOrder(
 			int[] order_productno, 
@@ -74,6 +76,7 @@ public class OrdersController {
 			Order order, 
 			Authentication auth
 			) {
+
 		// 오더 생성
 		order.setUserid(auth.getName());
 		order.setOstatus("입금 대기중");
@@ -96,6 +99,7 @@ public class OrdersController {
 			}
 			orderProductsService.createOrderProductByList(orderProductList);
 			cartsService.removeSelectCart(cartList);
+			
 		} else { // 상품 상세 페이지에서 직접 구매할 때
 			OrderProduct orderProduct = new OrderProduct();
 			orderProduct.setProductno(order_productno[0]);
