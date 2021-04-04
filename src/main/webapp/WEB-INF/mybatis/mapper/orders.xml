@@ -16,6 +16,7 @@
 		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from orders
 		where userid=#{userid}
+		order by odate desc
 	</select>	
 	
 	<select id="getOrderProduct" resultType="orderproduct">
