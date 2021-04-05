@@ -3,15 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<style>
-.tempdd{
-	    border-radius: 12px;
-	    box-shadow: 0px 1px 5px 0px gray;
-	    background-color: rgb(255, 255, 255);
-	    margin-bottom: 20px;
-	    padding: 24px 24px;
-    }
-</style>
+<script type="text/javascript">
+	const cancelorder = (orderno) => {
+		if(confirm("주문을 취소 하시겠습니까?") == true){
+			location.href ="<%=application.getContextPath()%>/mypage/order_cancel?orderno="+orderno;
+		} else{
+			return ;
+		}	
+	}
+</script>
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -37,8 +37,8 @@
 	
 	<!--게시판-->
 	<c:forEach items="${orderList}" var="order">
-		<div class="tempdd">
-			<table class="orderedtable table">
+<!-- 		<div class="tempdd"> -->
+			<table class="orderedtable table mt-5 border">
 				 <thead>
 					<tr>
 						<th width="20%"><span >주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></span></th>
@@ -46,26 +46,46 @@
 						<th width="10%"></th>
 						<th width="10%"></th>
 						<th width="15%"></th>
-						<th width="25%">주문번호: ${order.orderno}</th>
+						<th width="25%"><a href="<%=application.getContextPath()%>/mypage/order_view?orderno=${order.orderno}" style="color:gray;">주문내역 상세보기</a></th>
 					</tr>
 				</thead>
 				
 				<c:forEach items="${order.orderproductlist}" var="orderproduct">
-					<tr class="ordered_list" onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-						<th><img class="rounded" src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px"></th>
-						<th>${orderproduct.pname}</th>
+					<tr class="ordered_list">
+						<th>
+							<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+								<img class="rounded" src="<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px" >
+							</a>	
+						</th>
+						<th>
+							<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+								${orderproduct.pname}
+							</a>
+						</th>
 						<th></th>
 						<th>${orderproduct.pprice} 원</th>
 						<th>수량: ${orderproduct.oquantity}개</th>
 						<th>${order.ostatus}</th>
 					</tr>
+					<c:set var="total" value="${total+orderproduct.oquantity*orderproduct.pprice}"/>
 				</c:forEach>
-			</table>
-			<div>
 				
+				<tr class="ordered_list">
+					<th>총 금액: </th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th><c:out value="${total}"/>원</th>
+				</tr>
+			</table>
+			<c:if test="${order.ostatus eq '배송중'}">
+				<div class="text-right">
+					<a class="btn btn-outline-dark btn-sm" onclick="cancelorder(${order.orderno})">배송취소</a>
+				</div>
+			</c:if>
 			
-			</div>
-		</div>
+<!-- 		</div> -->
 	<!--게시판-->
 	</c:forEach>
     

@@ -55,7 +55,6 @@
 	
 	<update id="updateOrder" parameterType="order">
 		update orders set 
-		oaddress=#{oaddress},
 		ostatus=#{ostatus}
 		where orderno=#{orderno}
 	</update>

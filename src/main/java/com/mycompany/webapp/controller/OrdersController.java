@@ -82,6 +82,7 @@ public class OrdersController {
 		order.setOstatus("입금 대기중");
 		ordersService.createOrder(order);
 		
+	
 		if(isCart == 1) {//카트에서 구매 할 때
 			List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
 			List<Cart> cartList = new ArrayList<Cart>();
@@ -127,5 +128,22 @@ public class OrdersController {
 		return "mypage/ordered_list";
 	}
 	
+	@GetMapping("/mypage/order_cancel")
+	public String orderCancel(int orderno) {
+		
+		Order order = new Order();
+		order.setOstatus("취소");
+		order.setOrderno(orderno);
+		ordersService.updateOrder(order);
+		
+		return "redirect:/mypage/ordered_list";
+	}
+	
+	@GetMapping("/mypage/order_view")
+	public String orderView(int orderno,Model model) {
+		Order order = ordersService.getOrder(orderno);
+		model.addAttribute("order", order);
+		return "mypage/ordered_view";
+	}
 
 }

@@ -29,7 +29,7 @@
 		if(cartArr.length == 0){
 			alert("선택된 상품이 없습니다.")
 		} else {
-			if(confirm("선택된 상품들을 삭제하시겠습니다?") == true){
+			if(confirm("선택된 상품들을 삭제하시겠습까?") == true){
 				$.ajax({
 						url: "delete_cart_selected",
 						data: {cartArr},
