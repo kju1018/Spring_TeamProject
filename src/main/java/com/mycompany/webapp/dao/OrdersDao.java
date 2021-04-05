@@ -24,7 +24,5 @@ public interface OrdersDao {
 	public int delete(int orderno);
 	
 	
-	
-	//특정 유저의 주문 내역 리스트(안쓰일듯)
 	public List<Order> selectByUserId(String userid);
 }

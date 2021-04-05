@@ -1,6 +1,8 @@
 package com.mycompany.webapp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,6 +93,24 @@ public class ProductsService {
 	public void pDeleteByPno(int productno) {
 		productsDao.pDeleteByPno(productno);
 	}
+	
+	
+	
+	//연정 검색
+	public List<Products> pSelectBySearchword(Pager pager, String searchword){
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchword", searchword);
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		List<Products> list = productsDao.pSelectBySearchword(map);
+
+		return list;
+	}	
+	public int getTotalRowsSearchword(String searchword) {
+		int rows = productsDao.countsearchword(searchword);
+		return rows;
+	}
+	
 	
 
 }

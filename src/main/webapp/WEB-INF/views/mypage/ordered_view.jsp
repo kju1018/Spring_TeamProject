@@ -24,19 +24,23 @@
                 <table class="table">
                 <tr>
                     <th>주문번호</th>
-                    <td>A12341234</td>
+                    <td>${order.orderno}</td>
                 </tr>
                 <tr>
                     <th>주문일자</th>
-                    <td>2021-03-08</td>
+                    <td>${order.odate}</td>
                 </tr>
                 <tr>
                     <th>결제방법</th>
-                    <td>[무통장 입금] KOSA은행 110-4234-2342342 (THE, FIVE)</td>
+                    <td>[${order.omethod}] KOSA은행 110-4234-2342342 (THE, FIVE)</td>
                 </tr>
                 <tr>
                     <th>주문자</th>
-                    <td>이연정</td>
+                    <td>${order.userid}</td>
+                </tr>
+                <tr>
+                    <th>주문 상태</th>
+                    <td>${order.ostatus}</td>
                 </tr>
                 </table> 
                 <br/><br/>
@@ -45,21 +49,21 @@
                 <table class="table"> 
                 <tr>
                     <th>받으시는분</th>
-                    <td>이연정</td>
+                    <td>${order.oreceiver}</td>
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td>서울특별시 송파구 송파대로 257(가락동)</td>
+                    <td>${order.oaddress}</td>
                 </tr>
                 
                 <tr>
                     <th>휴대전화</th>
-                    <td colspan="3">010-1234-1234</td>
+                    <td colspan="3">${order.onumber}</td>
                 </tr>
                 
                 <tr>
                     <th>배송메시지</th>
-                    <td colspan="3">문 앞에 놔주세요</td>
+                    <td colspan="3">${order.omessage}</td>
                 </tr>
             </table>
 

@@ -54,6 +54,7 @@ public class OrdersController {
 		
 		List<Products> productList = new ArrayList<Products>();
 		String[] quantityArr = quantity.split(" ");
+		
 		for(int i = 0; i < chk_productno.length; i++) {
 			Products product = productsService.pSelectByPno(chk_productno[i]);
 			productList.add(product);
@@ -66,6 +67,7 @@ public class OrdersController {
 		return "order/orderForm";
 	}
 	
+	//주문 처리
 	@PostMapping("/order/create_order")
 	public String createOrder(
 			int[] order_productno, 
@@ -74,21 +76,25 @@ public class OrdersController {
 			Order order, 
 			Authentication auth
 			) {
+
 		// 오더 생성
 		order.setUserid(auth.getName());
 		order.setOstatus("입금 대기중");
 		ordersService.createOrder(order);
 		
+	
 		if(isCart == 1) {//카트에서 구매 할 때
 			List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
 			List<Cart> cartList = new ArrayList<Cart>();
 			for(int i = 0; i < order_productno.length; i++) {
+				//주문 물품을 만들어준다
 				OrderProduct orderProduct = new OrderProduct();
 				orderProduct.setProductno(order_productno[i]);
 				orderProduct.setOquantity(order_quantity[i]);
 				orderProduct.setOrderno(order.getOrderno());
 				orderProductList.add(orderProduct);
 				
+				//카트에서 구매를 했기 때문에 삭제도 해줘야함
 				Cart cart = new Cart();
 				cart.setUserid(auth.getName());
 				cart.setProductno(order_productno[i]);
@@ -96,18 +102,14 @@ public class OrdersController {
 			}
 			orderProductsService.createOrderProductByList(orderProductList);
 			cartsService.removeSelectCart(cartList);
+			
 		} else { // 상품 상세 페이지에서 직접 구매할 때
 			OrderProduct orderProduct = new OrderProduct();
 			orderProduct.setProductno(order_productno[0]);
 			orderProduct.setOquantity(order_quantity[0]);
 			orderProduct.setOrderno(order.getOrderno());
-			
-			Cart cart = new Cart();
-			cart.setUserid(auth.getName());
-			cart.setProductno(order_productno[0]);
-			
+		
 			orderProductsService.createOrderProduct(orderProduct);
-			cartsService.createCart(cart);
 		}
 		
 		return "redirect:/order/order_complete";
@@ -120,10 +122,30 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/mypage/ordered_list")
-	public String getOrderedList() {
+	public String getOrderedList(Model model, Authentication auth) {
+		
+		List<Order> orderList = ordersService.getOrderList(auth.getName());
+		model.addAttribute("orderList", orderList);
 		
 		return "mypage/ordered_list";
 	}
 	
+	@GetMapping("/mypage/order_cancel")
+	public String orderCancel(int orderno) {
+		
+		Order order = new Order();
+		order.setOstatus("취소");
+		order.setOrderno(orderno);
+		ordersService.updateOrder(order);
+		
+		return "redirect:/mypage/ordered_list";
+	}
+	
+	@GetMapping("/mypage/order_view")
+	public String orderView(int orderno,Model model) {
+		Order order = ordersService.getOrder(orderno);
+		model.addAttribute("order", order);
+		return "mypage/ordered_view";
+	}
 
 }

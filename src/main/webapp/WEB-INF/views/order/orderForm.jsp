@@ -117,7 +117,7 @@
                         </div><!--입력하는곳-->
                         <div class="p-4"><!-- 메시지-->
                             <select class="paymentSelect item_width_100" name="omessage">
-                                <option value="selectNo">--메시지 선택(선택사항)--</option>
+                                <option value="선택없음">--메시지 선택(선택사항)--</option>
                                 <option value="배송전에 미리 연락바랍니다.">배송전에 미리 연락바랍니다.</option>
                                 <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
                                 <option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>

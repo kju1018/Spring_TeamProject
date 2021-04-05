@@ -36,7 +36,6 @@ public class CartController {
 	public String createCart(Cart cart, Authentication auth) {
 		cart.setUserid(auth.getName());//제품상세에서 받은 productno, quantity를 이용해서 Cart객체 생성
 		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 있으면 null
-		
 		JSONObject jsonObject = new JSONObject();
 		if(tempCart == null) {
 			cartsService.createCart(cart);
@@ -97,10 +96,18 @@ public class CartController {
 	@ResponseBody
 	public String updateQuantity(Cart cart, Authentication auth) {
 		cart.setUserid(auth.getName());
-		cartsService.updateCartQuantity(cart);
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("result", "success");
-		return jsonObject.toString();
+		
+		if(cart.getCartquantity() < 1) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "failure");
+			return jsonObject.toString();
+		}else {
+			cartsService.updateCartQuantity(cart);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
+		}
+		
 	}
 	
 }

@@ -4,6 +4,27 @@
 <!--xml파일을 식별할 수 있는 이름 -->
 <mapper namespace="com.mycompany.webapp.dao.OrdersDao">
 	<!--select문을 식별할 수 있는 이름 -->
+	
+	<resultMap type="order" id="orderResult">
+		<id property="orderno" column="orderno"/>
+		<collection property="orderproductlist" column="orderno" javaType="list" ofType="orderproduct"
+				select="getOrderProduct"/>
+	</resultMap>
+	
+	
+	<select id="selectByUserId" parameterType="string" resultMap="orderResult">
+		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
+		from orders
+		where userid=#{userid}
+		order by odate desc
+	</select>	
+	
+	<select id="getOrderProduct" resultType="orderproduct">
+		select op.productno, op.orderno, op.oquantity, p.pname, p.pprice, pi.ioriginalname, pi.isavename, pi.imgtype
+		from orderproducts op, products p, productimgs pi
+		where op.orderno=#{orderno} and op.productno=p.productno 
+		and p.productno = pi.productno and pi.ipriority = 1
+	</select>
 
 	
 	<select id="selectByOrderNo" parameterType="int" resultType="order">
@@ -12,11 +33,7 @@
 		where orderno=#{orderno}
 	</select>
 	
-	<select id="selectByUserId" parameterType="string" resultType="order">
-		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
-		from orders
-		where userid=#{userid}
-	</select>
+
 	
 	
 	<insert id="insert" parameterType="order">
@@ -38,7 +55,6 @@
 	
 	<update id="updateOrder" parameterType="order">
 		update orders set 
-		oaddress=#{oaddress},
 		ostatus=#{ostatus}
 		where orderno=#{orderno}
 	</update>
