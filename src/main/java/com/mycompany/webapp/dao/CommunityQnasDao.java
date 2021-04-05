@@ -18,6 +18,7 @@ public interface CommunityQnasDao {
 	public List<CommunityQna> selectByKeyword(Map<String, Object> map);
 	
 	public int insert(CommunityQna communityqna); //안에 board는 board service
+	public int insertrepl(CommunityQna communityqna);
 	public int update(CommunityQna communityqna);
 	public int updateBcount(int boardno);
 	public int deleteByBoardno(int boardno);
@@ -26,6 +27,4 @@ public interface CommunityQnasDao {
 	public int countuser(String userid);
 	public int countkeyword(Map<String, String> map);
 	
-	//리플저장
-	public int insertRepl(CommunityQna communityqna); 
 }

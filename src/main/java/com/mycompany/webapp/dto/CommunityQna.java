@@ -9,9 +9,28 @@ public class CommunityQna {
 	private Date bdate;
 	private String bcontent;
 	private int bcount;
-
+	private int originno;
+	private int groupord;
+	private int grouplayer;
 	
-	
+	public int getOriginno() {
+		return originno;
+	}
+	public void setOriginno(int originno) {
+		this.originno = originno;
+	}
+	public int getGroupord() {
+		return groupord;
+	}
+	public void setGroupord(int groupord) {
+		this.groupord = groupord;
+	}
+	public int getGrouplayer() {
+		return grouplayer;
+	}
+	public void setGrouplayer(int grouplayer) {
+		this.grouplayer = grouplayer;
+	}
 	public int getBoardno() {
 		return boardno;
 	}
