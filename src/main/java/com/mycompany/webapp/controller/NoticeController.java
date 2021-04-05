@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,17 +56,20 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/notice_write")
-	public String noticeWrite(HttpSession session) {
+	public String noticeWrite(HttpSession session, Model model, Authentication auth) {
+		String userid = "";
+		userid = auth.getName();
+		
+		session.setAttribute("userid", userid);
+		model.addAttribute("userid", userid);
 		
 	    return "community/notice_write";
 	}
 	
 	@PostMapping("/create1")
 	public String noticeCreate(Notice notice, HttpSession session) {
-
-			notice.setUserid("user1");
 			noticesService.saveBoard(notice);
-			logger.info(notice.getBtitle());
+
 			return "redirect:/community/notice_list";
 
 	}

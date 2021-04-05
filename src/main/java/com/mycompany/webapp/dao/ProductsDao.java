@@ -1,6 +1,7 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,4 +31,8 @@ public interface ProductsDao {
 	public int pDeleteByPno(int productno); //상품 삭제
 
 	
+	
+	//연정 검색
+	public List<Products> pSelectBySearchword(Map<String, Object> map);
+	public int countsearchword(String searchword);
 }

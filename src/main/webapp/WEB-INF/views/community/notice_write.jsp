@@ -22,18 +22,23 @@
     <!--게시판-->
 	<form action="create1" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <table class="table">
-    <tr>
-        <th style="width:15%">제목</th>
-        <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
-    </tr>
-    <tr>
-        <th style="width:15%">글 내용</th>
-        <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
-    </tr>
-
-    </table>
-  	
+	    <table class="table">
+			<tr>
+				<th>작성자</th>
+				<td colspan="3"><input type="text" id="userid" name="userid" value="${userid}" style="width: 100%;" readonly></td>
+			</tr>
+	            
+			<tr>
+		        <th style="width:15%">제목</th>
+		        <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
+			</tr>
+			<tr>
+		        <th style="width:15%">글 내용</th>
+		        <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
+			</tr>
+	
+	    </table>
+	  	
   	
   	
     <div class="n_v_bottom">

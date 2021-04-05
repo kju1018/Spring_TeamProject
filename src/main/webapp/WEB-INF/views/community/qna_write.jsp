@@ -24,7 +24,6 @@
     <form action="create" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-    <div class="table table-responsive">
         <table class="table">
         	<tr>
                 <th>작성자</th>
@@ -47,7 +46,6 @@
                 <button type="submit" class="btn btn-dark btn-sm">등록</button>
                 <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">
             </div>
-    </div>
     </form>
     <!--게시판-->
 

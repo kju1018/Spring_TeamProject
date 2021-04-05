@@ -88,7 +88,7 @@
 		   				<a class="btn btn-outline-secondary btn-sm" href="qna_list?pageNo=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
 		   			</c:if>
 		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-secondary btn-sm" href="qna_list?pageNo=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+		   				<a class="btn btn-light btn-sm" href="qna_list?pageNo=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
 		   			</c:if>
 		   		</c:forEach>
 		   		
@@ -128,7 +128,7 @@
 
 			<div>
 
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+				<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
 
 			</div>
 
