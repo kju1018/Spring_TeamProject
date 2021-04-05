@@ -10,7 +10,33 @@ const insertcartquantity = (productno) => { //add to cart에 productno + product
 	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
 	};
  --%>
+$(function(){
+		reviewList();
+ });
 
+const reviewList = () => {
+	$.ajax({
+		url: "product_review_list",
+		method: "get"
+	}).then(data => {
+		$('#review_board').html(data);
+	});	
+};
+
+
+
+/* const reviewList = () => {
+	const productno = ${products.productno};
+	var productlist = {"productno": productno};
+	$.ajax({
+		url: "product_review_list",
+		method: "get",
+		data: productlist
+	}).then(data => {
+		$('#review_board').html(data);
+	}); 
+};
+ */	
 const cartComfirm = () => {
 			const productno = ${products.productno};			
 			const pquantity = document.getElementById('pquantity').value;
@@ -23,8 +49,10 @@ const cartComfirm = () => {
 				console.log(data);
 				if(data.result=="failure"){
 				alert("이미 장바구니에 있습니다.");
-			}else{
+			}else if(data.result=="success"){
 				alert("장바구니에 추가했습니다.");
+			}else{
+				alert("로그인")
 			}
 	});	
 }
@@ -129,65 +157,15 @@ const changeimg4 = (product_img) => {
        </c:if>      
 	  </div>
    
-    <!--제품 리뷰-->
-    <div style="clear: both;">
-        <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">REVIEW</p>
-    </div><br>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <table class="table col-9" style="text-align: center";>
-                <thead class="thead">
-                    <tr style="background-color: lightgray;">
-                        <th scope="col">번호</th>
-                        <th scope="col" style="width:20%">상품정보</th>
-                        <th scope="col" style="width:30%">제목</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성일</th>
-                        <th scope="col">조회</th>
-                    </tr>
-                </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:30%"> 조명1</td>
-                        <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">실제가 더 좋아요~</a></td>
-                        <td>ㅎㅎ</td>
-                        <td>2021-03-10</td>
-                        <td>10</td>
-                        
-                    </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><img src="<%=application.getContextPath()%>/resources/image/light3_sora.png" style="width:30%"> 조명3</td>
-                    <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">너무 좋아요~</a></td>
-                    <td>aa</td>
-                    <td>2021-03-11</td>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png" style="width:30%"> 조명2</td>
-                    <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">상품후기 테스트</a></td>
-                    <td>상품관리자</td>
-                    <td>2021-03-10</td>
-                    <td>3</td>
-                </tr>
-                </tbody>
-            </table>
-        </div> 
-    </div> 
-    <div style="margin-left: 83%;">
-        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/review_write" role="button">글 작성</a>
-        </div>
+    <!--제품 리뷰-->   
+ 		<div id="review_board">
+ 		
+ 		</div>
 
-    <div class="row justify-content-md-center">
-        <a href="#none"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></a> 
-        <a href="#none" class="text-black-50">PREV</a> 
-        <a href="#none" class="thisPageNumber text-black-50">1</a>
-        <a href="#none" class="text-black-50">NEXT</a>
-        <a href="#none"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></a>
-    </div><br><br><br>
-
+<%--  <c:import url="/product_review_list">
+		<c:param name="products" value="${products}"></c:param>	
+	</c:import>
+ --%>
     <!--제품 Q&A-->
     <div >
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>
