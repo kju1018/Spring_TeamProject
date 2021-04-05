@@ -78,32 +78,32 @@ window.onload = function (){
 						<!-- [처음] [이전] 1 2 3 4 5 [다음][맨끝] -->
 					<div class="flex-grow-1">
 							<a class="btn btn-outline-secondary btn-sm" 
-							href="product_list_user?pageNo=1&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">[처음]</a>
+							href="product_list_user?pageNo=1&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[처음]</a>
 							
 							<c:if test="${pager.groupNo>1}">
 								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.startPageNo-1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">이전</a>
+								href="product_list_user?pageNo=${pager.startPageNo-1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">이전</a>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo!=i}">
 									<a class="btn btn-outline-secondary btn-sm" 
-									href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">${i}</a>
+									href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo==i}">
 									<a class="btn btn-danger btn-sm" 
-										href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">${i}</a>
+										href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
 								</c:if>	
 							</c:forEach>
 							
 			
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
 								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.endPageNo+1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">다음</a>
+								href="product_list_user?pageNo=${pager.endPageNo+1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">다음</a>
 							</c:if>
 							
 							<a class="btn btn-outline-secondary btn-sm" 
-							href="product_list_user?pageNo=${pager.totalPageNo}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}">[맨끝]</a>
+							href="product_list_user?pageNo=${pager.totalPageNo}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[맨끝]</a>
 						</div>	
 	
 					</div> 
