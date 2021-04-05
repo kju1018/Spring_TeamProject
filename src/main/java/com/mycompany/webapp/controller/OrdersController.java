@@ -87,12 +87,14 @@ public class OrdersController {
 			List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
 			List<Cart> cartList = new ArrayList<Cart>();
 			for(int i = 0; i < order_productno.length; i++) {
+				//주문 물품을 만들어준다
 				OrderProduct orderProduct = new OrderProduct();
 				orderProduct.setProductno(order_productno[i]);
 				orderProduct.setOquantity(order_quantity[i]);
 				orderProduct.setOrderno(order.getOrderno());
 				orderProductList.add(orderProduct);
 				
+				//카트에서 구매를 했기 때문에 삭제도 해줘야함
 				Cart cart = new Cart();
 				cart.setUserid(auth.getName());
 				cart.setProductno(order_productno[i]);

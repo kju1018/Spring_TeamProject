@@ -96,10 +96,18 @@ public class CartController {
 	@ResponseBody
 	public String updateQuantity(Cart cart, Authentication auth) {
 		cart.setUserid(auth.getName());
-		cartsService.updateCartQuantity(cart);
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("result", "success");
-		return jsonObject.toString();
+		
+		if(cart.getCartquantity() < 1) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "failure");
+			return jsonObject.toString();
+		}else {
+			cartsService.updateCartQuantity(cart);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
+		}
+		
 	}
 	
 }

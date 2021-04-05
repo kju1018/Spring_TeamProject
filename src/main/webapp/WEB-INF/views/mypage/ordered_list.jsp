@@ -35,71 +35,70 @@
 		<input type='button' value="장바구니" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/cart'">
 	</div>
 	
-	<!--게시판-->
-	<c:forEach items="${orderList}" var="order">
-<!-- 		<div class="tempdd"> -->
-			<table class="orderedtable table mt-5 border">
-				 <thead>
-					<tr>
-						<th width="20%"><span >주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></span></th>
-						<th width="20%"></th>
-						<th width="10%"></th>
-						<th width="10%"></th>
-						<th width="15%"></th>
-						<th width="25%"><a href="<%=application.getContextPath()%>/mypage/order_view?orderno=${order.orderno}" style="color:gray;">주문내역 상세보기</a></th>
-					</tr>
-				</thead>
-				
-				<c:forEach items="${order.orderproductlist}" var="orderproduct">
+	<c:if test="${empty orderList}">
+			<div class="text-center border p-5">
+				주문내역이 없습니다.
+			</div>
+	</c:if>
+	
+	<c:if test="${not empty orderList}">
+		<!--게시판-->
+		<c:forEach items="${orderList}" var="order">
+	<!-- 		<div class="tempdd"> -->
+				<table class="orderedtable table mt-5 border">
+					 <thead>
+						<tr>
+							<th width="20%"><span >주문 일자: <fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></span></th>
+							<th width="20%"></th>
+							<th width="10%"></th>
+							<th width="10%"></th>
+							<th width="15%"></th>
+							<th width="25%"><a href="<%=application.getContextPath()%>/mypage/order_view?orderno=${order.orderno}" style="color:gray;">주문내역 상세보기</a></th>
+						</tr>
+					</thead>
+					
+					<c:forEach items="${order.orderproductlist}" var="orderproduct">
+						<tr class="ordered_list">
+							<th>
+								<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+									<img class="rounded" src="<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px" >
+								</a>	
+							</th>
+							<th>
+								<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+									${orderproduct.pname}
+								</a>
+							</th>
+							<th></th>
+							<th>${orderproduct.pprice} 원</th>
+							<th>수량: ${orderproduct.oquantity}개</th>
+							<th>${order.ostatus}</th>
+						</tr>
+						<c:set var="total" value="${total+orderproduct.oquantity*orderproduct.pprice}"/>
+					</c:forEach>
+					
 					<tr class="ordered_list">
-						<th>
-							<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
-								<img class="rounded" src="<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px" >
-							</a>	
-						</th>
-						<th>
-							<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
-								${orderproduct.pname}
-							</a>
-						</th>
+						<th>총 금액: </th>
 						<th></th>
-						<th>${orderproduct.pprice} 원</th>
-						<th>수량: ${orderproduct.oquantity}개</th>
-						<th>${order.ostatus}</th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th><c:out value="${total}"/>원</th>
 					</tr>
-					<c:set var="total" value="${total+orderproduct.oquantity*orderproduct.pprice}"/>
-				</c:forEach>
+				</table>
+				<c:if test="${order.ostatus eq '배송중'}">
+					<div class="text-right">
+						<a class="btn btn-outline-dark btn-sm" onclick="cancelorder(${order.orderno})">배송취소</a>
+					</div>
+				</c:if>
 				
-				<tr class="ordered_list">
-					<th>총 금액: </th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th><c:out value="${total}"/>원</th>
-				</tr>
-			</table>
-			<c:if test="${order.ostatus eq '배송중'}">
-				<div class="text-right">
-					<a class="btn btn-outline-dark btn-sm" onclick="cancelorder(${order.orderno})">배송취소</a>
-				</div>
-			</c:if>
-			
-<!-- 		</div> -->
-	<!--게시판-->
-	</c:forEach>
-    
+	<!-- 		</div> -->
+		<!--게시판-->
+		</c:forEach>
+    </c:if>
     <br/>
     <br/>
 
-    <!-- 페이지 -->
-    <ul class="pagenav">
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
-        <li class="page-item"><a href="#">PREV</a></li>
-        <li class="page-item"><a href="#">1</a></li>
-        <li class="page-item"><a href="#">NEXT</a></li>
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
-    </ul>
     <!-- 페이지 -->
 
 	<div class="c_bottom">

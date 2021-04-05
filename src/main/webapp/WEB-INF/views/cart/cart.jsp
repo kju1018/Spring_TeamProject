@@ -56,6 +56,9 @@
 			if(data.result=="success"){
 				alert("변경이 완료되었습니다");
 				getList();
+			} else if(data.result=="failure"){
+				alert("1개이상 설정해주세요.");
+				getList();
 			}
 		});   
 		   
