@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <script>
 window.onload = function (){
-	if(${sort}==5 || ${sort}==6){
+	if(${sort}==5 || ${sort}==6 || ${sort}==7){
 		document.getElementById('newitem').style.display="none";
 		document.getElementById('productname').style.display="none";
 		document.getElementById('lowprice').style.display="none";
@@ -16,7 +16,6 @@ window.onload = function (){
 	}
 	
 }
- 
  
  </script>
 		

@@ -16,6 +16,11 @@ public class ProductReviewsService {
 		return list;
 	}
 	
+	public List<ProductReviews> prSelectByPno(int productno){
+		List<ProductReviews> list = productReviewsDao.prSelectByPno(productno);
+		return list;
+	}
+	
 	public void prInsert(ProductReviews productrivews) {
 		productReviewsDao.prInsert(productrivews);
 	}

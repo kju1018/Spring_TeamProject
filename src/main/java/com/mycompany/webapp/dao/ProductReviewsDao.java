@@ -9,6 +9,7 @@ import com.mycompany.webapp.dto.ProductReviews;
 @Mapper
 public interface ProductReviewsDao {
 	public List<ProductReviews> prSelectAll();
+	public List<ProductReviews> prSelectByPno(int productno);	
 	public int prInsert(ProductReviews productrivews);
 	public int prUpdate(ProductReviews productrivews);
 	public int prDelete(int boardno);
