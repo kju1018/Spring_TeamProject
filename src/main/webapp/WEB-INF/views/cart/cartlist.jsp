@@ -18,7 +18,7 @@
 			
 			<c:if test="${empty cartList}">
 				<tr class="cart_list" >
-					<td colspan="7" class="text-center p-5">
+					<td colspan="8" class="text-center p-5">
 						장바구니가 비어있습니다.
 					</td>
 				</tr>
