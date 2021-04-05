@@ -69,7 +69,7 @@
                         <c:forEach var="best" items="${best}">
                          <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=${best.productno}')">
                              <div class="card item_width_13r" >
-                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
+                               <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${best.isavename}&type=${best.imgtype}" alt="Card image cap">
                                <div class="row align-self-center item_width_100 item_pb-1">
                                    <div class="col-lg" >
                                        <div class="item_list fontsize-sm"><span>${best.pname}</span></div>
@@ -95,7 +95,7 @@
                    <c:forEach var="newitem" items="${newitem}">
                         <div class="col-2 align-self-start text_center_sort pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_view_user?productno=${newitem.productno}')">
                             <div class="card item_width_13r" >
-                            <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" alt="Card image cap">
+                            <img class="card-img-top item_width_100 item_height_110r"  src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${newitem.isavename}&type=${newitem.imgtype}" alt="Card image cap">
                             <div class="row align-self-center item_width_100 item_pb-1">
                                 <div class="col-lg" >
                                     <div class="item_list fontsize-sm"><span>${newitem.pname}</span></div>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <script type="text/javascript">
@@ -131,8 +131,20 @@
 	const checkAll = () => {
 		 if ($("#checkbox_All").is(':checked')) {
              $("input[type=checkbox]").prop("checked", true);
+             const query = $("input[name=chk_productno]:checked");
+             var totalprice = 0;
+             query.each(function() {
+     			var box_productno = $(this).val(); 
+     			var price = $("#productprice"+box_productno).text();
+
+     			totalprice += parseInt(price);
+     		});
+             $("#totalprice").text(totalprice);
+             $("#totalprice2").text(totalprice);
          } else {
              $("input[type=checkbox]").prop("checked", false);
+             $("#totalprice").text(0);
+             $("#totalprice2").text(0);
          }
 	};
 </script>

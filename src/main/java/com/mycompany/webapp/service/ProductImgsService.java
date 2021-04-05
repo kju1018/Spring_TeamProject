@@ -27,13 +27,17 @@ public class ProductImgsService {
 	public void pImgDelete(int imgno) {
 		productImgsDao.pImgDelete(imgno);
 	}
-	public List<ProductImgs> pImgSelectByIno(int productno) {
-		List<ProductImgs> productImgs = productImgsDao.pImgSelectByIno(productno);
+	public List<ProductImgs> pImgSelectByPno(int productno) {
+		List<ProductImgs> productImgs = productImgsDao.pImgSelectByPno(productno);
 		return productImgs;
 	}
 	
-	public ProductImgs pImgSelectByIno_pri(int productno) {
-		ProductImgs productImgs = productImgsDao.pImgSelectByIno_pri(productno);
-		return productImgs;
+	public ProductImgs pImgSelectByIno(int imageno) {
+		ProductImgs productImg = productImgsDao.pImgSelectByIno(imageno);
+		return productImg;
 	}
+	
+
+	
+	
 }

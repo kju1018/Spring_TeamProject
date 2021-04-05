@@ -1,7 +1,12 @@
 package com.mycompany.webapp.controller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,12 +114,34 @@ public class ProductsController {
 	@GetMapping("/product_view_user")
 	public String product_view_user(Model model, int productno) {
 		Products products = productsService.pSelectByPno(productno);
-		List<ProductImgs> productimg = productImgsService.pImgSelectByIno(productno);
+		List<ProductImgs> productimg = productImgsService.pImgSelectByPno(productno);
 		model.addAttribute("products", products);
-		logger.info(Integer.toString(products.getPstock()));
-		model.addAttribute("productimg", productimg);				
+		logger.info("imgno : "+Integer.toString(productimg.get(0).getImgno()));
+		model.addAttribute("productimg", productimg);
+		
 		return "product/product_view_user";
 	}
+	
+	/*상품 사진*/
+	@GetMapping("/downloadImags_detail")
+	public void downloadImags_detail(String savename, String type, HttpServletResponse response) {
+		try {
+			response.setContentType(type);
+			//String originalName = products.getDetailimgoname(); 
+			//originalName = new String(originalName.getBytes("UTF-8"),"ISO-8859-1");
+			//response.setHeader("Content-Disposition", "attachment; filename=\""+originalName+"\";");			
+			InputStream is = new FileInputStream("C:/team5_spring_img/image/"+savename);
+		    OutputStream os = response.getOutputStream();
+		    FileCopyUtils.copy(is, os);
+		    os.flush();
+		    is.close();
+		    os.close();			   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 	
 	/*상품 리스트*/
 	@GetMapping("/product_list_user")
@@ -131,8 +159,7 @@ public class ProductsController {
 		  
 	      int totalRows = productsService.getTotalRows(pcategory); //카테고리의 전체 행수
 	      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
-	      //원래 세션자리
-	      
+	      //원래 세션자리	      
 	      List<Products> list = productsService.pSelectAll(pager); //행수 페이징 처리
 	      switch(sort) {
 	      case 1:
@@ -160,8 +187,7 @@ public class ProductsController {
 	      default:
 	    	  break;
       }
-	    session.setAttribute("pager", pager);  
-	    
+	    session.setAttribute("pager", pager);  	    
 		model.addAttribute("list", list);
 		model.addAttribute("sort", sort);
 		model.addAttribute("pcategory", pcategory);

@@ -53,7 +53,7 @@ window.onload = function (){
             
 	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}" id="product_no">
 	                <div>
-	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg" id="product_img">
+	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${p_list.isavename}&type=${p_list.imgtype}" id="product_img">
 	                </div>
 	                <div class="productTitle" id="product_name">
 	                    ${p_list.pname}
