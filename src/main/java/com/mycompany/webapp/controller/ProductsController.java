@@ -145,8 +145,10 @@ public class ProductsController {
 	
 	/*상품 리스트*/
 	@GetMapping("/product_list_user")
-	public String product_list_user(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname, int sort) {
+	public String product_list_user(String pageNo, Model model, HttpSession session, int pcategory, String pcategoryname, int sort, String searchword) {
 		  int intPageNo = 1;
+		  
+		  if(searchword == null || searchword.equals("")) {
 		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
 			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
 			  Pager pager = (Pager) session.getAttribute("pager");
@@ -184,6 +186,11 @@ public class ProductsController {
 	    	  pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
 	    	  list = productsService.pSelectDatePager(pager);
 	    	  break;
+	      case 7:
+	    	  totalRows = productsService.getTotalRowsSearchword(searchword);
+	    	  pager = new Pager(10,5, totalRows, intPageNo); //페이징 객체 생성
+	    	  list = productsService.pSelectBySearchword(pager, searchword);
+	    	  break;
 	      default:
 	    	  break;
       }
@@ -192,6 +199,60 @@ public class ProductsController {
 		model.addAttribute("sort", sort);
 		model.addAttribute("pcategory", pcategory);
 		model.addAttribute("pcategoryname", pcategoryname);
+		  } else {
+			  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
+				  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
+				  Pager pager = (Pager) session.getAttribute("pager");
+				  if(pager != null) {
+					  intPageNo = pager.getPageNo();
+				  } 
+			  }else { //클라이언트에서 pageNo가 넘어왔을 경우
+				  intPageNo = Integer.parseInt(pageNo);
+			  }	  
+			  
+		      int totalRows = productsService.getTotalRows(pcategory); //카테고리의 전체 행수
+		      Pager pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+		      //원래 세션자리	      
+		      List<Products> list = productsService.pSelectAll(pager); //행수 페이징 처리
+		      switch(sort) {
+		      case 1:
+		    	  list = productsService.getTotalDate(pager);
+		    	  break;
+		      case 2:
+		    	  list = productsService.getTotalName(pager);
+		    	  break;	      
+		      case 3:
+		    	  list = productsService.getTotalLow(pager);
+		    	  break;	    	  
+		      case 4:
+		    	  list = productsService.getTotalHigh(pager);
+		    	  break;
+		      case 5:
+		    	  totalRows = productsService.getTotalRowsAll();
+		    	  pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+		    	  list = productsService.pSelectBestPager(pager);
+		    	  break;
+		      case 6:
+		    	  totalRows = productsService.getTotalRowsAll();
+		    	  pager = new Pager(10,5, totalRows, intPageNo, pcategory); //페이징 객체 생성
+		    	  list = productsService.pSelectDatePager(pager);
+		    	  break;
+		      case 7:
+		    	  totalRows = productsService.getTotalRowsSearchword(searchword);
+		    	  pager = new Pager(10,5, totalRows, intPageNo); //페이징 객체 생성
+		    	  list = productsService.pSelectBySearchword(pager, searchword);
+		    	  break;
+		      default:
+		    	  break;
+	      }
+		    session.setAttribute("pager", pager);  	    
+			model.addAttribute("list", list);
+			model.addAttribute("sort", sort);
+			model.addAttribute("pcategory", pcategory);
+			model.addAttribute("pcategoryname", pcategoryname);
+			model.addAttribute("searchword", searchword);
+		  }
+		
 		return "product/product_list_user";
 	}
 	

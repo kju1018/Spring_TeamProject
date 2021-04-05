@@ -52,11 +52,11 @@ public class CommunityQnasService {
 		logger.info("저장 후 bno:" + communityqna.getBoardno());
 	} // 게시글 생성
 	
-	public void saveRepl(CommunityQna communityqna) { //-----------------
+	public void saveRepl(CommunityQna communityqna) {
 		logger.info("저장전 bno:"+ communityqna.getBoardno());
-		communityqnasDao.insertRepl(communityqna);
+		communityqnasDao.insertrepl(communityqna);
 		logger.info("저장 후 bno:" + communityqna.getBoardno());
-	} //댓글 달기 (아직 미완성------------------------------------------------)
+	}
 	
 	public void updateBoard(CommunityQna communityqna) {
 		communityqnasDao.update(communityqna);
@@ -88,20 +88,5 @@ public class CommunityQnasService {
 		int rows = communityqnasDao.countkeyword(map);
 		return rows;
 	}
-	
-	
-	
-	
 
-
-	
-//	public List<CommunityQna> getSearchList(Pager pager, String keyword) {
-//		List<CommunityQna> list = communityqnasDao.getSearchList(pager, keyword);
-//		return list;
-//	}
-//	
-//	public List<CommunityQna> getSearchuserList(Pager pager, String keyword) {
-//		List<CommunityQna> list = communityqnasDao.getSearchListuser(pager, keyword);
-//		return list;
-//	}
 }

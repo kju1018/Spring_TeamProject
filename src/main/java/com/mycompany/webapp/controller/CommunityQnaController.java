@@ -104,12 +104,13 @@ public class CommunityQnaController {
 		return "redirect:/community/qna_list";
 
 	}
-
+	
 	@GetMapping("/qna_view")
-	public String communityQnaView(int boardno, Model model) {
+	public String communityQnaView(int boardno, Model model, Authentication auth) {
 		communityQnasService.addBcount(boardno);
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna); // model객체를 이용해서, view로 data 전달
+		model.addAttribute("userid", auth.getName());
 		// model.addAttribute("변수이름", "변수에 넣을 데이터값"); 그러면 스프링은 그 값을 뷰쪽으로 넘겨준다.
 		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
 		
@@ -137,33 +138,35 @@ public class CommunityQnaController {
 		
 		return "redirect:/community/qna_list";
 	}
-	
-	@GetMapping("/answer_view")
-	public String answerView(int boardno, Model model) {
-		communityQnasService.addBcount(boardno);
-		CommunityQna communityqna = communityQnasService.getBoard(boardno);
-		model.addAttribute("communityqna", communityqna);
-		
-		return "community/answer_view";
-
-	}
 
 	@GetMapping("/answer_write")
-	public String AnswerqnaWrite(HttpSession session) {
-
+	public String AnswerqnaWrite(HttpSession session, Authentication auth, Model model) {
+		String userid = "";
+		userid = auth.getName();
+		
+		session.setAttribute("userid", userid);
+		model.addAttribute("userid", userid);
+		
 		return "community/answer_write";
 	}
 
-	@PostMapping("/replcreate")
-	public String AnswercreateCreate(CommunityQna communityqna, HttpSession session) throws Exception {
-		communityqna.setUserid("user1");
+	@PostMapping("/createrepl")
+	public String communityReplCreate(CommunityQna communityqna, HttpSession session, Model model, Authentication auth) {
 		communityQnasService.saveRepl(communityqna);
 		
 		return "redirect:/community/qna_list";
 
 	}
-
 	
+	@GetMapping("/answer_view")
+	public String answerView(int boardno, Model model, Authentication auth) {
+		communityQnasService.addBcount(boardno);
+		CommunityQna communityqna = communityQnasService.getBoard(boardno);
+		model.addAttribute("communityqna", communityqna);
+		model.addAttribute("userid", auth.getName());
+		return "community/answer_view?boardno=" + communityqna.getBoardno();
+
+	}
 
 	
 }
