@@ -32,6 +32,24 @@
 	});
 </script>
 
+<script>
+
+   // 생략	
+
+	$(document).on('click', '#productSearch', function(e){
+		e.preventDefault();
+
+		var url = "${pageContext.request.contextPath}/product/product_list_user?pcategory=0&pcategoryname=검색결과&sort=7&pageNo=1";
+		
+		url = url + "&searchword=" + $("#searchword").val();
+		
+		location.href = url;
+
+		console.log(url);
+
+	});	
+
+</script>
 
 <body>
 <header>

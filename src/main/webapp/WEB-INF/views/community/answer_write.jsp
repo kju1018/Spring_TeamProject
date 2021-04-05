@@ -14,17 +14,22 @@
     <br/>
 
     <!--제목-->
-    <p class="titleyj">QnA 쓰기</p>
+    <p class="titleyj">답글 쓰기</p>
 
     <!--게시판-->
-    <form action="replcreate" method="post">
+    <form action="createrepl" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <div class="table table-responsive">
         <table class="table">
-            <tr>
-                <th>제목</th>
-                <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
+        	<tr>
+                <th>작성자</th>
+                <td colspan="3"><input type="text" id="userid" name="userid" value="${userid}" style="width: 100%;" readonly></td>
             </tr>
-            
+            <tr>  
+                <th>제목</th>
+                <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;" value="${communityqna.btitle}"></td>
+            </tr>
+               
             <tr>
                 <th>글내용</th>
                 <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>

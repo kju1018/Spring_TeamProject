@@ -194,4 +194,31 @@ from(
 	select count(*) from products
 </select>
 
+
+
+
+<!-- 연정 검색 -->
+<select id="pSelectBySearchword" parameterType="pager" resultType="products">
+select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+from(
+    select rownum as rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
+        from (
+	select p.productno, p.pcategory, p.pname, p.pprice, p.pregisterdate, p.psalescount, p.pstock, p.penable, p.detailimgoname, p.detailimgsname, p.detailimgtype, i.imgno, i.ioriginalname, i.isavename, i.imgtype, i.ipriority
+	from products p, productimgs i
+	where p.productno=i.productno and i.ipriority=1
+	and p.pname like '%' || #{searchword} || '%'
+	order by p.psalescount desc
+	)
+		where rownum &lt;=#{endRowNo}
+	)
+where rnum &gt;= #{startRowNo}
+</select>
+
+<select id="countsearchword" resultType="int">
+
+select count(*)
+from products p
+where p.pname like '%' || #{searchword} || '%'
+</select>
+
 </mapper>
