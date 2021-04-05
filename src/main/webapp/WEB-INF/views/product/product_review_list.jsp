@@ -21,8 +21,8 @@
                  --%>    <tbody>
                     <tr>
                         <th scope="row">3</th>
-                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:30%">${products.productno}</td>
-                        <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">test</a></td>
+                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:30%">${previews.productno}</td>
+                        <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">${previews.bcontent}</a></td>
                         <td>ㅎㅎ</td>
                         <td>2021-03-10</td>
                         <td>10</td>

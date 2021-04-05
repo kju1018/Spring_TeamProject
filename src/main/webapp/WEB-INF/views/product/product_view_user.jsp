@@ -15,9 +15,11 @@ $(function(){
  });
 
 const reviewList = () => {
+	const productno = ${products.productno};
 	$.ajax({
 		url: "product_review_list",
-		method: "get"
+		method: "get",
+		data: productno
 	}).then(data => {
 		$('#review_board').html(data);
 	});	
@@ -39,11 +41,11 @@ const reviewList = () => {
  */	
 const cartComfirm = () => {
 			const productno = ${products.productno};			
-			const pquantity = document.getElementById('pquantity').value;
+			const cartquantity = document.getElementById('pquantity').value;
 			
 			$.ajax({
 				url:"<%=application.getContextPath()%>/cart/create_cart",
-				data: {productno, pquantity},
+				data: {productno, cartquantity},
 				method: "get"
 			}).then(data => {
 				console.log(data);

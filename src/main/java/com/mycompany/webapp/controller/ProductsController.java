@@ -24,6 +24,7 @@ import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductImgs;
 import com.mycompany.webapp.dto.Products;
 import com.mycompany.webapp.service.ProductImgsService;
+import com.mycompany.webapp.service.ProductReviewsService;
 import com.mycompany.webapp.service.ProductsService;
 
 @Controller
@@ -34,7 +35,8 @@ public class ProductsController {
 	private ProductsService productsService;
 	@Autowired
 	private ProductImgsService productImgsService;
-	
+	@Autowired
+	private ProductReviewsService productReviewsService;
 	
 	/*ADMIN*======================================================/
 	/*상품 상세 - admin*/
