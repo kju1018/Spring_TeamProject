@@ -17,10 +17,13 @@
 		</div>
 			
 			<div class="container-fluid">
+			
 				<div class="row justify-content-center">
+				
 					<table class="rv_table" style="width:70%;">		
 					<tr>
 					<th class="rv_table" colspan="2">
+					
 						<div id="rv_div1" class="col-2 content-left">
 						<img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" width="80%" height="80%" style="margin: 10px">
 						</div>						
@@ -56,6 +59,7 @@
                <div>
                    <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:77.7%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 목록 </a>
               </div>
+          
 				<br><br>
 </div>
 </div>

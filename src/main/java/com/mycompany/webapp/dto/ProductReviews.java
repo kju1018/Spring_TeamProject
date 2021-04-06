@@ -2,6 +2,8 @@ package com.mycompany.webapp.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductReviews {
 	private int boardno;
 	private String userid;
@@ -9,11 +11,25 @@ public class ProductReviews {
 	private String btitle;
 	private String bcontent;
 	private Date bdate;
+	private int bcount;
 	private String borgimg;
 	private String bsaveimg;
 	private String bimgtype;
-	
+	private MultipartFile battach;
 
+
+	public MultipartFile getBattach() {
+		return battach;
+	}
+	public void setBattach(MultipartFile battach) {
+		this.battach = battach;
+	}
+	public int getBcount() {
+		return bcount;
+	}
+	public void setBcount(int bcount) {
+		this.bcount = bcount;
+	}
 	public int getBoardno() {
 		return boardno;
 	}

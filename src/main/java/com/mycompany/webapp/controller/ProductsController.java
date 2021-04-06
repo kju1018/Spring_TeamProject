@@ -35,8 +35,6 @@ public class ProductsController {
 	private ProductsService productsService;
 	@Autowired
 	private ProductImgsService productImgsService;
-	@Autowired
-	private ProductReviewsService productReviewsService;
 	
 	/*ADMIN*======================================================/
 	/*상품 상세 - admin*/
