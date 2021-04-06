@@ -20,12 +20,25 @@
 			const uzipcode = $("#uzipcode").val();
 			const uaddress = $("#uaddress").val();
 			const utel = $("#utel").val();
+			
+			const userzipcode = ${user.uzipcode};
+			const useraddress = '${user.uaddress}';
+			const usertel = ${user.utel};
+			
+			
 			var result = true;
 			
 			if(uzipcode == "" || uaddress == "" || utel == ""){
 				result = false;
 				alert("수정할 정보가 없습니다.");
 			}
+			
+			
+			if(userzipcode == uzipcode || useraddress == uaddress || usertel == utel){
+				result = false;
+				alert("변경된 사항이 없습니다.");
+			}
+			
 			
 			if(result){
 				$.ajax({
@@ -49,7 +62,13 @@
 				method : "post"
 			}).then( data => {
 				if(data.result == "success"){
-					window.location.href = "<%=application.getContextPath()%>/";
+					$.ajax({
+						url:"<%=application.getContextPath()%>/logout",
+						method:"post"
+					}).then(data=>{
+						alert("탈퇴 되었습니다.");
+						window.location.href = "<%=application.getContextPath()%>";
+					})
 				}
 			});
 		}

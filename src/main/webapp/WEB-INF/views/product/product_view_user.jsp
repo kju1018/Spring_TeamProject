@@ -5,7 +5,7 @@
 <script type="text/javascript">
 
 $(function(){
-		reviewList(1);
+		reviewList();
  });
 const reviewWriteForm = () => {
 	$.ajax({
@@ -17,43 +17,61 @@ const reviewWriteForm = () => {
 }
 
 const reviewWrite = () => {
-	event.preventDefault();
-	const borgimg = $("#borgimg").val();
-	const btitle = $("#btitle").val();
-	const bcontent = $("#bcontent").val();
-	
-	const formData = new FormData();
-	formData.append("btitle", btitle);
-	formData.append("bcontent", bcontent);
-	
-	if(borgimg){
-		formData.append("borgimg", borgimg);
-	}
 	$.ajax({
 		url:"review_write",
-		data: formData,
-		method: "post",
-		cache: false,
-		processData: false,
-		contentType: false
+		method: "get"
 	}).then(data => {
-		if(data.result=="success"){
-			reviewList(1);
-		}
+		$('#review_board').html(data);
 	});
 }
 
-const reviewList = (pageNo) => {
-	const productno = ${products.productno};	
+const reviewList = () => {
+	const productno = ${products.productno};
 	$.ajax({
 		url: "product_review_list",
 		method: "get",
-		data: {productno, pageNo}
+		data: {productno}
 	}).then(data => {
 		$('#review_board').html(data);
 	});	
-}; 
+};
+///좋아요 이미지 클릭
+const likesOnClick = () => {
+	console.log("insert 실행");
 
+	const productno = ${pno};
+	$.ajax({
+		url : "<%=application.getContextPath()%>/likes/likeinsert",
+		data : {productno},
+		method : "get"
+	}).then(data => {
+		console.log(data.result);
+		if(data.result == "null"){
+			alert("좋아요 추가 실패하였습니다.");
+		}else{
+			const result = "<%=application.getContextPath()%>/product/product_view_user?productno=" + data.result;
+			window.location.href = result; 
+		}
+	})
+}
+
+const likesUnClick = () => {
+	console.log("delete 실행");
+	const productno = ${products.productno};
+	$.ajax({
+		url: "<%=application.getContextPath()%>/likes/likedelete",
+		data : {productno},
+		method : "get"
+	}).then(data => {
+		console.log(data.result);
+		if(data.result == "null"){
+			alert("좋아요 추가 실패하였습니다.");
+		}else{
+			const result = "<%=application.getContextPath()%>/product/product_view_user?productno=" + data.result;
+			window.location.href = result; 
+		}
+	})
+}
 
 
 const cartComfirm = () => {
@@ -136,7 +154,17 @@ const changeimg4 = (product_img) => {
 					<hr style="width:100%; color: black; border:1px solid black;"/>
 					<p style="font-size: large;">${products.pname}</p><br><br>
 					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		무료<br><br></pre>
-				    (최소주문수량 1개 이상)<img src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
+				    (최소주문수량 1개 이상)
+				      <!-- 좋아요 이미지 -->
+				    <!-- 로그인 안한상태이면 좋아요 이미지는 없다 있을 떄만 좋아요 이미지 -->
+				     <sec:authorize access="isAuthenticated()">
+				     	<c:if test="${likes == null}">
+				    		 <img class="pointer" onclick="likesOnClick()" src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
+				     	</c:if>
+				     	<c:if test="${likes != null}">
+				    		 <img class="pointer" onclick="likesUnClick()" src="<%=application.getContextPath()%>/resources/image/redlike.png" style="width:10%; height:10%; margin-left:63%;">
+				     	</c:if>
+				     </sec:authorize>
 				    
 				    </small>
 					<!--수량 선택-->
@@ -181,7 +209,7 @@ const changeimg4 = (product_img) => {
  		
  		</div>
 
-		
+
     <!--제품 Q&A-->
     <div >
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>

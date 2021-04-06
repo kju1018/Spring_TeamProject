@@ -3,7 +3,44 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+const individualDelete = (pageNo) => {
+	const productno = pageNo;
+	var urlresult ="";
+	if(productno != ""){
+		$.ajax({
+			url:"likedelete",
+			data: {productno},
+			method : "get"
+		}).then(data => {
+			console.log(data);
+			if(data.result != "null"){
+				const url = "<%=application.getContextPath()%>/likes/likelist?pageNo=";
+				const page = data.page;
+				urlresult = url+""+page;
+				console.log(urlresult);
+				
+				alert("삭제되었습니다.");
+				window.location.href=urlresult;
+			}
+		})
+	}
+}
 
+const allDelete = () => {
+	console.log("실행");
+	$.ajax({
+		url:"alldelete",
+		method: "get"
+	}).then(data => {
+		console.log(data.result);
+		if(data.result == "success"){
+			alert("삭제되었습니다.");
+			window.location.href="<%=application.getContextPath()%>/likes/likelist";
+		}
+	})
+}
+</script>
 
 <!-- 전체 컨텐츠 영역 -->
 <div class='container' style="margin-top: 12em;">
@@ -17,7 +54,7 @@
 	<img src="<%=application.getContextPath()%>/resources/image/slide/slide10.PNG" class="container">
     <!--제목-->
 	<p class='titleyj'>좋아요</p>
-	<div class="my_button">
+	<div class="my_button item_mb-3">
 		<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
 		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypage_update'">
 		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
@@ -26,10 +63,7 @@
 	</div>
 	
 	<!--검색창-->
-	<div class='find_zone'>
-	<input type='text' name='findStr' />
-	<input type='button' class="btn btn-dark btn-sm" value='검색' id='btnFind' name='select' />
-	</div>
+	
 	
 	<!--게시판-->
 	<table class="table">
@@ -39,31 +73,41 @@
 			<th width="55%">상품명</th>
 			<th width="15%">삭제</th>
 		</tr>
-		<tr onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
-			<th>북유럽풍 조명 장식</th>
-			<th><input type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
-		</tr>
-		
-		<tr onclick="location.href ='<%=application.getContextPath()%>/product/product_view'">
-            <th><input type="checkbox" name="chk_box" class="checkSelect"/></th>
-			<th><img src = "<%=application.getContextPath()%>/resources/image/lamp2.png" width="50"></th>
-			<th>스칸디나비아 주방 식탁</th>
-			<th><input type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
-		</tr>
+		<c:forEach var="product" items="${likeList}">
+			<tr>
+	            <th><input type="checkbox"  name="chk_box" class="checkSelect"/></th>
+				<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
+				<th onclick="location.href ='<%=application.getContextPath()%>/product/product_view?productno=${product.productno}'">${product.pname} </th>
+				<th><input onclick="individualDelete(${product.productno})" type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
+			</tr>
+		</c:forEach>
 	</table>
 	<!--게시판-->
 
     <br/>
-
+	<div>
+	<c:if test = "${number > 0}">
+    	<button onclick="allDelete()" class="btn btn-outline-danger float-right">전체삭제</button>
+    </c:if>	
+    </div>
 	<!-- 페이지 -->
-    <ul class="pagenav">
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></li>
-        <li class="page-item"><a href="#">PREV</a></li>
-        <li class="page-item"><a href="#">1</a></li>
-        <li class="page-item"><a href="#">NEXT</a></li>
-        <li class="page-item"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></li>
+     <ul class="pagenav">
+   	    <li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=1"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></a></li>
+    	<c:if test="${likelistpager.groupNo>1}">
+    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.startPageNo-1}">PREV</a></li>
+    	</c:if>
+        <c:forEach var="i" begin="${likelistpager.startPageNo}" end="${likelistpager.endPageNo}">
+        	<c:if test="${likelistpager.pageNo != i}">
+        		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
+        	</c:if>
+        	<c:if test="${likelistpager.pageNo == i}">
+        		<li class="page-item font-weight-bold"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
+        	</c:if>
+        </c:forEach>
+        <c:if test="${likelistpager.groupNo<likelistpager.totalGroupNo}">
+    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.endPageNo+1}">NEXT</a></li>
+    	</c:if>
+    	<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.totalPageNo}"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></a></li>
     </ul>
 
 	<div class="c_bottom">
