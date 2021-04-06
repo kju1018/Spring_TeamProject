@@ -4,7 +4,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
- <div class="container-fluid item_mt-18">
+ <div class="container-fluid" style="margin-top: 187px;">
         <!---carousel-->
             <div class="col-lg text_center_sort item_mt-05" >
                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

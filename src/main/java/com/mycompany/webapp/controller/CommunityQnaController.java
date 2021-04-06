@@ -86,11 +86,10 @@ public class CommunityQnaController {
 	}  //페이징 처리된 리스트 목록 가져오기
 	
 	@GetMapping("/qna_write")
-	public String communityQnaWrite(HttpSession session, Model model, Authentication auth) {
+	public String communityQnaWrite(Model model, Authentication auth) {
 		String userid = "";
 		userid = auth.getName();
 		
-		session.setAttribute("userid", userid);
 		model.addAttribute("userid", userid);
 		
 		logger.info("userid");
@@ -140,18 +139,22 @@ public class CommunityQnaController {
 	}
 
 	@GetMapping("/answer_write")
-	public String AnswerqnaWrite(HttpSession session, Authentication auth, Model model) {
+	public String AnswerqnaWrite(int boardno, Authentication auth, Model model) {
 		String userid = "";
 		userid = auth.getName();
-		
-		session.setAttribute("userid", userid);
+		CommunityQna communityQna = communityQnasService.getBoard(boardno);
 		model.addAttribute("userid", userid);
+		model.addAttribute("communityQna", communityQna);
 		
 		return "community/answer_write";
 	}
 
 	@PostMapping("/createrepl")
 	public String communityReplCreate(CommunityQna communityqna, HttpSession session, Model model, Authentication auth) {
+		communityqna.setBcount(0);
+		communityqna.setGroupord(0);
+		communityqna.setGrouplayer(1); // 답글은 1
+		
 		communityQnasService.saveRepl(communityqna);
 		
 		return "redirect:/community/qna_list";
