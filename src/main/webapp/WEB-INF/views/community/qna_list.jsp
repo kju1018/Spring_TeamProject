@@ -63,8 +63,20 @@
             <tbody>
                <c:forEach var="communityqna" items="${list}">
 		      <tr>
-		         <td>${communityqna.boardno}</td>
-		         <td><a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a></td>
+		      	<c:if test="${communityqna.grouplayer eq 0}">
+		         	<td>${communityqna.boardno}</td>
+		         </c:if>
+		         <c:if test="${communityqna.grouplayer eq 1}"> 
+		         	<td></td>
+		         </c:if>
+		         <td>
+		         	<c:if test="${communityqna.grouplayer eq 0}">
+		         		<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
+		         	</c:if>
+		         	<c:if test="${communityqna.grouplayer eq 1}"> 
+		         		ㄴ<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
+		         	</c:if>
+		         </td>
 		         <td>${communityqna.userid}</td>
 		         <td><fmt:formatDate value="${communityqna.bdate}" pattern="yyyy-MM-dd"/></td>
 		         <td>${communityqna.bcount}</td>
