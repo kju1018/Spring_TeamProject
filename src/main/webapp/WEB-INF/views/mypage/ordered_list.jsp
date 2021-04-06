@@ -60,12 +60,12 @@
 					<c:forEach items="${order.orderproductlist}" var="orderproduct">
 						<tr class="ordered_list">
 							<th>
-								<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${orderproduct.productno}">
 									<img class="rounded" src="<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px" >
 								</a>	
 							</th>
 							<th>
-								<a href="<%=application.getContextPath()%>/product/product_view?productno=${orderproduct.productno}">
+								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${orderproduct.productno}">
 									${orderproduct.pname}
 								</a>
 							</th>
