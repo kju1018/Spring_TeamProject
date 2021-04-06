@@ -5,36 +5,100 @@
 <script type="text/javascript">
 
 $(function(){
-		reviewList();
- });
-const reviewWriteForm = () => {
+	reviewList(1);
+	
+});
+
+const reviewWriteForm = (productno) => {	
 	$.ajax({
 		url:"review_write_form",
-		method: "get"
-	}).then(data => {
-		$('#review_board').html(data);
-	});
-}
-
-const reviewWrite = () => {
-	$.ajax({
-		url:"review_write",
-		method: "get"
-	}).then(data => {
-		$('#review_board').html(data);
-	});
-}
-
-const reviewList = () => {
-	const productno = ${products.productno};
-	$.ajax({
-		url: "product_review_list",
 		method: "get",
 		data: {productno}
 	}).then(data => {
+		$('#review_board2').show();
+		$('#review_board2').html(data);
+	});
+}
+
+const ReviewRead = (boardno) => {
+	$.ajax({
+		url: "review_view",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
 		$('#review_board').html(data);
-	});	
+		$('#review_board2').hide();
+	});
+}
+
+const deleteReview = (boardno) => {
+	$.ajax({
+		url: "delete_review",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
+}
+
+const reviewWrite = () => {		
+	const test1 = $("#btitle").val();
+	const test2 = $("#bcontent").val();
+	if(test1 == ""){
+		alert("제목을 적어주세요");
+	}
+	if(test2 == ""){
+		alert("내용을 적어주세요");
+	}
+	event.preventDefault();
+	
+	const productno = $("#productno").val();
+	const borgimg = $("#borgimg").val();
+	const btitle = $("#btitle").val();
+	const bcontent = $("#bcontent").val();
+	if(btitle == null || bcontent == null){
+		alert("test");
+	}
+	
+	const formData = new FormData();
+	formData.append("productno", productno);
+	formData.append("btitle", btitle);
+	formData.append("bcontent", bcontent);
+	
+	if(borgimg){
+		formData.append("borgimg", borgimg);
+	}
+	
+	$.ajax({
+		url:"review_write",
+		data: formData,
+		method: "post",
+		cache: false,
+		processData: false,
+		contentType: false
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
+}
+
+
+const reviewList = (pageNo) => {
+	const productno = ${products.productno};	
+	$.ajax({
+		url: "product_review_list",
+		method: "get",
+		data: {productno, pageNo}
+	}).then(data => {
+		$('#review_board').html(data);
+	});
 };
+
 ///좋아요 이미지 클릭
 const likesOnClick = () => {
 	console.log("insert 실행");
@@ -89,7 +153,7 @@ const cartComfirm = () => {
 			}else if(data.result=="success"){
 				alert("장바구니에 추가했습니다.");
 			}else{
-				alert("로그인")
+				alert("로그인이 필요합니다.")
 			}
 	});	
 }
@@ -208,7 +272,10 @@ const changeimg4 = (product_img) => {
  		<div id="review_board">
  		
  		</div>
-
+		<div id="review_board2">
+ 		
+ 		</div>
+		
 
     <!--제품 Q&A-->
     <div >

@@ -27,13 +27,13 @@
 <select id="pImgSelectByPno" resultType="productimgs">
 	select imgno, productno, ioriginalname, isavename, imgtype, ipriority
 	from productimgs
-	where productno=${productno} and ipriority=0
+	where productno=${productno}
 </select>
 
 <select id="pImgSelectByIno" parameterType="int" resultType="productimgs">
 	select imgno, productno, ioriginalname, isavename, imgtype, ipriority
 	from productimgs
-	where imgno=${imgno} and ipriority=0
+	where imgno=${imgno}
 </select>
 
 

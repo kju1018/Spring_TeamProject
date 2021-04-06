@@ -33,7 +33,7 @@ public class ProductReviewsController {
 	private ProductReviewsService productReviewsService;
 
 	@RequestMapping("/product_review_list")
-	public String productReviewList(String pageNo, Products pro, Model model, HttpSession session) {
+	public String productReviewList(String pageNo, Products products, Model model, HttpSession session) {
 		int intPageNo = 1;
 		if (pageNo == null) { // 클라이언트에서 pageNo가 넘어오지 않았을 경우
 			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
@@ -45,16 +45,21 @@ public class ProductReviewsController {
 			intPageNo = Integer.parseInt(pageNo);
 		}  
 			
-		int totalRows = productReviewsService.getTotalRows(pro.getProductno());
-		Pager pager = new Pager(3, 5, totalRows, intPageNo, pro.getProductno()); // 페이징 객체 생성
+		int totalRows = productReviewsService.getTotalRows(products.getProductno());
+		Pager pager = new Pager(3, 5, totalRows, intPageNo, products.getProductno()); // 페이징 객체 생성
 		session.setAttribute("pager", pager);	    
 		List<ProductReviews> previews = productReviewsService.prSelectByPno(pager);
 		model.addAttribute("previews", previews);
+		model.addAttribute("products",products);
 		return "product/product_review_list";
 	}
 	
 	@GetMapping("/review_write_form")
-	public String reviewWirteForm() {
+	public String reviewWirteForm(ProductReviews productreviews, Model model) {
+		
+		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
+		//int pno = productreviews.getProductno();
+		model.addAttribute("productreviews", productreviews);
 		return "product/review_write_form";
 	}
 
@@ -74,12 +79,13 @@ public class ProductReviewsController {
 				e.printStackTrace();
 			}
 		}
-		logger.info("컨텐트 : "+productreviews.getBcontent());
-		logger.info("타이틀 : "+productreviews.getBtitle());
-		logger.info("유저네임 : "+auth.getName());
-		logger.info("프로덕트 넘 : "+Integer.toString(productreviews.getProductno()));
-		logger.info("보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		
+		/*
+		 * logger.info("컨텐트 : "+productreviews.getBcontent());
+		 * logger.info("타이틀 : "+productreviews.getBtitle());
+		 * logger.info("유저네임 : "+auth.getName());
+		 * logger.info("프로덕트 넘 : "+Integer.toString(productreviews.getProductno()));
+		 */
 		
 		productreviews.setUserid(auth.getName());
 		productReviewsService.prInsert(productreviews);
@@ -89,4 +95,24 @@ public class ProductReviewsController {
 	}
 
 
+	@GetMapping("/review_view")
+	public String reviewView(ProductReviews productreviews, Model model) {
+		logger.info("보드 넘 : "+Integer.toString(productreviews.getBoardno()));
+		int bno = productreviews.getBoardno();
+		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
+		logger.info("컨텐트 : "+reviews.getBcontent());
+		logger.info("btitle : "+reviews.getBtitle());
+		model.addAttribute("reviews", reviews);
+		return "product/review_view";
+	}
+	
+	@GetMapping(value="/delete_review", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteReview(ProductReviews productreviews) {
+		int bno = productreviews.getBoardno();
+		productReviewsService.prDelete(bno);
+		JSONObject jsonobject = new JSONObject();
+	    jsonobject.put("result", "success");
+	    return jsonobject.toString();
+	}
 }

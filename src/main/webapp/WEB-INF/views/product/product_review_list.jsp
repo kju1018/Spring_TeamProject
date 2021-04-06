@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-    <!--제품 리뷰-->
     <div style="clear: both;">
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">REVIEW</p>
     </div><br>
@@ -21,8 +19,8 @@
                 <c:forEach var="rv_list" items="${previews}">
                 	<tbody>
                     <tr>
-                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:30%">${rv_list.btitle}</td>
-                        <td><a href="<%=application.getContextPath()%>/product/review_view" class="text-black-50">${rv_list.bcontent}</a></td>
+                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:20%"></td>
+                        <td><a onclick="ReviewRead(${rv_list.boardno})" style="width:20%" class="text-black-50">${rv_list.btitle} / ${rv_list.boardno}</a></td>
                         <td>${rv_list.userid}</td>
                         <td><fmt:formatDate value="${rv_list.bdate}" pattern="yyyy-MM-dd"/></td>
                         <td>${rv_list.bcount}</td>
@@ -36,7 +34,7 @@
     </div> 
     <div style="margin-left: 82%;">
     
-        <button class="btn btn-white btn-outline-dark" onclick="reviewWriteForm()">글 작성</button>
+        <button class="btn btn-white btn-outline-dark" onclick="reviewWriteForm(${products.productno})">글 작성</button>
        
     </div>
 

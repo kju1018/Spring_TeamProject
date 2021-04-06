@@ -22,7 +22,13 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
 	where rnum &gt;= #{startRowNo}
 </select>
 
-<select id="count" parameterType="int" resultType="int">
+<select id="prSelectByBno" parameterType="int" resultType="productreviews">
+	select boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount
+	from productreviews
+	where boardno=#{boardno}
+</select>
+
+<select id="count" parameterType="int" resultType="int">	
 	select count(*) from productreviews where productno=#{productno}
 </select>
 

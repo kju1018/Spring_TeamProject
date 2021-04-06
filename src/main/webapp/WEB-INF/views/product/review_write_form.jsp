@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<div class="container-fluid" style="margin-top:15%">
+<!-- <script>
+const title = document.getById("btitle").val();
+if(title == null){
+	alert("test");
+}
+</script> -->
+<div class="container-fluid" style="margin-top:5%">
 		<div class="row" >
 				<div class="col-5 text-center">
 			<div class="title">
@@ -14,9 +20,11 @@
 			</div>
 		</div>
 	
+	
+		
 			<div class="container-fluid">
-			<form onsubmit="reviewWrite()">	
-			
+			<form onsubmit="reviewWrite()">				
+				<input type="hidden" value="${productreviews.productno}" id="productno" name="productno">
 				<div class="row justify-content-center">
 			<table class="rw_table" style="width:70%;">		
 					<tr>
@@ -25,9 +33,8 @@
 						<img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" width="80%" height="80%" style="margin: 10px">
 						</div>	 --%>					
 						<div id="rw_div2" class="col-9" >
-							<!-- <b>북유럽식 식탁조명<br>50,000원</b> -->
 							<hr style="color:lightgray"/>
-							<input type="file" id="borgimg" name="borgimg">							
+							<input type="file" id="battach" name="battach">							
 						</div>
 					</th>
 					</tr>
@@ -38,15 +45,15 @@
 					</tr>
 					<tr>
 						<td class="rw_table" colspan="2" height="150">
-						<input type="text" style="width: 100%; height: 150px" id="bcontent" name="bcontent"></td>
-		
+						<textarea cols="50" rows="10" style="width: 100%; height: 150px" id="bcontent" name="bcontent"></textarea></td>
+						
 					</tr>
 		
 				</table>
 			</div>
 			<br>
     		<div>
-        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="<%=application.getContextPath()%>/product/product_review_list"> 취소 </button>
+        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
         <button class="btn btn-light btn-outline-secondary" style="width:8%" type="submit"> 완료 </button>
         
         </div>
