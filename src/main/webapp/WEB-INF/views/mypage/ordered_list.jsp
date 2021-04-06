@@ -95,13 +95,43 @@
 	<!-- 		</div> -->
 		<!--게시판-->
 		</c:forEach>
+		<div class="d-flex">
+			<div class="flex-grow-1 text-center">
+			<!--[처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+				<a class="btn btn-outline-dark btn-sm"
+				href="ordered_list?pageNo=1">처음</a>
+				
+				<c:if test="${pager.groupNo>1}">
+					<a class="btn btn-outline-secondary btn-sm"
+						href="ordered_list?pageNo=${pager.startPageNo-1}">이전</a>
+				</c:if>
+			
+				<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+					<c:if test="${pager.pageNo!=i}">
+						<a class="btn btn-outline-success btn-sm" href="ordered_list?pageNo=${i}">${i}</a>
+					</c:if>
+					
+					<c:if test="${pager.pageNo==i}">
+						<a class="btn btn-danger btn-sm" href="ordered_list?pageNo=${i}">${i}</a>
+					</c:if>
+				</c:forEach>
+			
+				<c:if test="${pager.groupNo<pager.totalGroupNo}">
+					<a class="btn btn-outline-secondary btn-sm"
+						href="ordered_list?pageNo=${pager.endPageNo+1}">다음</a>
+				</c:if>
+			
+				<a class="btn btn-outline-dark btn-sm"
+				href="ordered_list?pageNo=${pager.totalPageNo}">맨끝</a>
+			</div>					
+		</div>		
     </c:if>
     <br/>
     <br/>
 
     <!-- 페이지 -->
 
-	<div class="c_bottom">
+	<div class="text-center">
 		<input type="button" class="btn btn-dark" value="메인화면으로" onclick="location.href ='<%=application.getContextPath()%>'">
 	</div>
 </div>
