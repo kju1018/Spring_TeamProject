@@ -3,42 +3,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript">
-<%-- 
-const insertcartquantity = (productno) => { //add to cart에 productno + productquantity 넘기기
-	  const pquant = document.getElementById('quantity').value;
-	  alert(pquant);
-	  location.href ="<%=application.getContextPath()%>/cart/create_cart?productno="+productno+"&cartquantity="+pquant;
-	};
- --%>
+
 $(function(){
 		reviewList();
  });
+const reviewWriteForm = () => {
+	$.ajax({
+		url:"review_write_form",
+		method: "get"
+	}).then(data => {
+		$('#review_board').html(data);
+	});
+}
+
+const reviewWrite = () => {
+	$.ajax({
+		url:"review_write",
+		method: "get"
+	}).then(data => {
+		$('#review_board').html(data);
+	});
+}
 
 const reviewList = () => {
 	const productno = ${products.productno};
 	$.ajax({
 		url: "product_review_list",
 		method: "get",
-		data: productno
+		data: {productno}
 	}).then(data => {
 		$('#review_board').html(data);
 	});	
 };
 
 
-
-/* const reviewList = () => {
-	const productno = ${products.productno};
-	var productlist = {"productno": productno};
-	$.ajax({
-		url: "product_review_list",
-		method: "get",
-		data: productlist
-	}).then(data => {
-		$('#review_board').html(data);
-	}); 
-};
- */	
 const cartComfirm = () => {
 			const productno = ${products.productno};			
 			const cartquantity = document.getElementById('pquantity').value;
@@ -124,22 +122,22 @@ const changeimg4 = (product_img) => {
 				    </small>
 					<!--수량 선택-->
 					<form action="<%=application.getContextPath()%>/order/order_form" method="post">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<input type="hidden" name="isCart" value="0"/>
-						<input type="hidden" name="chk_productno" value="${products.productno}"/>
-						    <table style="width:100%; height:80px; border:1px solid lightgray;">
-										<tr>
-											<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요. ${procuts.pstock}</b>
-			                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
-			                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
-			                
-										</tr>
-								</table> 
-					    <!--구매 / 장바구니-->
-						<br><small style="margin-left:70%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
-						<!-- form으로 -->
-						
-						<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="isCart" value="0"/>
+								<input type="hidden" name="chk_productno" value="${products.productno}"/>
+								    <table style="width:100%; height:80px; border:1px solid lightgray;">
+												<tr>
+													<td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요. ${procuts.pstock}</b>
+					                <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
+					                <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
+					                
+												</tr>
+										</table> 
+							    <!--구매 / 장바구니-->
+								<br><small style="margin-left:70%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
+								<!-- form으로 -->
+								
+								<button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
 						</form>
 						<button onclick="cartComfirm()" class="btn btn-white btn-outline-dark" style="width:100%">ADD TO CART</button><br><br>
 							<!-- insertcartquantity(${products.productno}) -->
@@ -164,10 +162,7 @@ const changeimg4 = (product_img) => {
  		
  		</div>
 
-<%--  <c:import url="/product_review_list">
-		<c:param name="products" value="${products}"></c:param>	
-	</c:import>
- --%>
+
     <!--제품 Q&A-->
     <div >
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>
