@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
@@ -35,4 +36,6 @@ public interface ProductsDao {
 	//연정 검색
 	public List<Products> pSelectBySearchword(Map<String, Object> map);
 	public int countsearchword(String searchword);
+	
+	public Products likelistbylike(@Param("productno") int productno);
 }

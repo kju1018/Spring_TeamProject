@@ -43,7 +43,7 @@
            <li>개인정보를 관리하는 공간입니다.</li>
        </ul>
    </div>
-   <div class="banner" onclick="location.href ='<%=application.getContextPath()%>/mypage/like_list'">
+   <div class="banner" onclick="location.href ='<%=application.getContextPath()%>/likes/likelist'">
        <div id="icon">
        <img src = "<%=application.getContextPath()%>/resources/image/like.png" width="60">
        </div>

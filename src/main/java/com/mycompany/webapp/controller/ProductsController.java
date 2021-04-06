@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.Likes;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductImgs;
 import com.mycompany.webapp.dto.Products;
+import com.mycompany.webapp.service.LikesService;
 import com.mycompany.webapp.service.ProductImgsService;
 import com.mycompany.webapp.service.ProductReviewsService;
 import com.mycompany.webapp.service.ProductsService;
@@ -35,6 +38,9 @@ public class ProductsController {
 	private ProductsService productsService;
 	@Autowired
 	private ProductImgsService productImgsService;
+	
+	@Autowired
+	private LikesService likesService ;
 	
 	/*ADMIN*======================================================/
 	/*상품 상세 - admin*/
@@ -112,13 +118,26 @@ public class ProductsController {
 	/*USER*======================================================/
 	/*상품 상세*/
 	@GetMapping("/product_view_user")
-	public String product_view_user(Model model, int productno) {
+	public String product_view_user(Model model, int productno,Authentication auth) {
 		Products products = productsService.pSelectByPno(productno);
 		List<ProductImgs> productimg = productImgsService.pImgSelectByPno(productno);
 		model.addAttribute("products", products);
-		logger.info("imgno : "+Integer.toString(productimg.get(0).getImgno()));
+		model.addAttribute("pno", productno);
 		model.addAttribute("productimg", productimg);
 		
+		String userid = "";
+		try {
+			userid = auth.getName();
+		}catch(Exception e) {
+			
+		}
+		
+		/// 상세페이지 들어갔을 때, 유저가 이미지를 클릭을 했다면 success, 아니면 fail
+		Likes likes = likesService.SelectByIdandPno(userid, productno);
+		
+		if(likes != null) {
+			model.addAttribute("likes", "notnull");
+		}
 		return "product/product_view_user";
 	}
 	
