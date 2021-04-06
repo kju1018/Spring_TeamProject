@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.OrdersDao;
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.Pager;
 
 @Service
 public class OrdersService {
@@ -19,8 +20,8 @@ public class OrdersService {
 		return order;
 	}
 	
-	public List<Order> getOrderList(String userId){
-		List<Order> orderList = ordersDao.selectByUserId(userId);
+	public List<Order> getOrderList(Pager pager){
+		List<Order> orderList = ordersDao.selectByUserId(pager);
 		return orderList;
 	}
 	
@@ -40,5 +41,10 @@ public class OrdersService {
 	
 	public void removeOrder(int orderNo) {
 		ordersDao.delete(orderNo);
+	}
+	
+	public int getTotalRows(String orderid) {
+		int totalRows = ordersDao.count(orderid);
+		return totalRows;
 	}
 }

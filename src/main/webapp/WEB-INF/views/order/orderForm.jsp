@@ -94,7 +94,7 @@
                                 </colgroup>
                                 <tr>
                                     <th class="p-2">받는사람</th>
-                                    <td><input type="text" class="paymentinput" id="oreceiver" name="oreceiver" value="${user.uname}"></td>
+                                    <td><input type="text" class="paymentinput" id="oreceiver" name="oreceiver" value="${user.uname}" readonly></td>
                                 </tr>
 
                                 <tr>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.Pager;
 
 @Mapper
 public interface OrdersDao {
@@ -24,5 +25,7 @@ public interface OrdersDao {
 	public int delete(int orderno);
 	
 	
-	public List<Order> selectByUserId(String userid);
+	public List<Order> selectByUserId(Pager pager);
+	
+	public int count(String userid);
 }
