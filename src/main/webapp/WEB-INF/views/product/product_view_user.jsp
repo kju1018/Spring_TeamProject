@@ -5,7 +5,7 @@
 <script type="text/javascript">
 
 $(function(){
-		reviewList();
+		reviewList(1);
  });
 const reviewWriteForm = () => {
 	$.ajax({
@@ -17,24 +17,43 @@ const reviewWriteForm = () => {
 }
 
 const reviewWrite = () => {
+	event.preventDefault();
+	const borgimg = $("#borgimg").val();
+	const btitle = $("#btitle").val();
+	const bcontent = $("#bcontent").val();
+	
+	const formData = new FormData();
+	formData.append("btitle", btitle);
+	formData.append("bcontent", bcontent);
+	
+	if(borgimg){
+		formData.append("borgimg", borgimg);
+	}
 	$.ajax({
 		url:"review_write",
-		method: "get"
+		data: formData,
+		method: "post",
+		cache: false,
+		processData: false,
+		contentType: false
 	}).then(data => {
-		$('#review_board').html(data);
+		if(data.result=="success"){
+			reviewList(1);
+		}
 	});
 }
 
-const reviewList = () => {
-	const productno = ${products.productno};
+const reviewList = (pageNo) => {
+	const productno = ${products.productno};	
 	$.ajax({
 		url: "product_review_list",
 		method: "get",
-		data: {productno}
+		data: {productno, pageNo}
 	}).then(data => {
 		$('#review_board').html(data);
 	});	
-};
+}; 
+
 
 
 const cartComfirm = () => {
@@ -162,7 +181,7 @@ const changeimg4 = (product_img) => {
  		
  		</div>
 
-
+		
     <!--제품 Q&A-->
     <div >
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>

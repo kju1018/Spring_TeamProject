@@ -40,6 +40,7 @@
        
     </div>
 
+	<c:if test="${not empty previews}">	
 	<div class="container-xl d-flex justify-content-center" >
 		<div class="row">
 		<table>
@@ -48,33 +49,33 @@
 				<div class="d-flex">
 						<!-- [처음] [이전] 1 2 3 4 5 [다음][맨끝] -->
 					<div class="flex-grow-1">
-							<a class="btn btn-outline-secondary btn-sm" 
-							href="product_list_user?pageNo=1&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[처음]</a>
+							<button class="btn btn-outline-secondary btn-sm" 
+							onclick="reviewList(1)">[처음]</button>
 							
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.startPageNo-1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">이전</a>
+								<button class="btn btn-outline-secondary btn-sm" 
+								onclick="reviewList(${pager.startPageNo-1})">이전</button>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo!=i}">
-									<a class="btn btn-outline-secondary btn-sm" 
-									href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
+									<button class="btn btn-outline-secondary btn-sm" 
+									onclick="reviewList(${i})">${i}</button>
 								</c:if>
 								<c:if test="${pager.pageNo==i}">
-									<a class="btn btn-danger btn-sm" 
-										href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
+									<button class="btn btn-danger btn-sm" 
+										onclick="reviewList(${i})">${i}</button>
 								</c:if>	
 							</c:forEach>
 							
 			
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.endPageNo+1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">다음</a>
+								<button class="btn btn-outline-secondary btn-sm" 
+								onclick="reviewList(${pager.endPageNo+1})">다음</button>
 							</c:if>
 							
-							<a class="btn btn-outline-secondary btn-sm" 
-							href="product_list_user?pageNo=${pager.totalPageNo}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[맨끝]</a>
+							<button class="btn btn-outline-secondary btn-sm" 
+							onclick="reviewList(${pager.totalPageNo})">[맨끝]</button>
 						</div>	
 	
 					</div> 
@@ -82,8 +83,8 @@
 			</tr>
 		</table>
 		</div>
-		</div>
-
+	</div>
+	</c:if>
 
 
 
