@@ -2,23 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.ProductReviewsDao">
 <select id="prSelectAll" resultType="productreviews">
-	select boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype
+	select boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount
 	from productreviews
 	order by boardno desc
 </select>
 
-<select id="prSelectByPno" parameterType="int" resultType="productreviews">
-	select p.productno, pr.boardno, pr.userid, pr.btitle, pr.bcontent, pr.bdate, pr.borgimg, pr.bsaveimg, pr.bimgtype
-	from products p, productreviews pr
-	where p.productno=pr.productno and p.productno=#{productno}
-	order by boardno desc
+<select id="prSelectByPno" parameterType="pager" resultType="productreviews">
+select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount	
+		from(	
+			select rownum as rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount						
+			from (
+						select productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount
+						from  productreviews
+						where productno=#{pcategory}
+						order by boardno desc
+					 )
+				where rownum &lt;=#{endRowNo}
+			)
+	where rnum &gt;= #{startRowNo}
+</select>
+
+<select id="count" parameterType="int" resultType="int">
+	select count(*) from productreviews where productno=#{productno}
 </select>
 
 <insert id="prInsert" parameterType="productreviews">
+  <selectKey keyProperty="boardno" resultType="int" order="BEFORE"> 
+ 		select seq_preview_boardno.nextval from dual
+ </selectKey>	
+ <if test="borgimg == null">
 	insert into productreviews
-	(boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype)
+	(boardno, userid, productno, btitle, bcontent, bdate, bcount)
 	values
-	(seq_boardno.nextval, #{userid}, #{productno}, #{btitle}, #{bcontent}, sysdate, #{borgimg}, #{bsaveimg}, #{bimgtype})
+	(seq_preview_boardno.nextval, #{userid}, #{productno}, #{btitle}, #{bcontent}, sysdate, 0)
+	</if>
+  <if test="borgimg != null">
+ 	insert into productreviews
+	(boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount)
+	values
+	(seq_preview_boardno.nextval, #{userid}, #{productno}, #{btitle}, #{bcontent}, sysdate, #{borgimg}, #{bsaveimg}, #{bimgtype}, 0)  
+  </if>
 </insert>
 
 <update id="prUpdate" parameterType="productreviews">

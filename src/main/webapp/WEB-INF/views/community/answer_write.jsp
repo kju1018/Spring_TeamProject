@@ -19,6 +19,7 @@
     <!--게시판-->
     <form action="createrepl" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+    <input  type="hidden" name="originno" value="${communityQna.boardno}">
     <div class="table table-responsive">
         <table class="table">
         	<tr>
@@ -27,7 +28,7 @@
             </tr>
             <tr>  
                 <th>제목</th>
-                <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;" value="${communityqna.btitle}"></td>
+                <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;" value="[${communityQna.btitle} 글의 답글]"></td>
             </tr>
                
             <tr>

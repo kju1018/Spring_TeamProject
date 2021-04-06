@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductReviewsDao;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductReviews;
 
 @Service
@@ -16,10 +17,15 @@ public class ProductReviewsService {
 		return list;
 	}
 	
-	public List<ProductReviews> prSelectByPno(int productno){
-		List<ProductReviews> list = productReviewsDao.prSelectByPno(productno);
+	public List<ProductReviews> prSelectByPno(Pager pager){
+		List<ProductReviews> list = productReviewsDao.prSelectByPno(pager);
 		return list;
 	}
+	
+	public int getTotalRows(int productno) {
+		int rows = productReviewsDao.count(productno);
+		return rows;
+	}	
 	
 	public void prInsert(ProductReviews productrivews) {
 		productReviewsDao.prInsert(productrivews);

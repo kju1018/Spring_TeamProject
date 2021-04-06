@@ -15,7 +15,7 @@
             from (
                select boardno, btitle, bcontent, userid, bdate, bcount, originno, groupord, grouplayer
                from communityqnas
-               order by boardno desc
+               order by originno desc, boardno asc
             )
          where rownum &lt;=#{endRowNo}
       )

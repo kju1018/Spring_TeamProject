@@ -68,5 +68,11 @@ public class CommunityQna {
 	public void setBcount(int bcount) {
 		this.bcount = bcount;
 	}
+	@Override
+	public String toString() {
+		return "CommunityQna [boardno=" + boardno + ", userid=" + userid + ", btitle=" + btitle + ", bdate=" + bdate
+				+ ", bcontent=" + bcontent + ", bcount=" + bcount + ", originno=" + originno + ", groupord=" + groupord
+				+ ", grouplayer=" + grouplayer + "]";
+	}
 	
 }
