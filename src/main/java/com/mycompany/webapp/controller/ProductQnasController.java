@@ -41,7 +41,6 @@ public class ProductQnasController {
 	         intPageNo = Integer.parseInt(pageNo);
 	      }
 	   
-
 	      int totalRows = productQnasService.getTotalRows(productno);
 	      Pager pager = new Pager(5,5,totalRows, intPageNo, productno);
 	      session.setAttribute("pager", pager);
@@ -66,15 +65,13 @@ public class ProductQnasController {
         } else {
            intPageNo = Integer.parseInt(pageNo);
         }
-         
-         
-        int totalRows = productQnasService.getTotalRow(auth.getName());
-        Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
-        session.setAttribute("pager", pager);
-        List<ProductQnas> list = productQnasService.getBoardListById(pager);
-        model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
-        model.addAttribute("pager", pager);
-		
+          
+		int totalRows = productQnasService.getTotalRow(auth.getName());
+		Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
+		session.setAttribute("pager", pager);
+		List<ProductQnas> list = productQnasService.getBoardListById(pager);
+		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+		model.addAttribute("pager", pager);
 		return "product/p_qna_list";
 	}
 	

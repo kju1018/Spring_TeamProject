@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductReviews;
 import com.mycompany.webapp.dto.Products;
@@ -52,6 +53,32 @@ public class ProductReviewsController {
 		model.addAttribute("previews", previews);
 		model.addAttribute("products",products);
 		return "product/product_review_list";
+	}
+	
+	@GetMapping("/myproduct_review_list")
+	public String myProductReviewList(String pageNo, Model model, HttpSession session, Authentication auth) {
+
+        int intPageNo = 1;
+        if(pageNo == null) {
+        //세션에서 Pager를 찾고, 있으면 pageNo를 설정
+        Pager pager = (Pager) session.getAttribute("pager");
+           if(pager != null) {
+              intPageNo = pager.getPageNo();
+           }
+        } else {
+           intPageNo = Integer.parseInt(pageNo);
+        }
+         
+         
+        int totalRows = productReviewsService.getTotalRows(auth.getName());
+        Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
+        session.setAttribute("pager", pager);
+        List<ProductReviews> list = productReviewsService.prSelectByUserId(pager);
+        logger.info(""+list.size());
+        logger.info(""+totalRows);
+		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+		model.addAttribute("pager", pager);
+		return "product/myproduct_review_list";
 	}
 	
 	@PostMapping("/review_write_form")

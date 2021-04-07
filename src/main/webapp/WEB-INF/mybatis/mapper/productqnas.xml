@@ -47,7 +47,7 @@
 		select count(*) from productqnas where productno=#{productno}
 	</select>
 	
-	<select id="pqnacountuser" parameterType="int" resultType="int">
+	<select id="pqnacountuser" parameterType="string" resultType="int">
 		select count(*) from productqnas where userid=#{userid}
 	</select>
 	
