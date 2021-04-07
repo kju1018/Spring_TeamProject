@@ -14,6 +14,8 @@
 		<!-- <security:intercept-url pattern="/exam08/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
 	
 		<security:intercept-url pattern="/cart/**" access="hasRole('ROLE_USER')"/>
+
+		<security:intercept-url pattern="/auth/deleteuser" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/order/**" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/**" access="permitAll"/>
@@ -24,6 +26,7 @@
 							 password-parameter="upassword"
 							 login-processing-url="/login"
 							 authentication-failure-url="/auth/login" 
+							 
 							 />
 			<!-- <security:csrf disabled="true"/>  -->
 		<!--  -->			 
@@ -50,24 +53,41 @@
 	<!-- 사용자 인증 처리를 위한 설정 (DB 테이블 관련) -->
 	<security:authentication-manager>
 		<security:authentication-provider ref="daoAuthenticationProvider"/>
+		<security:authentication-provider ref="userAuthProvider"/>
 	</security:authentication-manager>
+	
+	
 	
 	<bean id="daoAuthenticationProvider"
 		  class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		  <property name="passwordEncoder" ref="bCryptPasswordEncoder"></property>
 		  <property name="userDetailsService" ref="jdbcUserService"/>
 		  <property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/>
-		  
 	</bean>
+	
+	<!-- <bean id="loginFailureHandler" class="com.mycompany.security.LoginFailureHandler">
+		<property name="userid" value="userid"/>
+	    <property name="upassword" value="upassword"/>
+	    <property name="errormsgname" value="ERRORMSG"/>
+	    <property name="defaultFailureUrl" value="/auth/login?error"/>
+
+	</bean> -->
 	
 	<bean id="bCryptPasswordEncoder" 
 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </bean>
+    
+    <bean id="userAuthProvider" class="com.mycompany.webapp.provider.CustomAuthenticationProvider"/>
 	
 	<security:jdbc-user-service id="jdbcUserService"
 								data-source-ref="dataSource"
 								users-by-username-query="select userid, upassword, uenabled from users where userid=?"
 								authorities-by-username-query="select userid, uauthority from users where userid=?"/>
+								
+
+
+
+
 								
 	<bean id="roleHierarchyAuthoritiesMapper"
 		  class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper">

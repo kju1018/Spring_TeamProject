@@ -23,6 +23,16 @@
 		}
 	}
 	
+	function openZipSearch() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				$('[name=uzipcode]').val(data.zonecode); // 우편번호 (5자리)
+				$('[name=uaddress]').val(data.address);
+				$('[name=udetailaddress]').val(data.buildingName);
+			}
+		}).open();
+	}
+	
 
 	/// 양력체크시 음력은 체크 못함
 	const datecheck1 = () => {
@@ -122,7 +132,7 @@
 		}else{
 			
 			if(udetailaddress !== ""){
-				uaddress = uaddress + udetailaddress;
+				uaddress = uaddress + "-" +udetailaddress;
 			}else{
 				uaddress = uaddress;
 			}
@@ -207,6 +217,8 @@
 		}
 		
 	}		
+	
+	
 </script>
 
 
@@ -291,16 +303,16 @@
                     <div class="col-10 border-left border-secondary">
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <input type="text" style="width: 100%;" id="uzipcode" name="uzipcode">
+                                <input type="text" style="width: 100%;" id="uzipcode" name="uzipcode" readonly>
                             </div>
                             <div class="col-3 pl-0">
-                                <a href="#" class="btn btn-outline-dark btn-sm">우편번호</a>
+                                <a onclick="openZipSearch()" class="btn btn-outline-dark btn-sm">우편번호</a>
                                 <span id="errorUzipcode" class="text-danger error fontsize-sm"></span>
                             </div>
                         </div>
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <input type="text" style="width: 100%;" id="uaddress" name="uaddress">
+                                <input type="text" style="width: 100%;" id="uaddress" name="uaddress" readonly>
                             </div>
                             <div class="col-8">
                                <span id="errorUaddress" class="text-danger error fontsize-sm"></span>
