@@ -27,6 +27,10 @@ public class ProductReviewsService {
 		return productreviews;
 	}
 	
+	public void prUpdateCount(int boardno) {
+		productReviewsDao.prUpdateCount(boardno);
+	}
+	
 	public int getTotalRows(int productno) {
 		int rows = productReviewsDao.count(productno);
 		return rows;

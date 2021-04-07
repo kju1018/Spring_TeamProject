@@ -99,6 +99,7 @@ public class ProductReviewsController {
 	public String reviewView(ProductReviews productreviews, Model model) {
 		logger.info("보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		int bno = productreviews.getBoardno();
+		productReviewsService.prUpdateCount(bno);
 		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
 		//logger.info("컨텐트 : "+reviews.getBcontent());
 		//logger.info("btitle : "+reviews.getBtitle());
@@ -132,7 +133,7 @@ public class ProductReviewsController {
 	
 	@PostMapping(value="/review_update", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String reviewUpdate(ProductReviews productreviews) {
+	public String reviewUpdate(ProductReviews productreviews) {		
 		logger.info("업데이트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		productReviewsService.prUpdate(productreviews);
 		JSONObject jsonobject = new JSONObject();

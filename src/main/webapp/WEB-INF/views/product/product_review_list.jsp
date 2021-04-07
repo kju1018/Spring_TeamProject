@@ -19,7 +19,14 @@
                 <c:forEach var="rv_list" items="${previews}">
                 	<tbody>
                     <tr>
-                        <td><img src="<%=application.getContextPath()%>/resources/image/light2_sora.png" style="width:20%"></td>
+                    <c:choose>
+                    	<c:when test="${rv_list.borgimg != null}">
+                        <td><img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${rv_list.bsaveimg}&type=${rv_list.bimgtype}" style="width:100px; height:80px;"></td>
+                       </c:when>
+                       <c:otherwise>
+                       	<td><div style="width:30%;"></div></td>                       
+                       </c:otherwise>
+                      </c:choose>
                         <td><a onclick="ReviewRead(${rv_list.boardno})" style="width:20%" class="text-black-50">${rv_list.btitle} / ${rv_list.boardno}</a></td>
                         <td>${rv_list.userid}</td>
                         <td><fmt:formatDate value="${rv_list.bdate}" pattern="yyyy-MM-dd"/></td>
