@@ -13,9 +13,9 @@ if(title == null){
 				<div class="col-5 text-center">
 			<div class="title">
 				<h2>
-			<font color="33333">REVIEW</font>
+			<font color="33333">REVIEW_UPDATE</font>
 		</h2>
-		<p>리뷰 쓰기입니다.</p>
+		<p>리뷰 수정 페이지입니다.</p>
 			</div>
 			</div>
 		</div>
@@ -23,7 +23,7 @@ if(title == null){
 	
 		
 			<div class="container-fluid">
-			<form onsubmit="reviewWrite()">				
+			<form onsubmit="reviewUpdate(${productreviews.boardno})">				
 				<input type="hidden" value="${productreviews.productno}" id="productno" name="productno">
 				<div class="row justify-content-center">
 			<table class="rw_table" style="width:70%;">		

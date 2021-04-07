@@ -16,13 +16,11 @@
 			
 			<typeAlias type="com.mycompany.webapp.dto.OrderProduct" alias="orderproduct"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.Pcategory" alias="pcategory"/>
-			
 			<typeAlias type="com.mycompany.webapp.dto.Products" alias="products"/>
 			
 			<typeAlias type="com.mycompany.webapp.dto.ProductImgs" alias="productimgs"/>
 			
-			<typeAlias type="com.mycompany.webapp.dto.ProductQnas" alias="productqnas"/>
+			<typeAlias type="com.mycompany.webapp.dto.ProductQnas" alias="productqna"/>
 			
 			<typeAlias type="com.mycompany.webapp.dto.ProductReviews" alias="productreviews"/>
 			

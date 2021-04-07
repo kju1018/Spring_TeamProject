@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<div class="container-fluid" style="margin-top:15%">
+<div class="container" style="margin-top:15%">
 		<div class="row" >
 				<div class="col-5 text-center">
 			<div class="title">
@@ -15,31 +16,44 @@
 			</div>
 		</div>
 
-			<div class="container-fluid">
+			<div class="container">
 				<div class="row justify-content-center">
 	<div style="width:70%;">
-		<table class="pv_table" style="width:100%;">
-		<tr>
-			<th class="pv_table" style="width:20%">PRODUCT</th>
-			<th class="pv_table" style="text-align: left; width:100%">&nbsp;북유럽식 식탁조명</th>
-			<tr>
-				<td class="pv_table">SUBJECT</td>
-				<td class="pv_table" style="text-align: left">&nbsp;제품 크기</td>				
-			</tr>
-		<tr>
-				<td class="pv_table">WRITER</td>
-				<td class="pv_table" style="text-align: left">&nbsp;ㅎㅎ</td>				
-			</tr>
-			<tr>
-				<td class="pv_table">DATE</td>
-				<td class="pv_table" style="text-align: left">&nbsp;2021-03-10</td>				
-			</tr>	
-			<tr>
-				<td class="pv_table" colspan="2" height="150" style="text-align:left">&nbsp;홈페이지 회원가입 후 등업신청 하시면 동영샹 메뉴얼을 보실 수 있습니다.</td>
-								
-			</tr>	
+	<input type="hidden" name="productno" value="${productqna.productno}">
+		<table class="table">
 		
-		</table>
+    <tr>
+        <th style="width:15%">글번호</th>
+        <td><input type="text" class="form-control" value="${productqna.boardno}" readonly></td>
+        <th style="width:15%">조회수</th>
+        <td><input type="text" class="form-control" value="${productqna.bcount}" readonly></td>
+    </tr> 
+    <tr>
+        <th style="width:15%">작성자</th>
+        <td><input type="text" class="form-control" value="${productqna.userid}" readonly></td>
+        <th style="width:15%">작성일</th>
+        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd" /></td>
+    </tr>
+    <tr>
+        <th style="width:15%">제목</th>
+        <td colspan="3"><input type="text" class="form-control" value="${productqna.btitle}" readonly></td>
+    </tr>
+    <tr>
+        <th style="width:15%">글 내용</th>
+        <td colspan="3"><input type="text" class="form-control" value="${productqna.bcontent}" readonly></td>
+    </tr>
+    </table>
+  
+    <div class="n_v_bottom">
+        <hr/>  
+        <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${productqna.productno}'">
+        <c:if test="${loginUid == notice.userid}">
+	        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/product/qna_update?boardno=${productqna.boardno}'">          
+	        <input type="button" class="btn btn-dark btn-sm" value="삭제하기" onclick="location.href ='<%=application.getContextPath()%>/product/pdeleteqna?boardno=${productqna.boardno}&productno=${productqna.productno}'">
+		</c:if>   
+    </div>
+		
+	
 	</div>
 	</div>
 	

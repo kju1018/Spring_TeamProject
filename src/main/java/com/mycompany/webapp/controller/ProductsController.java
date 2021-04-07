@@ -43,15 +43,15 @@ public class ProductsController {
 	private LikesService likesService ;
 	
 	/*ADMIN*======================================================/
-	/*상품 상세 - admin*/
-	@GetMapping("/product_view")
-	public String product_view(Model model, int productno) {
-		Products productnum = productsService.pSelectByPno(productno);
-		model.addAttribute("productnum", productnum);	
-		return "product/product_view";
-	}
+	/*상품 상세 - admin
 	
-	/*상품 리스트 - admin*/
+	 * @GetMapping("/product_view") public String product_view(Model model, int
+	 * productno) { Products productnum = productsService.pSelectByPno(productno);
+	 * model.addAttribute("productnum", productnum); return "product/product_view";
+	 * }
+	
+	
+	/*상품 리스트 - admin
 	@GetMapping("/product_list")
 	public String product_list(Model model) {
 		List<Products> list = productsService.pSelectAll();
@@ -59,26 +59,26 @@ public class ProductsController {
 		return "product/product_list";
 	}
 	
-	/*상품 추가 폼으로 이동 - admin*/
+	상품 추가 폼으로 이동 - admin
 	@GetMapping("/product_insert")
 	public String product_insert() {
 		return "product/product_insert";
 	}
 	
-	/*상품 추가 폼에서 입력한 값 DB에 저장 - admin*/
+	상품 추가 폼에서 입력한 값 DB에 저장 - admin
 	@PostMapping("/insert") //jsp에서 값 얻기
 	public String insert(Products products) {
 		productsService.pInsert(products);
 		return "redirect:/list/product_list";
 	}
 	
-	/*업데이트할 상품 번호 받기 - admin*/
+	업데이트할 상품 번호 받기 - admin
 	@GetMapping("/product_update_num")
 	public String product_update_num() {
 		return "product/product_update_num";
 	}
 	
-	/*업데이트할 상품 번호 있는지 확인 - admin*/
+	업데이트할 상품 번호 있는지 확인 - admin
 	@PostMapping(value ="/update_num", produces = "text/html; charset=UTF-8") //jsp에서 값 얻기
 	@ResponseBody
 	public String update_num(Products products, Model model) {
@@ -98,14 +98,14 @@ public class ProductsController {
 		}		
 	}
 	
-	/*번호가 있을 경우 수정할 정보 입력 - admin*/
+	번호가 있을 경우 수정할 정보 입력 - admin
 	@GetMapping("/product_update")
 	public String product_update(Products products) {
 		//productsService.pSelectByPno(products.getProductno());
 		return "product/product_update";
 	}
 	
-	/*상품 업데이트 폼에서 입력한 값 DB에 저장 - admin*/
+	상품 업데이트 폼에서 입력한 값 DB에 저장 - admin
 	@PostMapping("/update") //jsp에서 값 얻기
 	public String update(Products products) {
 		logger.info(products.getPname());
@@ -114,6 +114,7 @@ public class ProductsController {
 		productsService.pUpdate(products);	
 		return "redirect:/list/product_list";
 	}
+	*/
 	
 	/*USER*======================================================/
 	/*상품 상세*/
