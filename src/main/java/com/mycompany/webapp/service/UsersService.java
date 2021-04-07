@@ -74,10 +74,10 @@ public class UsersService {
 		
 		User dbUser = usersDao.selectbyemailandname(uemail,uname);
 		if(dbUser != null) {
-			logger.info(dbUser.getUserid());
+		
 			return dbUser.getUserid();
 		}else {
-			logger.info("fail");
+			
 			return "fail";
 		}
 	}

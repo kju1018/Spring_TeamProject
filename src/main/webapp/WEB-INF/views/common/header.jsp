@@ -15,7 +15,7 @@
 	<script src="<%=application.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   	<link href="<%=application.getContextPath()%>/resources/css/thefive.css" rel="stylesheet" type="text/css">
-   
+    <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 </head>
 <script>

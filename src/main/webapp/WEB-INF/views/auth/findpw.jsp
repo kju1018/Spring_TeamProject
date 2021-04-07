@@ -7,15 +7,13 @@
 
 
 	const findpw = () => {
-		
+		event.preventDefault();
 		
 		const userid = $("#userid").val();
 		const uname = $("#uname").val();
 		const uemail = $("#uemail").val();
 		var result = true;
-		console.log(userid);
-		console.log(uname);
-		console.log(uemail);
+		
 		if(userid === "" || uname === "" || uemail === "" ){
 			result = false;
 			alert("양식을 채워주세요.");
@@ -23,13 +21,14 @@
 		
 	
 		if(result){
-		
+			console.log(result);
 			$.ajax({
 				url : "findpwProcess",
 				data : {userid,uname,uemail},
 				method: "post"
 			})
 			.then(data => {
+				
 				if(data.result == "notnull"){
 					window.location.href = "pwupdate";
 				}else{
