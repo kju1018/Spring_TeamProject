@@ -32,11 +32,11 @@
 						<tr class="cart_list" >
 							<th class="align-middle text-center"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
 							<th class="align-middle text-center">
-								<a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">
+								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${cart.productno}">
 									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
 								</a>
 							</th>
-							<th class="align-middle text-center"><a href="<%=application.getContextPath()%>/product/product_view?productno=${cart.productno}">${cart.pname}</a></th>
+							<th class="align-middle text-center"><a href="<%=application.getContextPath()%>/product/product_view_user?productno=${cart.productno}">${cart.pname}</a></th>
 							<th class="align-middle text-center">${cart.pprice}원</th>
 							<th class="align-middle text-center">
 								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:50%"> 개

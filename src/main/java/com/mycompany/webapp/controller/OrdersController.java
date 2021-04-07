@@ -3,6 +3,8 @@ package com.mycompany.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.OrderProduct;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
 import com.mycompany.webapp.dto.User;
 import com.mycompany.webapp.service.CartsService;
@@ -79,7 +82,7 @@ public class OrdersController {
 
 		// 오더 생성
 		order.setUserid(auth.getName());
-		order.setOstatus("입금 대기중");
+		order.setOstatus("배송중");
 		ordersService.createOrder(order);
 		
 	
@@ -122,11 +125,24 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/mypage/ordered_list")
-	public String getOrderedList(Model model, Authentication auth) {
+	public String getOrderedList(String pageNo, Model model, Authentication auth, HttpSession session) {
+		int intPageNo = 1;
+		if(pageNo == null) {
+			//세션에서 Pager를 찾고, 있으면 pageNo를 설정
+			Pager pager = (Pager) session.getAttribute("pager");
+			if(pager != null) {
+				intPageNo = pager.getPageNo();
+			}
+		} else {
+			intPageNo = Integer.parseInt(pageNo);
+		}
+		int totalRows = ordersService.getTotalRows(auth.getName()); 
+		Pager pager = new Pager(5, 5, totalRows, intPageNo, auth.getName());
+		session.setAttribute("pager", pager);
+		List<Order> orderList = ordersService.getOrderList(pager);
 		
-		List<Order> orderList = ordersService.getOrderList(auth.getName());
 		model.addAttribute("orderList", orderList);
-		
+		model.addAttribute("pager", pager);
 		return "mypage/ordered_list";
 	}
 	
