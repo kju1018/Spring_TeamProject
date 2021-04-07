@@ -22,6 +22,21 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
 	where rnum &gt;= #{startRowNo}
 </select>
 
+<select id="prSelectByUserId" parameterType="pager" resultType="productreviews">
+select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount	
+		from(	
+			select rownum as rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount						
+			from (
+						select productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount
+						from  productreviews
+						where userid=#{userid}
+						order by boardno desc
+					 )
+				where rownum &lt;=#{endRowNo}
+			)
+	where rnum &gt;= #{startRowNo}
+</select>
+
 <select id="prSelectByBno" parameterType="int" resultType="productreviews">
 	select boardno, userid, productno, btitle, bcontent, bdate, borgimg, bsaveimg, bimgtype, bcount
 	from productreviews
@@ -30,6 +45,10 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
 
 <select id="count" parameterType="int" resultType="int">	
 	select count(*) from productreviews where productno=#{productno}
+</select>
+
+<select id="countByUserId" parameterType="string" resultType="int">	
+	select count(*) from productreviews where userid=#{userid}
 </select>
 
 <insert id="prInsert" parameterType="productreviews">

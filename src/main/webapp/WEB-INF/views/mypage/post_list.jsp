@@ -37,6 +37,19 @@
 		    data: {pageNo}
 	 	}).then(data => {
 	 	  	$("#mypost_div").html(data);
+	 		$("#p_qna_list_table").removeClass("col-9");
+	 		$("#p_qna_list_table").addClass("mt-4");
+	 		$("#p_qna_title").text("");
+		});
+	};
+	
+	const getProductReview = (pageNo) => {
+	 	$.ajax({
+	 		url:"<%=application.getContextPath()%>/product/myproduct_review_list",
+		    method: "get",
+		    data: {pageNo}
+	 	}).then(data => {
+	 	  	$("#mypost_div").html(data);
 		});
 	};
 </script>
@@ -66,74 +79,13 @@
 	  <select name="select_post" id="select_post" onchange="test(this.value)">
           <option value="1" >내가 쓴 QnA</option>
           <option value="2" >내가 쓴 제품 QnA</option>
-          <option value="3" >내가 쓴 제품 QnA</option>
+          <option value="3" >내가 쓴 제품 리뷰</option>
       </select>              
 	<!-- 게시물 종류 선택 -->
-	<div id="mypost_div">
+	<div id="mypost_div" class="container-fluid">
+	
 	</div>
 
-	<hr/>
-	<!--게시판-->
-	
-	<!--게시판-->
-	<div class="sel_nav">
-		<label>[내가 쓴 제품 QnA]</label>
-	</div>
-	
-	<table class="table mb-7">
-		<thead>
-			<tr>
-				<th width="10%">번호</th>
-				<th width="25%">사진</th>
-				<th  width="25%">제목</th>
-				<th width="15%">작성자</th>
-				<th width="15%">작성일</th>
-				<th width="10%">조회수</th>
-			</tr>
-		</thead>
-		<tbody>
-		<tr>
-			 	<td>1</td>
-			 	<td><img src="<%=application.getContextPath()%>/resources/image/light4_sora.png"></td>
-		         <td>배송관련 문의</td>
-		         <td>user2</td>
-		         <td>2021-03-31</td>
-		         <td>5</td>
-		</tr>   
-		   <tr>
-		   	<td colspan="6" class="text-center">
-		   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-		   		<a class="btn btn-dark btn-sm"
-		   		   href="post_list?pageNo=1">처음</a>
-		   		
-		   		<c:if test="${pager.groupNo>1}">
-			   		<a class="btn btn-light btn-sm"
-			   		   href="post_list?pageNo=${pager.startPageNo-1}">이전</a>
-			   	</c:if>
-		   		
-		   		<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-		   			<c:if test="${pager.pageNo!=i}">
-		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
-		   			</c:if>
-		   			<c:if test="${pager.pageNo==i}">
-		   				<a class="btn btn-outline-secondary btn-sm" href="post_list?pageNo=${i}">${i}</a>
-		   			</c:if>
-		   		</c:forEach>
-		   		
-		   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			   		<a class="btn btn-light btn-sm"
-			   		   href="post_list?pageNo=${pager.endPageNo+1}">다음</a>
-			   	</c:if>
-			   	
-		   		<a class="btn btn-dark btn-sm"
-		   		   href="post_list?pageNo=${pager.totalPageNo}">맨끝</a>
-		   	</td>
-		   </tr>
-		</tbody>
-	
-	</table>
-	<hr/>
-	<!--게시판-->
 
 </div>
 	<div class="c_bottom">

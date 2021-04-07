@@ -106,7 +106,6 @@ public class CommunityQnaController {
         List<CommunityQna> list = communityQnasService.getBoardListById(pager);
         model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
         model.addAttribute("pager", pager);
-		
 		return "community/my_qna_list";
 	}
 	
