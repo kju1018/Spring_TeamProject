@@ -52,16 +52,13 @@
 			if(useraddress2 != uaddress2){
 				
 				uaddress = uaddress+ "-" + uaddress2;
-<<<<<<< HEAD
 			}else{
 				result = false;
 				alert("변경된 사항이 없습니다.");
 			}
+			
+			
 			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel ){
-=======
-			}
-			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel){
->>>>>>> branch 'master' of https://github.com/kju1018/Spring_TeamProject.git
 				
 			}else{
 				result = false;
