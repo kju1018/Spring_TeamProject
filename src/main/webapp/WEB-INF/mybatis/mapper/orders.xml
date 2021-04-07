@@ -35,15 +35,11 @@
 		and p.productno = pi.productno and pi.ipriority = 1
 	</select>
 
-	
 	<select id="selectByOrderNo" parameterType="int" resultType="order">
 		select orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from orders
 		where orderno=#{orderno}
 	</select>
-	
-
-	
 	
 	<insert id="insert" parameterType="order">
 		<selectKey keyProperty="orderno" resultType="int" order="BEFORE">
@@ -56,22 +52,11 @@
 		(#{orderno}, #{userid}, #{oaddress}, #{oreceiver}, #{omessage}, #{omethod}, sysdate, #{ostatus}, #{ozipcode}, #{onumber})
 	</insert>
 	
-	<update id="updateOrderStatus" parameterType="int">
-		update orders set 
-		ostatus='취소'
-		where orderno=#{orderno}
-	</update>
-	
 	<update id="updateOrder" parameterType="order">
 		update orders set 
 		ostatus=#{ostatus}
 		where orderno=#{orderno}
 	</update>
-	
-	<delete id="delete" parameterType="int">
-		delete from orders
-		where orderno=#{orderno}
-	</delete>
 	
 	<select id="count" parameterType="string" resultType="int">
 		select count(*) from orders 

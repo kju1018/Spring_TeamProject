@@ -15,7 +15,6 @@ public class OrderProductsService {
 	@Autowired
 	private OrderProductsDao orderProductsDao;
 	
-	
 	public void createOrderProduct(OrderProduct orderProduct) {
 		orderProductsDao.insert(orderProduct);
 	}
@@ -24,15 +23,5 @@ public class OrderProductsService {
 		orderProductsDao.insertByList(orderProductList);
 	}
 	
-	public void updateOrderProduct(OrderProduct orderProduct) {
-		orderProductsDao.updateOrderProduct(orderProduct);
-	}
-	
-	public void delete(OrderProduct orderProduct) {
-		orderProductsDao.delete(orderProduct);
-	}
-	
-	public void deleteByOrderNo(int orderno) {
-		orderProductsDao.deleteByOrderNo(orderno);
-	}
+
 }
