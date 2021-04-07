@@ -5,6 +5,16 @@
 
 	<h1 style="color:red;">${requestScope.loginFailMsg}</h1>
    <div class="container-lg item_mt-18">
+		   <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+	               <div class="text_center_sort">
+					   	 <font color="red">
+					        <p>로그인에 실패하였습니다.<br/>
+					           이유 : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+					        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+					     </font>
+				    </div>
+			   </c:if>
+		
 		
    	  <form method="post" action="<%=application.getContextPath()%>/login">
    	  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -34,6 +44,7 @@
                 <div class="item_mt-05 item_mb-3">
                     <a href="<%=application.getContextPath()%>/auth/signup" class="btn btn-secondary btn-lg item_width_100 btn-block">회원가입</a>
                 </div>
+            
                 
             </div>
         </div>

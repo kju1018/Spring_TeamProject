@@ -5,6 +5,9 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +15,15 @@ import com.mycompany.webapp.dao.UsersDao;
 import com.mycompany.webapp.dto.User;
 
 @Service
-public class UsersService {
+public class UsersService implements UserDetailsService{
 	
 	private static final Logger logger =
 			LoggerFactory.getLogger(UsersService.class);
 	
 	@Autowired
 	private UsersDao usersDao;
+
+	
 	/// 회원가입 시 회원추가
 	public void join(User user) {
 
@@ -42,23 +47,7 @@ public class UsersService {
 		 }		 
 		 return "success";
 	}
-	
-	public String duplicateId(User user) {
-		User dbUser=usersDao.selectbyUserid(user);
-		logger.info(dbUser.getUserid());
-		int uenabled = dbUser.getUenabled(); 
-		 if(dbUser == null || uenabled == 0 ) {
-			 return "wrongUid";
-		 }else {
-			 BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-			 boolean result = bpe.matches(user.getUpassword(),dbUser.getUpassword());
-			 
-			 if(!result) {
-				 return "wrongUpassword";
-			 }
-		 }
-		 return "success";
-	}
+
 	
 	public String duplicateEmail(String useremail) {
 		User dbUser = usersDao.selectbyUemail(useremail);
@@ -128,6 +117,14 @@ public class UsersService {
 			return "fail";
 		}
 		
+	}
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = usersDao.selectbyUserid(username);
+		if(user == null) {
+			throw new UsernameNotFoundException(username);
+		}
+		return user;
 	}
 	
 	

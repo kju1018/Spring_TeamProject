@@ -1,8 +1,16 @@
 package com.mycompany.webapp.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class User {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
+@SuppressWarnings("serial")
+public class User implements UserDetails{
 	
 	String userid;
 	String upassword;
@@ -81,6 +89,45 @@ public class User {
 	}
 	public void setUauthority(String uauthority) {
 		this.uauthority = uauthority;
+	}
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		 ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+	        auth.add(new SimpleGrantedAuthority(uauthority));
+	        return auth;
+	}
+	@Override
+	public String getPassword() {
+		
+		return upassword;
+	}
+	@Override
+	public String getUsername() {
+		
+		return userid;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		if(uenabled == 1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 
