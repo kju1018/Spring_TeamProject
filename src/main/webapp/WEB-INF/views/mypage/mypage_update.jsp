@@ -17,11 +17,14 @@
 	});
 	
 	function openZipSearch() {
+		const uaddress2 = $("#uaddress2").val();
 		new daum.Postcode({
 			oncomplete: function(data) {
 				$('[name=uzipcode]').val(data.zonecode); // 우편번호 (5자리)
 				$('[name=uaddress]').val(data.address);
-				$('[name=uaddress2]').val(data.buildingName);
+				$('[name=uaddress2]').val(uaddress2);
+				
+				
 			}
 		}).open();
 	}
@@ -49,8 +52,11 @@
 			if(useraddress2 != uaddress2){
 				
 				uaddress = uaddress+ "-" + uaddress2;
+			}else{
+				result = false;
+				alert("변경된 사항이 없습니다.");
 			}
-			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel){
+			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel ){
 				
 			}else{
 				result = false;
