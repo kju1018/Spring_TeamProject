@@ -5,7 +5,6 @@
 <mapper namespace="com.mycompany.webapp.dao.OrderProductsDao">
 	<!--select문을 식별할 수 있는 이름 -->
 
-	
 	<select id="selectByUserId" parameterType="string" resultType="orderproduct">
 		select op.productno, o.orderno, op.oquantity, p.pname, p.pprice, pi.ioriginalname, pi.isavename, pi.imgtype, o.ostatus, o.odate
 		from orders o, orderproducts op, products p, productimgs pi
@@ -33,22 +32,6 @@
 	
 	</insert>
 
-	<update id="updateOrderProduct" parameterType="orderproduct">
-		update orderproducts set 
-		oquantity=#{oquantity}
-		where orderno=#{orderno} and productno=#{productno}
-	</update>
-	
-	<delete id="delete" parameterType="orderproduct">
-		delete from orderproducts
-		where orderno=#{orderno} and productno=#{productno}
-	</delete>
-	
-	<delete id="deleteByOrderNo" parameterType="int">
-		delete from orderproducts
-		where orderno=#{orderno}
-	</delete>
-	
 </mapper>
 
 
