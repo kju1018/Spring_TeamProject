@@ -14,39 +14,36 @@
 			</div>
 		</div>
 		
-			<div class="container-fluid">
-				<div class="row justify-content-center">
-					<table class="pw_table" style="width:70%;">		
-					<tr style="margin-letf:15%;">
-			<td class="pw_table">PRODUCT</td>
-			<td class="pw_table" style="text-align: left;">&nbsp;북유럽식 식탁조명</td>
-			<tr>
-				<td class="pw_table">SUBJECT</td>
-				<td class="pw_table pw_input1"><input style="width:100%" type="text"></td>				
-			</tr>
-		<tr>
-				<td class="pw_table">WRITER</td>
-				<td class="pw_table" style="text-align: left">&nbsp;ㅎㅎ</td>				
-			</tr>
-			<tr>
-				<td class="pw_table">DATE</td>
-				<td class="pw_table" style="text-align: left">&nbsp;2021-03-10</td>				
-			</tr>	
-			<tr>
-				<td class="pw_table" colspan="2" height="150"><input type="text"
-					style="width:100%; height: 150px"></td>				
-			</tr>	
-		
-		</table>
-	</div>
-	<br>
-    <div>
-        <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 취소 </a>
-        <a class="btn btn-light btn-outline-secondary" style="width:8%" href="<%=application.getContextPath()%>/product/product_view" role="button"> 완료 </a>
-        
-        </div>
-	<br><br>	
+			<div class="container">
+				
+				<form action="createqna" method="post">
+    				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<input type="hidden" name="productno" value="${productno}"/>
+			        <table class="table">
+			        	<tr>
+			                <th>작성자</th>
+			                <td colspan="3"><input type="text" id="userid" name="userid" value="${userid}" style="width: 100%;" readonly></td>
+			            </tr>
+			            
+			            <tr>
+			                <th>제목</th>
+			                <td colspan="3"><input type="text" id="btitle" name="btitle" style="width: 100%;"></td>
+			            </tr>
+			            
+			            <tr>
+			                <th>글내용</th>
+			                <td colspan="3"><textarea style="width: 100%;" id="bcontent" name="bcontent"></textarea></td>
+			            </tr>
+			        </table>
+			
+			            <div class="q_w_bottom">
+			                <hr/>         
+			                <button type="submit" class="btn btn-dark btn-sm">등록</button>
+			                <input type="button" class="btn btn-dark btn-sm" value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${productno}'">
+			            </div>
+			    </form>
 	</div>
 	</div>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

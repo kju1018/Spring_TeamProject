@@ -132,6 +132,23 @@ const changeimg4 = (product_img) => {
 	var imgs = document.getElementById("detail_img1");
 	imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
 }	
+
+
+//연정 qna
+$(function(){
+	qnaList();
+});
+
+const qnaList = (pageNo) => {
+	const productno = ${products.productno};
+	$.ajax({
+		url: "product_qna_list",
+		method: "get",
+		data: {productno, pageNo}
+	}).then(data=> {
+		$('#qna_board').html(data); //html 조각을 div에 넣어줌
+	});
+};
 </script>
 
 <div class="container-fluid" style="margin-top:15%">
@@ -211,47 +228,11 @@ const changeimg4 = (product_img) => {
 
 
     <!--제품 Q&A-->
-    <div >
-        <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>
-    </div><br>
-    <div class="row justify-content-center">
-        <table class="table col-9" style="text-align: center;">
-            <thead class="thead">
-              <tr style="background-color: lightgray;">
-                <th scope="col">번호</th>
-                <th scope="col"style="width:18%">카테고리</th>
-                <th scope="col" style="width:33%">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">작성일</th>
-                <th scope="col">조회</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td> </td>
-                <td><a href="<%=application.getContextPath()%>/product/p_qna_view" class="text-black-50">재입고 문의 드립니다.</a></td>
-                <td>ㅎㅎ</td>
-                <td>2021-03-10</td>
-                <td>10</td>
-                
-              </tr>
-              
-            </tbody>
-          </table>
-        </div>
-        <div style="margin-left: 80%;">
-        <a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/p_qna_write" role="button">상품문의하기</a>
-        </div>
-
-        <div class="row justify-content-md-center">
-            <a href="#none"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></a> 
-            <a href="#none" class="text-black-50">PREV</a> 
-            <a href="#none" class="thisPageNumber text-black-50">1</a>
-            <a href="#none" class="text-black-50">NEXT</a>
-            <a href="#none"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></a>
-            
-        </div>
+    <div id="qna_board">
+        
+    </div>     
+    
+  	
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
