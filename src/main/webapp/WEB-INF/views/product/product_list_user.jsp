@@ -33,7 +33,6 @@ window.onload = function (){
             <a class="filterItem" id="productname" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=2">상품명</a>
             <a class="filterItem" id="lowprice" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=3">낮은가격</a>
             <a class="filterItem" id="highprice" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=4">높은가격</a>
-            <a class="filterItem" id="like" onclick="like()">좋아요</a>
             
         </div>
     </div>
