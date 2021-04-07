@@ -5,14 +5,13 @@
 <script type="text/javascript">
 
 $(function(){
-	reviewList(1);
-	
+	reviewList(1);	
 });
 
 const reviewWriteForm = (productno) => {	
 	$.ajax({
 		url:"review_write_form",
-		method: "get",
+		method: "post",
 		data: {productno}
 	}).then(data => {
 		$('#review_board2').show();
@@ -31,6 +30,33 @@ const ReviewRead = (boardno) => {
 	});
 }
 
+const reviewUpdateForm = (boardno) => {
+	$.ajax({
+		url: "review_update_form",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
+			$('#review_board').html(data);
+			$('#review_board2').hide();	
+	});
+}
+
+const reviewUpdate = (boardno) => {
+	event.preventDefault();
+  const btitle = $("#btitle").val();
+  const bcontent = $("#bcontent").val();
+	$.ajax({
+		url: "review_update",
+		method: "post",
+		data: {boardno, btitle, bcontent}
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
+}
+
 const deleteReview = (boardno) => {
 	$.ajax({
 		url: "delete_review",
@@ -45,24 +71,17 @@ const deleteReview = (boardno) => {
 }
 
 const reviewWrite = () => {		
-	const test1 = $("#btitle").val();
-	const test2 = $("#bcontent").val();
-	if(test1 == ""){
-		alert("제목을 적어주세요");
-	}
-	if(test2 == ""){
-		alert("내용을 적어주세요");
-	}
-	event.preventDefault();
-	
-	const productno = $("#productno").val();
-	const borgimg = $("#borgimg").val();
 	const btitle = $("#btitle").val();
 	const bcontent = $("#bcontent").val();
-	if(btitle == null || bcontent == null){
-		alert("test");
+	if(btitle == ""){
+		alert("제목을 적어주세요");
 	}
-	
+	if(bcontent == ""){
+		alert("내용을 적어주세요");
+	}
+	event.preventDefault();	
+	const productno = $("#productno").val();
+	const borgimg = $("#borgimg").val();
 	const formData = new FormData();
 	formData.append("productno", productno);
 	formData.append("btitle", btitle);
@@ -70,8 +89,7 @@ const reviewWrite = () => {
 	
 	if(borgimg){
 		formData.append("borgimg", borgimg);
-	}
-	
+	}	
 	$.ajax({
 		url:"review_write",
 		data: formData,
@@ -214,8 +232,8 @@ const changeimg4 = (product_img) => {
 				  <!-- 값 넘길 때  href="read?bno=${board.bno}
 				  read jsp의 ?뒤의 bno는 넘길 곳의 변수명 / 뒤에는 내쪽에서 넘기는 변수명-->
 				    <!--product -->				  
-					<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
-					<hr style="width:100%; color: black; border:1px solid black;"/>
+			<div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
+				<hr style="width:100%; color: black; border:1px solid black;"/>
 					<p style="font-size: large;">${products.pname}</p><br><br>
 					<pre><small style="color: gray;">판매가		${products.pprice}원<br><br>배송비		무료<br><br></pre>
 				    (최소주문수량 1개 이상)

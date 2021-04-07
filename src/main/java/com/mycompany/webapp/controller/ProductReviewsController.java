@@ -54,7 +54,7 @@ public class ProductReviewsController {
 		return "product/product_review_list";
 	}
 	
-	@GetMapping("/review_write_form")
+	@PostMapping("/review_write_form")
 	public String reviewWirteForm(ProductReviews productreviews, Model model) {
 		
 		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
@@ -100,8 +100,8 @@ public class ProductReviewsController {
 		logger.info("보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		int bno = productreviews.getBoardno();
 		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
-		logger.info("컨텐트 : "+reviews.getBcontent());
-		logger.info("btitle : "+reviews.getBtitle());
+		//logger.info("컨텐트 : "+reviews.getBcontent());
+		//logger.info("btitle : "+reviews.getBtitle());
 		model.addAttribute("reviews", reviews);
 		return "product/review_view";
 	}
@@ -111,6 +111,30 @@ public class ProductReviewsController {
 	public String deleteReview(ProductReviews productreviews) {
 		int bno = productreviews.getBoardno();
 		productReviewsService.prDelete(bno);
+		JSONObject jsonobject = new JSONObject();
+	    jsonobject.put("result", "success");
+	    return jsonobject.toString();
+	}
+	
+	@GetMapping("/review_update_form")
+	public String reviewUpdateForm(ProductReviews bno, Model model) {
+		int rvbno = bno.getBoardno();
+		logger.info("업데이트 폼 프로덕트 넘 : "+Integer.toString(bno.getBoardno()));
+			
+		ProductReviews productreviews = productReviewsService.prSelectByBno(rvbno);
+		logger.info("업데이트 폼 프로덕트 넘2 : "+Integer.toString(productreviews.getBoardno()));
+		logger.info("업데이트 폼 컨텐트 넘2 : "+productreviews.getBcontent());
+		//logger.info("업데이트 폼 프로덕트 넘2 : "+Integer.toString(productreviews.getBoardno()));
+				
+		model.addAttribute("productreviews", productreviews);
+		return "product/review_update_form";
+	}
+	
+	@PostMapping(value="/review_update", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String reviewUpdate(ProductReviews productreviews) {
+		logger.info("업데이트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));
+		productReviewsService.prUpdate(productreviews);
 		JSONObject jsonobject = new JSONObject();
 	    jsonobject.put("result", "success");
 	    return jsonobject.toString();

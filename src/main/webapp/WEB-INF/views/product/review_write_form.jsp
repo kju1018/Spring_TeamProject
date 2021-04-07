@@ -53,7 +53,7 @@ if(title == null){
 			</div>
 			<br>
     		<div>
-        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
+        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" type="reset" onclick="reviewList(1)"> 취소 </button>
         <button class="btn btn-light btn-outline-secondary" style="width:8%" type="submit"> 완료 </button>
         
         </div>

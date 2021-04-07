@@ -50,14 +50,11 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
   </if>
 </insert>
 
-<update id="prUpdate" parameterType="productreviews">
-	update productreviews set
-	btitle=#{btitle}, 
-	bcontent=#{bcontent}, 
-	borgimg=#{borgimg}, 
-	bsaveimg=#{bsaveimg}, 
-	bimgtype=#{bimgtype}
-	where boardno=#{boardno}
+<update id="prUpdate" parameterType="productreviews">	
+    update productreviews set
+ 		btitle=#{btitle}, 
+		bcontent=#{bcontent} 
+		where boardno=#{boardno}
 </update>
 	
 	<delete id="prDelete" parameterType="int">
