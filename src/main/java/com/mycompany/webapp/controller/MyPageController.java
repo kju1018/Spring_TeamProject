@@ -39,8 +39,22 @@ public class MyPageController {
 	public String myPageUpdate(Authentication auth, Model model) {
 		if(auth.getName() != null) {
 			User dbuser = usersService.finduser(auth.getName());
+			
+			
 			if(dbuser != null) {
 				model.addAttribute("user",dbuser);
+				String[] address = dbuser.getUaddress().split("-");
+				if(address[0] != null) {
+					model.addAttribute("address1", address[0]);
+				}
+				try {
+					if(address[1] != null) {
+						model.addAttribute("address2", address[1]);
+					}
+					
+				}catch(Exception e) {
+					
+				}
 				return "mypage/mypage_update";
 			}else {
 				return  "redirect:/mypage/mypage";

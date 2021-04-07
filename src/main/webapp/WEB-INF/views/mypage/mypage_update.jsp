@@ -15,26 +15,44 @@
 	        xhr.setRequestHeader(header, token);
 	    });
 	});
+	
+	function openZipSearch() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				$('[name=uzipcode]').val(data.zonecode); // 우편번호 (5자리)
+				$('[name=uaddress]').val(data.address);
+				$('[name=uaddress2]').val(data.buildingName);
+			}
+		}).open();
+	}
 		const updatepage = () => {
 			event.preventDefault();
 			const uzipcode = $("#uzipcode").val();
-			const uaddress = $("#uaddress").val();
+			var uaddress = $("#uaddress").val();
+			const uaddress2 = $("#uaddress2").val();
 			const utel = $("#utel").val();
 			
 			const userzipcode = ${user.uzipcode};
 			const useraddress = '${user.uaddress}';
+			const useraddress2 = '${address2}';
 			const usertel = ${user.utel};
 			
 			
 			var result = true;
+			var addresult = false;
 			
-			if(uzipcode == "" || uaddress == "" || utel == ""){
+			if(uzipcode == "" || uaddress == "" || utel == "" ){
 				result = false;
 				alert("수정할 정보가 없습니다.");
 			}
 			
-			
-			if(userzipcode == uzipcode || useraddress == uaddress || usertel == utel){
+			if(useraddress2 != uaddress2){
+				
+				uaddress = uaddress+ "-" + uaddress2;
+			}
+			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel){
+				
+			}else{
 				result = false;
 				alert("변경된 사항이 없습니다.");
 			}
@@ -54,6 +72,7 @@
 						}
 					});
 			}
+			
 		}
 		
 		const logout = () => {
@@ -137,14 +156,17 @@
                                 
                             </div>
                             <div class="col-2 pl-0">
-                                <a href="#" class="btn btn-outline-dark btn-sm">우편번호</a>
+                                <a onclick="openZipSearch()" class="btn btn-outline-dark btn-sm">우편번호</a>
                             </div>
                         </div>
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <c:if test="${user.uaddress != null}">
-	  							<input type="text" style="width: 100%;" id="uaddress" name="uaddress" value="${user.uaddress}">
-	  						</c:if>
+                                <c:if test="${address1 != null}">
+	  								<input type="text" style="width: 100%;" id="uaddress" name="uaddress" value="${address1}">
+	  							</c:if>
+	  							<c:if test="${address1 == null}">
+	  								<input type="text" style="width: 100%;" id="uaddress" name="uaddress" >
+	  							</c:if>
                             </div>
                             <div class="col-8">
                                <span class="signup-span">기본주소</span>
@@ -152,7 +174,12 @@
                         </div>
                         <div class="row align-items-center mt-1 mb-1">
                             <div class="col-4">
-                                <input type="text" style="width: 100%;">
+                            <c:if test="${address2 != null}">
+                                <input type="text" style="width: 100%;"id="uaddress2" name="uaddress2"  value="${address2}">
+                             </c:if>  
+                              <c:if test="${address2 == null}">
+                                <input type="text" style="width: 100%;" id="uaddress2" name="uaddress2" >
+                             </c:if>    
                             </div>
                             <div class="col-8">
                                <span class="signup-span">나머지 주소(선택입력가능)</span>
