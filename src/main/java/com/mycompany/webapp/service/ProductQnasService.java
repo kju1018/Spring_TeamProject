@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductQnasDao;
+import com.mycompany.webapp.dto.CommunityQna;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductQnas;
 
@@ -16,6 +17,11 @@ public class ProductQnasService {
 		List<ProductQnas> list = productQnasDao.SelectByProductno(pager);
 		return list;
 	}
+	
+	public List<ProductQnas> getBoardListById(Pager pager){
+		List<ProductQnas> list = productQnasDao.selectByUserid(pager);
+		return list;
+	} //userid에 맞는 게시물 가져오기
 	
 	public void pqnaInsert(ProductQnas productqna) {
 		productQnasDao.pqnaInsert(productqna);

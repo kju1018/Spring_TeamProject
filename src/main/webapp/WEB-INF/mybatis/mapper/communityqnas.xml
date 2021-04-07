@@ -32,7 +32,7 @@
          insert into communityqnas
          (boardno, btitle, bcontent, userid, bdate, bcount, originno, groupord, grouplayer)
          values
-         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0, #{originno}, #{groupord}, #{grouplayer})      
+         (#{boardno}, #{btitle}, #{bcontent}, #{userid}, sysdate, 0, #{boardno}, #{groupord}, #{grouplayer})      
    
    </insert>
    
