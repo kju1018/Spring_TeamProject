@@ -7,28 +7,28 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <script>
 window.onload = function (){
-	if(${sort}==5 || ${sort}==6 || ${sort}==7){
-		document.getElementById('newitem').style.display="none";
-		document.getElementById('productname').style.display="none";
-		document.getElementById('lowprice').style.display="none";
-		document.getElementById('highprice').style.display="none";
-		document.getElementById('like').style.display="none";
-	}
-	
+   if(${sort}==5 || ${sort}==6 || ${sort}==7){
+      document.getElementById('newitem').style.display="none";
+      document.getElementById('productname').style.display="none";
+      document.getElementById('lowprice').style.display="none";
+      document.getElementById('highprice').style.display="none";
+      document.getElementById('like').style.display="none";
+   }
+   
 }
  
  </script>
-		
+      
     <div class="container-xl" style="margin-top: 16em;" >
         <h4 class="font-weight-bold">${pcategoryname}</h4>
         
     </div>
 
-		
+      
     <div class="container-xl mt-4 border-bottom" id="sort_item" name="sort_item"><!-- 상품 개수, 필터 영역 -->
         <p id="itemNumber">${pager.totalRows} PRODUCT ITEM</p>
-	
-    	  <div class="filterDiv">
+   
+         <div class="filterDiv">
             <a class="filterItem" id="newitem" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=1">신상품</a>
             <a class="filterItem" id="productname" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=2">상품명</a>
             <a class="filterItem" id="lowprice" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=3">낮은가격</a>
@@ -37,6 +37,7 @@ window.onload = function (){
             
         </div>
     </div>
+
 	<div class="container-xl p-0 productBox" >
 	
 		<!-- 검색 안내문구 영역 -->
@@ -49,11 +50,13 @@ window.onload = function (){
      	</div>
     
     <div>
+
     	
     		<c:forEach var="p_list" items="${list}">
         		<ul class="list"><!-- 상품 리스트 영역 -->
             		<li class="product mt-4">
             
+
 	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}" id="product_no">
 	               <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${p_list.isavename}&type=${p_list.imgtype}" id="product_img">	                
 	                <div class="productTitle" id="product_name">
@@ -68,11 +71,13 @@ window.onload = function (){
           			</li>
     <!--         onclick="location.href='product/product_view'" -->
 
+
         		</ul><!-- 상품 리스트 영역 -->
         	</c:forEach>
       
     </div>
     
+
 	<div class="container-xl d-flex justify-content-center" >
 		<div class="row">
 		<table>

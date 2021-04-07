@@ -12,7 +12,7 @@ public interface ProductReviewsDao {
 	public List<ProductReviews> prSelectAll();
 	public List<ProductReviews> prSelectByPno(Pager pager);
 	public ProductReviews prSelectByBno(int boardno);
-	
+	public void prUpdateCount(int boardno);
 	public int count(int productno);
 	public int prInsert(ProductReviews productrivews);
 	public int prUpdate(ProductReviews productrivews);
