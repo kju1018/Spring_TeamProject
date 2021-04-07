@@ -28,14 +28,14 @@ window.onload = function (){
     <div class="container-xl mt-4 border-bottom" id="sort_item" name="sort_item"><!-- 상품 개수, 필터 영역 -->
         <p id="itemNumber">${pager.totalRows} PRODUCT ITEM</p>
 	
-    	  <ul class="filterDiv">
+    	  <div class="filterDiv">
             <a class="filterItem" id="newitem" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=1">신상품</a>
             <a class="filterItem" id="productname" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=2">상품명</a>
             <a class="filterItem" id="lowprice" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=3">낮은가격</a>
             <a class="filterItem" id="highprice" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=4">높은가격</a>
             <a class="filterItem" id="like" onclick="like()">좋아요</a>
             
-        </ul>
+        </div>
     </div>
 
  	
@@ -51,9 +51,7 @@ window.onload = function (){
             <li class="product mt-4">
             
 	            <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${p_list.productno}" id="product_no">
-	                <div>
-	                    <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${p_list.isavename}&type=${p_list.imgtype}" id="product_img">
-	                </div>
+	               <img class="productImg" style="width:100%" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${p_list.isavename}&type=${p_list.imgtype}" id="product_img">	                
 	                <div class="productTitle" id="product_name">
 	                    ${p_list.pname}
 	                </div>

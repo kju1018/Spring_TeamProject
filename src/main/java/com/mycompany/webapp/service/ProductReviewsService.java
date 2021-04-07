@@ -22,6 +22,11 @@ public class ProductReviewsService {
 		return list;
 	}
 	
+	public ProductReviews prSelectByBno(int boardno) {
+		ProductReviews productreviews = productReviewsDao.prSelectByBno(boardno);
+		return productreviews;
+	}
+	
 	public int getTotalRows(int productno) {
 		int rows = productReviewsDao.count(productno);
 		return rows;
