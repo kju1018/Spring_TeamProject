@@ -38,13 +38,11 @@ public class AuthContoller {
 	@PostMapping(value="/findIdProcess", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String findIdProcess(String uemail, String uname) {
-		logger.info("실행");
-		logger.info(uemail);
-		logger.info(uname);
+	
 		JSONObject jsonObject = new JSONObject();
 		String result = usersService.finduser(uemail, uname);
 		jsonObject.put("result", result.toString());
-		logger.info(result);
+	
 		return jsonObject.toString();
 	}
 	
