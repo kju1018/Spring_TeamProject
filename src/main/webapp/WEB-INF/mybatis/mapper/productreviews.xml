@@ -56,7 +56,11 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
 		bcontent=#{bcontent} 
 		where boardno=#{boardno}
 </update>
-	
+
+<update id="prUpdateCount" parameterType="int">
+   update productreviews set bcount=bcount+1 where boardno=#{boardno}
+</update>
+  	
 	<delete id="prDelete" parameterType="int">
 		delete from productreviews where boardno=#{boardno}
 	</delete>

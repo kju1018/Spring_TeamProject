@@ -25,7 +25,7 @@
 					<th class="rv_table" colspan="2">
 						<c:if test="${reviews.borgimg != null}">
 						<div id="rv_div1" class="col-2 content-left">
-						<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${p_list.isavename}&type=${p_list.imgtype}" width="80%" height="80%" style="margin: 10px">
+						<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${reviews.bsaveimg}&type=${reviews.bimgtype}" style="margin: 10px; width:150px; height:100px;">
 						</div>		
 						</c:if>				
 						<div id="rv_div2" class="col-9" >
