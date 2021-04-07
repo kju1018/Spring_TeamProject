@@ -14,6 +14,8 @@
 					     </font>
 				    </div>
 			   </c:if>
+		
+		
    	  <form method="post" action="<%=application.getContextPath()%>/login">
    	  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
