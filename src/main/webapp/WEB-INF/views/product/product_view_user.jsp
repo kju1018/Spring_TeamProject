@@ -5,117 +5,125 @@
 <script type="text/javascript">
 
 $(function(){
-   reviewList(1);   
+	reviewList(1);	
 });
 
-const reviewWriteForm = (productno) => {   
-   $.ajax({
-      url:"review_write_form",
-      method: "post",
-      data: {productno}
-   }).then(data => {
-      $('#review_board2').show();
-      $('#review_board2').html(data);
-   });
+const reviewWriteForm = (productno) => {	
+	$.ajax({
+		url:"review_write_form",
+		method: "post",
+		data: {productno}
+	}).then(data => {
+		$('#review_board2').show();
+		$('#review_board2').html(data);
+	});
 }
 
 const ReviewRead = (boardno) => {
-   $.ajax({
-      url: "review_view",
-      method: "get",
-      data: {boardno}
-   }).then(data => {
-      $('#review_board').html(data);
-      $('#review_board2').hide();
-   });
+	$.ajax({
+		url: "review_view",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
+		$('#review_board').html(data);
+		$('#review_board2').hide();
+	});
 }
 
 const reviewUpdateForm = (boardno) => {
-   $.ajax({
-      url: "review_update_form",
-      method: "get",
-      data: {boardno}
-   }).then(data => {
-         $('#review_board').html(data);
-         $('#review_board2').hide();   
-   });
+	$.ajax({
+		url: "review_update_form",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
+			$('#review_board').html(data);
+			$('#review_board2').hide();	
+	});
 }
 
 const reviewUpdate = (boardno) => {
-   event.preventDefault();
-  const btitle = $("#btitle").val();
-  const bcontent = $("#bcontent").val();
-   $.ajax({
-      url: "review_update",
-      method: "post",
-      data: {boardno, btitle, bcontent}
-   }).then(data => {
-      if(data.result=="success"){
-         reviewList(1);
-         $('#review_board2').hide();
-      }
-   });
+	const btitle = $("#btitle").val();
+	const bcontent = $("#bcontent").val();
+	if(btitle == ""){
+		alert("제목을 적어주세요");
+	}
+	if(bcontent == ""){
+		alert("내용을 적어주세요");
+	}
+	event.preventDefault();
+	$.ajax({
+		url: "review_update",
+		method: "post",
+		data: {boardno, btitle, bcontent}
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
 }
+
 
 const deleteReview = (boardno) => {
-   $.ajax({
-      url: "delete_review",
-      method: "get",
-      data: {boardno}
-   }).then(data => {
-      if(data.result=="success"){
-         reviewList(1);
-         $('#review_board2').hide();
-      }
-   });
+	$.ajax({
+		url: "delete_review",
+		method: "get",
+		data: {boardno}
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
 }
 
-const reviewWrite = () => {      
-   const btitle = $("#btitle").val();
-   const bcontent = $("#bcontent").val();
-   if(btitle == ""){
-      alert("제목을 적어주세요");
-   }
-   if(bcontent == ""){
-      alert("내용을 적어주세요");
-   }
-   event.preventDefault();   
-   const productno = $("#productno").val();
-   const borgimg = $("#borgimg").val();
-   const formData = new FormData();
-   formData.append("productno", productno);
-   formData.append("btitle", btitle);
-   formData.append("bcontent", bcontent);
-   
-   if(borgimg){
-      formData.append("borgimg", borgimg);
-   }   
-   $.ajax({
-      url:"review_write",
-      data: formData,
-      method: "post",
-      cache: false,
-      processData: false,
-      contentType: false
-   }).then(data => {
-      if(data.result=="success"){
-         reviewList(1);
-         $('#review_board2').hide();
-      }
-   });
+const reviewWrite = () => {		
+	const btitle = $("#btitle").val();
+	const bcontent = $("#bcontent").val();
+	if(btitle == ""){
+		alert("제목을 적어주세요");
+	}
+	if(bcontent == ""){
+		alert("내용을 적어주세요");
+	}
+	event.preventDefault();	
+	const productno = $("#productno").val();
+	const battach = $("#battach")[0].files[0];
+	const formData = new FormData();
+	formData.append("productno", productno);
+	formData.append("btitle", btitle);
+	formData.append("bcontent", bcontent);
+	
+	if(battach){
+		formData.append("battach", battach);
+	}	
+	$.ajax({
+		url:"review_write",
+		data: formData,
+		method: "post",
+		cache: false,
+		processData: false,
+		contentType: false
+	}).then(data => {
+		if(data.result=="success"){
+			reviewList(1);
+			$('#review_board2').hide();
+		}
+	});
 }
 
 
 const reviewList = (pageNo) => {
-   const productno = ${products.productno};   
-   $.ajax({
-      url: "product_review_list",
-      method: "get",
-      data: {productno, pageNo}
-   }).then(data => {
-      $('#review_board').html(data);
-   });
+	const productno = ${products.productno};	
+	$.ajax({
+		url: "product_review_list",
+		method: "get",
+		data: {productno, pageNo}
+	}).then(data => {
+		$('#review_board').html(data);
+	});
 };
+
 
 ///좋아요 이미지 클릭
 const likesOnClick = () => {
@@ -215,7 +223,6 @@ const changeimg4 = (product_img) => {
    imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
 }   
 
-
 //연정 qna
 $(function(){
    qnaList();
@@ -230,6 +237,7 @@ const qnaList = (pageNo) => {
    }).then(data=> {
       $('#qna_board').html(data); //html 조각을 div에 넣어줌
    });
+
 };
 </script>
 
@@ -317,7 +325,7 @@ const qnaList = (pageNo) => {
         
     </div>     
     
-     
+
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

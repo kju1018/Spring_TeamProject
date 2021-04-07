@@ -6,27 +6,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductQnasDao;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.ProductQnas;
 
 @Service
 public class ProductQnasService {
 	@Autowired ProductQnasDao productQnasDao;
-	public List<ProductQnas> pQanSelectAll(){
-		List<ProductQnas> list = productQnasDao.pQanSelectAll();
+	public List<ProductQnas> SelectByProductno(Pager pager){
+		List<ProductQnas> list = productQnasDao.SelectByProductno(pager);
 		return list;
 	}
 	
-	public void pQnaInsert(ProductQnas productqnas) {
-		productQnasDao.pQnaInsert(productqnas);
+	public void pqnaInsert(ProductQnas productqna) {
+		productQnasDao.pqnaInsert(productqna);
 	}
 	
-	public void pQnaUpdate(ProductQnas productqnas) {
-		productQnasDao.pQnaUpdate(productqnas);
+	public void pqnaUpdate(ProductQnas productqna) {
+		productQnasDao.pqnaUpdate(productqna);
 	}
 	
-	public void pQnaDelete(int boardno) {
-		productQnasDao.pQnaDelete(boardno);
+	public void pqnaDelete(int boardno) {
+		productQnasDao.pqnaDelete(boardno);
 	}
 	
-
+	public int getTotalRows(int productno) {
+		int rows = productQnasDao.pqnacount(productno);
+		return rows;
+	} 
+	
+	public int getTotalRow(String userid) {
+		int rows = productQnasDao.pqnacountuser(userid);
+		return rows;
+	} 
+	
+	public void paddBcount(int boardno) {
+		productQnasDao.pupdateBcount(boardno);
+	} // 조회수 증가
+	
+	public ProductQnas getBoard(int boardno) {
+		ProductQnas productqna = productQnasDao.selectByBoardno(boardno);
+		return productqna;
+	} //해당하는 번호의 게시물 가져오기
 }
