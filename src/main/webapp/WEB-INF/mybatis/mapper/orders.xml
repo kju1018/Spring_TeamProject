@@ -12,7 +12,7 @@
 	</resultMap>
 	
 	
-	<select id="selectByUserId" parameterType="pager" resultMap="orderResult">
+	<select id="selectByUserId" parameterType="pager" resultMap="orderResult"> 
 		select rnum, orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
 		from(
 		    select rownum as rnum, orderno, userid, oaddress, oreceiver, omessage, omethod, odate, ostatus, ozipcode, onumber
