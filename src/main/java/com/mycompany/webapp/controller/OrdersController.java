@@ -130,7 +130,7 @@ public class OrdersController {
 		int intPageNo = 1;
 		if(pageNo == null) {
 			//세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager) session.getAttribute("pager");
+			Pager pager = (Pager) session.getAttribute("orderd_list_pager");
 			if(pager != null) {
 				intPageNo = pager.getPageNo();
 			}
@@ -139,7 +139,7 @@ public class OrdersController {
 		}
 		int totalRows = ordersService.getTotalRows(auth.getName()); 
 		Pager pager = new Pager(5, 5, totalRows, intPageNo, auth.getName());
-		session.setAttribute("pager", pager);
+		session.setAttribute("orderd_list_pager", pager);
 		List<Order> orderList = ordersService.getOrderList(pager);
 		
 		model.addAttribute("orderList", orderList);
