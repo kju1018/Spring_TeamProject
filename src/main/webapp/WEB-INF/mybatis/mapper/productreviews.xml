@@ -83,4 +83,11 @@ select rnum, productno, boardno, userid, btitle, bcontent, bdate, borgimg, bsave
 	<delete id="prDelete" parameterType="int">
 		delete from productreviews where boardno=#{boardno}
 	</delete>
+	
+<select id="prUser" parameterType="int" resultType="productreviews">
+	select distinct o.userid
+	from orders o, orderproducts op
+	where o.orderno=op.orderno and op.productno=#{productno};
+</select>	
+
 </mapper>

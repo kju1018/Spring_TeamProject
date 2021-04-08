@@ -81,8 +81,15 @@ public class ProductReviewsController {
 	}
 	
 	@PostMapping("/review_write_form")
-	public String reviewWirteForm(ProductReviews productreviews, Model model) {
-		
+	public String reviewWirteForm(ProductReviews productreviews, Model model, Authentication auth) {
+		List<ProductReviews> list = productReviewsService.prUser(productreviews.getProductno());
+		for(int i=0; i< list.size(); i++) {
+			if(list.get(i).getUserid() == auth.getName()) {
+				logger.info("구매한 사람");
+			}else {
+				logger.info("구매하지 않음.");
+			}
+		}
 		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
 		//int pno = productreviews.getProductno();
 		model.addAttribute("productreviews", productreviews);
@@ -92,6 +99,7 @@ public class ProductReviewsController {
 	@PostMapping(value="/review_write", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String reviewWrite(ProductReviews productreviews, Authentication auth) {
+		logger.info(Integer.toString(productreviews.getProductno()));
 		MultipartFile battach = productreviews.getBattach();
 		if (battach != null && !battach.isEmpty()) {
 			productreviews.setBorgimg(battach.getOriginalFilename());
@@ -114,6 +122,14 @@ public class ProductReviewsController {
 		 */
 		
 		productreviews.setUserid(auth.getName());
+		List<ProductReviews> list = productReviewsService.prUser(productreviews.getProductno());
+		for(int i=0; i< list.size(); i++) {
+			if(list.get(i).getUserid() == auth.getName()) {
+				logger.info("구매한 사람");
+			}else {
+				logger.info("구매하지 않음.");
+			}
+		}
 		productReviewsService.prInsert(productreviews);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
