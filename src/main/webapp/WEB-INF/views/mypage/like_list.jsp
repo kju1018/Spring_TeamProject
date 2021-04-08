@@ -55,7 +55,7 @@ const allDelete = () => {
     <!--제목-->
 	<p class='titleyj'>좋아요</p>
 	<div class="my_button item_mb-3">
-	<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list'">
+	<input type='button' value="주문내역" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/ordered_list?pageNo=1'">
 		<input type='button' value="회원정보" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/mypage/mypageupdate'">
 
 		<input type='button' value="좋아요" class="btn btn-outline-dark" onclick="location.href ='<%=application.getContextPath()%>/likes/likelist?pageNo=1'">
@@ -83,6 +83,11 @@ const allDelete = () => {
 				<th><input onclick="individualDelete(${product.productno})" type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
 			</tr>
 		</c:forEach>
+		<c:if test = "${number == 0}">
+			<tr>
+				<th class="text_center_sort" colspan="4"><p class=" item_mt-2">주문내역이 없습니다.</p></th>
+			</tr>
+		</c:if>
 	</table>
 	<!--게시판-->
 
@@ -93,24 +98,26 @@ const allDelete = () => {
     </c:if>	
     </div>
 	<!-- 페이지 -->
-     <ul class="pagenav">
-   	    <li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=1"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></a></li>
-    	<c:if test="${likelistpager.groupNo>1}">
-    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.startPageNo-1}">PREV</a></li>
-    	</c:if>
-        <c:forEach var="i" begin="${likelistpager.startPageNo}" end="${likelistpager.endPageNo}">
-        	<c:if test="${likelistpager.pageNo != i}">
-        		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
-        	</c:if>
-        	<c:if test="${likelistpager.pageNo == i}">
-        		<li class="page-item font-weight-bold"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
-        	</c:if>
-        </c:forEach>
-        <c:if test="${likelistpager.groupNo<likelistpager.totalGroupNo}">
-    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.endPageNo+1}">NEXT</a></li>
-    	</c:if>
-    	<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.totalPageNo}"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></a></li>
-    </ul>
+	<c:if test = "${number > 0}">
+     	<ul class="pagenav">
+	   	    <li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=1"><img src="<%=application.getContextPath()%>/resources/image/btn_page_first.gif"></a></li>
+	    	<c:if test="${likelistpager.groupNo>1}">
+	    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.startPageNo-1}">PREV</a></li>
+	    	</c:if>
+	        <c:forEach var="i" begin="${likelistpager.startPageNo}" end="${likelistpager.endPageNo}">
+	        	<c:if test="${likelistpager.pageNo != i}">
+	        		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
+	        	</c:if>
+	        	<c:if test="${likelistpager.pageNo == i}">
+	        		<li class="page-item font-weight-bold"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${i}">${i}</a></li>
+	        	</c:if>
+	        </c:forEach>
+	        <c:if test="${likelistpager.groupNo<likelistpager.totalGroupNo}">
+	    		<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.endPageNo+1}">NEXT</a></li>
+	    	</c:if>
+	    	<li class="page-item"><a href="<%=application.getContextPath()%>/likes/likelist?pageNo=${likelistpager.totalPageNo}"><img src="<%=application.getContextPath()%>/resources/image/btn_page_last.gif"></a></li>
+	    </ul>
+     </c:if>	
 
 	<div class="c_bottom">
 		<input type="button" class="btn btn-dark" value="메인화면으로" onclick="location.href ='<%=application.getContextPath()%>'">

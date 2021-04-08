@@ -23,6 +23,18 @@
 		}
 	}
 	
+	const subcheck = () => {
+		console.log("실행");
+		const allcheck = document.getElementById("allcheck");
+		const buycheck = document.getElementById("buycheck");
+		const shopcheck = document.getElementById("shopcheck");
+		if(shopcheck.checked && buycheck.checked){
+			allcheck.checked = true;
+		}else {
+			allcheck.checked = false;
+		}
+	} 
+	
 	function openZipSearch() {
 		new daum.Postcode({
 			oncomplete: function(data) {
@@ -431,14 +443,14 @@
                     </tr>
 
                     <tr class="border-bottom">
-                        <th class="p-2"><input type="checkbox" id="buycheck" name="buycheck"></th>
+                        <th class="p-2"><input onclick="subcheck()" type="checkbox" id="buycheck" name="buycheck"></th>
                         <td>
                             [필수] 구매조건 확인 및 결제진행 동의
                         </td>
                     </tr>
 
                     <tr>
-                        <th class="p-2"><input type="checkbox" id="shopcheck" name="shopcheck"></th>
+                        <th class="p-2"><input onclick="subcheck()" type="checkbox" id="shopcheck" name="shopcheck"></th>
                         <td>
                             [필수] 쇼핑몰 이용약관 동의
                         </td>
