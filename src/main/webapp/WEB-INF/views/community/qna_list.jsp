@@ -74,7 +74,7 @@
 		         		<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
 		         	</c:if>
 		         	<c:if test="${communityqna.grouplayer eq 1}"> 
-		         		ㄴ<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
+		         		<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
 		         	</c:if>
 		         </td>
 		         <td>${communityqna.userid}</td>
