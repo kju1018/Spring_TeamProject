@@ -22,7 +22,6 @@
 	                <th scope="col">조회</th>
 				</tr>
 			</thead>
-			
 			<tbody>
 				<c:if test="${empty list}">
 					<tr class="cart_list" >
@@ -72,7 +71,7 @@
 						</td>
 					</tr>
 				</c:if>
-			</tbody>
+				</tbody>
 		</table>
 	</div>
 </div>
