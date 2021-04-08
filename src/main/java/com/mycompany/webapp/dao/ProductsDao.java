@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.mycompany.webapp.dto.OrderProduct;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
 

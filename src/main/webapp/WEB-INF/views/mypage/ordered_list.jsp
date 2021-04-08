@@ -46,7 +46,7 @@
 	<c:if test="${not empty orderList}">
 		<!--게시판-->
 		<c:forEach items="${orderList}" var="order">
-	<!-- 		<div class="tempdd"> -->
+				<c:set var="total" value="0"/>
 				<table class="orderedtable table mt-5 border">
 					 <thead>
 						<tr>
@@ -60,6 +60,7 @@
 					</thead>
 					
 					<c:forEach items="${order.orderproductlist}" var="orderproduct">
+
 						<tr class="ordered_list">
 							<th>
 								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${orderproduct.productno}">

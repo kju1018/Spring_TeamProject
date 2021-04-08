@@ -136,7 +136,6 @@ from(
 	order by p.productno desc
 </select>
 
-
 <!--	select productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
 	from products
 	where productno=#{productno}
