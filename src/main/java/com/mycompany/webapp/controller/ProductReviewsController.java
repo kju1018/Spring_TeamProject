@@ -74,7 +74,6 @@ public class ProductReviewsController {
         Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
         session.setAttribute("p_review_pager", pager);
         List<ProductReviews> list = productReviewsService.prSelectByUserId(pager);
-		logger.info(pager.getPageNo()+"");
 		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
 		model.addAttribute("pager", pager);
 		return "product/product_myreview_list";
@@ -82,8 +81,6 @@ public class ProductReviewsController {
 	
 	@PostMapping("/review_write_form")
 	public String reviewWirteForm(ProductReviews productreviews, Model model, Authentication auth) {
-		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
-		logger.info(Integer.toString(productreviews.getProductno()));
 		int pno = productreviews.getProductno();
 		List<ProductReviews> list = productReviewsService.prUser(pno);
 		for(int i=0; i< list.size(); i++) {
@@ -93,7 +90,6 @@ public class ProductReviewsController {
 				break;
 			}
 		}
-		//int pno = productreviews.getProductno();
 		model.addAttribute("productreviews", productreviews);
 		return "product/review_write_form";
 	}
@@ -101,8 +97,6 @@ public class ProductReviewsController {
 	@PostMapping(value="/review_write", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String reviewWrite(ProductReviews productreviews, Authentication auth) {
-		logger.info("리뷰 라이트 테스트");
-		//logger.info(Integer.toString(productreviews.getProductno()));
 		MultipartFile battach = productreviews.getBattach();
 		if (battach != null && !battach.isEmpty()) {
 			productreviews.setBorgimg(battach.getOriginalFilename());
@@ -116,13 +110,7 @@ public class ProductReviewsController {
 				e.printStackTrace();
 			}
 		}
-		
-		/*
-		 * logger.info("컨텐트 : "+productreviews.getBcontent());
-		 * logger.info("타이틀 : "+productreviews.getBtitle());
-		 * logger.info("유저네임 : "+auth.getName());
-		 * logger.info("프로덕트 넘 : "+Integer.toString(productreviews.getProductno()));
-		 */
+
 		
 		productreviews.setUserid(auth.getName());
 		productReviewsService.prInsert(productreviews);
@@ -134,12 +122,9 @@ public class ProductReviewsController {
 
 	@GetMapping("/review_view")
 	public String reviewView(ProductReviews productreviews, Model model) {
-		logger.info("보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		int bno = productreviews.getBoardno();
 		productReviewsService.prUpdateCount(bno);
 		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
-		//logger.info("컨텐트 : "+reviews.getBcontent());
-		//logger.info("btitle : "+reviews.getBtitle());
 		model.addAttribute("reviews", reviews);
 		return "product/review_view";
 	}
@@ -148,13 +133,9 @@ public class ProductReviewsController {
 	@ResponseBody
 	public String deleteReview(ProductReviews productreviews, Authentication auth) {
 		int bno = productreviews.getBoardno();
-		logger.info("딜리트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));		
 		JSONObject jsonobject = new JSONObject();
 		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
 		String buserid = reviews.getUserid();
-		
-		logger.info("딜리트 유저 : "+buserid);		
-		logger.info("딜리트 유저 : "+auth.getName());		
 		
 		if(buserid.equals(auth.getName())) {
 			logger.info("구매한 사람");
@@ -184,7 +165,6 @@ public class ProductReviewsController {
 	@PostMapping(value="/review_update", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String reviewUpdate(ProductReviews productreviews) {		
-		logger.info("업데이트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));
 		productReviewsService.prUpdate(productreviews);
 		JSONObject jsonobject = new JSONObject();
 	    jsonobject.put("result", "success");

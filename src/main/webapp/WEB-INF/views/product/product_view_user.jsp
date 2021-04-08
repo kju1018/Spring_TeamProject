@@ -251,11 +251,11 @@ const qnaList = (pageNo) => {
     <div class="row justify-content-center" >
        <div class="col-12" style="width:100%;" id="photo1" >          
           <div id="photo2" style="float:left; width:35%; margin-left:14%;">
-                <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.isavename}&type=${products.imgtype}" style="margin-top:10px; width:100%; height:600px;" name="detail_img1" id="detail_img1"><br>          
-            <img onclick="changeimg1('${productimg[0].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="width:25%; height:135px; margin-top:10px;" name="detail_img2" id="detail_img2">
-            <img onclick="changeimg2('${productimg[1].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="width:25%; height:135px;" name="detail_img3" id="detail_img3">
-            <img onclick="changeimg3('${productimg[2].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="width:24%; height:135px;" name="detail_img4" id="detail_img4">
-            <img onclick="changeimg4('${productimg[3].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="width:23.3%; height:135px;" name="detail_img5" id="detail_img5">
+                <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.isavename}&type=${products.imgtype}" style="margin-top:10px; width:100%; height:550px;" name="detail_img1" id="detail_img1"><br>          
+            <img onclick="changeimg1('${productimg[0].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="cursor: pointer; width:25%; height:135px; margin-top:5px;" name="detail_img2" id="detail_img2">
+            <img onclick="changeimg2('${productimg[1].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="cursor: pointer; width:25%; height:135px; margin-top:5px;" name="detail_img3" id="detail_img3">
+            <img onclick="changeimg3('${productimg[2].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="cursor: pointer; width:24%; height:135px; margin-top:5px;" name="detail_img4" id="detail_img4">
+            <img onclick="changeimg4('${productimg[3].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="cursor: pointer; width:23.3%; height:135px; margin-top:5px;" name="detail_img5" id="detail_img5">
                
         </div><!-- photo2 -->
             
@@ -265,8 +265,8 @@ const qnaList = (pageNo) => {
                 <!--product -->              
          <div id="photo_subject" style="float:left; width:35%; margin-left:3%;">
             <hr style="width:100%; color: black; border:1px solid black;"/>
-               <p style="font-size: large;">${products.pname}</p><br><br>
-               <pre><small style="color: gray;">판매가      ${products.pprice}원<br><br>배송비      무료<br><br></pre>
+               <h4>${products.pname}</h4><br><br>
+               <pre><small style="color: gray;">판매가      ${products.pprice}원<br><br>배송비      무료<br><br></pre><br>
                 (최소주문수량 1개 이상)
                   <!-- 좋아요 이미지 -->
                 <!-- 로그인 안한상태이면 좋아요 이미지는 없다 있을 떄만 좋아요 이미지 -->
@@ -288,13 +288,14 @@ const qnaList = (pageNo) => {
                             <table style="width:100%; height:80px; border:1px solid lightgray;">
                                     <tr>
                                        <td><small><img src="<%=application.getContextPath()%>/resources/image/icon_sora.gif"><b>수량을 선택해주세요. ${procuts.pstock}</b>
-                               <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:40%;">
-                               <small style="margin-left:27%;"><span id="price">${products.pprice}원</span></small></td>
+                               <br><br>${products.pname}</small><input onclick="sumtotal(${products.pprice})" type="number" id="pquantity" name="quantity" value="1" style="width:8%; margin-left:30%;">
+                               <small style="margin-left:23%;"><span id="price">${products.pprice}원</span></small></td>
                                
                                     </tr>
                               </table> 
+                              <br><br><br>
                          <!--구매 / 장바구니-->
-                        <br><small style="margin-left:70%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
+                        <br><small style="margin-left:65%;">TOTAL:</small>&nbsp;<b><span id="totalprice">${products.pprice} 원</span></b><small>(1개)</small><br><br>
                         <!-- form으로 -->
                         
                         <button type="submit" class="btn btn-dark" style="width:100%" role="button">BUY IT NOW</button><br><br>
