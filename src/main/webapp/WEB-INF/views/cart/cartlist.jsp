@@ -33,7 +33,7 @@
 							<th class="align-middle text-center"><input type="checkbox" name="chk_productno" class="checkSelect" value="${cart.productno}" checked onclick="check(${cartList.size()})"/></th>
 							<th class="align-middle text-center">
 								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${cart.productno}">
-									<img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px">
+									<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${cart.isavename}&type=${cart.imgtype}" width="80px">
 								</a>
 							</th>
 							<th class="align-middle text-center"><a href="<%=application.getContextPath()%>/product/product_view_user?productno=${cart.productno}">${cart.pname}</a></th>

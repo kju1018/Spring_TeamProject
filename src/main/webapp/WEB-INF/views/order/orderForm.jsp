@@ -20,7 +20,6 @@
 		$("#oaddress").val("");
 		
 		$("#subaddress").attr("placeholder", "나머지 주소")
-		$("#subaddress").removeAttr("readonly");
 
 		$("#onumber").val("");
 		$("#onumber").removeAttr("readonly");
@@ -53,6 +52,7 @@
 			oncomplete: function(data) {
 				$('#ozipcode').val(data.zonecode); // 우편번호 (5자리)
 				$('#oaddress').val(data.address+" "+data.buildingName);
+				$("#subaddress").removeAttr("readonly");
 			}
 		}).open();
 	}
@@ -146,7 +146,7 @@
 		            <div class="row ml-0 mr-0 mt-3">
 		                <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${product.productno}" target="_blank">
 		                    <div>
-		                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/resources/image/productList/productList_1.jpg">
+		                        <img class="paymentproductImg" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${product.isavename}&type=${product.imgtype}">
 		                    </div>
 		                </a>
 		                <a href="<%=application.getContextPath()%>/product/product_view_user?productno=${product.productno}" target="_blank" class="ml-3">
@@ -203,6 +203,7 @@
                                         <th class="p-2">휴대전화</th>
                                         <td> 
                                             <input class="paymentinput2" type="text" id="onumber" name="onumber" value="${user.utel}" readonly>
+                                            <span>Ex) 010-0000-0000</span>
                                             <span id="errorOnumber" class="text-danger error fontsize-sm"></span>
                                         </td>
                                 </tr>

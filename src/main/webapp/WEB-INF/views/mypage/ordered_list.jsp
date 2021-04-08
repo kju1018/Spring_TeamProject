@@ -63,7 +63,7 @@
 						<tr class="ordered_list">
 							<th>
 								<a href="<%=application.getContextPath()%>/product/product_view_user?productno=${orderproduct.productno}">
-									<img class="rounded" src="<%=application.getContextPath()%>/resources/image/lamp1.png" width="80px" >
+									<img class="rounded" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${orderproduct.isavename}&type=${orderproduct.imgtype}" width="80px" >
 								</a>	
 							</th>
 							<th>
