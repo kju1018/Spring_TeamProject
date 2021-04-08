@@ -128,7 +128,7 @@
  			    			<li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=2&pcategoryname=디퓨저/캔들&sort=0')"><a class=" header_a" style="text-decoration: none; color: black;">디퓨저/캔들</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=3&pcategoryname=액자&sort=0')"><a class=" header_a" style="text-decoration: none; color: black;">액자</a></li>
                 <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=4&pcategoryname=조화/화병&sort=0')"><a class=" header_a" style="text-decoration: none; color: black;">조화/화병</a></li>
-                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/community/notice_list')"><a class=" header_a" style="text-decoration: none; color: black;">커뮤니티</a></li>
+                <li class="navli pointer" onclick="move_page('<%=application.getContextPath()%>/community/notice_list?pageNo=1')"><a class=" header_a" style="text-decoration: none; color: black;">커뮤니티</a></li>
             </ul>
         </div>
         <!-----category text-->

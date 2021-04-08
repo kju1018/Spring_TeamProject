@@ -14,6 +14,7 @@
 		
 		url = url + "?searchType=" + $("#searchType").val();
 		url = url + "&keyword=" + $("#keyword").val();
+		url = url + "&pageNo=" + 1
 		
 		location.href = url;
 
@@ -41,8 +42,8 @@
 	
 	<!-- 공지사항 QnA 선택 버튼 -->
 	<div class="select_nav">
-		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
-		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
+		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list?pageNo=1'">
+		<input type="button" class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list?pageNo=1'">          
 	</div>   
 	       
     <div style="text-align: right; margin-bottom: 4px;">
@@ -71,10 +72,10 @@
 		         </c:if>
 		         <td>
 		         	<c:if test="${communityqna.grouplayer eq 0}">
-		         		<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
+		         		<a href="qna_view?boardno=${communityqna.boardno}&pageNo=${pager.pageNo}&searchType=${searchType}&keyword=${keyword}">${communityqna.btitle}</a>
 		         	</c:if>
 		         	<c:if test="${communityqna.grouplayer eq 1}"> 
-		         		<a href="qna_view?boardno=${communityqna.boardno}">${communityqna.btitle}</a>
+		         		<a href="qna_view?boardno=${communityqna.boardno}&pageNo=${pager.pageNo}&searchType=${searchType}&keyword=${keyword}">${communityqna.btitle}</a>
 		         	</c:if>
 		         </td>
 		         <td>${communityqna.userid}</td>
