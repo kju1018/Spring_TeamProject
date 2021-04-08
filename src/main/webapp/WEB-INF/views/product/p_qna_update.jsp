@@ -19,6 +19,7 @@
 			<div class="container">
 				<form action="pupdateqna" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	<input type="hidden" name="productno" value="${productqna.productno}">
     <table class="table">
         <tr>
             <th style="width:15%">글번호</th>
@@ -30,7 +31,7 @@
         
         <tr>
             <th style="width:15%">작성자</th>
-            <td><input type="text" class="form-control" value="${userid}" readonly></td>
+            <td><input type="text" class="form-control" value="${productqna.userid}" readonly></td>
             <th style="width:15%">작성일</th>
             <td><fmt:formatDate value="${productqna.bdate}" pattern="yyyy-MM-dd"/></td>
         </tr>
@@ -56,10 +57,7 @@
 	</form>
 	
 	<br>
-	<div>
-        <a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:77.7%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 목록 </a>
-   </div>
-	<br><br>
+
 	</div>
 	</div>
 
