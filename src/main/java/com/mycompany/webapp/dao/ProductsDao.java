@@ -37,6 +37,8 @@ public interface ProductsDao {
 	//연정 검색
 	public List<Products> pSelectBySearchword(Map<String, Object> map);
 	public int countsearchword(String searchword);
+	//연정 검색
+	
 	
 	public Products likelistbylike(@Param("productno") int productno);
 }
