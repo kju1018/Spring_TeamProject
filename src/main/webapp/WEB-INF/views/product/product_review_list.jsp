@@ -58,30 +58,30 @@
 							<button class="btn btn-outline-secondary btn-sm" 
 							onclick="reviewList(1)">[처음]</button>
 							
-							<c:if test="${pager.groupNo>1}">
+							<c:if test="${pager_pr.groupNo>1}">
 								<button class="btn btn-outline-secondary btn-sm" 
-								onclick="reviewList(${pager.startPageNo-1})">이전</button>
+								onclick="reviewList(${pager_pr.startPageNo-1})">이전</button>
 							</c:if>
 							
-							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-								<c:if test="${pager.pageNo!=i}">
+							<c:forEach var="i" begin="${pager_pr.startPageNo}" end="${pager_pr.endPageNo}">
+								<c:if test="${pager_pr.pageNo!=i}">
 									<button class="btn btn-outline-secondary btn-sm" 
 									onclick="reviewList(${i})">${i}</button>
 								</c:if>
-								<c:if test="${pager.pageNo==i}">
+								<c:if test="${pager_pr.pageNo==i}">
 									<button class="btn btn-danger btn-sm" 
 										onclick="reviewList(${i})">${i}</button>
 								</c:if>	
 							</c:forEach>
 							
 			
-							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<c:if test="${pager_pr.groupNo<pager.totalGroupNo}">
 								<button class="btn btn-outline-secondary btn-sm" 
-								onclick="reviewList(${pager.endPageNo+1})">다음</button>
+								onclick="reviewList(${pager_pr.endPageNo+1})">다음</button>
 							</c:if>
 							
 							<button class="btn btn-outline-secondary btn-sm" 
-							onclick="reviewList(${pager.totalPageNo})">[맨끝]</button>
+							onclick="reviewList(${pager_pr.totalPageNo})">[맨끝]</button>
 						</div>	
 	
 					</div> 
