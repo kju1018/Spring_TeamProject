@@ -39,7 +39,7 @@
 	
 	const qnaList = (pageNo) => {
 	 	$.ajax({
-	 		url:"<%=application.getContextPath()%>/product/myqna_list",
+	 		url:"<%=application.getContextPath()%>/product/product_myqna_list",
 		    method: "get",
 		    data: {pageNo}
 	 	}).then(data => {
@@ -52,7 +52,7 @@
 	
 	const getProductReview = (pageNo) => {
 	 	$.ajax({
-	 		url:"<%=application.getContextPath()%>/product/myproduct_review_list",
+	 		url:"<%=application.getContextPath()%>/product/product_myreview_list",
 		    method: "get",
 		    data: {pageNo}
 	 	}).then(data => {
