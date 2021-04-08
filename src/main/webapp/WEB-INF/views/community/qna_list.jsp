@@ -60,8 +60,14 @@
                     <th width="10%">READ</th>
                 </tr>
             </thead>
-
+			
             <tbody>
+            <c:if test="${ empty list}">
+			<tr>
+				<th colspan="6" class="text_center_sort"><p>검색 조건에 맞는 글이 없습니다.</p></th>
+			</tr>
+			</c:if>
+            <c:if test="${ not empty list }">
                <c:forEach var="communityqna" items="${list}">
 		      <tr>
 		      	<c:if test="${communityqna.grouplayer eq 0}">
@@ -114,7 +120,9 @@
 		   		   href="qna_list?pageNo=${pager.totalPageNo}&searchType=${searchType}&keyword=${keyword}">맨끝</a>
 		   	</td>
 		   </tr>
+		   </c:if>
             </tbody>
+            
     </table>
 	
 	<!-- search{s} -->
