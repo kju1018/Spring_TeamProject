@@ -14,10 +14,33 @@
 		<!-- <security:intercept-url pattern="/exam08/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
 	
 		<security:intercept-url pattern="/cart/**" access="hasRole('ROLE_USER')"/>
-
+		<security:intercept-url pattern="/likes/**" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/auth/deleteuser" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/order/**" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/qna_write" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/create" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/qna_update" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/updateqna" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/deleteqna" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/answer_write" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/createrepl" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/answer_view" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/notice_write" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/create1" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/notice_update" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/updatenoti" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/community/deletenoti" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/p_qna_write" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/createqna" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/qna_update" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/pupdateqna" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/pdeleteqna" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/review_write_form" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/review_write" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/delete_review" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/review_update_form" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/product/review_update" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/**" access="permitAll"/>
 		
 		<!-- 로그인/로그아웃 설정 -->
@@ -25,8 +48,7 @@
 							 username-parameter="userid"
 							 password-parameter="upassword"
 							 login-processing-url="/login"
-							 authentication-failure-url="/auth/login" 
-							 
+							 authentication-failure-handler-ref="loginFailureHandler"
 							 />
 			<!-- <security:csrf disabled="true"/>  -->
 		<!--  -->			 
@@ -53,11 +75,8 @@
 	<!-- 사용자 인증 처리를 위한 설정 (DB 테이블 관련) -->
 	<security:authentication-manager>
 		<security:authentication-provider ref="daoAuthenticationProvider"/>
-		<security:authentication-provider ref="userAuthProvider"/>
 	</security:authentication-manager>
-	
-	
-	
+
 	<bean id="daoAuthenticationProvider"
 		  class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		  <property name="passwordEncoder" ref="bCryptPasswordEncoder"></property>
@@ -65,29 +84,14 @@
 		  <property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/>
 	</bean>
 	
-	<!-- <bean id="loginFailureHandler" class="com.mycompany.security.LoginFailureHandler">
-		<property name="userid" value="userid"/>
-	    <property name="upassword" value="upassword"/>
-	    <property name="errormsgname" value="ERRORMSG"/>
-	    <property name="defaultFailureUrl" value="/auth/login?error"/>
-
-	</bean> -->
-	
 	<bean id="bCryptPasswordEncoder" 
 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </bean>
-    
-    <bean id="userAuthProvider" class="com.mycompany.webapp.provider.CustomAuthenticationProvider"/>
 	
 	<security:jdbc-user-service id="jdbcUserService"
 								data-source-ref="dataSource"
 								users-by-username-query="select userid, upassword, uenabled from users where userid=?"
 								authorities-by-username-query="select userid, uauthority from users where userid=?"/>
-								
-
-
-
-
 								
 	<bean id="roleHierarchyAuthoritiesMapper"
 		  class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper">
@@ -103,6 +107,12 @@
 		  </constructor-arg>	
 	</bean>
 	
+	
+	<bean id="loginFailureHandler" class="com.mycompany.webapp.security.LoginFailureHandler">
+	    <property name="useForward" value="false"/>
+	    <property name="defaultFailureUrl" value="/auth/login"/>
+
+	</bean>
 	<!-- 로그인 성공했을 때와 실패했을 때 콜백되는 객체 설정 -->
 	<!-- <bean id="authSuccesshandler" 
 	      class="com.mycompany.webapp.security.AuthSuccessHandler"></bean> 

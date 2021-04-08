@@ -5,6 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +16,7 @@ import com.mycompany.webapp.dao.UsersDao;
 import com.mycompany.webapp.dto.User;
 
 @Service
-public class UsersService implements UserDetailsService{
+public class UsersService {
 	
 	private static final Logger logger =
 			LoggerFactory.getLogger(UsersService.class);
@@ -118,14 +119,7 @@ public class UsersService implements UserDetailsService{
 		}
 		
 	}
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = usersDao.selectbyUserid(username);
-		if(user == null) {
-			throw new UsernameNotFoundException(username);
-		}
-		return user;
-	}
+
 	
 	
 
