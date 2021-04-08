@@ -144,7 +144,7 @@
 		}else{
 			
 			if(udetailaddress !== ""){
-				uaddress = uaddress + "-" +udetailaddress;
+				uaddress = uaddress + "/" +udetailaddress;
 			}else{
 				uaddress = uaddress;
 			}
