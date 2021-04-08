@@ -129,10 +129,11 @@ public class ProductQnasController {
 	}
 
 	@PostMapping("/pupdateqna")
-	public String communityQnaUpdate(ProductQnas productqna) {
+	public String communityQnaUpdate(ProductQnas productqna, int productno, Model model) {
 		productQnasService.pqnaUpdate(productqna);
+		model.addAttribute("productno", productno);
 		
-		return "redirect:/product/p_qna_view?boardno=" + productqna.getBoardno();
+		return "redirect:/product/product_view_user?productno=" + productqna.getProductno();
 	}
 
 	@GetMapping("/pdeleteqna")

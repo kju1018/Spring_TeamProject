@@ -44,7 +44,7 @@
 					</c:forEach>
 		 			
 		 			<tr>
-						<td colspan="5" class="text-center">
+						<td colspan="6">
 				   		<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
 				   		<a class="btn btn-dark btn-sm"
 				   		  onclick="qnaList(1)">처음</a>
