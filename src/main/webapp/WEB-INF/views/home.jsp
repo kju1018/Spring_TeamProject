@@ -36,7 +36,7 @@
              </div>
               <!-----category image-->
               <div class="col" >
-                  <div class="row  justify-content-center p-10 item_mt-10">
+                  <div class="row  justify-content-center p-10" style="margin-top: 80px;">
                       <div class="col text_center_sort">
                            <a href="<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=1&pcategoryname=인테리어조명&sort=0"><img class="item_width_90 item_height_180r" src="<%=application.getContextPath()%>/resources/image/button/lamp1.jpg" alt=""></a>
                            <div onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=1&pcategoryname=인테리어조명&sort=0')" class="pointer" style="position: absolute; top:45%; left: 28%; color: white;"><h3>인테리어 조명</h3></div>
@@ -56,12 +56,12 @@
                   </div>
               </div>
               <!---- about us-->
-                      <div class="col-lg item_mt-10 text_center_sort" >
-                           <a href="<%=application.getContextPath()%>/company/about_us"><img class="item_width_100 item_height_350r item_mt-1" src="<%=application.getContextPath()%>/resources/image/slide/aboutus.png"alt=""></a>
+                      <div class="col-lg text_center_sort" style="margin-top: 80px;">
+                           <a href="<%=application.getContextPath()%>/company/about_us"><img class="item_width_100 item_height_250r item_mt-1" src="<%=application.getContextPath()%>/resources/image/slide/aboutus.png"alt=""></a>
                      </div>
               <!------best item-->
               
-              <div class="col item_mt-10" >
+              <div class="col" style="margin-top: 60px;">
                    <div class="row" style="cursor: pointer;" onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=0&pcategoryname=Best&sort=5')">
                        <h3 class="aft col-2 text_end_sort">Best</h3>    
                    </div>
@@ -87,7 +87,7 @@
                      </div>
                 </div>
                 <!------ new item-->
-                <div class="col item_mt-4">
+                <div class="col" style="margin-top: 60px;">
                    <div class="row" style="cursor: pointer;"onclick="move_page('<%=application.getContextPath()%>/product/product_list_user?pageNo=1&pcategory=0&pcategoryname=New&sort=6')" >
                        <h3 class="aft col-2 text_end_sort">NEW</h3>
                    </div>
@@ -113,8 +113,8 @@
                 </div>
                 <!----newitem-->
                 <!----video-->
-                <div class="row justify-content-center item_mt-2" >
-                    <div class="col-12 text_center_sort" style="background-color: white; ">
+                <div class="row justify-content-center" style="margin-top: 60px;">
+                    <div class="col-12 text_center_sort" style="background-color: white;">
                        <img src="<%=application.getContextPath()%>/resources/image/youtubelogo_sihyun.png" alt="" width="100">
                     </div>
                     <div class="col-12 text_center_sort" >
@@ -128,5 +128,3 @@
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-       	
-             
