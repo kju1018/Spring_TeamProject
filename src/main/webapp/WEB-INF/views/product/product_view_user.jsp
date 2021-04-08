@@ -119,9 +119,13 @@ const deleteReview = (boardno) => {
       method: "get",
       data: {boardno}
    }).then(data => {
-      if(data.result=="success"){
+	   console.log(data);
+      if(data.result=="success"){    	  
          reviewList(1);
          $('#review_board2').hide();
+      }else{
+    	  alert("본인이 쓴 리뷰만 삭제할 수 있습니다.");
+    	  reviewList(1);          
       }
    });
 }

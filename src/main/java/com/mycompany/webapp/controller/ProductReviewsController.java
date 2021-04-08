@@ -158,16 +158,23 @@ public class ProductReviewsController {
 	@ResponseBody
 	public String deleteReview(ProductReviews productreviews, Authentication auth) {
 		int bno = productreviews.getBoardno();
-		productReviewsService.prDelete(bno);
-
+		logger.info("딜리트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));		
 		JSONObject jsonobject = new JSONObject();
-		String buserid = productreviews.getUserid();
+		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
+		String buserid = reviews.getUserid();
+		
+		logger.info("딜리트 유저 : "+buserid);		
+		logger.info("딜리트 유저 : "+auth.getName());		
+		
 		if(buserid.equals(auth.getName())) {
-				logger.info("구매한 사람");
-				jsonobject.put("deleteuser", "success");
+			logger.info("구매한 사람");
+			jsonobject.put("result", "success");
+		    productReviewsService.prDelete(bno);
+		}else {
+			jsonobject.put("result", "failure");
+		    
 		}
-	    jsonobject.put("result", "success");
-	    return jsonobject.toString();
+		return jsonobject.toString();
 	}
 	
 	@GetMapping("/review_update_form")
