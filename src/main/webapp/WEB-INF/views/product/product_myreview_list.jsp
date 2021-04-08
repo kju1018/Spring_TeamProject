@@ -11,7 +11,7 @@
 	<table class="table mt-4" style="text-align: center;">
 		<thead class="thead">
 			<tr style="background-color: lightgray;">
-				<th width="10%">번호</th>
+				<th width="10%">사진</th>
 				<th  width="50%">제목</th>
 				<th width="15%">작성자</th>
 				<th width="15%">작성일</th>
@@ -34,7 +34,7 @@
 		                <tr>
 		                    <td>
 		                    	<c:if test="${review.borgimg != null}">
-		                    		<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${review.bsaveimg}&type=${review.bimgtype}" style="width:100px; height:80px;">
+		                    		<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${review.bsaveimg}&type=${review.bimgtype}" style="width:100px; height:90px;">
 		                    	</c:if>
 		                    </td>
 		                    <td><a href="<%=application.getContextPath()%>/product/product_view_user?productno=${review.productno}" style="width:20%" class="text-black-50">${review.btitle}</a></td>
