@@ -3,11 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
-window.onload = function(){
-	alert(${result});
-}
+$(function(){
+	if(${result eq 'success'}){
+		
+	}else{
+		alert("제품을 구매한 회원만 리뷰를 쓸 수 있습니다.");
+		reviewList(1);
+	}	
+});
 </script>
-<div class="container-fluid" style="margin-top:5%">
+
+ <div class="container-fluid" style="margin-top:5%">
 		<div class="row" >
 				<div class="col-5 text-center">
 			<div class="title">
@@ -48,7 +54,8 @@ window.onload = function(){
 				
 						</table>
 				</div>
-					<br>		    		
+					<br>
+								    		
 		   			 <button type="button" class="btn btn-light btn-outline-secondary" style="width:8%;margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
 		   			  <button type="button" class="btn btn-light btn-outline-secondary" style="width:8%; " onclick="reviewWrite()"> 완료 </button>
 		   		        

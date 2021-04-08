@@ -82,22 +82,15 @@ public class ProductReviewsController {
 	
 	@PostMapping("/review_write_form")
 	public String reviewWirteForm(ProductReviews productreviews, Model model, Authentication auth) {
-		logger.info("리뷰라이트 product 넘 : "+Integer.toString(productreviews.getProductno()));
+		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
 		logger.info(Integer.toString(productreviews.getProductno()));
-		//String result = "";
 		int pno = productreviews.getProductno();
 		List<ProductReviews> list = productReviewsService.prUser(pno);
 		for(int i=0; i< list.size(); i++) {
 			if(list.get(i).getUserid().equals(auth.getName())) {
 				logger.info("구매한 사람");
-				//result = "success";
-				//model.addAttribute("result", result);
-
-			}else {
-				logger.info("구매하지 않음.");
-				//result = "failure";
-				//model.addAttribute("result", result);
-
+				model.addAttribute("result", "success");
+				break;
 			}
 		}
 		//int pno = productreviews.getProductno();
@@ -172,15 +165,19 @@ public class ProductReviewsController {
 	}
 	
 	@GetMapping("/review_update_form")
-	public String reviewUpdateForm(ProductReviews bno, Model model) {
-		int rvbno = bno.getBoardno();
-		logger.info("업데이트 폼 프로덕트 넘 : "+Integer.toString(bno.getBoardno()));
-			
+	public String reviewUpdateForm(ProductReviews bno, Model model, Authentication auth) {
+		int rvbno = bno.getBoardno();	
 		ProductReviews productreviews = productReviewsService.prSelectByBno(rvbno);
-		logger.info("업데이트 폼 프로덕트 넘2 : "+Integer.toString(productreviews.getBoardno()));
-		logger.info("업데이트 폼 컨텐트 넘2 : "+productreviews.getBcontent());
-		//logger.info("업데이트 폼 프로덕트 넘2 : "+Integer.toString(productreviews.getBoardno()));
-				
+		int pno = productreviews.getProductno();
+		
+		List<ProductReviews> list = productReviewsService.prUser(pno);
+		for(int i=0; i< list.size(); i++) {
+			if(list.get(i).getUserid().equals(auth.getName())) {
+				logger.info("구매한 사람");
+				model.addAttribute("result", "success");
+				break;
+			}
+		}		
 		model.addAttribute("productreviews", productreviews);
 		return "product/review_update_form";
 	}

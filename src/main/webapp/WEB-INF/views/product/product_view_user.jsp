@@ -247,11 +247,11 @@ const qnaList = (pageNo) => {
     <div class="row justify-content-center" >
        <div class="col-12" style="width:100%;" id="photo1" >          
           <div id="photo2" style="float:left; width:35%; margin-left:14%;">
-                <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.isavename}&type=${products.imgtype}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br>          
-            <img onclick="changeimg1('${productimg[0].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
-            <img onclick="changeimg2('${productimg[1].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
-            <img onclick="changeimg3('${productimg[2].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
-            <img onclick="changeimg4('${productimg[3].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="width:23.3%; height:100px;" name="detail_img5" id="detail_img5">
+                <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.isavename}&type=${products.imgtype}" style="margin-top:10px; width:100%; height:600px;" name="detail_img1" id="detail_img1"><br>          
+            <img onclick="changeimg1('${productimg[0].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="width:25%; height:135px; margin-top:10px;" name="detail_img2" id="detail_img2">
+            <img onclick="changeimg2('${productimg[1].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="width:25%; height:135px;" name="detail_img3" id="detail_img3">
+            <img onclick="changeimg3('${productimg[2].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="width:24%; height:135px;" name="detail_img4" id="detail_img4">
+            <img onclick="changeimg4('${productimg[3].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="width:23.3%; height:135px;" name="detail_img5" id="detail_img5">
                
         </div><!-- photo2 -->
             
@@ -268,10 +268,10 @@ const qnaList = (pageNo) => {
                 <!-- 로그인 안한상태이면 좋아요 이미지는 없다 있을 떄만 좋아요 이미지 -->
                  <sec:authorize access="isAuthenticated()">
                     <c:if test="${likes == null}">
-                       <img class="pointer" onclick="likesOnClick()" src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
+                       <img class="pointer" onclick="likesOnClick()" src="<%=application.getContextPath()%>/resources/image/redlike.png" style="width:10%; height:10%; margin-left:63%;">
                     </c:if>
                     <c:if test="${likes != null}">
-                       <img class="pointer" onclick="likesUnClick()" src="<%=application.getContextPath()%>/resources/image/redlike.png" style="width:10%; height:10%; margin-left:63%;">
+                       <img class="pointer" onclick="likesUnClick()" src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
                     </c:if>
                  </sec:authorize>
                 
@@ -327,7 +327,7 @@ const qnaList = (pageNo) => {
         
     </div>     
 	<div style="margin-left: 80%;">
-		<a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/p_qna_write?productno=${pager.pcategory}" role="button">상품문의하기</a>
+		<a class="btn btn-white btn-outline-dark" href="<%=application.getContextPath()%>/product/p_qna_write?productno=${products.productno}" role="button">상품문의하기</a>
 	</div>
 
 </div>
