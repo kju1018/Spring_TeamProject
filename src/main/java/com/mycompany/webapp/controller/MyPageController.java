@@ -82,46 +82,15 @@ public class MyPageController {
 		return jsonObject.toString();
 	}
 	
-	@GetMapping("/cart")
-	public String Cart() {
-		return "mypage/cart";
-	}
-	
-	@GetMapping("/like_list")
-	public String likeList() {
-		return "mypage/like_list";
-	}
-	
 	@GetMapping("/mypage")
 	public String Mypage() {
 		return "mypage/mypage";
 	}
 	
 	@GetMapping("/post_list")
-	   public String postList(
-	      String pageNo, Model model, HttpSession session, String userid, Authentication auth) {
-			userid = auth.getName();
-			session.setAttribute("userid", userid);
+	public String postList(
+		   String pageNo, Model model, HttpSession session, String userid, Authentication auth) {
 	
-	        int intPageNo = 1;
-	        if(pageNo == null) {
-	        //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-	        Pager pager = (Pager) session.getAttribute("pager");
-	           if(pager != null) {
-	              intPageNo = pager.getPageNo();
-	           }
-	        } else {
-	           intPageNo = Integer.parseInt(pageNo);
-	        }
-	         
-	         
-	        int totalRows = communityqnasService.getTotalRow(userid);
-	        Pager pager = new Pager(6, 5, totalRows, intPageNo, userid);
-	        session.setAttribute("pager", pager);
-	        List<CommunityQna> list = communityqnasService.getBoardListById(pager);
-	        model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
-	        model.addAttribute("pager", pager);
-	        model.addAttribute("userid", userid);
-	     return "mypage/post_list";
-	   }
+		return "mypage/post_list";
+	}
 }

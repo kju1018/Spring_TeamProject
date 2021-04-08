@@ -17,6 +17,10 @@
                 <p class="font-weight-bold">고객님의 주문이<br>
                     정상적으로 완료되었습니다.</p>
             </div>
+            <div class="row justify-content-center mt-5">
+            	<a class="btn btn-dark m-2" href="<%=application.getContextPath()%>">쇼핑계속하기</a>
+            	<a class="btn btn-outline-dark m-2" href="<%=application.getContextPath()%>/mypage/ordered_list">주문내역보기</a>
+            </div>
         </div>
     </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

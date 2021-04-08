@@ -85,6 +85,30 @@ public class CommunityQnaController {
 		return "community/qna_list";  //뷰 이름 리턴(뷰페이지 이름)
 	}  //페이징 처리된 리스트 목록 가져오기
 	
+	@GetMapping("/myqna_list")
+	public String communityMyBoardList(String pageNo, Model model, HttpSession session, Authentication auth) {
+
+        int intPageNo = 1;
+        if(pageNo == null) {
+        //세션에서 Pager를 찾고, 있으면 pageNo를 설정
+        Pager pager = (Pager) session.getAttribute("qna_pager");
+           if(pager != null) {
+              intPageNo = pager.getPageNo();
+           }
+        } else {
+           intPageNo = Integer.parseInt(pageNo);
+        }
+         
+         
+        int totalRows = communityQnasService.getTotalRow(auth.getName());
+        Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
+        session.setAttribute("qna_pager", pager);
+        List<CommunityQna> list = communityQnasService.getBoardListById(pager);
+        model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
+        model.addAttribute("pager", pager);
+		return "community/my_qna_list";
+	}
+	
 	@GetMapping("/qna_write")
 	public String communityQnaWrite(Model model, Authentication auth) {
 		String userid = "";
@@ -114,6 +138,18 @@ public class CommunityQnaController {
 		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
 		
 		return "community/qna_view";
+	}
+	
+	@GetMapping("/myqna_view")
+	public String communityMyQnaView(int boardno, Model model, Authentication auth) {
+		communityQnasService.addBcount(boardno);
+		CommunityQna communityqna = communityQnasService.getBoard(boardno);
+		model.addAttribute("communityqna", communityqna); // model객체를 이용해서, view로 data 전달
+		model.addAttribute("userid", auth.getName());
+		// model.addAttribute("변수이름", "변수에 넣을 데이터값"); 그러면 스프링은 그 값을 뷰쪽으로 넘겨준다.
+		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
+		
+		return "community/myqna_view";
 	}
 
 	@GetMapping("/qna_update")

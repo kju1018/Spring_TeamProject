@@ -22,6 +22,11 @@ public class ProductReviewsService {
 		return list;
 	}
 	
+	public List<ProductReviews> prSelectByUserId(Pager pager){
+		List<ProductReviews> list = productReviewsDao.prSelectByUserId(pager);
+		return list;
+	}
+	
 	public ProductReviews prSelectByBno(int boardno) {
 		ProductReviews productreviews = productReviewsDao.prSelectByBno(boardno);
 		return productreviews;
@@ -34,7 +39,12 @@ public class ProductReviewsService {
 	public int getTotalRows(int productno) {
 		int rows = productReviewsDao.count(productno);
 		return rows;
-	}	
+	}
+	
+	public int getTotalRows(String userid) {
+		int rows = productReviewsDao.countByUserId(userid);
+		return rows;
+	}
 	
 	public void prInsert(ProductReviews productrivews) {
 		productReviewsDao.prInsert(productrivews);

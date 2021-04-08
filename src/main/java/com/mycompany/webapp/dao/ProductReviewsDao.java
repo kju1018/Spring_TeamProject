@@ -11,9 +11,11 @@ import com.mycompany.webapp.dto.ProductReviews;
 public interface ProductReviewsDao {
 	public List<ProductReviews> prSelectAll();
 	public List<ProductReviews> prSelectByPno(Pager pager);
+	public List<ProductReviews> prSelectByUserId(Pager pager);
 	public ProductReviews prSelectByBno(int boardno);
 	public void prUpdateCount(int boardno);
 	public int count(int productno);
+	public int countByUserId(String userid);
 	public int prInsert(ProductReviews productrivews);
 	public int prUpdate(ProductReviews productrivews);
 	public int prDelete(int boardno);
