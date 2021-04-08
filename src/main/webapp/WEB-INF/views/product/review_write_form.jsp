@@ -49,13 +49,11 @@ if(title == null){
 				
 						</table>
 				</div>
-					<br>
-		    		<div>
-		        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
-		        <button class="btn btn-light btn-outline-secondary" style="width:8%" type="submit"> 완료 </button>
-		        
-		        </div>
-        </form>
-			<br><br>
+					<br>		    		
+		   			 <button type="button" class="btn btn-light btn-outline-secondary" style="width:8%;margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
+		   			  <button type="button" class="btn btn-light btn-outline-secondary" style="width:8%; " onclick="reviewWrite()"> 완료 </button>
+		   		        
+		    </form>
+        <br><br>
 	</div>
 	</div>
