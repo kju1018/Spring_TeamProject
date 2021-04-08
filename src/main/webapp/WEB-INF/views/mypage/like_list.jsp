@@ -70,22 +70,20 @@ const allDelete = () => {
 	<!--게시판-->
 	<table class="table">
 		<tr>
-            <th><input type="checkbox" name="" id="checkAll" onclick="selectAll(this)"/></th>
-			<th width="30%">제품사진</th>
-			<th width="55%">상품명</th>
-			<th width="15%">삭제</th>
+			<th class="text_center_sort" width="20%">제품사진</th>
+			<th class="text_center_sort" width="55%">상품명</th>
+			<th class="pointer text_center_sort" width="25%">삭제</th>
 		</tr>
 		<c:forEach var="product" items="${likeList}">
-			<tr>
-	            <th><input type="checkbox"  name="chk_box" class="checkSelect"/></th>
-				<th><img src = "<%=application.getContextPath()%>/product/downloadImags_detail?savename=${product.isavename}" width="50"></th>
-				<th class="pointer" onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${product.productno}'">${product.pname} </th>
-				<th><input onclick="individualDelete(${product.productno})" type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
+			<tr class="item_mt-2">
+				<th class="pointer text_center_sort" ><img src = "<%=application.getContextPath()%>/product/downloadImags_detail?savename=${product.isavename}" width="50"></th>
+				<th class="pointer text_center_sort" onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${product.productno}'">${product.pname} </th>
+				<th class="pointer text_center_sort"><input onclick="individualDelete(${product.productno})" type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
 			</tr>
 		</c:forEach>
 		<c:if test = "${number == 0}">
 			<tr>
-				<th class="text_center_sort" colspan="4"><p class=" item_mt-2">주문내역이 없습니다.</p></th>
+				<th class="text_center_sort" colspan="4"><p class=" item_mt-2">리스트가 없습니다.</p></th>
 			</tr>
 		</c:if>
 	</table>

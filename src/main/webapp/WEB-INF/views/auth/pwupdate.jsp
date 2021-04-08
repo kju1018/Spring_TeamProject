@@ -48,7 +48,12 @@
 					window.location.href = "login";
 				}else if(data.updateresult == "findUserid" || data.updateresult == "loginUid"){
 					alert("변경에 성공했습니다.");
-					window.location.href="<%=application.getContextPath()%>/mypage/mypage";
+					$.ajax({
+						url:"<%=application.getContextPath()%>/logout",
+						method:"post"
+					}).then(data => {
+						window.location.href = "<%=application.getContextPath()%>";
+					})
 				} 
 				else{
 					window.location.href = "find_pw";

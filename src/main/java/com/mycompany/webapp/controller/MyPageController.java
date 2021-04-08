@@ -43,7 +43,7 @@ public class MyPageController {
 			
 			if(dbuser != null) {
 				model.addAttribute("user",dbuser);
-				String[] address = dbuser.getUaddress().split("-");
+				String[] address = dbuser.getUaddress().split("/");
 				if(address[0] != null) {
 					model.addAttribute("address1", address[0]);
 				}

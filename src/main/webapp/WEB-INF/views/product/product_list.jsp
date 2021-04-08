@@ -28,7 +28,7 @@
     </div>
  
  	
-    <div class="container-xl p-0 productBox"><!-- 검색 안내문구 영역 -->
+    <div class="container-xl p-0 productBox" style="background: yellow;"><!-- 검색 안내문구 영역 -->
         <p class="findResult text-center">
             검색결과가 없습니다.<br>
             정확한 검색어 인지 확인하시고 다시 검색해 주세요.

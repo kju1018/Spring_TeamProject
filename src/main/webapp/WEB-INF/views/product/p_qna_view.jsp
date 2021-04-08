@@ -32,7 +32,7 @@
         <th style="width:15%">작성자</th>
         <td><input type="text" class="form-control" value="${productqna.userid}" readonly></td>
         <th style="width:15%">작성일</th>
-        <td><fmt:formatDate value="${notice.bdate}" pattern="yyyy-MM-dd" /></td>
+        <td><fmt:formatDate value="${productqna.bdate}" pattern="yyyy-MM-dd" /></td>
     </tr>
     <tr>
         <th style="width:15%">제목</th>
@@ -47,7 +47,7 @@
     <div class="n_v_bottom">
         <hr/>  
         <input type="button" class="btn btn-dark btn-sm"  value="목록보기" onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${productqna.productno}'">
-        <c:if test="${loginUid == notice.userid}">
+        <c:if test="${userid == productqna.userid}">
 	        <input type="button" class="btn btn-dark btn-sm" value="수정하기" onclick="location.href ='<%=application.getContextPath()%>/product/qna_update?boardno=${productqna.boardno}'">          
 	        <input type="button" class="btn btn-dark btn-sm" value="삭제하기" onclick="location.href ='<%=application.getContextPath()%>/product/pdeleteqna?boardno=${productqna.boardno}&productno=${productqna.productno}'">
 		</c:if>   
