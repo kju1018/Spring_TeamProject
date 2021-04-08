@@ -205,22 +205,22 @@ const sumtotal = (pprice) => { //총합 계산 & 재고 계산
 
 const changeimg1 = (product_img) => { //이미지 클릭시 변경
    var imgs = document.getElementById("detail_img1");
-   imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
+   imgs.src="<%=application.getContextPath()%>/product/downloadImags_detail?savename="+product_img;
 }   
 
 const changeimg2 = (product_img) => {
    var imgs = document.getElementById("detail_img1");
-   imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
+   imgs.src="<%=application.getContextPath()%>/product/downloadImags_detail?savename="+product_img;
 }   
 
 const changeimg3 = (product_img) => {
    var imgs = document.getElementById("detail_img1");
-   imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
+   imgs.src="<%=application.getContextPath()%>/product/downloadImags_detail?savename="+product_img;
 }      
 
 const changeimg4 = (product_img) => {
    var imgs = document.getElementById("detail_img1");
-   imgs.src="<%=application.getContextPath()%>/resources/image/"+product_img;
+   imgs.src="<%=application.getContextPath()%>/product/downloadImags_detail?savename="+product_img;
 }   
 
 //연정 qna
@@ -246,10 +246,10 @@ const qnaList = (pageNo) => {
        <div class="col-12" style="width:100%;" id="photo1" >          
           <div id="photo2" style="float:left; width:35%; margin-left:14%;">
                 <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.isavename}&type=${products.imgtype}" style="margin-top:10px; width:100%; height:500px;" name="detail_img1" id="detail_img1"><br>          
-            <img onclick="changeimg1('${productimg[0].ioriginalname}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
-            <img onclick="changeimg2('${productimg[1].ioriginalname}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
-            <img onclick="changeimg3('${productimg[2].ioriginalname}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
-            <img onclick="changeimg4('${productimg[3].ioriginalname}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="width:23.3%; height:100px;" name="detail_img5" id="detail_img5">
+            <img onclick="changeimg1('${productimg[0].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[0].isavename}&type=${productimg[0].imgtype}" style="width:25%; height:100px;" name="detail_img2" id="detail_img2">
+            <img onclick="changeimg2('${productimg[1].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[1].isavename}&type=${productimg[1].imgtype}" style="width:25%; height:100px;" name="detail_img3" id="detail_img3">
+            <img onclick="changeimg3('${productimg[2].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[2].isavename}&type=${productimg[2].imgtype}" style="width:24%; height:100px;" name="detail_img4" id="detail_img4">
+            <img onclick="changeimg4('${productimg[3].isavename}')" src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${productimg[3].isavename}&type=${productimg[3].imgtype}" style="width:23.3%; height:100px;" name="detail_img5" id="detail_img5">
                
         </div><!-- photo2 -->
             
@@ -305,9 +305,9 @@ const qnaList = (pageNo) => {
         <p style="margin-left:12%; font-size: large;">Product Detail</p>
   </div><br>
     <!--상품 상세 이미지-->
-    <div style="height:auto; margin-left: 5%">
+    <div style="height:auto; margin-left: 20%">
        <c:if test="${products.detailimgoname != null}">   
-               <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.detailimgsname}&type=${products.detailimgtype}" width="100%"/>            
+               <img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${products.detailimgsname}&type=${products.detailimgtype}" width="80%"/>            
        </c:if>      
      </div>
    

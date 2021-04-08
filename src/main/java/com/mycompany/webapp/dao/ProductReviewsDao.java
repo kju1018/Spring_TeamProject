@@ -19,5 +19,5 @@ public interface ProductReviewsDao {
 	public int prInsert(ProductReviews productrivews);
 	public int prUpdate(ProductReviews productrivews);
 	public int prDelete(int boardno);
-	
+	public List<ProductReviews> prUser(int productno);
 }

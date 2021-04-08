@@ -57,4 +57,9 @@ public class ProductReviewsService {
 	public void prDelete(int boardno) {
 		productReviewsDao.prDelete(boardno);
 	}
+	
+	public List<ProductReviews> prUser(int productno) {
+		List<ProductReviews> list = productReviewsDao.prUser(productno);
+		return list;
+	}
 }
