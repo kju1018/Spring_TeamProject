@@ -26,7 +26,7 @@ window.onload = function (){
 
       
     <div class="container-xl mt-4 border-bottom" id="sort_item" name="sort_item"><!-- 상품 개수, 필터 영역 -->
-        <p id="itemNumber">${pager.totalRows} PRODUCT ITEM</p>
+        <p id="itemNumber">${pager_pl.totalRows} PRODUCT ITEM</p>
    
          <div class="filterDiv">
             <a class="filterItem" id="newitem" href="<%=application.getContextPath()%>/product/product_list_user?pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=1">신상품</a>
@@ -88,30 +88,30 @@ window.onload = function (){
 							<a class="btn btn-outline-secondary btn-sm" 
 							href="product_list_user?pageNo=1&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[처음]</a>
 							
-							<c:if test="${pager.groupNo>1}">
+							<c:if test="${pager_pl.groupNo>1}">
 								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.startPageNo-1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">이전</a>
+								href="product_list_user?pageNo=${pager_pl.startPageNo-1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">이전</a>
 							</c:if>
 							
-							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-								<c:if test="${pager.pageNo!=i}">
+							<c:forEach var="i" begin="${pager_pl.startPageNo}" end="${pager_pl.endPageNo}">
+								<c:if test="${pager_pl.pageNo!=i}">
 									<a class="btn btn-outline-secondary btn-sm" 
 									href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
 								</c:if>
-								<c:if test="${pager.pageNo==i}">
+								<c:if test="${pager_pl.pageNo==i}">
 									<a class="btn btn-danger btn-sm" 
 										href="product_list_user?pageNo=${i}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">${i}</a>
 								</c:if>	
 							</c:forEach>
 							
 			
-							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<c:if test="${pager_pl.groupNo<pager_pl.totalGroupNo}">
 								<a class="btn btn-outline-secondary btn-sm" 
-								href="product_list_user?pageNo=${pager.endPageNo+1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">다음</a>
+								href="product_list_user?pageNo=${pager_pl.endPageNo+1}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">다음</a>
 							</c:if>
 							
 							<a class="btn btn-outline-secondary btn-sm" 
-							href="product_list_user?pageNo=${pager.totalPageNo}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[맨끝]</a>
+							href="product_list_user?pageNo=${pager_pl.totalPageNo}&pcategory=${pcategory}&pcategoryname=${pcategoryname}&sort=${sort}&searchword=${searchword}">[맨끝]</a>
 						</div>	
 	
 					</div> 
