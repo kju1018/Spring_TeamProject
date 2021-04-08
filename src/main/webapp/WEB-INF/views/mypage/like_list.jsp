@@ -83,7 +83,7 @@ const allDelete = () => {
 		</c:forEach>
 		<c:if test = "${number == 0}">
 			<tr>
-				<th class="text_center_sort" colspan="4"><p class=" item_mt-2">주문내역이 없습니다.</p></th>
+				<th class="text_center_sort" colspan="4"><p class=" item_mt-2">리스트가 없습니다.</p></th>
 			</tr>
 		</c:if>
 	</table>
