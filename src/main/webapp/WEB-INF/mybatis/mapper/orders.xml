@@ -9,7 +9,7 @@
 		<id property="orderno" column="orderno"/>
 		<collection property="orderproductlist" column="orderno" javaType="list" ofType="orderproduct"
 				select="getOrderProduct"/>
-	</resultMap>
+	</resultMap> 
 	
 	
 	<select id="selectByUserId" parameterType="pager" resultMap="orderResult"> 

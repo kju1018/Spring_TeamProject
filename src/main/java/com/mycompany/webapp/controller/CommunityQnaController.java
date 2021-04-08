@@ -109,7 +109,7 @@ public class CommunityQnaController {
 		return "community/my_qna_list";
 	}
 	
-	@GetMapping("/qna_write")
+	@GetMapping("/qna_write") // 막기
 	public String communityQnaWrite(Model model, Authentication auth) {
 		String userid = "";
 		userid = auth.getName();
@@ -120,7 +120,7 @@ public class CommunityQnaController {
 		return "community/qna_write";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/create")  //막기
 	public String communityQnaCreate(CommunityQna communityqna, HttpSession session, Model model, Authentication auth) {
 		communityQnasService.saveBoard(communityqna);
 		
@@ -152,7 +152,7 @@ public class CommunityQnaController {
 		return "community/myqna_view";
 	}
 
-	@GetMapping("/qna_update")
+	@GetMapping("/qna_update") //막기
 	public String communityQnaUpdateForm(int boardno, Model model) {
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna);
@@ -160,21 +160,21 @@ public class CommunityQnaController {
 		return "community/qna_update";
 	}
 
-	@PostMapping("/updateqna")
+	@PostMapping("/updateqna")//막기
 	public String communityQnaUpdate(CommunityQna communityqna) {
 		communityQnasService.updateBoard(communityqna);
 		
 		return "redirect:/community/qna_view?boardno=" + communityqna.getBoardno();
 	}
 
-	@GetMapping("/deleteqna")
+	@GetMapping("/deleteqna") //막기
 	public String communityQnaDelete(int boardno) {
 		communityQnasService.deleteBoard(boardno);
 		
 		return "redirect:/community/qna_list";
 	}
 
-	@GetMapping("/answer_write")
+	@GetMapping("/answer_write") // 막기
 	public String AnswerqnaWrite(int boardno, Authentication auth, Model model) {
 		String userid = "";
 		userid = auth.getName();
@@ -185,7 +185,7 @@ public class CommunityQnaController {
 		return "community/answer_write";
 	}
 
-	@PostMapping("/createrepl")
+	@PostMapping("/createrepl") // 막기
 	public String communityReplCreate(CommunityQna communityqna, HttpSession session, Model model, Authentication auth) {
 		communityqna.setBcount(0);
 		communityqna.setGroupord(0);
@@ -197,7 +197,7 @@ public class CommunityQnaController {
 
 	}
 	
-	@GetMapping("/answer_view")
+	@GetMapping("/answer_view") // 막기
 	public String answerView(int boardno, Model model, Authentication auth) {
 		communityQnasService.addBcount(boardno);
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
