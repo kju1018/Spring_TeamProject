@@ -20,8 +20,8 @@
 	<p class=sub_title>공지사항입니다.</p>
 	
 	<div class="select_nav">
-		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list'">
-		<input type="button"  class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list'">          
+		<input type="button" class="btn btn-outline-dark" value="공지사항" onclick="location.href ='<%=application.getContextPath()%>/community/notice_list?pageNo=1'">
+		<input type="button"  class="btn btn-outline-dark" value="QnA" onclick="location.href ='<%=application.getContextPath()%>/community/qna_list?pageNo=1'">          
 	</div>            
 
 	<div style="text-align: right; margin-bottom: 4px;">

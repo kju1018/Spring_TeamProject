@@ -49,18 +49,18 @@ public class CommunityQnaController {
 			Pager pager = new Pager(6, 5, totalRows, intPageNo);
 			// Pager (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 			// (페이지당 행수, 그룹당 페이지수, 전체 행수, 현재 페이지 번호)
-			session.setAttribute("pager", pager); 
+			session.setAttribute("allPager", pager); 
 			//setAttribut(String name, Object value) 리턴타입:void 이름이 속성의 값을 value로 지정
 			List<CommunityQna> list = communityQnasService.getBoardList(pager);
 			model.addAttribute("list", list); // 오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
-			model.addAttribute("allPager", pager);
+			model.addAttribute("pager", pager);
 		} else {
 			int intPageNo = 1;
 			
 			String sessionKeyword = (String) session.getAttribute("keyword");
 			if(sessionKeyword != null && sessionKeyword.equals(keyword)) {
 				if (pageNo == null) {
-					Pager pager = (Pager) session.getAttribute("keywordPager");
+					Pager pager = (Pager) session.getAttribute("allPager");
 					if(pager != null) {
 						intPageNo = pager.getPageNo();
 					}
@@ -73,7 +73,7 @@ public class CommunityQnaController {
 
 			int totalRows = communityQnasService.getTotalRows(searchType, keyword);
 			Pager pager = new Pager(6, 5, totalRows, intPageNo);
-			session.setAttribute("keywordPager", pager);
+			session.setAttribute("allPager", pager);
 
 			List<CommunityQna> list = communityQnasService.getBoardListByKeyword(pager, searchType, keyword);
 			model.addAttribute("list", list); // 뷰로 데이터 전달
@@ -129,10 +129,12 @@ public class CommunityQnaController {
 	}
 	
 	@GetMapping("/qna_view")
-	public String communityQnaView(int boardno, Model model, Authentication auth) {
+	public String communityQnaView(int boardno, String searchType, String keyword, Model model, Authentication auth) {
 		communityQnasService.addBcount(boardno);
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna); // model객체를 이용해서, view로 data 전달
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
 		try {
 		model.addAttribute("userid", auth.getName());
 		} catch(Exception e) {
