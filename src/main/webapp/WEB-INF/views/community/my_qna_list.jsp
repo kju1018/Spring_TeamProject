@@ -28,7 +28,7 @@
 				<c:forEach var="post_list" items="${list}">
 			      <tr>
 			         <td>${post_list.boardno}</td>
-			         <td><a href="<%=application.getContextPath()%>/community/qna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
+			         <td><a href="<%=application.getContextPath()%>/community/myqna_view?boardno=${post_list.boardno}">${post_list.btitle}</a></td>
 			         <td>${post_list.userid}</td>
 			         <td><fmt:formatDate value="${post_list.bdate}" pattern="yyyy-MM-dd"/></td>
 			         <td>${post_list.bcount}</td>

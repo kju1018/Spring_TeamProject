@@ -37,7 +37,7 @@
 		                    		<img src="<%=application.getContextPath()%>/product/downloadImags_detail?savename=${review.bsaveimg}&type=${review.bimgtype}" style="width:100px; height:80px;">
 		                    	</c:if>
 		                    </td>
-		                    <td><a onclick="" style="width:20%" class="text-black-50">${review.btitle}</a></td>
+		                    <td><a href="<%=application.getContextPath()%>/product/product_view_user?productno=${review.productno}" style="width:20%" class="text-black-50">${review.btitle}</a></td>
 		                    <td>${review.userid}</td>
 		                    <td><fmt:formatDate value="${review.bdate}" pattern="yyyy-MM-dd"/></td>
 		                    <td>${review.bcount}</td>   

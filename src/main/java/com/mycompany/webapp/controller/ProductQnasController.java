@@ -58,7 +58,7 @@ public class ProductQnasController {
         int intPageNo = 1;
         if(pageNo == null) {
         //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-        Pager pager = (Pager) session.getAttribute("pager");
+        Pager pager = (Pager) session.getAttribute("p_qna_pager");
            if(pager != null) {
               intPageNo = pager.getPageNo();
            }
@@ -68,7 +68,7 @@ public class ProductQnasController {
           
 		int totalRows = productQnasService.getTotalRow(auth.getName());
 		Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
-		session.setAttribute("pager", pager);
+		session.setAttribute("p_qna_pager", pager);
 		List<ProductQnas> list = productQnasService.getBoardListById(pager);
 		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
 		model.addAttribute("pager", pager);

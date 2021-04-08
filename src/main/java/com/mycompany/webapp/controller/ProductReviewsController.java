@@ -61,21 +61,20 @@ public class ProductReviewsController {
         int intPageNo = 1;
         if(pageNo == null) {
         //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-        Pager pager = (Pager) session.getAttribute("pager");
-           if(pager != null) {
-              intPageNo = pager.getPageNo();
-           }
+        	Pager pager = (Pager) session.getAttribute("p_review_pager");
+			if(pager != null) {
+				logger.info("페이저");
+				intPageNo = pager.getPageNo();
+			}
         } else {
            intPageNo = Integer.parseInt(pageNo);
         }
-         
-         
+        
         int totalRows = productReviewsService.getTotalRows(auth.getName());
         Pager pager = new Pager(6, 5, totalRows, intPageNo, auth.getName());
-        session.setAttribute("pager", pager);
+        session.setAttribute("p_review_pager", pager);
         List<ProductReviews> list = productReviewsService.prSelectByUserId(pager);
-        logger.info(""+list.size());
-        logger.info(""+totalRows);
+		logger.info(pager.getPageNo()+"");
 		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
 		model.addAttribute("pager", pager);
 		return "product/myproduct_review_list";
