@@ -38,18 +38,18 @@ public class ProductReviewsController {
 		int intPageNo = 1;
 		if (pageNo == null) { // 클라이언트에서 pageNo가 넘어오지 않았을 경우
 			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager) session.getAttribute("pager");
-			if (pager != null) {
-				intPageNo = pager.getPageNo();
+			Pager pager_pr = (Pager) session.getAttribute("pager1");
+			if (pager_pr != null) {
+				intPageNo = pager_pr.getPageNo();
 			}
 		} else { // 클라이언트에서 pageNo가 넘어왔을 경우
 			intPageNo = Integer.parseInt(pageNo);
 		}  
 			
 		int totalRows = productReviewsService.getTotalRows(products.getProductno());
-		Pager pager = new Pager(3, 5, totalRows, intPageNo, products.getProductno()); // 페이징 객체 생성
-		session.setAttribute("pager", pager);	    
-		List<ProductReviews> previews = productReviewsService.prSelectByPno(pager);
+		Pager pager_pr = new Pager(3, 5, totalRows, intPageNo, products.getProductno()); // 페이징 객체 생성
+		session.setAttribute("pager_pr", pager_pr);	    
+		List<ProductReviews> previews = productReviewsService.prSelectByPno(pager_pr);
 		model.addAttribute("previews", previews);
 		model.addAttribute("products",products);
 		return "product/product_review_list";
