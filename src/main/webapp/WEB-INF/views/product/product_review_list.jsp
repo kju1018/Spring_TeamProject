@@ -18,6 +18,11 @@
                         <th scope="col">조회</th>
                     </tr>
                 </thead>
+                <c:if test="${empty previews}">
+	                <tr>
+	                	<td colspan="5">글이 없습니다.</td>
+	                </tr>	
+								</c:if>
                 <c:forEach var="rv_list" items="${previews}">
                 	<tbody>
                     <tr>
