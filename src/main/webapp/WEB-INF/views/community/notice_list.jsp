@@ -25,7 +25,7 @@
 	</div>            
 
 	<div style="text-align: right; margin-bottom: 4px;">
-        <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_write'"> 
+        <!-- <input type="button" class="btn btn-dark btn-sm" value="글쓰기" onclick="location.href ='<%=application.getContextPath()%>/community/notice_write'">  -->
     </div>
     
  	<!--게시판-->
