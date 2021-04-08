@@ -171,7 +171,7 @@ public class ProductsController {
 		  if(searchword == null || searchword.equals("")) {
 		  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
 			  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			  Pager pager_pl = (Pager) session.getAttribute("pager");
+			  Pager pager_pl = (Pager) session.getAttribute("pager_pl");
 			  if(pager_pl != null) {
 				  intPageNo = pager_pl.getPageNo();
 			  } 
@@ -222,7 +222,7 @@ public class ProductsController {
 		  } else {
 			  if(pageNo == null) { //클라이언트에서 pageNo가 넘어오지 않았을 경우
 				  //세션에서 Pager를 찾고, 있으면 pageNo를 설정
-				  Pager pager_pl = (Pager) session.getAttribute("pager");
+				  Pager pager_pl = (Pager) session.getAttribute("pager_pl");
 				  if(pager_pl != null) {
 					  intPageNo = pager_pl.getPageNo();
 				  } 

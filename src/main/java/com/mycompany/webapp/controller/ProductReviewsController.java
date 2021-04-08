@@ -55,7 +55,7 @@ public class ProductReviewsController {
 		return "product/product_review_list";
 	}
 	
-	@GetMapping("/myproduct_review_list")
+	@GetMapping("/product_myreview_list")
 	public String myProductReviewList(String pageNo, Model model, HttpSession session, Authentication auth) {
 
         int intPageNo = 1;
@@ -77,7 +77,7 @@ public class ProductReviewsController {
 		logger.info(pager.getPageNo()+"");
 		model.addAttribute("list", list); //오른쪽이 위에 list 왼쪽이 jsp에서 쓸 이름
 		model.addAttribute("pager", pager);
-		return "product/myproduct_review_list";
+		return "product/product_myreview_list";
 	}
 	
 	@PostMapping("/review_write_form")
@@ -156,28 +156,37 @@ public class ProductReviewsController {
 	
 	@GetMapping(value="/delete_review", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String deleteReview(ProductReviews productreviews) {
+	public String deleteReview(ProductReviews productreviews, Authentication auth) {
 		int bno = productreviews.getBoardno();
-		productReviewsService.prDelete(bno);
+		logger.info("딜리트 보드 넘 : "+Integer.toString(productreviews.getBoardno()));		
 		JSONObject jsonobject = new JSONObject();
-	    jsonobject.put("result", "success");
-	    return jsonobject.toString();
+		ProductReviews reviews =  productReviewsService.prSelectByBno(bno);
+		String buserid = reviews.getUserid();
+		
+		logger.info("딜리트 유저 : "+buserid);		
+		logger.info("딜리트 유저 : "+auth.getName());		
+		
+		if(buserid.equals(auth.getName())) {
+			logger.info("구매한 사람");
+			jsonobject.put("result", "success");
+		    productReviewsService.prDelete(bno);
+		}else {
+			jsonobject.put("result", "failure");
+		    
+		}
+		return jsonobject.toString();
 	}
 	
 	@GetMapping("/review_update_form")
 	public String reviewUpdateForm(ProductReviews bno, Model model, Authentication auth) {
 		int rvbno = bno.getBoardno();	
 		ProductReviews productreviews = productReviewsService.prSelectByBno(rvbno);
-		int pno = productreviews.getProductno();
-		
-		List<ProductReviews> list = productReviewsService.prUser(pno);
-		for(int i=0; i< list.size(); i++) {
-			if(list.get(i).getUserid().equals(auth.getName())) {
+		String buserid = productreviews.getUserid();
+		if(buserid.equals(auth.getName())) {
 				logger.info("구매한 사람");
 				model.addAttribute("result", "success");
-				break;
-			}
-		}		
+		}
+				
 		model.addAttribute("productreviews", productreviews);
 		return "product/review_update_form";
 	}
