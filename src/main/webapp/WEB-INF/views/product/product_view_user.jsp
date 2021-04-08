@@ -25,8 +25,8 @@ const ReviewRead = (boardno) => {
 		method: "get",
 		data: {boardno}
 	}).then(data => {
-		$('#review_board').html(data);
-		$('#review_board2').hide();
+		$('#review_board2').show();
+		$('#review_board2').html(data);
 	});
 }
 
@@ -36,8 +36,7 @@ const reviewUpdateForm = (boardno) => {
 		method: "get",
 		data: {boardno}
 	}).then(data => {
-			$('#review_board').html(data);
-			$('#review_board2').hide();	
+			$('#review_board2').html(data);
 	});
 }
 
@@ -121,6 +120,7 @@ const reviewList = (pageNo) => {
 		data: {productno, pageNo}
 	}).then(data => {
 		$('#review_board').html(data);
+		$('#review_board2').hide();
 	});
 };
 

@@ -2,12 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<!-- <script>
-const title = document.getById("btitle").val();
-if(title == null){
-	alert("test");
-}
-</script> -->
+
+	
 <div class="container-fluid" style="margin-top:5%">
 		<div class="row" >
 				<div class="col-5 text-center">
@@ -32,11 +28,11 @@ if(title == null){
 			
 								<tr class="rw_table">
 									<td class="rw_table">SUBJECT</td>
-									<td class="rw_table input1"> <input type="text" style="width:100%" id="btitle" name="btitle"></td>
+									<td class="rw_table input1"> <input type="text" value="${productreviews.btitle}" style="width:100%" id="btitle" name="btitle"></td>
 								</tr>
 								<tr>
 									<td class="rw_table" colspan="2" height="150">
-									<textarea cols="50" rows="10" style="width: 100%; height: 150px" id="bcontent" name="bcontent"></textarea></td>
+									<textarea cols="50" rows="10" style="width: 100%; height: 150px" id="bcontent" name="bcontent" >${productreviews.btitle}</textarea></td>
 									
 								</tr>
 					
@@ -44,9 +40,9 @@ if(title == null){
 					</div>
 					<br>
 		    		<div>
-		        <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>
-		        <button class="btn btn-light btn-outline-secondary" style="width:8%" type="submit"> 완료 </button>
-		        
+		    			 <button type="button" class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:69.4%;" onclick="reviewList(1)"> 취소 </button>		        
+								<button type="button" class="btn btn-light btn-outline-secondary" style="width:8%; " onclick="reviewUpdate(${productreviews.boardno})"> 완료 </button>
+		   		            
 		        </div>
         </form>
 			<br><br>
