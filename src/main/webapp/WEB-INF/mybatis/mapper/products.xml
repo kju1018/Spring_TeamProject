@@ -217,7 +217,7 @@ from(
 	from products p, productimgs i
 	where p.productno=i.productno and i.ipriority=1
 	and p.pname like '%' || #{searchword} || '%'
-	order by p.psalescount desc
+	order by p.pname desc
 	)
 		where rownum &lt;=#{endRowNo}
 	)
