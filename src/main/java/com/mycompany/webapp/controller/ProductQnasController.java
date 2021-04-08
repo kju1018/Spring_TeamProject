@@ -52,7 +52,7 @@ public class ProductQnasController {
 
 	   }
 
-	@GetMapping("/myqna_list")
+	@GetMapping("/product_myqna_list")
 	public String communityMyBoardList(String pageNo, Model model, HttpSession session, Authentication auth) {
 
         int intPageNo = 1;
