@@ -71,7 +71,7 @@
                 <div class="row item_mt-2 justify-content-center">
                     <!--label : 이름-->
                     <div class="col-3 align-self-end ">
-                        <label for="uname">비밀번호</label> 
+                        <label for="uname">새로운 비밀번호</label> 
                     </div>
                     <!--input : 이름-->
                     <div class="col-6">
@@ -81,7 +81,7 @@
                 <div class="row item_mt-1 justify-content-center" >
                     <!--label : email-->
                     <div class="col-3  align-self-end">
-                        <label for="uemail">비밀번호 확인</label>
+                        <label for="uemail">새로운 비밀번호 확인</label>
                     </div>
                     <!--input : email-->
                     <div class="col-6">
