@@ -133,7 +133,11 @@ public class CommunityQnaController {
 		communityQnasService.addBcount(boardno);
 		CommunityQna communityqna = communityQnasService.getBoard(boardno);
 		model.addAttribute("communityqna", communityqna); // model객체를 이용해서, view로 data 전달
+		try {
 		model.addAttribute("userid", auth.getName());
+		} catch(Exception e) {
+			
+		}
 		// model.addAttribute("변수이름", "변수에 넣을 데이터값"); 그러면 스프링은 그 값을 뷰쪽으로 넘겨준다.
 		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
 		
