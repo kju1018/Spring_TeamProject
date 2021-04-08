@@ -2,12 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<!-- <script>
-const title = document.getById("btitle").val();
-if(title == null){
-	alert("test");
+<script>
+window.onload = function(){
+	alert(${result});
 }
-</script> -->
+</script>
 <div class="container-fluid" style="margin-top:5%">
 		<div class="row" >
 				<div class="col-5 text-center">

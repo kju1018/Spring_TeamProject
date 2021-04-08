@@ -82,15 +82,24 @@ public class ProductReviewsController {
 	
 	@PostMapping("/review_write_form")
 	public String reviewWirteForm(ProductReviews productreviews, Model model, Authentication auth) {
-		List<ProductReviews> list = productReviewsService.prUser(productreviews.getProductno());
+		logger.info("리뷰라이트 product 넘 : "+Integer.toString(productreviews.getProductno()));
+		logger.info(Integer.toString(productreviews.getProductno()));
+		//String result = "";
+		int pno = productreviews.getProductno();
+		List<ProductReviews> list = productReviewsService.prUser(pno);
 		for(int i=0; i< list.size(); i++) {
-			if(list.get(i).getUserid() == auth.getName()) {
+			if(list.get(i).getUserid().equals(auth.getName())) {
 				logger.info("구매한 사람");
+				//result = "success";
+				//model.addAttribute("result", result);
+
 			}else {
 				logger.info("구매하지 않음.");
+				//result = "failure";
+				//model.addAttribute("result", result);
+
 			}
 		}
-		logger.info("product 넘 : "+Integer.toString(productreviews.getProductno()));
 		//int pno = productreviews.getProductno();
 		model.addAttribute("productreviews", productreviews);
 		return "product/review_write_form";
@@ -99,7 +108,8 @@ public class ProductReviewsController {
 	@PostMapping(value="/review_write", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String reviewWrite(ProductReviews productreviews, Authentication auth) {
-		logger.info(Integer.toString(productreviews.getProductno()));
+		logger.info("리뷰 라이트 테스트");
+		//logger.info(Integer.toString(productreviews.getProductno()));
 		MultipartFile battach = productreviews.getBattach();
 		if (battach != null && !battach.isEmpty()) {
 			productreviews.setBorgimg(battach.getOriginalFilename());
@@ -122,6 +132,7 @@ public class ProductReviewsController {
 		 */
 		
 		productreviews.setUserid(auth.getName());
+		/*
 		List<ProductReviews> list = productReviewsService.prUser(productreviews.getProductno());
 		for(int i=0; i< list.size(); i++) {
 			if(list.get(i).getUserid() == auth.getName()) {
@@ -130,6 +141,7 @@ public class ProductReviewsController {
 				logger.info("구매하지 않음.");
 			}
 		}
+		*/
 		productReviewsService.prInsert(productreviews);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
