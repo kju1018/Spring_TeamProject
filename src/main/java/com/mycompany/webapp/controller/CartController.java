@@ -38,6 +38,7 @@ public class CartController {
 		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 있으면 null
 		JSONObject jsonObject = new JSONObject();
 		if(tempCart == null) {
+			logger.info(cart.toString());
 			cartsService.createCart(cart);
 			jsonObject.put("result", "success");
 		} else {
