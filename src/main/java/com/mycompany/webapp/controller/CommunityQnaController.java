@@ -80,6 +80,7 @@ public class CommunityQnaController {
 			model.addAttribute("pager", pager);
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);
+			
 		}
 
 		return "community/qna_list";  //뷰 이름 리턴(뷰페이지 이름)
