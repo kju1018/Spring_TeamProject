@@ -207,6 +207,9 @@ from(
 
 
 
+
+
+
 <!-- 연정 검색 -->
 <select id="pSelectBySearchword" parameterType="pager" resultType="products">
 select rnum, productno, pcategory, pname, pprice, pregisterdate, psalescount, pstock, penable, detailimgoname, detailimgsname, detailimgtype, imgno, ioriginalname, isavename, imgtype, ipriority
@@ -230,5 +233,7 @@ select count(*)
 from products p
 where p.pname like '%' || #{searchword} || '%'
 </select>
+<!-- 연정 검색 -->
+
 
 </mapper>

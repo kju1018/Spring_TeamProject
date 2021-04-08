@@ -103,20 +103,22 @@ public class ProductQnasController {
 		productQnasService.paddBcount(boardno);
 		ProductQnas productqna = productQnasService.getBoard(boardno);
 		model.addAttribute("productqna", productqna); // model객체를 이용해서, view로 data 전달
-		model.addAttribute("userid", auth.getName());
+		try {
+			model.addAttribute("userid", auth.getName());
+			} catch(Exception e) {
+				
+			}
 		// model.addAttribute("변수이름", "변수에 넣을 데이터값"); 그러면 스프링은 그 값을 뷰쪽으로 넘겨준다.
 		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
 		return "product/p_qna_view";
 	}
 	
 	@GetMapping("/p_myqna_view")
-	public String productMyQnaView(int boardno, Model model, Authentication auth) {
+	public String productMyQnaView(int boardno, Model model) {
 		productQnasService.paddBcount(boardno);
 		ProductQnas productqna = productQnasService.getBoard(boardno);
-		model.addAttribute("productqna", productqna); // model객체를 이용해서, view로 data 전달
-		model.addAttribute("userid", auth.getName());
-		// model.addAttribute("변수이름", "변수에 넣을 데이터값"); 그러면 스프링은 그 값을 뷰쪽으로 넘겨준다.
-		//뷰(.jsp)파일에서는 ${}를 이용해서 값을 가져온다.
+		model.addAttribute("productqna", productqna); 
+		
 		return "product/p_myqna_view";
 	}
 	
