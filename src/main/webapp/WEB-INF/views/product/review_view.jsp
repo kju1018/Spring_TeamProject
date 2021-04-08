@@ -12,7 +12,7 @@
 					<font color="33333">REVIEW</font>
 				</h2>
 				<p>상품 사용후기입니다.</p>
-			</div>
+			</div> 
 			</div>
 		</div>
 			
