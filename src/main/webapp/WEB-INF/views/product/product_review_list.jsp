@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
     <div style="clear: both;">
         <p style="margin-left:12%; margin-bottom: 0px; font-size: large;">REVIEW</p>
     </div><br>
@@ -39,12 +41,11 @@
             </table>
         </div> 
     </div> 
-    <div style="margin-left: 82%;">
-    
-        <button class="btn btn-white btn-outline-dark" onclick="reviewWriteForm(${products.productno})">글 작성</button>
-       
+    <sec:authorize access="isAuthenticated()">
+    <div style="margin-left: 82%;">    
+        <button class="btn btn-white btn-outline-dark" onclick="reviewWriteForm(${products.productno})">글 작성</button>       
     </div>
-
+		</sec:authorize>
 	<c:if test="${not empty previews}">	
 	<div class="container-xl d-flex justify-content-center" >
 		<div class="row">

@@ -2,7 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
+<script>
+$(function(){
+	if(${result eq 'success'}){
+	
+	}else{
+		alert("본인이 쓴 리뷰만 수정할 수 있습니다.");
+		reviewList(1);
+	}	
+});
+</script>
 	
 <div class="container-fluid" style="margin-top:5%">
 		<div class="row" >
