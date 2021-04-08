@@ -44,9 +44,7 @@
 		    data: {pageNo}
 	 	}).then(data => {
 	 	  	$("#mypost_div").html(data);
-	 		$("#p_qna_list_table").removeClass("col-9");
-	 		$("#p_qna_list_table").addClass("mt-4");
-	 		$("#p_qna_title").text("");
+
 		});
 	};
 	

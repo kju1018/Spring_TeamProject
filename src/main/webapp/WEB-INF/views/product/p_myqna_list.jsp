@@ -5,13 +5,10 @@
 <%@ page import="com.mycompany.webapp.dto.*" %>
 
 
-<div >
-	<p id="p_qna_title"style="margin-left:12%; margin-bottom: 0px; font-size: large;">Q&A</p>
-</div><br>
 
-<div class="container-fluid">
+
 	<div class="row justify-content-center">
-		<table id="p_qna_list_table" class="col-9 table" style="text-align: center;">
+		<table class="table mt-4" style="text-align: center;">
 			<thead class="thead">
 				<tr style="background-color: lightgray;">
 					<th scope="col">번호</th>
@@ -66,7 +63,6 @@
 				   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
 					   		<a class="btn btn-light btn-sm" onclick="qnaList(${pager.endPageNo+1})">다음</a>
 					   	</c:if>
-					   	
 				   		<a class="btn btn-dark btn-sm" onclick="qnaList(${pager.totalPageNo})">맨끝</a>
 						</td>
 					</tr>
@@ -74,6 +70,6 @@
 				</tbody>
 		</table>
 	</div>
-</div>
+
         
 							 
