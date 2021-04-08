@@ -8,6 +8,56 @@ $(function(){
    reviewList(1);   
 });
 
+const reviewList = (pageNo) => {
+	   const productno = ${products.productno};   
+	   $.ajax({
+	      url: "product_review_list",
+	      method: "get",
+	      data: {productno, pageNo}
+	   }).then(data => {
+	      $('#review_board').html(data);
+	      $('#review_board2').hide();
+	   });
+};
+	
+	
+const reviewWrite = () => {      
+	   const btitle = $("#btitle").val();
+	   const bcontent = $("#bcontent").val();
+	   if(btitle == ""){
+	      alert("제목을 적어주세요");
+	   }
+	   if(bcontent == ""){
+	      alert("내용을 적어주세요");
+	   }
+	   event.preventDefault();   
+	   const productno = $("#productno").val();
+	   const battach = $("#battach")[0].files[0];
+	   const formData = new FormData();
+	   formData.append("productno", productno);
+	   formData.append("btitle", btitle);
+	   formData.append("bcontent", bcontent);
+	   
+	   if(battach){
+	      formData.append("battach", battach);
+	   }   
+	   $.ajax({
+	      url:"review_write",
+	      data: formData,
+	      method: "post",
+	      cache: false,
+	      processData: false,
+	      contentType: false
+	   }).then(data => {
+	      if(data.result=="success"){
+	         reviewList(1);
+	         $('#review_board2').hide();
+	      }
+	   });
+	}
+
+
+
 const reviewWriteForm = (productno) => {   
    $.ajax({
       url:"review_write_form",
@@ -75,54 +125,6 @@ const deleteReview = (boardno) => {
       }
    });
 }
-
-const reviewWrite = () => {      
-   const btitle = $("#btitle").val();
-   const bcontent = $("#bcontent").val();
-   if(btitle == ""){
-      alert("제목을 적어주세요");
-   }
-   if(bcontent == ""){
-      alert("내용을 적어주세요");
-   }
-   event.preventDefault();   
-   const productno = $("#productno").val();
-   const battach = $("#battach")[0].files[0];
-   const formData = new FormData();
-   formData.append("productno", productno);
-   formData.append("btitle", btitle);
-   formData.append("bcontent", bcontent);
-   
-   if(battach){
-      formData.append("battach", battach);
-   }   
-   $.ajax({
-      url:"review_write",
-      data: formData,
-      method: "post",
-      cache: false,
-      processData: false,
-      contentType: false
-   }).then(data => {
-      if(data.result=="success"){
-         reviewList(1);
-         $('#review_board2').hide();
-      }
-   });
-}
-
-
-const reviewList = (pageNo) => {
-   const productno = ${products.productno};   
-   $.ajax({
-      url: "product_review_list",
-      method: "get",
-      data: {productno, pageNo}
-   }).then(data => {
-      $('#review_board').html(data);
-      $('#review_board2').hide();
-   });
-};
 
 
 ///좋아요 이미지 클릭
