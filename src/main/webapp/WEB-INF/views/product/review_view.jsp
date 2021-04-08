@@ -55,10 +55,13 @@
 					</div>
 						<br>
                <div>
-              		 <button class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:61%;" onclick="reviewUpdateForm(${reviews.boardno})" > 수정 </button>                   
-                   <button class="btn btn-light btn-outline-secondary" style="width:8%;" onclick="deleteReview(${reviews.boardno})" > 삭제 </button>
-                   <button class="btn btn-light btn-outline-secondary" style="width:8%;" onclick="reviewList(1)" > 목록 </button>
+               <button class="btn btn-light btn-outline-secondary" style="width:8%;margin-left:61%;" onclick="reviewList(1)" > 목록 </button>
               
+               <sec:authorize access="isAuthenticated()">    
+              		 <button class="btn btn-light btn-outline-secondary" style="width:8%; " onclick="reviewUpdateForm(${reviews.boardno})" > 수정 </button>                   
+                   <button class="btn btn-light btn-outline-secondary" style="width:8%;" onclick="deleteReview(${reviews.boardno})" > 삭제 </button>
+                   </sec:authorize>
+                   
               </div>
           
 				<br><br>
