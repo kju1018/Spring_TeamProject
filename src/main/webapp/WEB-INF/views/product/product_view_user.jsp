@@ -268,10 +268,10 @@ const qnaList = (pageNo) => {
                 <!-- 로그인 안한상태이면 좋아요 이미지는 없다 있을 떄만 좋아요 이미지 -->
                  <sec:authorize access="isAuthenticated()">
                     <c:if test="${likes == null}">
-                       <img class="pointer" onclick="likesOnClick()" src="<%=application.getContextPath()%>/resources/image/redlike.png" style="width:10%; height:10%; margin-left:63%;">
+                       <img class="pointer" onclick="likesOnClick()" src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
                     </c:if>
                     <c:if test="${likes != null}">
-                       <img class="pointer" onclick="likesUnClick()" src="<%=application.getContextPath()%>/resources/image/like_sora.png" style="width:10%; height:10%; margin-left:63%;">
+                       <img class="pointer" onclick="likesUnClick()" src="<%=application.getContextPath()%>/resources/image/redlike.png" style="width:10%; height:10%; margin-left:63%;">
                     </c:if>
                  </sec:authorize>
                 
