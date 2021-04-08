@@ -125,16 +125,6 @@ public class ProductReviewsController {
 		 */
 		
 		productreviews.setUserid(auth.getName());
-		/*
-		List<ProductReviews> list = productReviewsService.prUser(productreviews.getProductno());
-		for(int i=0; i< list.size(); i++) {
-			if(list.get(i).getUserid() == auth.getName()) {
-				logger.info("구매한 사람");
-			}else {
-				logger.info("구매하지 않음.");
-			}
-		}
-		*/
 		productReviewsService.prInsert(productreviews);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");

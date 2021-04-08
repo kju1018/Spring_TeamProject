@@ -55,11 +55,11 @@
 				<div class="d-flex">
 						<!-- [처음] [이전] 1 2 3 4 5 [다음][맨끝] -->
 					<div class="flex-grow-1">
-							<button class="btn btn-outline-secondary btn-sm" 
+							<button class="btn btn-dark btn-sm" 
 							onclick="reviewList(1)">[처음]</button>
 							
 							<c:if test="${pager_pr.groupNo>1}">
-								<button class="btn btn-outline-secondary btn-sm" 
+								<button class="btn btn-light btn-sm" 
 								onclick="reviewList(${pager_pr.startPageNo-1})">이전</button>
 							</c:if>
 							
@@ -69,18 +69,18 @@
 									onclick="reviewList(${i})">${i}</button>
 								</c:if>
 								<c:if test="${pager_pr.pageNo==i}">
-									<button class="btn btn-danger btn-sm" 
+									<button class="btn btn-light btn-sm" 
 										onclick="reviewList(${i})">${i}</button>
 								</c:if>	
 							</c:forEach>
 							
 			
 							<c:if test="${pager_pr.groupNo<pager.totalGroupNo}">
-								<button class="btn btn-outline-secondary btn-sm" 
+								<button class="btn btn-light btn-sm" 
 								onclick="reviewList(${pager_pr.endPageNo+1})">다음</button>
 							</c:if>
 							
-							<button class="btn btn-outline-secondary btn-sm" 
+							<button class="btn btn-dark btn-sm" 
 							onclick="reviewList(${pager_pr.totalPageNo})">[맨끝]</button>
 						</div>	
 	
