@@ -55,7 +55,7 @@ public class NoticeController {
 		return "community/notice_list";
 	}
 	
-	@GetMapping("/notice_write")
+	@GetMapping("/notice_write") //------------------------>막아줘
 	public String noticeWrite(HttpSession session, Model model, Authentication auth) {
 		String userid = "";
 		userid = auth.getName();
@@ -66,7 +66,7 @@ public class NoticeController {
 	    return "community/notice_write";
 	}
 	
-	@PostMapping("/create1")
+	@PostMapping("/create1") //------------------------>막아줘
 	public String noticeCreate(Notice notice, HttpSession session) {
 			noticesService.saveBoard(notice);
 
@@ -74,7 +74,7 @@ public class NoticeController {
 
 	}
 	
-	@GetMapping("/notice_view")
+	@GetMapping("/notice_view") //------------------------>막아줘
 	public String noticeView(int boardno, Model model) {
 		noticesService.addHitcount(boardno);
 		Notice notice = noticesService.getBoard(boardno);
@@ -82,20 +82,20 @@ public class NoticeController {
 		return "community/notice_view";
 	}
 	
-	@GetMapping("/notice_update")
+	@GetMapping("/notice_update") //------------------------>막아줘
 	public String noticeUpdateForm(int boardno, Model model) {
 		Notice notice = noticesService.getBoard(boardno);
 		model.addAttribute("notice", notice);
 		return "community/notice_update";
 	}
 	
-	@PostMapping("/updatenoti")
+	@PostMapping("/updatenoti") //------------------------>막아줘
 	public String noticeUpdate(Notice notice) {
 		noticesService.updateBoard(notice);
 		return "redirect:/community/notice_view?boardno="+notice.getBoardno();
 	}
 	
-	@GetMapping("/deletenoti")
+	@GetMapping("/deletenoti") //------------------------>막아줘
 	public String notieDelete(int boardno) {
 		noticesService.deleteBoard(boardno);
 		return "redirect:/community/notice_list";

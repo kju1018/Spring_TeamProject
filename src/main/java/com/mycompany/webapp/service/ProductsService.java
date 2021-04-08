@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductsDao;
+import com.mycompany.webapp.dto.OrderProduct;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
 
@@ -80,11 +81,12 @@ public class ProductsService {
 	public void pInsert(Products products) {
 		productsDao.pInsert(products);
 	};
+	
 	public void pUpdate(Products products) {
 		logger.info(products.getPname());
 		productsDao.pUpdate(products);
 	};
-
+	
 	public Products pSelectByPno(int productno){ 
 		Products products = productsDao.pSelectByPno(productno); 
 		return products; 

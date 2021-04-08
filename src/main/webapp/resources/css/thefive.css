@@ -597,10 +597,12 @@ wrapper_content {
     .item_width_15{ width: 15%;}
     .item_width_10{ width: 10%;}
     .item_width_13r {width:13rem}
+    .item_height_8r {height:8rem}
     .item_height_35r {height: 3.5rem;}
     .item_height_35r {height: 3.5rem;}
     .item_height_110r {height: 11rem;}
     .item_height_350r {height: 35rem;}
+    .item_height_220r {height: 22rem;}
     .item_height_180r {height: 18rem;}
     .item_mt-05{ margin-top: 0.5rem;}
     .item_mt-1{ margin-top: 1rem;}

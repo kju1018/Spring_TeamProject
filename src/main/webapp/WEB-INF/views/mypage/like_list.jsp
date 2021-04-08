@@ -78,7 +78,7 @@ const allDelete = () => {
 		<c:forEach var="product" items="${likeList}">
 			<tr>
 	            <th><input type="checkbox"  name="chk_box" class="checkSelect"/></th>
-				<th><img src = "<%=application.getContextPath()%>/resources/image/lamp1.png" width="50"></th>
+				<th><img src = "<%=application.getContextPath()%>/product/downloadImags_detail?savename=${product.isavename}" width="50"></th>
 				<th onclick="location.href ='<%=application.getContextPath()%>/product/product_view_user?productno=${product.productno}'">${product.pname} </th>
 				<th><input onclick="individualDelete(${product.productno})" type="button" class="btn btn-outline-dark btn-sm" value="삭제"></th>
 			</tr>
