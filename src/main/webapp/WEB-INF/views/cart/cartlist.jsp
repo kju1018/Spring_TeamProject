@@ -41,7 +41,9 @@
 							<th class="align-middle text-center">
 								<input type="number" min="1" id="cartquantity${cart.productno}" value="${cart.cartquantity}" style="width:50%"> 개
 							</th>
-							<th class="align-middle text-center"><a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a></th>
+							<th class="align-middle text-center">
+								<a class="btn btn-outline-dark btn-sm" style="width:100%" onclick="updatecartquantity(${cart.productno})">변경</a>
+							</th>
 							<th class="align-middle text-center"><span id="productprice${cart.productno}">${cart.cartquantity*cart.pprice}</span>원</th>
 							<th class="align-middle text-center">무료</th>
 						</tr>
