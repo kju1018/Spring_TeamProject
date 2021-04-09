@@ -106,6 +106,8 @@
 		if(result==true) {
 			var payment_Form = document.querySelector("#paymentForm");
 			payment_Form.submit();
+		} else if(result==false){
+			alert("필수 항목들을 입력해주세요.");
 		}
 	};
 	
