@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th>주문일자</th>
-                    <td>${order.odate}</td>
+                    <td><fmt:formatDate value="${order.odate}" pattern="yyyy-MM-dd"/></td>
                 </tr>
                 <tr>
                     <th>결제방법</th>

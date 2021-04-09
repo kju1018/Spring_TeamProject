@@ -22,8 +22,8 @@
 	 const cartdelete = () => {
 		var cartArr = new Array();
 		$("input[name=chk_productno]:checked").each(function() {
-				var test = $(this).val(); 
-				cartArr.push(test);
+				var productNo = $(this).val(); 
+				cartArr.push(productNo);
 		});
 		
 		if(cartArr.length == 0){
