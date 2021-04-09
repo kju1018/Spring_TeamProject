@@ -7,7 +7,7 @@
 		select userid,productno
 		from likes
 		where userid = #{userid}
-	</select>
+</select>
 	
 	<select id="SelectByIdandPno" resultType="likes">
 		select userid,productno

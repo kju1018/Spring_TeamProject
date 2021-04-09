@@ -38,9 +38,10 @@
 			const userzipcode = ${user.uzipcode};
 			const useraddress = '${user.uaddress}';
 			const useraddress2 = '${address2}';
-			const usertel = ${user.utel};
+			const usertel = '${user.utel}';
 			
-			
+			var regExp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
+		
 			var result = true;
 			var addresult = false;
 			
@@ -53,14 +54,16 @@
 				
 				uaddress = uaddress+ "/" + uaddress2;
 			}else{
-				result = false;
-				alert("변경된 사항이 없습니다.");
+				uaddress = uaddress + "/" + '${address2}';
 			}
 			
+			if(!regExp.test(utel)){
+				result = false;
+				alert("핸드폰은 000-0000-0000와 같은 형식으로 작성해주세요")
+			}
+		
 			
-			if(userzipcode != uzipcode || useraddress != uaddress || usertel != utel ){
-				
-			}else{
+			if(userzipcode == uzipcode && useraddress == uaddress && usertel == utel ){
 				result = false;
 				alert("변경된 사항이 없습니다.");
 			}
