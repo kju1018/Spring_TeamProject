@@ -41,7 +41,7 @@ $(function(){
 								</tr>
 								<tr>
 									<td class="rw_table" colspan="2" height="150">
-									<textarea cols="50" rows="10" style="width: 100%; height: 150px" id="bcontent" name="bcontent" >${productreviews.btitle}</textarea></td>
+									<textarea cols="50" rows="10" style="width: 100%; height: 150px" id="bcontent" name="bcontent" >${productreviews.bcontent}</textarea></td>
 									
 								</tr>
 					

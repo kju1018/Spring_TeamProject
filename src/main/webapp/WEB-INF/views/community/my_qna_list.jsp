@@ -56,11 +56,9 @@
 				   		</c:forEach>
 				   		
 				   		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-					   		<a class="btn btn-light btn-sm"
-					   		   onclick="getMyQnA(${pager.endPageNo+1})">다음</a>
+					   		<a class="btn btn-light btn-sm" onclick="getMyQnA(${pager.endPageNo+1})">다음</a>
 					   	</c:if>
-				   		<a class="btn btn-dark btn-sm"
-				   		   onclick="getMyQnA(${pager.totalPageNo})">맨끝</a>
+				   		<a class="btn btn-dark btn-sm" onclick="getMyQnA(${pager.totalPageNo})">맨끝</a>
 				   	</td>
 				</tr>
 			</c:if>
