@@ -54,11 +54,7 @@
 			</div>
 		</div>
 	
-		<br>
-		<div>
-        	<a class="btn btn-light btn-outline-secondary" style="width:8%; margin-left:77.7%;" href="<%=application.getContextPath()%>/product/product_view" role="button"> 목록 </a>
-   		</div>
-		<br><br>
+		
 	</div>
 </div>
 
