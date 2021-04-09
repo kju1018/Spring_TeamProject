@@ -51,7 +51,7 @@
 			
 			if(useraddress2 != uaddress2){
 				
-				uaddress = uaddress+ "-" + uaddress2;
+				uaddress = uaddress+ "/" + uaddress2;
 			}else{
 				result = false;
 				alert("변경된 사항이 없습니다.");
