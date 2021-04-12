@@ -63,7 +63,7 @@
                     
                         <div id="searching" class="col" style="text-align: end; margin: 0 auto; ">
                         	
-                            <input type="text" name="searchword" id="searchword" style=" text-align: center;">
+                            <input type="text" name="searchword" id="searchword" style=" text-align: center;" value="${param.searchword}">
                             <button class="btn btn-sm btn-dark" name="productSearch" id="productSearch">검색</button>
                         	
                         </div>

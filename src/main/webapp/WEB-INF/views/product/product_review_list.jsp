@@ -34,7 +34,7 @@
                        	<td><div style="width:30%;"></div></td>                       
                        </c:otherwise>
                       </c:choose>
-                        <td><a onclick="ReviewRead(${rv_list.boardno})" style="width:20%" class="text-black-50">${rv_list.btitle} / ${rv_list.boardno}</a></td>
+                        <td><a onclick="ReviewRead(${rv_list.boardno})" style="width:20%; cursor: pointer;" class="text-black-50">${rv_list.btitle}</a></td>
                         <td>${rv_list.userid}</td>
                         <td><fmt:formatDate value="${rv_list.bdate}" pattern="yyyy-MM-dd"/></td>
                         <td>${rv_list.bcount}</td>

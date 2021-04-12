@@ -34,11 +34,12 @@ public class CartController {
 	@GetMapping(value="/create_cart", produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public String createCart(Cart cart, Authentication auth) {
-		cart.setUserid(auth.getName());//제품상세에서 받은 productno, quantity를 이용해서 Cart객체 생성
-		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 있으면 null
 		JSONObject jsonObject = new JSONObject();
+		
+		cart.setUserid(auth.getName());//제품상세에서 받은 productno, quantity를 이용해서 Cart객체 생성
+		Cart tempCart = cartsService.getCart(cart);//위에서 만든 카트와 동일한 카트가 없으면 null
+
 		if(tempCart == null) {
-			logger.info(cart.toString());
 			cartsService.createCart(cart);
 			jsonObject.put("result", "success");
 		} else {
@@ -68,13 +69,16 @@ public class CartController {
 	@ResponseBody
 	public String deleteCart(@RequestParam(value="cartArr[]") List<String> cartArr, Authentication auth) {
 		JSONObject jsonObject = new JSONObject();
+		
 		List<Cart> cartlist = new ArrayList<Cart>();
+		
 		for(String productno : cartArr) {
 			Cart cart = new Cart();
 			cart.setUserid(auth.getName());
 			cart.setProductno(Integer.parseInt(productno));
 			cartlist.add(cart);
 		}
+		
 		if(cartlist.size() > 0) {
 			cartsService.removeSelectCart(cartlist);
 			jsonObject.put("result", "success");
@@ -86,7 +90,9 @@ public class CartController {
 	@GetMapping(value="/delete_allcart", produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public String deleteCartAll(Authentication auth) {
+		
 		cartsService.removeCartAll(auth.getName());
+		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
 		return jsonObject.toString();
@@ -97,14 +103,14 @@ public class CartController {
 	@ResponseBody
 	public String updateQuantity(Cart cart, Authentication auth) {
 		cart.setUserid(auth.getName());
+		JSONObject jsonObject = new JSONObject();
 		
 		if(cart.getCartquantity() < 1) {
-			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("result", "failure");
 			return jsonObject.toString();
 		}else {
 			cartsService.updateCartQuantity(cart);
-			JSONObject jsonObject = new JSONObject();
+			
 			jsonObject.put("result", "success");
 			return jsonObject.toString();
 		}
